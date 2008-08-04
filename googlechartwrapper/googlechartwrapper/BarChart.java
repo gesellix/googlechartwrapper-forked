@@ -3,7 +3,7 @@ package googlechartwrapper;
 import java.awt.Dimension;
 import java.text.MessageFormat;
 
-public class BarChart extends Chart{
+public class BarChart extends AbstractChart{
 
 	BarChartOrientation orientation;
     BarChartStyle style;

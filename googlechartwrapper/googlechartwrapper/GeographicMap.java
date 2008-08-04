@@ -14,7 +14,7 @@ import java.util.Locale;
  * @author martin
  *
  */
-public class GeographicMap extends Chart {
+public class GeographicMap extends AbstractChart {
 	
 	private GeographicalArea area;
 	private Collection<String> coloredStates;

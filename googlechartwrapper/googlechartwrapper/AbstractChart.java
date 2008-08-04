@@ -17,7 +17,7 @@ import java.util.Queue;
  * base class for every chart
  *
  */
-abstract class Chart {
+abstract class AbstractChart implements Chart {
 	
 	 private final String googleAPI = "http://chart.apis.google.com/chart?";
      protected Queue<String> urlElements = new LinkedList<String>();
@@ -31,15 +31,14 @@ abstract class Chart {
 	 
 
     
-     public Chart(Dimension chartDimension)
+     public AbstractChart(Dimension chartDimension)
      {
          this.chartDimension = chartDimension;
      }
 
-     /**
-      * 
-      * @param values
-      */
+     /* (non-Javadoc)
+	 * @see googlechartwrapper.Chart#setValues(int[])
+	 */
      public void setValues(int [] values){
     	 
     	 this.values = this.encoder.encode(values);
@@ -51,10 +50,9 @@ abstract class Chart {
      public void setValues(Collection<int []> values){
          this.values = this.encoder.encodeIntegerCollection(values);
      }
-     /**
-      * 
-      * @param values
-      */
+     /* (non-Javadoc)
+	 * @see googlechartwrapper.Chart#setValues(float[])
+	 */
      public void setValues(float [] values){
     	 
     	 this.values = this.encoder.encode(values);
@@ -64,11 +62,17 @@ abstract class Chart {
      {
          this.values = this.encoder.encodeFloatCollection(values);
      }*/
-     public void setEncoder(IEncoder newEncoder){
+     /* (non-Javadoc)
+	 * @see googlechartwrapper.Chart#setEncoder(googlechartwrapper.coder.IEncoder)
+	 */
+    public void setEncoder(IEncoder newEncoder){
      
     	 this.encoder = newEncoder;
      }
-     public IEncoder getEncoder(){
+     /* (non-Javadoc)
+	 * @see googlechartwrapper.Chart#getEncoder()
+	 */
+    public IEncoder getEncoder(){
     	 return this.encoder;
      }
     
@@ -305,7 +309,10 @@ abstract class Chart {
      }
      */
     
-     public String getUrl()
+     /* (non-Javadoc)
+	 * @see googlechartwrapper.Chart#getUrl()
+	 */
+    public String getUrl()
      {
          collectUrlElements();
          
