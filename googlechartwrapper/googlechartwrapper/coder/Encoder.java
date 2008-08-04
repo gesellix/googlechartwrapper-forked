@@ -1,11 +1,10 @@
 package googlechartwrapper.coder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 /**
+ * The default encoder implementation
  * 
  * @author steffan
  *
@@ -187,8 +186,8 @@ public class Encoder implements IEncoder {
         
         /**
          * 
-         * @param values
-         * @return
+         * @param values array of integer to search
+         * @return the max value
          */
         private int getMaxValue(int[] values)
         {
@@ -198,33 +197,23 @@ public class Encoder implements IEncoder {
         			max = values[i];
         		}
 			}
-			return 0;
-
-        	/*if(values.length > 0) {
-        	Arrays.sort(values);
-        	
-        	return values[values.length-1];
-        	}
-        	//there is no value inside
-            return 0;*/
+			return max;        	
         }
         /**
          * 
-         * @param values
-         * @return
+         * @param values collection of integer arrays to search
+         * @return the max value
          */
         private int getMaxValue(Collection<int[]> values)
         {
-        	List<Integer> lMaxValues = new ArrayList<Integer>(values.size());
-        	
+        	int max = 0;         	
         	for(int[] array: values){
         		
-        		lMaxValues.add(getMaxValue(array));
-        	}
-        	
-        	Arrays.sort(lMaxValues.toArray());
-           //FIXME ordentlcihes grenzen checken
-            return lMaxValues.get(lMaxValues.size()-1);
+        		if(this.getMaxValue(array) > max){
+        			max = this.getMaxValue(values);
+        		}        		
+        	}        	
+        	return max;      
         }
     
 
