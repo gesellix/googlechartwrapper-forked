@@ -3,12 +3,24 @@ package googlechartwrapper;
 import java.awt.Dimension;
 import java.text.MessageFormat;
 
+/**
+ * 
+ * @author steffan
+ *
+ */
 public class BarChart extends AbstractChart{
 
 	BarChartOrientation orientation;
     BarChartStyle style;
     int barWidth;
     
+    /**
+     * Constructs 
+     * 
+     * @param chartDimension
+     * @param orientation
+     * @param style
+     */
 	public BarChart(Dimension chartDimension, BarChartOrientation orientation, BarChartStyle style) {
 		super(chartDimension);
 		
@@ -41,12 +53,20 @@ public class BarChart extends AbstractChart{
          }
 		 
 	 }
-	
+	/**
+	 * Specify the bar size
+	 * 
+	 * @param width the size of every single bar
+	 */
 	public void SetBarWidth(int width)
     {
         this.barWidth = width;
     }
-	
+	/**
+	 * 
+	 * @author steffan
+	 *
+	 */
 	public enum BarChartOrientation
     {
         /// <summary>
@@ -59,6 +79,11 @@ public class BarChart extends AbstractChart{
         /// </summary>
         Horizontal
     }
+	/**
+	 * 
+	 * @author steffan
+	 *
+	 */
 	 public enum BarChartStyle
 	    {
 	        /// <summary>
