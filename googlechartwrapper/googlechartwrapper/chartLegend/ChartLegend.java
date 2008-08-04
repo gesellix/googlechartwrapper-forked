@@ -13,7 +13,7 @@ public class ChartLegend implements IChartLegendable{
 
 	private List<String> legendList = new ArrayList<String>();
 	
-	public void AddChartLegend(String[] legend) {
+	public void addChartLegend(String[] legend) {
 		
 		for(String currentLegend : legend){
 			legendList.add(currentLegend);
@@ -22,7 +22,7 @@ public class ChartLegend implements IChartLegendable{
 		
 	}
 
-	public void AddChartLegend(Collection<String> legend) {
+	public void addChartLegend(Collection<String> legend) {
 		legendList.addAll(legend);
 		
 	}

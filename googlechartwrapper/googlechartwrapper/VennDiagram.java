@@ -52,13 +52,13 @@ public class VennDiagram extends AbstractChart implements IChartLegendable{
 			 */
 	}
 
-	public void AddChartLegend(String[] legend) {
-		this.chartLegend.AddChartLegend(legend);
+	public void addChartLegend(String[] legend) {
+		this.chartLegend.addChartLegend(legend);
 		
 	}
 
-	public void AddChartLegend(Collection<String> legend) {
-		this.chartLegend.AddChartLegend(legend);
+	public void addChartLegend(Collection<String> legend) {
+		this.chartLegend.addChartLegend(legend);
 		
 	}
 	

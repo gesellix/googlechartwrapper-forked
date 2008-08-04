@@ -14,12 +14,12 @@ public interface IChartLegendable {
 	 * Adds an array of strings for the legend.
 	 * @param legend array of string
 	 */
-	public void AddChartLegend(String[] legend);
+	public void addChartLegend(String[] legend);
 	
 	/**
 	 * Adds a collection of strings for the legend.
 	 * @param legend collection of string
 	 */
-	public void AddChartLegend(Collection<String> legend);
+	public void addChartLegend(Collection<String> legend);
 
 }
