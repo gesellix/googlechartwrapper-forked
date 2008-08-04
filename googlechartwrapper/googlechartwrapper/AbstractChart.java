@@ -24,15 +24,14 @@ abstract class AbstractChart implements Chart {
 	 protected String values;
 	 private IEncoder encoder = new Encoder();
 	 protected Dimension chartDimension;
-	 private String title;
-     private String titleColor;
+	 //private String title;
+     //private String titleColor;
      private String newLine = System.getProperty("line.separator");
      protected Color[] dataColors;
 	 
 
     
-     public AbstractChart(Dimension chartDimension)
-     {
+     public AbstractChart(Dimension chartDimension){
          this.chartDimension = chartDimension;
      }
 
@@ -57,14 +56,7 @@ abstract class AbstractChart implements Chart {
     	 
     	 this.values = this.encoder.encode(values);
      }
-     /*
-     public void setValues(Collection<float[]> values)
-     {
-         this.values = this.encoder.encodeFloatCollection(values);
-     }*/
-     /* (non-Javadoc)
-	 * @see googlechartwrapper.Chart#setEncoder(googlechartwrapper.coder.IEncoder)
-	 */
+    
     public void setEncoder(IEncoder newEncoder){
      
     	 this.encoder = newEncoder;
@@ -74,52 +66,9 @@ abstract class AbstractChart implements Chart {
 	 */
     public IEncoder getEncoder(){
     	 return this.encoder;
-     }
-    
-     public void setTitle(String title)
-     {
-         String urlTitle = title.replace(' ', '+');
-         //urlTitle.re
-         //urlTitle = urlTitle.Replace(Environment.NewLine, "|");
-         //FIXME
-         this.title = urlTitle;
-     }
+     }    
 
-    
-     public void setTitle(String title, String color)
-     {
-         setTitle(title);
-         this.titleColor = color;
-     }
-/*
-     /// <summary>
-     /// Set chart title
-     /// </summary>
-     /// <param name="title">chart title text</param>
-     /// <param name="color">chart title color an RRGGBB format hexadecimal number</param>
-     /// <param name="fontSize">chart title font size in pixels</param>
-     public void SetTitle(string title, string color, int fontSize)
-     {
-         SetTitle(title);
-         this.titleColor = color + "," + fontSize;
-     }
-     #endregion
-
-     #region Colors
-     private string[] datasetColors;
-
-     /// <summary>
-     /// Set the color for each dataset, match colors to datasets by
-     /// specifying them in the same order the datasets were added to the
-     /// chart.
-     /// </summary>
-     /// <param name="datasetColors">an array of RRGGBB format hexadecimal numbers</param>
-     public void SetDatasetColors(string[] datasetColors)
-     {
-         this.datasetColors = datasetColors;
-     }
-
-     #endregion
+     /*#endregion
 
      # region Fills
      List<SolidFill> solidFills = new List<SolidFill>();
@@ -333,13 +282,24 @@ abstract class AbstractChart implements Chart {
          urlElements.offer(this.values);
 
          // chart title
-         if (title != null)
+         /*if (title != null)
          {
              urlElements.offer(MessageFormat.format("chtt={0}", this.title));
          }
          if (titleColor != null)
          {
              urlElements.offer(MessageFormat.format("chts={0}", this.titleColor));
+         }*/
+         
+         //converts the color objects into an hex equivalent for google
+         if (dataColors != null && dataColors.length > 0){
+         	StringBuffer bf = new StringBuffer(dataColors.length * 8+5);
+         	bf.append("chco=");
+         	for (Color c: dataColors){
+         		bf.append(Integer.toHexString(c.getRGB()).substring(2,8));
+         		bf.append(",");
+         	}
+         	urlElements.offer(bf.toString().substring(0,bf.toString().length()-1));
          }
 
          /*
