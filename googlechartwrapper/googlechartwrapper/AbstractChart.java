@@ -279,7 +279,10 @@ abstract class AbstractChart implements Chart {
     	 urlElements.clear();
     	 urlElements.offer(MessageFormat.format("cht={0}", this.getUrlChartType()));
          urlElements.offer(MessageFormat.format("chs={0}x{1}", this.chartDimension.width, this.chartDimension.height));
-         urlElements.offer(this.values);
+         if (values!= null){
+        	 urlElements.offer(this.values);
+         }
+        
 
          // chart title
          /*if (title != null)

@@ -81,6 +81,7 @@ public class GeographicMap extends AbstractChart {
 	
 	@Override
 	protected void collectUrlElements() {
+		//TODO martin: use basic functionality of AbstractChart and add extended!
 		urlElements.clear();
 		urlElements.offer(MessageFormat.format("cht={0}", this.getUrlChartType()));
 		//chart type (immer t)

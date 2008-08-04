@@ -2,7 +2,7 @@ package googlechartwrapper;
 
 import googlechartwrapper.coder.IEncoder;
 
-interface Chart {
+public interface Chart {
 
 	/**
 	 * 
