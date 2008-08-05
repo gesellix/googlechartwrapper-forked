@@ -1,5 +1,7 @@
 package googlechartwrapper;
 
+import java.awt.Color;
+
 /**
  * 
  * @author steffan
@@ -8,7 +10,7 @@ package googlechartwrapper;
 public class SolidFill
 {
     private ChartFillDestination fillDestination;
-    private String color;
+    private Color color;
     
     /**
      * Constructs an solidfill
@@ -16,10 +18,11 @@ public class SolidFill
      * @param fillDestination define the destination layer
      * @param color the layers color
      */
-    public SolidFill(ChartFillDestination fillDestination, String color){
+    public SolidFill(ChartFillDestination fillDestination, Color color){
     	
     	this.fillDestination = fillDestination;
     	this.color = color;
+    	
     }
    
     /**
@@ -40,14 +43,14 @@ public class SolidFill
      * 
      * @param color
      */
-    public void setColor(String color){
+    public void setColor(Color color){
     	this.color = color;
     }
     /**
      * 
      * @return
      */
-    public String getColor(){
+    public Color getColor(){
     	
     	return this.color;
     }

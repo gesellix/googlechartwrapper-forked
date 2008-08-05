@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.util.Collection;
 
 /**
+ * Specifies a venn diagram <a href="http://code.google.com/apis/chart/#venn">
+ * http://code.google.com/apis/chart/#venn</a>
  * 
  * @author steffan
  *
@@ -15,6 +17,11 @@ public class VennDiagram extends AbstractChart implements IChartLegendable{
 	
 	private ChartLegend chartLegend;
 
+	/**
+	 * Constructs a venn diagram
+	 * 
+	 * @param chartDimension the size of the diagram
+	 */
 	public VennDiagram(Dimension chartDimension) {
 		super(chartDimension);
 		

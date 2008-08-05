@@ -1,6 +1,5 @@
 package googlechartwrapper.coder;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -13,7 +12,7 @@ public class Encoder implements IEncoder {
 	
         public  String encode(int[] values)
         {
-        	System.out.println(Arrays.toString(values));
+        
             int maxValue = this.getMaxValue(values);
             
             if (maxValue <= 61)

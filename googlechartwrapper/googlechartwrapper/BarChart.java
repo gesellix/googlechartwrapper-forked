@@ -4,22 +4,24 @@ import java.awt.Dimension;
 import java.text.MessageFormat;
 
 /**
+ * Specifies a bar chart <a href="http://code.google.com/apis/chart/#bar_charts">
+ * http://code.google.com/apis/chart/#bar_charts</a>
  * 
  * @author steffan
  *
  */
 public class BarChart extends AbstractChart{
 
-	BarChartOrientation orientation;
-    BarChartStyle style;
-    int barWidth;
+	private BarChartOrientation orientation;
+    private BarChartStyle style;
+    private int barWidth;
     
     /**
-     * Constructs 
+     * Constructs a bar cahrt
      * 
-     * @param chartDimension
-     * @param orientation
-     * @param style
+     * @param chartDimension the size of the diagram
+     * @param orientation the orientation
+     * @param style the style
      */
 	public BarChart(Dimension chartDimension, BarChartOrientation orientation, BarChartStyle style) {
 		super(chartDimension);
@@ -64,19 +66,16 @@ public class BarChart extends AbstractChart{
     }
 	/**
 	 * 
+	 * 
 	 * @author steffan
 	 *
 	 */
 	public enum BarChartOrientation
     {
-        /// <summary>
-        /// Bars will be positioned vertically
-        /// </summary>
+        
         Vertical,
 
-        /// <summary>
-        /// Bars will be positioned horizontally
-        /// </summary>
+       
         Horizontal
     }
 	/**
@@ -86,14 +85,10 @@ public class BarChart extends AbstractChart{
 	 */
 	 public enum BarChartStyle
 	    {
-	        /// <summary>
-	        /// Multiple data sets will be stacked.
-	        /// </summary>
+	       
 	        Stacked,
 
-	        /// <summary>
-	        /// Multiple data sets will be grouped.
-	        /// </summary>
+	       
 	        Grouped
 	    }
 
