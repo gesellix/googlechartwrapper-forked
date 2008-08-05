@@ -1,13 +1,16 @@
 package googlechartwrapper.markers;
 
+import googlechartwrapper.util.IFeatureAppender;
+
 import java.awt.Color;
+import java.util.List;
 
 /**
  * 
  * @author steffan
  *
  */
-public class HorizontalRangeMarker {
+public class HorizontalRangeMarker implements IFeatureAppender {
 	
 	private Color color;
 	private int startPoint;
@@ -67,5 +70,23 @@ public class HorizontalRangeMarker {
 	 */
 	public int getStopPoint(){
 		return this.endPoint;
+	}
+	
+	public String getAppendableString(List<IFeatureAppender> otherAppenders) {
+		
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("chm=r,");
+		
+		//append color
+		builder.append(Integer.toHexString(color.getRGB()).substring(2,8));
+		//append non use value
+		builder.append(",0");
+		//startpoint
+		builder.append("," + Integer.toString(this.startPoint));
+		//endpoint
+		builder.append(","+Integer.toBinaryString(this.endPoint)+"|");
+		
+		return builder.toString();
 	}
 }
