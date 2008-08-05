@@ -2,7 +2,7 @@ package googlechartwrapper;
 
 import googlechartwrapper.coder.Encoder;
 import googlechartwrapper.coder.IEncoder;
-import googlechartwrapper.util.FeatureAppender;
+import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -101,9 +101,9 @@ abstract class AbstractChart implements Chart {
          }
      }
      
-     protected void collectUrlElements(List<FeatureAppender> appenders) {
+     protected void collectUrlElements(List<IFeatureAppender> appenders) {
     	 collectUrlElements();
-    	 for (FeatureAppender ap : appenders){
+    	 for (IFeatureAppender ap : appenders){
  			urlElements.offer(ap.getAppendableString(appenders));
  		}
      }
