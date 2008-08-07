@@ -10,7 +10,7 @@ import googlechartwrapper.util.IFeatureAppender;
  * @author steffan
  *
  */
-public class ShapeMarker implements IFeatureAppender {
+public class ShapeMarker implements IFeatureAppender, IMarker {
 	
 	private MarkerTyp markerTyp;
 	private Color color;

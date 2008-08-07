@@ -11,7 +11,7 @@ import java.util.List;
  * @author steffan
  *
  */
-public class RangeMarker implements IFeatureAppender {
+public class RangeMarker implements IFeatureAppender, IMarker {
 	
 	private Color color;
 	private float startPoint;
