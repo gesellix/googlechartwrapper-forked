@@ -1,4 +1,4 @@
-package googlechartwrapper.markers;
+package googlechartwrapper.style;
 
 import java.awt.Color;
 import java.util.List;
@@ -10,22 +10,37 @@ import googlechartwrapper.util.IFeatureAppender;
  * @author steffan
  *
  */
-public class ShapeMarker implements IFeatureAppender, IMarker {
+public class ShapeMarker implements IFeatureAppender {
 	
 	private MarkerTyp markerTyp;
 	private Color color;
 	private int dataSetIndex;	
 	private float dataPoint;
 	private int size;
+	private Priority priority;
+	
 	
 	public ShapeMarker(MarkerTyp markerTyp, Color color, int dataSetIndex, float dataPoint, int size){
 	
 		if(dataSetIndex < 0)
 			throw new IllegalArgumentException("dataSetIndex must be 0 or higher");
+		
 		this.markerTyp = markerTyp;
 		this.color = color;
 		this.dataPoint = dataPoint;
 		this.size = size;
+	
+	}
+	public ShapeMarker(MarkerTyp markerTyp, Color color, int dataSetIndex, float dataPoint, int size,Priority priority){
+		
+		if(dataSetIndex < 0)
+			throw new IllegalArgumentException("dataSetIndex must be 0 or higher");
+		
+		this.markerTyp = markerTyp;
+		this.color = color;
+		this.dataPoint = dataPoint;
+		this.size = size;
+		this.priority = priority;
 	
 	}
 	/**
@@ -41,6 +56,9 @@ public class ShapeMarker implements IFeatureAppender, IMarker {
 	 */
 	public Color getColor(){
 		return this.color;
+	}
+	public void setMarkerTyp(MarkerTyp markerTyp){
+		this.markerTyp = markerTyp;
 	}
 	public MarkerTyp getMarkerTyp(){
 		return this.markerTyp;
@@ -62,6 +80,12 @@ public class ShapeMarker implements IFeatureAppender, IMarker {
 	}
 	public void setDataSetIndex(int dataSetIndex) {
 		this.dataSetIndex = dataSetIndex;
+	}
+	public Priority getPriority() {
+		return priority;
+	}
+	public void setPriority(Priority priority) {
+		this.priority = priority;
 	}
 
 	public String getAppendableString(List<IFeatureAppender> otherAppenders) {

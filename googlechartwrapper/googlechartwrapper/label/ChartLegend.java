@@ -1,4 +1,4 @@
-package googlechartwrapper.chartLegend;
+package googlechartwrapper.label;
 
 import java.util.ArrayList;
 import java.util.Collection;

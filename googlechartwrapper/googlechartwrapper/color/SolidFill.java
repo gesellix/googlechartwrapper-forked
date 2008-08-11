@@ -1,13 +1,16 @@
-package googlechartwrapper;
+package googlechartwrapper.color;
+
+import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Color;
+import java.util.List;
 
 /**
  * 
  * @author steffan
  *
  */
-public class SolidFill
+public class SolidFill implements IFeatureAppender
 {
     private ChartFillDestination fillDestination;
     private Color color;
@@ -96,5 +99,9 @@ public class SolidFill
    	 ChartArea
 
    }
+	public String getAppendableString(List<IFeatureAppender> otherAppenders) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 

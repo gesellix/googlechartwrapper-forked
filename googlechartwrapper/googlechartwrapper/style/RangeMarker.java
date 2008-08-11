@@ -1,4 +1,4 @@
-package googlechartwrapper.markers;
+package googlechartwrapper.style;
 
 import googlechartwrapper.util.IFeatureAppender;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @author steffan
  *
  */
-public class RangeMarker implements IFeatureAppender, IMarker {
+public class RangeMarker implements IFeatureAppender {
 	
 	private Color color;
 	private float startPoint;
@@ -93,10 +93,10 @@ public class RangeMarker implements IFeatureAppender, IMarker {
 		StringBuilder builder = new StringBuilder();
 		
 		if(this.align == Alignment.Horizontal){
-			builder.append("chm=r,");
+			builder.append("r,");
 		}
 		else{
-			builder.append("chm=R,");
+			builder.append("R,");
 		}
 		//append color
 		if(this.color != null){

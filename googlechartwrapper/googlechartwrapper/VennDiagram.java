@@ -1,7 +1,7 @@
 package googlechartwrapper;
 
-import googlechartwrapper.chartLegend.ChartLegend;
-import googlechartwrapper.chartLegend.IChartLegendable;
+import googlechartwrapper.label.ChartLegend;
+import googlechartwrapper.label.IChartLegendable;
 
 import java.awt.Dimension;
 import java.util.Collection;

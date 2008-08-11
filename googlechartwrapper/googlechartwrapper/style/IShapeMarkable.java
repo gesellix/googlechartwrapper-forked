@@ -1,4 +1,4 @@
-package googlechartwrapper.markers;
+package googlechartwrapper.style;
 
 import java.util.List;
 

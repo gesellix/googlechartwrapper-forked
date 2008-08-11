@@ -1,4 +1,4 @@
-package googlechartwrapper.markers;
+package googlechartwrapper.style;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface IRangeMarkable {
 	 * 
 	 * @param hrm
 	 */
-	public void addRangeMarker(RangeMarker hrm);
+	public void addRangeMarker(RangeMarker rm);
 	
 	/**
 	 * 

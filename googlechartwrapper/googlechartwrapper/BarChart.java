@@ -1,7 +1,13 @@
 package googlechartwrapper;
 
+import googlechartwrapper.marker.GenericAppender;
+import googlechartwrapper.style.IMarkable;
+import googlechartwrapper.style.RangeMarker;
+import googlechartwrapper.style.ShapeMarker;
+
 import java.awt.Dimension;
 import java.text.MessageFormat;
+import java.util.List;
 
 /**
  * Specifies a bar chart <a href="http://code.google.com/apis/chart/#bar_charts">
@@ -10,14 +16,16 @@ import java.text.MessageFormat;
  * @author steffan
  *
  */
-public class BarChart extends AbstractChart{
+public class BarChart extends AbstractChart implements IMarkable{
 
 	private BarChartOrientation orientation;
     private BarChartStyle style;
     private int barWidth;
     
+    private GenericAppender genAppender;
+    
     /**
-     * Constructs a bar cahrt
+     * Constructs a bar chart
      * 
      * @param chartDimension the size of the diagram
      * @param orientation the orientation
@@ -53,6 +61,9 @@ public class BarChart extends AbstractChart{
          {
              super.urlElements.offer(MessageFormat.format("chbh={0}", this.barWidth));
          }
+         
+         //alle appender 
+         super.urlElements.offer(genAppender.getAppendableString(null));
 		 
 	 }
 	/**
@@ -91,5 +102,25 @@ public class BarChart extends AbstractChart{
 	       
 	        Grouped
 	    }
+	public void addRangeMarker(RangeMarker rm) {
+
+			this.genAppender.add(rm);
+		
+	}
+
+	public List<RangeMarker> getRangeMarkers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addShapeMarker(ShapeMarker shapeMarker) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<ShapeMarker> getShapeMarkers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
