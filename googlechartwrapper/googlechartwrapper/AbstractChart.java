@@ -70,12 +70,12 @@ abstract class AbstractChart implements Chart {
      /* (non-Javadoc)
 	 * @see googlechartwrapper.Chart#getUrl()
 	 */
-    public String getUrl()
-     {
+    public abstract String getUrl();
+    /* {
          collectUrlElements();
          
          return generateUrlString();
-     }
+     }*/
 
      
      protected abstract String getUrlChartType();
@@ -108,7 +108,7 @@ abstract class AbstractChart implements Chart {
  		}
      }
 
-     private String generateUrlString()
+     protected String generateUrlString()
      {
          StringBuilder url = new StringBuilder();         
          url.append(googleAPI);      

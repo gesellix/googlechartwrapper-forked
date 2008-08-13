@@ -4,9 +4,11 @@ import googlechartwrapper.marker.GenericAppender;
 import googlechartwrapper.style.IMarkable;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
+import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Dimension;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +24,7 @@ public class BarChart extends AbstractChart implements IMarkable{
     private BarChartStyle style;
     private int barWidth;
     
-    private GenericAppender genAppender;
+    private GenericAppender<RangeMarker> rangeMarkerAppender;
     
     /**
      * Constructs a bar chart
@@ -52,20 +54,7 @@ public class BarChart extends AbstractChart implements IMarkable{
 
           return MessageFormat.format("b{0}{1}", orientationChar, styleChar);
 	}
-	@Override
-	 protected  void collectUrlElements(){
-		
-		 super.collectUrlElements();
-		 
-         if (this.barWidth != 0)
-         {
-             super.urlElements.offer(MessageFormat.format("chbh={0}", this.barWidth));
-         }
-         
-         //alle appender 
-         super.urlElements.offer(genAppender.getAppendableString(null));
-		 
-	 }
+	
 	/**
 	 * Specify the bar size
 	 * 
@@ -104,13 +93,12 @@ public class BarChart extends AbstractChart implements IMarkable{
 	    }
 	public void addRangeMarker(RangeMarker rm) {
 
-			this.genAppender.add(rm);
+			this.rangeMarkerAppender.add(rm);
 		
 	}
 
 	public List<RangeMarker> getRangeMarkers() {
-		// TODO Auto-generated method stub
-		return null;
+		return rangeMarkerAppender.getList();
 	}
 
 	public void addShapeMarker(ShapeMarker shapeMarker) {
@@ -121,6 +109,19 @@ public class BarChart extends AbstractChart implements IMarkable{
 	public List<ShapeMarker> getShapeMarkers() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String getUrl() {
+		collectUrlElements(getAllAppenders());
+		return generateUrlString();
+	}
+	
+	private List<IFeatureAppender> getAllAppenders(){
+		List<IFeatureAppender> all = new ArrayList<IFeatureAppender>();
+		all.add(rangeMarkerAppender);
+		//to fill
+		return all;
 	}
 
 }
