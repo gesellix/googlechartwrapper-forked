@@ -1,4 +1,4 @@
-package googlechartwrapper.marker;
+package googlechartwrapper.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,9 +6,8 @@ import java.util.List;
 
 import googlechartwrapper.ChartType;
 import googlechartwrapper.ChartTypeFeature;
-import googlechartwrapper.util.IFeatureAppender;
 
-public class GenericAppender< T extends IFeatureAppender> implements IFeatureAppender{
+public class GenericAppender< T extends IFeatureAppender> implements IExtendedFeatureAppender{
 	
 	private List<T> list;
 	private String prefix;
@@ -40,7 +39,7 @@ public class GenericAppender< T extends IFeatureAppender> implements IFeatureApp
 		return Collections.unmodifiableList(list);
 	}
 
-	public String getAppendableString(List<IFeatureAppender> otherAppenders) {
+	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		
 		if (list.size() > 0){
 			StringBuilder bf = new StringBuilder(list.size()*10);

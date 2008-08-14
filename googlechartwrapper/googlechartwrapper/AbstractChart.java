@@ -2,14 +2,17 @@ package googlechartwrapper;
 
 import googlechartwrapper.coder.Encoder;
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.text.MessageFormat;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 /**
@@ -101,10 +104,21 @@ abstract class AbstractChart implements Chart {
          }
      }
      
-     protected void collectUrlElements(List<IFeatureAppender> appenders) {
+     protected void collectUrlElements(List<IExtendedFeatureAppender> appenders) {
     	 collectUrlElements();
-    	 for (IFeatureAppender ap : appenders){
+    	 Map<String, IFeatureAppender> m = new HashMap<String, IFeatureAppender>();
+    	 /*for (IExtendedFeatureAppender ap : appenders){
+  			if (m.containsKey(ap.getFeaturePrefix())){
+  				m.get(ap.getFeaturePrefix()).add(ap);
+  			}
+  			else {
+  				m.put(ap.getFeaturePrefix(), ap);
+  			}
+  			
+  		}*/
+    	 for (IExtendedFeatureAppender ap : appenders){
  			urlElements.offer(ap.getAppendableString(appenders));
+ 			
  		}
      }
 

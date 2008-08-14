@@ -4,8 +4,6 @@ import java.util.List;
 
 public interface IFeatureAppender {
 	
-	public String getAppendableString (List<IFeatureAppender> otherAppenders);
-	
-	public String getFeaturePrefix ();
+	public String getAppendableString (List<? extends IFeatureAppender> otherAppenders);
 
 }

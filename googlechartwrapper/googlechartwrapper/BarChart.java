@@ -1,9 +1,10 @@
 package googlechartwrapper;
 
-import googlechartwrapper.marker.GenericAppender;
 import googlechartwrapper.style.IMarkable;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
+import googlechartwrapper.util.GenericAppender;
+import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Dimension;
@@ -24,7 +25,8 @@ public class BarChart extends AbstractChart implements IMarkable{
     private BarChartStyle style;
     private int barWidth;
     
-    private GenericAppender<RangeMarker> rangeMarkerAppender;
+    private GenericAppender<RangeMarker> rangeMarkerAppender = 
+    	new GenericAppender<RangeMarker>(ChartTypeFeature.Markers);
     
     /**
      * Constructs a bar chart
@@ -117,8 +119,8 @@ public class BarChart extends AbstractChart implements IMarkable{
 		return generateUrlString();
 	}
 	
-	private List<IFeatureAppender> getAllAppenders(){
-		List<IFeatureAppender> all = new ArrayList<IFeatureAppender>();
+	private List<IExtendedFeatureAppender> getAllAppenders(){
+		List<IExtendedFeatureAppender> all = new ArrayList<IExtendedFeatureAppender>();
 		all.add(rangeMarkerAppender);
 		//to fill
 		return all;
