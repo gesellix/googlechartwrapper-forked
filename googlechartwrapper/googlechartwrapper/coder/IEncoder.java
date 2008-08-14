@@ -1,10 +1,12 @@
 package googlechartwrapper.coder;
 
+import googlechartwrapper.Chart;
+
 import java.util.Collection;
 
 /**
  * The Interface for the Encoder. The Encoder defines the way how your data will be encoded.<br />
- * To receive more information about the encoding kinds study <a href=" die url">http://code.google.com/apis/chart/#text</a>.
+ * To receive more information about the encoding kinds study <a href="http://code.google.com/apis/chart/#text">http://code.google.com/apis/chart/#text</a>.
  * 
  * @author steffan
  *
