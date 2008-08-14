@@ -2,12 +2,13 @@ package googlechartwrapper;
 
 import googlechartwrapper.coder.Encoder;
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.IExtendedFeatureAppender;
-import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -106,20 +107,29 @@ abstract class AbstractChart implements Chart {
      
      protected void collectUrlElements(List<IExtendedFeatureAppender> appenders) {
     	 collectUrlElements();
-    	 Map<String, IFeatureAppender> m = new HashMap<String, IFeatureAppender>();
-    	 /*for (IExtendedFeatureAppender ap : appenders){
-  			if (m.containsKey(ap.getFeaturePrefix())){
-  				m.get(ap.getFeaturePrefix()).add(ap);
+    	 Map<String, FeatureAppender<IExtendedFeatureAppender>> m = 
+    		 new HashMap<String, FeatureAppender<IExtendedFeatureAppender>>();
+    	 
+    	 for (IExtendedFeatureAppender ap : appenders){
+    		 if (m.containsKey(ap.getFeaturePrefix())){
+    			 m.get(ap.getFeaturePrefix()).add(ap);
   			}
   			else {
-  				m.put(ap.getFeaturePrefix(), ap);
+  				FeatureAppender<IExtendedFeatureAppender> fa = 
+  					new FeatureAppender<IExtendedFeatureAppender>(ap.getFeaturePrefix());
+  				fa.add(ap);
+  				m.put(ap.getFeaturePrefix(), fa);
   			}
   			
-  		}*/
-    	 for (IExtendedFeatureAppender ap : appenders){
- 			urlElements.offer(ap.getAppendableString(appenders));
- 			
- 		}
+    	 }
+    	 List<FeatureAppender<IExtendedFeatureAppender>> values = 
+    		 new ArrayList<FeatureAppender<IExtendedFeatureAppender>>(m.values());
+    	 for (FeatureAppender<IExtendedFeatureAppender> ap : values){
+    		 urlElements.offer(ap.getAppendableString(values));
+    	 }
+    	 //for (IExtendedFeatureAppender ap : appenders){
+  			//urlElements.offer(ap.getAppendableString(appenders));	
+    	 
      }
 
      protected String generateUrlString()
@@ -137,7 +147,20 @@ abstract class AbstractChart implements Chart {
 
 	public void setDataColors(Color[] dataColors) {
 		this.dataColors = dataColors;
-	}     
+	}
+	
+	private class FeatureAppender<T extends IExtendedFeatureAppender> extends GenericAppender<T>{
+
+		public FeatureAppender(String stm) {
+			super(stm);
+		}
+		
+		@Override
+		public String getAppendableString(List otherAppenders) {
+			return getFeaturePrefix() + "="+super.getAppendableString(otherAppenders);
+		}
+		
+	}
  }
 
 
