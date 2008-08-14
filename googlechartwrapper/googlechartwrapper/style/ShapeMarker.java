@@ -88,7 +88,7 @@ public class ShapeMarker implements IFeatureAppender {
 		this.priority = priority;
 	}
 
-	public String getAppendableString(List<IFeatureAppender> otherAppenders) {
+	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		// TODO Auto-generated method stub
 		return null;
 	}

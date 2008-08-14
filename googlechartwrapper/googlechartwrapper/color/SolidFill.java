@@ -99,7 +99,7 @@ public class SolidFill implements IFeatureAppender
    	 ChartArea
 
    }
-	public String getAppendableString(List<IFeatureAppender> otherAppenders) {
+    public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -88,7 +88,7 @@ public class RangeMarker implements IFeatureAppender {
 		return this.endPoint;
 	}
 	
-	public String getAppendableString(List<IFeatureAppender> otherAppenders) {
+	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new StringBuilder();
 		
