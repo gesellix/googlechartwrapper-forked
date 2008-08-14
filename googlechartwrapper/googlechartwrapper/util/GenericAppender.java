@@ -45,16 +45,33 @@ public class GenericAppender< T extends IFeatureAppender> implements IExtendedFe
 			StringBuilder bf = new StringBuilder(list.size()*10);
 			//bf.append("chm=");
 			for (IFeatureAppender m:list){
-				bf.append(m.getAppendableString(otherAppenders));
-				bf.append("|");
+				String app = m.getAppendableString(otherAppenders);
+				if (app.length()>0){
+					bf.append(app);
+					bf.append("|");		
+				}
+				//bf.append(m.getAppendableString(otherAppenders));
+						
 			}
-			return bf.substring(0, bf.length()-1);			
+			if (bf.length()>0){
+				return bf.substring(0, bf.length()-1);
+			}
+			else {
+				return "";
+			}
+			
 		}
 		else return "";
 	}
 	
 	public String getFeaturePrefix (){
 		return prefix;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString()+" "+list;
 	}
 
 }
