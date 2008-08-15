@@ -30,12 +30,36 @@ public class GenericAppender< T extends IFeatureAppender> implements IExtendedFe
 		return list.remove(m);
 	}
 	
+	public T remove (int index){
+		return list.remove(index);
+	}
+	
+	public void removeAll (){
+		for (int i = 0; i < list.size();){
+			list.remove(i);
+		}
+	}
+	
+	/**
+	 * Returns the list of all T elements added to this appender. 
+	 * It returns an unmodifiable view of the value list.
+	 * Consequently "read-only" access is possible
+	 * @return unmodifiable view of the values
+	 */
 	public List<T> getList (){
 		return Collections.unmodifiableList(list);
 	}
 	
+	/**
+	 * Returns the list of all T elements added to this appender. 
+	 * It returns an unmodifiable view of the value list.
+	 * Consequently "read-only" access is possible. The value list is filtered
+	 * for elements which are instance of the parameter class.
+	 * @param c optional parameter: filters the returned list to classes of this type
+	 * @return unmodifiable view of the values
+	 */
 	public List<? extends T> getList (Class<? extends T> c){
-		//TODO
+		//TODO mva: filter!
 		return Collections.unmodifiableList(list);
 	}
 
