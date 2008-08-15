@@ -20,5 +20,26 @@ public interface IShapeMarkable {
 	 * @return
 	 */
 	public List<ShapeMarker> getShapeMarkers();
+	
+	/**
+	 * 
+	 * @param index
+	 * @return
+	 */
+	public ShapeMarker removeShapeMarker(int index);
+	
+	/**
+	 * 
+	 * @param rm
+	 * @return
+	 */
+	public boolean removeShapeMarker(ShapeMarker sm);
+	
+	/**
+	 * 
+	 */
+	public void removeAllShapeMarkers();	
+	
+	
 
 }

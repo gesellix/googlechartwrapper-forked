@@ -2,7 +2,8 @@ package googlechartwrapper;
 
 public enum ChartTypeFeature {
 
-	Markers("chm");
+	Marker("chm"),
+	GridLine("chg");
 	
 	private String prefix;
 		

@@ -1,15 +1,16 @@
 package googlechartwrapper;
 
+import googlechartwrapper.style.GridLine;
+import googlechartwrapper.style.IGridLineable;
 import googlechartwrapper.style.IMarkable;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
 import googlechartwrapper.util.GenericAppender;
-import googlechartwrapper.util.IExtendedFeatureAppender;
-import googlechartwrapper.util.IFeatureAppender;
+import googlechartwrapper.util.UpperLimitGenericAppender;
+import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 import java.awt.Dimension;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,14 +20,18 @@ import java.util.List;
  * @author steffan
  *
  */
-public class BarChart extends AbstractChart implements IMarkable{
+public class BarChart extends AbstractChart implements IMarkable, IGridLineable{
 
 	private BarChartOrientation orientation;
     private BarChartStyle style;
     private int barWidth;
     
-    private GenericAppender<RangeMarker> rangeMarkerAppender = 
-    	new GenericAppender<RangeMarker>(ChartTypeFeature.Markers);
+    protected GenericAppender<RangeMarker> rangeMarkerAppender = 
+    	new GenericAppender<RangeMarker>(ChartTypeFeature.Marker);
+    protected  GenericAppender<ShapeMarker> shapeMarkerAppender =
+    	new GenericAppender<ShapeMarker>(ChartTypeFeature.Marker);
+    protected UpperLimitGenericAppender<GridLine> gridLineAppender =
+    	new UpperLimitGenericAppender<GridLine>(ChartTypeFeature.GridLine, 1,UpperLimitReactions.RemoveFirst);
     
     /**
      * Constructs a bar chart
@@ -51,7 +56,7 @@ public class BarChart extends AbstractChart implements IMarkable{
 	@Override
 	protected String getUrlChartType() {
 		
-		  char orientationChar = this.orientation == BarChartOrientation.Horizontal ? 'h' : 'v';
+		  char orientationChar = this.orientation == BarChartOrientation.Horizontal ? 'v' : 'h';
           char styleChar = this.style == BarChartStyle.Stacked ? 's' : 'g';
 
           return MessageFormat.format("b{0}{1}", orientationChar, styleChar);
@@ -94,7 +99,6 @@ public class BarChart extends AbstractChart implements IMarkable{
 	        Grouped
 	    }
 	public void addRangeMarker(RangeMarker rm) {
-
 			this.rangeMarkerAppender.add(rm);
 		
 	}
@@ -104,26 +108,53 @@ public class BarChart extends AbstractChart implements IMarkable{
 	}
 
 	public void addShapeMarker(ShapeMarker shapeMarker) {
-		// TODO Auto-generated method stub
+		this.shapeMarkerAppender.add(shapeMarker);
 		
 	}
 
-	public List<ShapeMarker> getShapeMarkers() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ShapeMarker> getShapeMarkers() {		
+		return shapeMarkerAppender.getList();
 	}
 
-	@Override
-	public String getUrl() {
-		collectUrlElements(getAllAppenders());
-		return generateUrlString();
+	public void removeAllRangeMarkers() {
+		this.rangeMarkerAppender.removeAll();
+		
 	}
+
+	public RangeMarker removeRangeMarker(int index) {
+		
+		return this.removeRangeMarker(index);
+	}
+
+	public boolean removeRangeMarker(RangeMarker rm) {
+		
+		return this.removeRangeMarker(rm);
+	}
+
+	public void removeAllShapeMarkers() {
+		this.shapeMarkerAppender.removeAll();
+		
+	}
+
+	public ShapeMarker removeShapeMarker(int index) {
+		
+		return this.shapeMarkerAppender.remove(index);
+	}
+
+	public boolean removeShapeMarker(ShapeMarker sm) {
+		
+		return this.shapeMarkerAppender.remove(sm);
+	}
+
+	public void removeGridLine() {
+		this.gridLineAppender.removeAll();
+		
+	}
+
+	public void setGridLine(GridLine gl) {
+		this.gridLineAppender.add(gl);
+		
+	}
+
 	
-	private List<IExtendedFeatureAppender> getAllAppenders(){
-		List<IExtendedFeatureAppender> all = new ArrayList<IExtendedFeatureAppender>();
-		all.add(rangeMarkerAppender);
-		//to fill
-		return all;
-	}
-
 }

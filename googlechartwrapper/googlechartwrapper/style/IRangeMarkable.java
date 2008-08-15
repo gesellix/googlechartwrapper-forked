@@ -20,5 +20,26 @@ public interface IRangeMarkable {
 	 * @return
 	 */
 	public List<RangeMarker> getRangeMarkers();
+	
+	/**
+	 * 
+	 * @param index
+	 * @return
+	 */
+	public RangeMarker removeRangeMarker(int index);
+	
+	/**
+	 * 
+	 * @param rm
+	 * @return
+	 */
+	public boolean removeRangeMarker(RangeMarker rm);
+	
+	/**
+	 * 
+	 */
+	public void removeAllRangeMarkers();
+	
+	
 
 }

@@ -109,9 +109,11 @@ public class RangeMarker implements IFeatureAppender {
 		//append non use value
 		builder.append(",0");
 		//startpoint
-		builder.append("," + Float.toString(this.startPoint));
+		builder.append(',');
+		builder.append(this.startPoint);
 		//endpoint
-		builder.append(","+Float.toString(this.endPoint));
+		builder.append(',');
+		builder.append(this.endPoint);
 		
 		return builder.toString();
 	}
@@ -126,4 +128,5 @@ public class RangeMarker implements IFeatureAppender {
 		
 		Vertical
 	}
+	
 }

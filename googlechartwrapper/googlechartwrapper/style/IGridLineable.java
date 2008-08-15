@@ -5,8 +5,10 @@ package googlechartwrapper.style;
  * @author steffan
  *
  */
-public interface IGridLine {
+public interface IGridLineable {
 	
 	public void setGridLine(GridLine gl);
+	
+	public void removeGridLine();
 
 }

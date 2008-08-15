@@ -130,9 +130,9 @@ public class GridLine implements IFeatureAppender {
 		
 		int i = s.indexOf(".");
 		
-		//nachkommastelle abschneiden
+		//cut decimal place
 		if(s.length() > i){
-			return s.substring(0, i+1);
+			return s.substring(0, i+2);
 		}
 		return s;
 	}
