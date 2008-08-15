@@ -9,8 +9,8 @@ import googlechartwrapper.ChartTypeFeature;
 
 public class GenericAppender< T extends IFeatureAppender> implements IExtendedFeatureAppender{
 	
-	private List<T> list;
-	private String prefix;
+	protected List<T> list;
+	protected String prefix;
 	
 	public GenericAppender(ChartTypeFeature m){
 		list = new ArrayList<T>();
