@@ -22,7 +22,7 @@ public class RangeMarker implements IFeatureAppender {
 	 * Constructs the horizontal range marker
 	 * 
 	 * @param align 
-	 * @param color color of range, white if null
+	 * @param color color of range, white if <code>null</code>
 	 * @param startPoint value between 0.0 and 1.0
 	 * @param endPoint value between 0.0 and 1.0
 	 * @throws IllegalArgumentException if startPoint or endPoint out of range
