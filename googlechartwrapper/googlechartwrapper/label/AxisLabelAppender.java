@@ -90,11 +90,11 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 				axisStyle.append(",");
 				axisStyle.append(MiscUtils.getSixCharacterHexValue(
 						sum.getAxisStyle().getColor()));
-				//TODO mva: fontsize und alignment
-				if (sum.getAxisStyle().isUseFontSize()){
+				
+				if (sum.getAxisStyle().getFontSize()>0){
 					axisStyle.append(",");
 					axisStyle.append(sum.getAxisStyle().getFontSize());
-					if (sum.getAxisStyle().isUseAlignment()){
+					if (sum.getAxisStyle().isAlignmentUsed()){
 						axisStyle.append(",");
 						axisStyle.append(sum.getAxisStyle().getAlignment());
 					}

@@ -39,6 +39,11 @@ public class AxisLabelSummary {
 		return labels;
 	}
 	
+	/**
+	 * The first label is placed at the start, 
+	 * the last at the end, others are uniformly spaced in between.
+	 * @param label
+	 */
 	public void addLabel (AxisLabel label){
 		labels.add(label);
 	}

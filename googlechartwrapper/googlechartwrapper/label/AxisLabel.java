@@ -1,5 +1,10 @@
 package googlechartwrapper.label;
 
+/**
+ * Specifies an label for an axis. 
+ * @author martin
+ *
+ */
 public class AxisLabel{
 	
 	protected String label;
@@ -22,6 +27,10 @@ public class AxisLabel{
 		return pos;
 	}
 
+	/**
+	 * Set positon for the label. 
+	 * @param pos
+	 */
 	public void setPos(int pos) {
 		this.pos = pos;
 	}
