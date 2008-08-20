@@ -5,7 +5,7 @@ package googlechartwrapper.color;
  * @author steffan
  * 
  */
-public interface LinearGradientable {
+public interface ILinearGradientable {
 
 	/**
 	 * 

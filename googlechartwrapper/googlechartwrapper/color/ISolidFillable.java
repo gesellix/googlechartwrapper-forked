@@ -7,7 +7,7 @@ import java.util.List;
  * @author steffan
  *
  */
-public interface SolidFillable {
+public interface ISolidFillable {
 	
 	/**
 	 * 

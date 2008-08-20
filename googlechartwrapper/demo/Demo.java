@@ -28,9 +28,9 @@ public class Demo {
 		int [] values = new int[] {10,60,33,10,10,23,12,32};
 		c.setValues(values);
 		
-		//c.addRangeMarker(new RangeMarker(Alignment.Vertical,Color.BLUE,0.2f,0.5f));
-		//c.addShapeMarker(new ShapeMarker(MarkerTyp.Cross,Color.BLACK,0,5.5f,10));
-		//c.addShapeMarker(new ShapeMarker(MarkerTyp.HorizontalLine,Color.CYAN,6,0.4f,5));
+		c.addRangeMarker(new RangeMarker(Alignment.Vertical,Color.BLUE,0.2f,0.5f));
+		c.addShapeMarker(new ShapeMarker(MarkerTyp.Cross,Color.BLACK,0,5.5f,10));
+		c.addShapeMarker(new ShapeMarker(MarkerTyp.HorizontalLine,Color.CYAN,6,0.4f,5));
 		//c.removeAllShapeMarkers();
 		c.setGridLine(new GridLine(10f,20f));
 		System.out.println(c.getUrl());

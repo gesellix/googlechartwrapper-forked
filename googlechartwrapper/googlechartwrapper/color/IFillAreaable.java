@@ -7,7 +7,7 @@ import java.util.List;
  * @author steffan
  *
  */
-public interface FillAreaable {
+public interface IFillAreaable {
 	
 	/**
 	 * 
