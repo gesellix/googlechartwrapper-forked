@@ -1,12 +1,14 @@
 package googlechartwrapper;
 
+import googlechartwrapper.color.ISolidFillable;
+import googlechartwrapper.color.SolidFill;
+import googlechartwrapper.color.SolidFill.ChartFillDestination;
+import googlechartwrapper.util.GenericAppender;
+
 import java.awt.Color;
 import java.awt.Dimension;
-import java.text.MessageFormat;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Locale;
+import java.util.List;
 
 /**
  * Specifies a map <a href="http://code.google.com/apis/chart/#map">
@@ -14,10 +16,12 @@ import java.util.Locale;
  * @author martin
  *
  */
-public class GeographicMap extends AbstractChart {
+public class GeographicMap extends AbstractChart implements ISolidFillable{
 	
 	private GeographicalArea area;
 	private Collection<String> coloredStates;
+	protected GenericAppender<SolidFill> solidFill = 
+		new GenericAppender<SolidFill>("chf");
 	
 	public enum GeographicalArea {
 		AFRICA,
@@ -37,7 +41,8 @@ public class GeographicMap extends AbstractChart {
 	 * Constructs a new GeographicMap corresponding to 
 	 * <a href="http://code.google.com/apis/chart/#map">
 	 * http://code.google.com/apis/chart/#map</a>
-	 * <p>The maximum size of the map is 440x220. If a greater value is given an {@link IllegalArgumentException}
+	 * <p>The maximum size of the map is 440x220. If a greater value is given an 
+	 * {@link IllegalArgumentException}
 	 * will be thrown.</p>
 	 * @param chartDimension dimension of the chart, maximum 440x220
 	 * @throws IllegalArgumentException if dimension is wrong
@@ -81,33 +86,21 @@ public class GeographicMap extends AbstractChart {
 	
 	@Override
 	protected void collectUrlElements() {
+		super.collectUrlElements();
 		//TODO martin: use basic functionality of AbstractChart and add extended!
-		urlElements.clear();
+		/*urlElements.clear();
 		urlElements.offer(MessageFormat.format("cht={0}", this.getUrlChartType()));
 		//chart type (immer t)
    	 	urlElements.offer(MessageFormat.format("chs={0}x{1}", 
    	 			this.chartDimension.width, this.chartDimension.height));
-   	 	//dimension (max 440x220)
-   	 	if (values != null){
-   	 		urlElements.offer(values);
-   	 	}
-   	 	else {
-   	 		urlElements.offer("chd=s:_");   
+   	 	//dimension (max 440x220)*/
+   	 	if (values == null){
+   	 		urlElements.offer("chd=s:_"); 
    	 	}
    	 	
         urlElements.offer("chtm="+area.getAreaCode()); //area code
         
-        if (dataColors != null && dataColors.length > 0){
-        	StringBuffer bf = new StringBuffer(dataColors.length * 8+5);
-        	bf.append("chco=");
-        	for (Color c: dataColors){
-        		bf.append(Integer.toHexString(c.getRGB()).substring(2,8));
-        		bf.append(",");
-        	}
-        	urlElements.offer(bf.toString().substring(0,bf.toString().length()-1));
-        }
-        
-        if (coloredStates!=null){
+       if (coloredStates!=null){
         	//chld=<list of codes for each country or state to be colored>
         	StringBuffer bf = new StringBuffer(coloredStates.size() * 2+5);
         	bf.append("chld=");
@@ -118,9 +111,38 @@ public class GeographicMap extends AbstractChart {
         		else {
         			bf.append(c);
         		} 
-        		//bf.append(",");
         	}
         	urlElements.offer(bf.toString());
         }
+	}
+
+	/**
+	 * Only supports {@link ChartFillDestination#Background}.
+	 * @throws IllegalArgumentException if {@link SolidFill#getChartFillDestination()}
+	 * does not equals ChartFillDestination#Background
+	 */
+	public void addSolidFill(SolidFill sf) {
+		if (!sf.getChartFillDestination().equals(ChartFillDestination.Background)){
+			throw new IllegalArgumentException
+				("only ChartFillDestination.Background supported");
+		}
+		solidFill.add(sf);
+	}
+
+	public List<SolidFill> getSolidFills() {
+		return solidFill.getList();
+	}
+
+	public void removeAllSolidFills() {
+		solidFill.removeAll();
+		
+	}
+
+	public SolidFill removeSolidFill(int index) {
+		return solidFill.remove(index);
+	}
+
+	public boolean removeSolidFill(SolidFill sf) {
+		return solidFill.remove(sf);
 	}
 }
