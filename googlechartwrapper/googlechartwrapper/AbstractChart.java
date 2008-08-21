@@ -27,7 +27,7 @@ import java.util.Queue;
  * base class for every chart
  * 
  */
-abstract class AbstractChart implements Chart {
+public abstract class AbstractChart implements Chart {
 
 	private static final String googleAPI = "http://chart.apis.google.com/chart?";
 	//TODO mva: googleAPI string austauschbar machen?
