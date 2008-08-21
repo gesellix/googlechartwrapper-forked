@@ -10,6 +10,7 @@ import googlechartwrapper.label.IAxisLabelable;
 import googlechartwrapper.label.IChartTitleable;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
+import googlechartwrapper.style.IShapeMarkable;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
 import googlechartwrapper.util.GenericAppender;
@@ -19,8 +20,8 @@ import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 import java.awt.Dimension;
 import java.util.List;
 
-public class RadarChart extends AbstractChart implements IGridLineable, IMarkable, 
-	IAxisLabelable, IFillAreaable, IChartTitleable{
+public class RadarChart extends AbstractChart implements IGridLineable, IShapeMarkable, 
+	IAxisLabelable, IFillAreaable, IChartTitleable, IMarkable{
 	
 	private boolean curved;
 	
@@ -50,7 +51,7 @@ public class RadarChart extends AbstractChart implements IGridLineable, IMarkabl
 
 	@Override
 	protected String getUrlChartType() {
-		return curved?"cht=r":"cht:rs";
+		return curved?"r":"rs";
 	}
 
 	public void setGridLine(GridLine gl) {
@@ -150,7 +151,6 @@ public class RadarChart extends AbstractChart implements IGridLineable, IMarkabl
 		title.removeAll();
 	}
 
-	
 	public void setChartTitle(ChartTitle title) {
 		if (title == null){
 			this.title.removeAll();

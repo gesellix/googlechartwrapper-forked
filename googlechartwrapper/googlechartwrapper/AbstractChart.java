@@ -6,6 +6,7 @@ import googlechartwrapper.util.ArrayUtils;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
+import googlechartwrapper.util.MiscUtils;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -150,7 +151,13 @@ abstract class AbstractChart implements Chart {
 			StringBuffer bf = new StringBuffer(dataColors.length * 8 + 5);
 			bf.append("chco=");
 			for (Color c : dataColors) {
-				bf.append(Integer.toHexString(c.getRGB()).substring(2, 8));
+				if (c.getAlpha()==255){
+					bf.append(MiscUtils.getSixCharacterHexValue(c));
+				}
+				else {
+					bf.append(MiscUtils.getEightCharacterHexValue(c));
+				}
+				
 				bf.append(",");
 			}
 			urlElements.offer(bf.toString().substring(0,
@@ -194,7 +201,11 @@ abstract class AbstractChart implements Chart {
 
 		while (urlElements.size() > 0) {
 			//solange noch etwas drin, an die url mit dem Trennzeichen & anhängen
-			url.append("&" + urlElements.poll()); //TODO mva: & auslagern
+			String urlElem = urlElements.poll();
+			if (urlElem.length()>0){
+				url.append("&" + urlElem);
+			}
+			 //TODO mva: & auslagern
 		}
 		return url.toString();
 	}
@@ -212,8 +223,10 @@ abstract class AbstractChart implements Chart {
 
 		@Override
 		public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
-			return getFeaturePrefix() + "="
-					+ super.getAppendableString(otherAppenders);
+			String appString = super.getAppendableString(otherAppenders);
+			
+			return appString.length()>0? getFeaturePrefix() + "="
+					+ appString : "";
 		}
 	}
 }

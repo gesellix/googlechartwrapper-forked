@@ -58,7 +58,13 @@ public class FillArea implements IFeatureAppender {
 		
 		builder.append(this.dataSetKind.getDataSetKind());
 		builder.append(',');
-		builder.append(MiscUtils.getSixCharacterHexValue(this.color));
+		if (color.getAlpha()==255){
+			builder.append(MiscUtils.getSixCharacterHexValue(this.color));
+		}
+		else {
+			builder.append(MiscUtils.getEightCharacterHexValue(this.color));
+		}
+		
 		builder.append(',');
 		builder.append(this.startLineIndex);
 		builder.append(',');

@@ -43,7 +43,7 @@ public class GoogleOMeter extends AbstractChart{
 	
 	@Override
 	protected void collectUrlElements() {
-		super.collectUrlElements();
+		super.collectUrlElements(); //todo martin: use feature Appender
 		if (labelTexts!= null && labelTexts.length >0){
 			StringBuffer bf = new StringBuffer(labelTexts.length*8);
 			bf.append("chl=");
@@ -62,7 +62,7 @@ public class GoogleOMeter extends AbstractChart{
 	 * @author mart
 	 *
 	 */
-	public class PercentageEncoder implements IEncoder{
+	public static class PercentageEncoder implements IEncoder{
 
 		public String encode(int[] values) {
 			StringBuffer bf = new StringBuffer(values.length*3+5);
