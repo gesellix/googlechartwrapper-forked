@@ -20,10 +20,27 @@ public class ShapeMarker implements IFeatureAppender {
 	private Priority priority;
 	
 	
+	/**
+	 * Constructs a shapemaker
+	 * 
+	 * @param markerTyp
+	 * @param color
+	 * @param dataSetIndex
+	 * @param dataPoint
+	 * @param size
+	 * 
+	 * @throws IllegalArgumentException
+	 */
 	public ShapeMarker(MarkerTyp markerTyp, Color color, int dataSetIndex, float dataPoint, int size){
 	
+		if(markerTyp == null)
+			throw new IllegalArgumentException("markerTyp can not be null");		
+		if(color == null)
+			throw new IllegalArgumentException("color can not be null");
 		if(dataSetIndex < 0)
 			throw new IllegalArgumentException("dataSetIndex must be 0 or higher");
+		if(size < 0)
+			throw new IllegalArgumentException("size out of range");
 		
 		this.markerTyp = markerTyp;
 		this.color = color;
@@ -31,10 +48,30 @@ public class ShapeMarker implements IFeatureAppender {
 		this.size = size;
 	
 	}
+	/**
+	 * Constructs a shapemarker
+	 * 
+	 * @param markerTyp
+	 * @param color
+	 * @param dataSetIndex
+	 * @param dataPoint
+	 * @param size
+	 * @param priority
+	 * 
+	 * @throws IllegalArgumentException
+	 */
 	public ShapeMarker(MarkerTyp markerTyp, Color color, int dataSetIndex, float dataPoint, int size,Priority priority){
 		
 		if(dataSetIndex < 0)
 			throw new IllegalArgumentException("dataSetIndex must be 0 or higher");
+		if(markerTyp == null)
+			throw new IllegalArgumentException("markerTyp can not be null");		
+		if(color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if(dataSetIndex < 0)
+			throw new IllegalArgumentException("dataSetIndex must be 0 or higher");
+		if(size < 0)
+			throw new IllegalArgumentException("size out of range");
 		
 		this.markerTyp = markerTyp;
 		this.color = color;
@@ -57,34 +94,95 @@ public class ShapeMarker implements IFeatureAppender {
 	public Color getColor(){
 		return this.color;
 	}
+	/**
+	 * 
+	 * @param markerTyp
+	 * 
+	 * @throws IllegalArgumentException if markerTyp <code>null</code>
+	 */
 	public void setMarkerTyp(MarkerTyp markerTyp){
+		if(markerTyp == null)
+			throw new IllegalArgumentException("markerTyp can not be null");	
 		this.markerTyp = markerTyp;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public MarkerTyp getMarkerTyp(){
 		return this.markerTyp;
 	}
+	/**
+	 * 
+	 * @return
+	 * 
+	 * 
+	 */
 	public int getSize(){
 		return this.size;
 	}
+	/**
+	 * 
+	 * @param size
+	 * 
+	 * @throws IllegalArgumentException if index out of range
+	 */
 	public void setSize(int size){
+		if(size < 0)
+			throw new IllegalArgumentException("size out of range");
 		this.size = size;
 	}
 	public float getDataPoint(){
 		return this.dataPoint;
 	}
+	
+	/**
+	 * 
+	 * @param dataPoint
+	 */
 	public void setDataPoint(float dataPoint){
 		this.dataPoint = dataPoint;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getDataSetIndex() {
 		return dataSetIndex;
 	}
+	
+	/**
+	 * 
+	 * @param dataSetIndex
+	 * 
+	 * @throws IllegalArgumentException if dataSetIndex < 0
+	 */
 	public void setDataSetIndex(int dataSetIndex) {
+
+		if(dataSetIndex < 0)
+			throw new IllegalArgumentException("dataSetIndex must be 0 or higher");
+		if(markerTyp == null)
 		this.dataSetIndex = dataSetIndex;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public Priority getPriority() {
 		return priority;
 	}
+	
+	/**
+	 * 
+	 * @param priority
+	 * 
+	 * @throws IllegalArgumentException if markerTyp <code>null</code>
+	 */
 	public void setPriority(Priority priority) {
+		if(markerTyp == null)
+			throw new IllegalArgumentException("markerTyp can not be null");
 		this.priority = priority;
 	}
 

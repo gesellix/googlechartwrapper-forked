@@ -1,8 +1,17 @@
 package googlechartwrapper;
 
+import googlechartwrapper.color.FillArea;
+import googlechartwrapper.color.ISolidFillable;
+import googlechartwrapper.color.LinearGradient;
+import googlechartwrapper.color.SolidFill;
+import googlechartwrapper.interfaces.ILinearable;
+import googlechartwrapper.interfaces.IMarkable;
+import googlechartwrapper.interfaces.IStyleable;
+import googlechartwrapper.label.AxisLabelAppender;
+import googlechartwrapper.label.AxisLabelSummary;
+import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
-import googlechartwrapper.style.IMarkable;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
 import googlechartwrapper.util.GenericAppender;
@@ -20,11 +29,11 @@ import java.util.List;
  * @author steffan
  *
  */
-public class BarChart extends AbstractChart implements IMarkable, IGridLineable{
+public class BarChart extends AbstractChart implements IMarkable,ILinearable,IStyleable, IGridLineable, ISolidFillable{
 
 	private BarChartOrientation orientation;
     private BarChartStyle style;
-    private int barWidth;
+    //private int barWidth;
     
     protected GenericAppender<RangeMarker> rangeMarkerAppender = 
     	new GenericAppender<RangeMarker>(ChartTypeFeature.Marker);
@@ -32,6 +41,15 @@ public class BarChart extends AbstractChart implements IMarkable, IGridLineable{
     	new GenericAppender<ShapeMarker>(ChartTypeFeature.Marker);
     protected UpperLimitGenericAppender<GridLine> gridLineAppender =
     	new UpperLimitGenericAppender<GridLine>(ChartTypeFeature.GridLine, 1,UpperLimitReactions.RemoveFirst);
+    protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender =
+    	new UpperLimitGenericAppender<LinearGradient>(ChartTypeFeature.LinearGradient, 1,UpperLimitReactions.RemoveFirst);
+    protected GenericAppender<FillArea> fillAreaAppender = new GenericAppender<FillArea>(ChartTypeFeature.FillArea);
+    protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(ChartTypeFeature.SolidFill);
+    protected UpperLimitGenericAppender<ChartTitle>  chartTitleAppender =
+    	new UpperLimitGenericAppender<ChartTitle>(ChartTypeFeature.ChartTitle, 1,UpperLimitReactions.RemoveFirst);
+    
+    protected AxisLabelAppender axisLabelAppender = 
+		new AxisLabelAppender();
     
     /**
      * Constructs a bar chart
@@ -39,9 +57,18 @@ public class BarChart extends AbstractChart implements IMarkable, IGridLineable{
      * @param chartDimension the size of the diagram
      * @param orientation the orientation
      * @param style the style
+     * 
+     * @throws IllegalArgumentException
      */
 	public BarChart(Dimension chartDimension, BarChartOrientation orientation, BarChartStyle style) {
 		super(chartDimension);
+		
+		if(chartDimension == null)
+			throw new IllegalArgumentException("chartDimension can not be null");
+		if(orientation == null)
+			throw new IllegalArgumentException("orientation can not be null");
+		if(style == null)
+			throw new IllegalArgumentException("style can not be null");
 		
 		 this.orientation = orientation;
          this.style = style;
@@ -62,15 +89,17 @@ public class BarChart extends AbstractChart implements IMarkable, IGridLineable{
           return MessageFormat.format("b{0}{1}", orientationChar, styleChar);
 	}
 	
+	/*
 	/**
 	 * Specify the bar size
 	 * 
 	 * @param width the size of every single bar
-	 */
+	 *
 	public void SetBarWidth(int width)
     {
         this.barWidth = width;
     }
+	*/
 	/**
 	 * 
 	 * 
@@ -153,6 +182,101 @@ public class BarChart extends AbstractChart implements IMarkable, IGridLineable{
 
 	public void setGridLine(GridLine gl) {
 		this.gridLineAppender.add(gl);
+		
+	}
+
+	public void removeLinearGradient() {
+		this.linearGradientAppender.removeAll();
+		
+	}
+
+	public void setLinearGradient(LinearGradient lg) {
+		this.linearGradientAppender.add(lg);
+		
+	}
+
+	public void addFillArea(FillArea fa) {
+		this.fillAreaAppender.add(fa);
+		
+	}
+
+	public List<FillArea> getFillAreas() {
+		
+		return this.fillAreaAppender.getList();
+	}
+
+	public void removeAllFillAreas() {
+		this.fillAreaAppender.removeAll();
+		
+	}
+
+	public FillArea removeFillArea(int index) {
+		
+		return this.fillAreaAppender.remove(index);
+	}
+
+	public boolean removeFillArea(FillArea fa) {
+		
+		return this.fillAreaAppender.remove(fa);
+	}
+
+	public void addSolidFill(SolidFill sf) {
+		this.solidFillAppender.add(sf);
+		
+	}
+
+	public List<SolidFill> getSolidFills() {
+		
+		return this.solidFillAppender.getList();
+	}
+
+	public void removeAllSolidFills() {
+		this.solidFillAppender.removeAll();
+		
+	}
+
+	public SolidFill removeSolidFill(int index) {
+		
+		return this.solidFillAppender.remove(index);
+	}
+
+	public boolean removeSolidFill(SolidFill sf) {
+		
+		return this.solidFillAppender.remove(sf);
+	}
+
+	public void addAxisLabelSummary(AxisLabelSummary labelSummary) {
+		
+		this.axisLabelAppender.addAxis(labelSummary);
+	}
+
+	public List<AxisLabelSummary> getAxisLabelSummaries() {
+		
+		return this.axisLabelAppender.getList();
+	}
+
+	public void removeAllAxisLabelSummaries() {
+		this.axisLabelAppender.removeAll();
+		
+	}
+
+	public AxisLabelSummary removeAxisLabelSummary(int index) {
+		
+		return this.axisLabelAppender.removeAxis(index);
+	}
+
+	public boolean removeAxisLabelSummary(AxisLabelSummary labelSummary) {
+		
+		return this.axisLabelAppender.removeAxis(labelSummary);
+	}
+
+	public void removeChartTitle() {
+		this.chartTitleAppender.removeAll();
+		
+	}
+
+	public void setChartTitle(ChartTitle title) {
+		this.chartTitleAppender.add(title);
 		
 	}
 

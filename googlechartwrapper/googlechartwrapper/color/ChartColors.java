@@ -30,10 +30,13 @@ public class ChartColors implements IFeatureAppender {
 	}
 
 	/**
-	 * @param color
-	 *            the color to set
+	 * @param color the color to set
+	 * 
+	 * @throws IllegalArgumentException if color <code>null</code>
 	 */
 	public void setColor(Color color) {
+		if (color == null)
+			throw new IllegalArgumentException("color can not be null");
 		this.color = color;
 	}
 

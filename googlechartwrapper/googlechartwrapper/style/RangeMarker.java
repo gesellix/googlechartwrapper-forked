@@ -22,13 +22,15 @@ public class RangeMarker implements IFeatureAppender {
 	 * Constructs the horizontal range marker
 	 * 
 	 * @param align 
-	 * @param color color of range, white if <code>null</code>
+	 * @param color color of range
 	 * @param startPoint value between 0.0 and 1.0
 	 * @param endPoint value between 0.0 and 1.0
 	 * @throws IllegalArgumentException if startPoint or endPoint out of range
 	 */
 	public RangeMarker(Alignment align, Color color, float startPoint,float endPoint){
 		
+		if(color == null)
+			throw new IllegalArgumentException("color can not be null");
 		if(startPoint < 0.0f || startPoint > 1.0f)
 			throw new IllegalArgumentException("startPoint out of range");
 		if(endPoint < 0.0f || endPoint > 1.0f)
@@ -43,9 +45,12 @@ public class RangeMarker implements IFeatureAppender {
 	/**
 	 * 
 	 * @param color the color of the range
+	 * 
+	 * @throws IllegalArgumentException if color <code>null</code>
 	 */ 
 	public void setColor(Color color){
-		
+		if(color == null)
+			throw new IllegalArgumentException("color can not be null");
 		this.color = color;
 	}
 	/**

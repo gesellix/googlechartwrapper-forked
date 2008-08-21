@@ -174,6 +174,8 @@ public class LinearGradient implements IFeatureAppender{
 		builder.append(',');
 		builder.append("lg");
 		builder.append(',');
+		builder.append(this.angle);
+		builder.append(',');
 		builder.append(MiscUtils.getSixCharacterHexValue(this.startColor));
 		builder.append(',');
 		builder.append(this.startOffset);

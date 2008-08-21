@@ -5,7 +5,11 @@ public enum ChartTypeFeature {
 	Marker("chm"),
 	GridLine("chg"),
 	ChartTitle("chtt"),
-	ChartTitleStyle("chts");
+	ChartTitleStyle("chts"),
+	LinearGradient("chf"),
+	FillArea("chm"),
+	SolidFill("chf"),
+	AxisLabel("chxt");
 	
 	private String prefix;
 		

@@ -2,6 +2,7 @@ package googlechartwrapper;
 
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.IFillAreaable;
+import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelSummary;
 import googlechartwrapper.label.ChartTitle;
@@ -9,7 +10,6 @@ import googlechartwrapper.label.IAxisLabelable;
 import googlechartwrapper.label.IChartTitleable;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
-import googlechartwrapper.style.IMarkable;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
 import googlechartwrapper.util.GenericAppender;
@@ -33,7 +33,7 @@ public class RadarChart extends AbstractChart implements IGridLineable, IMarkabl
 		new GenericAppender<ShapeMarker>(ChartTypeFeature.Marker);
 	protected AxisLabelAppender axisLabels = 
 		new AxisLabelAppender();
-	protected GenericAppender<FillArea> fillAreas = new GenericAppender<FillArea>("chm");
+	protected GenericAppender<FillArea> fillAreas = new GenericAppender<FillArea>(ChartTypeFeature.FillArea);
 	protected GenericAppender<ChartTitle> title = 
 		new UpperLimitGenericAppender<ChartTitle>(ChartTypeFeature.ChartTitle,
 			1,UpperLimitReactions.RemoveAll);
@@ -150,6 +150,7 @@ public class RadarChart extends AbstractChart implements IGridLineable, IMarkabl
 		title.removeAll();
 	}
 
+	
 	public void setChartTitle(ChartTitle title) {
 		if (title == null){
 			this.title.removeAll();
