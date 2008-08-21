@@ -66,8 +66,8 @@ public class ChartTitle implements IExtendedFeatureAppender{
 	 */
 	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		StringBuffer ret = new StringBuffer(title.length()+15);
-		ret.append(ChartTypeFeature.ChartTitle.getPrefix());
-		ret.append("=");
+		//ret.append(ChartTypeFeature.ChartTitle.getPrefix());
+		//ret.append("=");
 		ret.append(title);
 		if (color != null){
 			ret.append("&");
