@@ -30,7 +30,7 @@ public class LinearGradient implements IFeatureAppender{
 	 * @param endColor
 	 * @param endOffset float between 0 and 1
 	 * 
-	 * @throws 
+	 * @throws IllegalArgumentException
 	 */
 	public LinearGradient(GradientFillDestination fillDestination, int angle, Color startColor, float startOffset,
 			Color endColor, float endOffset) {

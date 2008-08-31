@@ -1,6 +1,7 @@
 package googlechartwrapper.interfaces;
 
 import googlechartwrapper.color.ILinearGradientable;
+import googlechartwrapper.color.ILinearStripeable;
 import googlechartwrapper.label.IChartTitleable;
 
 /**
@@ -8,7 +9,7 @@ import googlechartwrapper.label.IChartTitleable;
  * @author steffan
  *
  */
-/* linear stripes*/
-public interface ILinearable extends ILinearGradientable, IChartTitleable {
+
+public interface ILinearable extends ILinearGradientable, IChartTitleable, ILinearStripeable {
 
 }

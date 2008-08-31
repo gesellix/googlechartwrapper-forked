@@ -1,13 +1,14 @@
 package googlechartwrapper.interfaces;
 
 import googlechartwrapper.color.IFillAreaable;
+import googlechartwrapper.style.ILineStyleable;
 
 /**
  * 
  * @author steffan
  *
  */
-/* line styles */
-public interface IStyleable extends IFillAreaable {
+
+public interface IStyleable extends IFillAreaable, ILineStyleable {
 
 }

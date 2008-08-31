@@ -9,7 +9,7 @@ import googlechartwrapper.util.IFeatureAppender;
  * @author steffan
  *
  */
-public class LineStyle implements IFeatureAppender{
+public class LineStyle implements IFeatureAppender, ILineStyle{
 	
 	private float thickniss;
 	private float lengthOfLineSegment;
@@ -36,7 +36,7 @@ public class LineStyle implements IFeatureAppender{
 		builder.append(',');
 		builder.append(this.lengthOfLineSegment);
 		builder.append(',');
-		builder.append(this.lengthOfBlankSegment);
+		builder.append(this.lengthOfBlankSegment);	
 		
 		return builder.toString();
 	}
