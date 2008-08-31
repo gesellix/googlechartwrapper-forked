@@ -6,4 +6,6 @@ public interface IChartTitleable {
 	
 	public void removeChartTitle ();
 	
+	public ChartTitle getChartTitle();
+	
 }

@@ -1,7 +1,5 @@
 package googlechartwrapper.label;
 
-import java.util.Collection;
-
 /**
  * The interface for chart types which supports a legend.
  * 
@@ -11,15 +9,20 @@ import java.util.Collection;
 public interface IChartLegendable {
 	
 	/**
-	 * Adds an array of strings for the legend.
-	 * @param legend array of string
+	 * 
+	 * @param legend
 	 */
-	public void addChartLegend(String[] legend);
+	public void setChartLegend(ChartLegend legend);
 	
 	/**
-	 * Adds a collection of strings for the legend.
-	 * @param legend collection of string
+	 * 
 	 */
-	public void addChartLegend(Collection<String> legend);
+	public void removeChartLegend();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ChartLegend getChartLegend();
 
 }

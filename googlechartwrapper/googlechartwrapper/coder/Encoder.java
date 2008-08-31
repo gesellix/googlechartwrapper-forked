@@ -57,14 +57,14 @@ public class Encoder implements IEncoder {
 
         public String SimpleEncoding(int[] values)
         {
-            return "chd=s:" + simpleEncode(values);
+            return "s:" + simpleEncode(values);
         }
 
         public String SimpleEncoding(Collection<int[]> values)
         {
             StringBuilder chartValues = new StringBuilder();
             
-            chartValues.append("chd=s:");
+            chartValues.append("s:");
 
             for(int [] array : values){
             	chartValues.append(simpleEncode(array)+",");
@@ -95,13 +95,13 @@ public class Encoder implements IEncoder {
       
         public String TextEncoding(float[] data)
         {
-            return "chd=t:" + textEncode(data);
+            return "t:" + textEncode(data);
         }
 
         public String TextEncoding(Collection<float[]> values)
         {
             StringBuilder chartValues = new StringBuilder();
-            chartValues.append("chd=t:");
+            chartValues.append("t:");
 
             for(float [] array : values){
             	
@@ -135,13 +135,13 @@ public class Encoder implements IEncoder {
 
         public String ExtendedEncoding(int[] values)
         {
-            return "chd=e:" + extendedEncode(values);
+            return "e:" + extendedEncode(values);
         }
 
         public String ExtendedEncoding(Collection<int[]> values)
         {
             StringBuilder chartValues = new StringBuilder();
-            chartValues.append("chd=e:");
+            chartValues.append("e:");
 
             for(int [] array : values){
             	

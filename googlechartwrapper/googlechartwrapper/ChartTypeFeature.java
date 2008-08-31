@@ -10,7 +10,10 @@ public enum ChartTypeFeature {
 	FillArea("chm"),
 	SolidFill("chf"),
 	AxisLabel("chxt"),
-	LinearStripes("chf");
+	LinearStripes("chf"),
+	ChartLegend("chdl"),
+	ChartData("chd");
+	
 	
 	private String prefix;
 		

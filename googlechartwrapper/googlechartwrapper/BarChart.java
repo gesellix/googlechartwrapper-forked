@@ -1,8 +1,10 @@
 package googlechartwrapper;
 
+import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
+import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
@@ -12,6 +14,8 @@ import googlechartwrapper.label.AxisLabelSummary;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
+import googlechartwrapper.style.ILineStyle;
+import googlechartwrapper.style.LineStyle;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
 import googlechartwrapper.util.GenericAppender;
@@ -278,6 +282,46 @@ public class BarChart extends AbstractChart implements IMarkable,ILinearable,ISt
 	public void setChartTitle(ChartTitle title) {
 		this.chartTitleAppender.add(title);
 		
+	}
+
+	public void removeLinearStripes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setLinearStripes(LinearStripes ls) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addLineStyle(ILineStyle lineStyle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<ILineStyle> getLineStyles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void removeAllLineStyles() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public LineStyle removeLineStyle(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean removeLineStyle(LineStyle lineStyle) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public IEncoder getEncoder() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
