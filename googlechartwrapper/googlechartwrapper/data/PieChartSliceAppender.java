@@ -1,6 +1,7 @@
 package googlechartwrapper.data;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import googlechartwrapper.coder.IEncoder;
@@ -11,7 +12,7 @@ import googlechartwrapper.util.MiscUtils;
 
 public class PieChartSliceAppender implements IExtendedFeatureAppender{
 	
-	protected List<PieChartSlice> list;
+	protected List<PieChartSlice> list= new LinkedList<PieChartSlice>();
 	protected IEncoder encoder = new PercentageEncoder();
 	
 	public void add (PieChartSlice m){

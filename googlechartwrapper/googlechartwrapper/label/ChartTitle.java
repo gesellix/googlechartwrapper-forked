@@ -31,6 +31,22 @@ public class ChartTitle implements IExtendedFeatureAppender{
 	}
 
 	/**
+	 * Constructs a ChartTitle. Specify a space with a plus sign (+). 
+	 * Use a pipe character (|) to force a line break. 
+	 * Classic space characters " " are converted to a +.
+	 * @param title title to set != null
+	 * @param color color to set, if no style null
+	 * @param fontsize fontsize of the title, if color != null must be >= 0
+	 * @throws IllegalArgumentException color != null && fontsize < 0
+	 * @throws IllegalArgumentException if title == null
+	 */
+	public ChartTitle(String title, Color color, int fontsize) {
+		super();
+		this.title = title;
+		setStyle(color, fontsize);
+	}
+
+	/**
 	 * Returns chart title.
 	 * @return title
 	 */

@@ -8,6 +8,7 @@ import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.LinearGradient.GradientFillDestination;
+import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.data.PieChartSliceAppender;
 import googlechartwrapper.label.ChartTitle;
@@ -101,6 +102,10 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 		return dataAppender.getEncoder();
 	}
 	
+	public void setEncoder (IEncoder encoder){
+		dataAppender.setEncoder(encoder);
+	}
+	
 	public void addSolidFill(SolidFill sf) {
 		this.solidFillAppender.add(sf);
 		
@@ -149,8 +154,8 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 			linearStripesAppender.removeAll();
 			return;
 		}
-		if (!ls.getFillDestination().equals(GradientFillDestination.Background)){
-			throw new IllegalArgumentException("only GradientFillDestination" +
+		if (!ls.getFillDestination().equals(LinearStripesDestination.Background)){
+			throw new IllegalArgumentException("only LinearStripesDestination" +
 					".Background supported");
 		}
 		this.linearStripesAppender.add(ls);	

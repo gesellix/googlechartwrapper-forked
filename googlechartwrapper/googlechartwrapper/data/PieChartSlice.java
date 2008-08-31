@@ -18,6 +18,22 @@ public class PieChartSlice{
 	
 	/**
 	 * Constructs a new PieChartSlice with the given data. 
+	 * @param data value, is transformed to percentages (or others) by an encoder
+	 * @param color color of the slice (optional value). If the number of colors specified is less than the number of slices, 
+	 * 			then colors are interpolated.
+	 * @param label label text (optional value)
+	 * @see PieChart#setEncoder(googlechartwrapper.coder.IEncoder)
+	 * @see PieChart#getEncoder()
+	 */
+	public PieChartSlice(int data, String label, Color color) {
+		super();
+		this.data = data;
+		this.color = color;
+		this.label = label;
+	}
+
+	/**
+	 * Constructs a new PieChartSlice with the given data. 
 	 * @param data value, is transformed to percentages by the google api
 	 */
 	public PieChartSlice(int data) {
