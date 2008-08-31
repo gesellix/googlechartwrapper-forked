@@ -1,5 +1,6 @@
 package googlechartwrapper;
 
+import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.IFillAreaable;
 import googlechartwrapper.interfaces.IMarkable;
@@ -158,6 +159,11 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 		else {
 			this.title.add(title);
 		}
+	}
+
+	public IEncoder getEncoder() {
+		// TODO mva Auto-generated method stub
+		return null;
 	}	
 
 }

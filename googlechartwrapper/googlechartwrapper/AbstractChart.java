@@ -21,67 +21,26 @@ import java.util.Map;
 import java.util.Queue;
 
 /**
- * 
- * @author steffan, martin
- * 
  * base class for every chart
- * 
+ * @author steffan,
+ * @author martin
  */
 public abstract class AbstractChart implements Chart {
 
 	private static final String googleAPI = "http://chart.apis.google.com/chart?";
 	//TODO mva: googleAPI string austauschbar machen?
 	protected Queue<String> urlElements = new LinkedList<String>();
-	protected String values;
-	private IEncoder encoder = new Encoder();
+	
 	protected Dimension chartDimension;
 	// private String newLine = System.getProperty("line.separator");
-	protected Color[] dataColors;
+	//	protected String values;
+	//protected Color[] dataColors;
 
 	public AbstractChart(Dimension chartDimension) {
 		this.chartDimension = chartDimension;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see googlechartwrapper.Chart#setValues(int[])
-	 */
-	public void setValues(int[] values) {
-		this.values = this.encoder.encode(values);
-	}
-
-	/**
-	 * 
-	 * @param values
-	 */
-	public void setValues(Collection<int[]> values) {
-		this.values = this.encoder.encodeIntegerCollection(values);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see googlechartwrapper.Chart#setValues(float[])
-	 */
-	public void setValues(float[] values) {
-
-		this.values = this.encoder.encode(values);
-	}
-
-	public void setEncoder(IEncoder newEncoder) {
-
-		this.encoder = newEncoder;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see googlechartwrapper.Chart#getEncoder()
-	 */
-	public IEncoder getEncoder() {
-		return this.encoder;
-	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -143,7 +102,7 @@ public abstract class AbstractChart implements Chart {
 				.getUrlChartType()));
 		urlElements.offer(MessageFormat.format("chs={0}x{1}",
 				this.chartDimension.width, this.chartDimension.height));
-		if (values != null) {
+		/*if (values != null) {
 			urlElements.offer(this.values);
 		}
 		// converts the color objects into an hex equivalent for google
@@ -162,7 +121,7 @@ public abstract class AbstractChart implements Chart {
 			}
 			urlElements.offer(bf.toString().substring(0,
 					bf.toString().length() - 1));
-		}
+		}*/
 	}
 
 	protected void collectUrlElements(List<IExtendedFeatureAppender> appenders) {
@@ -210,9 +169,9 @@ public abstract class AbstractChart implements Chart {
 		return url.toString();
 	}
 
-	public void setDataColors(Color[] dataColors) {
+	/*public void setDataColors(Color[] dataColors) {
 		this.dataColors = dataColors;
-	}
+	}*/
 
 	private class FeatureAppender<T extends IExtendedFeatureAppender> extends
 			GenericAppender<T> {

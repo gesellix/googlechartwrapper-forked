@@ -9,7 +9,8 @@ public enum ChartTypeFeature {
 	LinearGradient("chf"),
 	FillArea("chm"),
 	SolidFill("chf"),
-	AxisLabel("chxt");
+	AxisLabel("chxt"),
+	LinearStripes("chf");
 	
 	private String prefix;
 		

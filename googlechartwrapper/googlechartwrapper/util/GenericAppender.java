@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import googlechartwrapper.ChartType;
 import googlechartwrapper.ChartTypeFeature;
 
 public class GenericAppender< T extends IFeatureAppender> implements IExtendedFeatureAppender{
@@ -94,7 +93,6 @@ public class GenericAppender< T extends IFeatureAppender> implements IExtendedFe
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString()+" "+list;
 	}
 

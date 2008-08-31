@@ -13,5 +13,14 @@ public class MiscUtils {
 		//TODO mva: fix bug (when transparency in hex with leading 0)
 		return Integer.toHexString(color.getRGB()).substring(2, 8);
 	}
+	
+	public static String getMatchingColorHexValue (Color color){
+		if (color.getAlpha()==255){
+			return (MiscUtils.getSixCharacterHexValue(color));
+		}
+		else {
+			return (MiscUtils.getEightCharacterHexValue(color));
+		}
+	}
 
 }
