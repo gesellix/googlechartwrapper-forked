@@ -23,13 +23,14 @@ public class ChartLegend implements IFeatureAppender {
 	 * @throws IllegalArgumentException
 	 */
 	public ChartLegend(Collection<String> label) {
-		
-		if(label == null)
+
+		if (label == null)
 			throw new IllegalArgumentException("label can not be null");
-		
+
 		this.label = label;
-		
+
 	}
+
 	/**
 	 * 
 	 * @param labels
@@ -37,35 +38,38 @@ public class ChartLegend implements IFeatureAppender {
 	 * 
 	 * @throws IllegalArgumentException
 	 */
-	public ChartLegend(Collection<String> label, ChartLegendPosition chartLegendPosition){
-		
-		if(label == null)
+	public ChartLegend(Collection<String> label,
+			ChartLegendPosition chartLegendPosition) {
+
+		if (label == null)
 			throw new IllegalArgumentException("label can not be null");
-		if(chartLegendPosition == null)
+		if (chartLegendPosition == null)
 			throw new IllegalArgumentException("chartLegendPosition");
-		
+
 		this.label = label;
 		this.chartLegendPosition = chartLegendPosition;
-		
+
 	}
 
 	public String getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		StringBuilder builder = new StringBuilder();
-		
-		for(String currentLabel : this.label){
+
+		for (String currentLabel : this.label) {
 			builder.append(currentLabel);
 			builder.append('|');
 		}
-		builder.deleteCharAt(builder.length());
-		
-		if(this.chartLegendPosition != null)
-		{
+
+		// only if we have one or more elements
+		if (this.label.size() > 0) {
+			builder.deleteCharAt(builder.length() - 1);
+		}
+
+		if (this.chartLegendPosition != null) {
 			builder.append("chdlp=");
 			builder.append(this.chartLegendPosition.getPosition());
-		}		
-		
+		}
 
 		return builder.toString();
 	}
@@ -76,29 +80,36 @@ public class ChartLegend implements IFeatureAppender {
 	public Collection<String> getLabel() {
 		return label;
 	}
+
 	/**
-	 * @param label the label to set
+	 * @param label
+	 *            the label to set
 	 * 
-	 * @throws IllegalArgumentException if label is <code>null</code>
+	 * @throws IllegalArgumentException
+	 *             if label is <code>null</code>
 	 */
 	public void setLabel(Collection<String> label) {
-		if(label == null)
+		if (label == null)
 			throw new IllegalArgumentException("label can not be null");
 		this.label = label;
 	}
+
 	/**
 	 * @return the chartLegendPosition
 	 */
 	public ChartLegendPosition getChartLegendPosition() {
 		return chartLegendPosition;
 	}
+
 	/**
-	 * @param chartLegendPosition the chartLegendPosition to set
+	 * @param chartLegendPosition
+	 *            the chartLegendPosition to set, default is right
 	 * 
-	 * @throws IllegalArgumentException if label is <code>null</code>
+	 * @throws IllegalArgumentException
+	 *             if label is <code>null</code>
 	 */
 	public void setChartLegendPosition(ChartLegendPosition chartLegendPosition) {
-		if(label == null)
+		if (label == null)
 			throw new IllegalArgumentException("label can not be null");
 		this.chartLegendPosition = chartLegendPosition;
 	}

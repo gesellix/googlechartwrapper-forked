@@ -17,11 +17,11 @@ public class Encoder implements IEncoder {
             
             if (maxValue <= 61)
             {
-                return SimpleEncoding(values);
+                return simpleEncoding(values);
             }
             else if(maxValue <= 4095)
             {
-                return ExtendedEncoding(values);
+                return extendedEncoding(values);
             }
 
             return null;
@@ -33,11 +33,11 @@ public class Encoder implements IEncoder {
             
             if (maxValue <= 61)
             {
-                return SimpleEncoding(values);
+                return simpleEncoding(values);
             }
             else if (maxValue <= 4095)
             {
-                return ExtendedEncoding(values);
+                return extendedEncoding(values);
             }
 
             return null;
@@ -45,22 +45,22 @@ public class Encoder implements IEncoder {
 
         public String encode(float[] values)
         {
-            return TextEncoding(values);
+            return textEncoding(values);
         }
 
         public String encodeFloatCollection(Collection<float[]> values)
         {
-            return TextEncoding(values);
+            return textEncoding(values);
         }
 
        
 
-        public String SimpleEncoding(int[] values)
+        public String simpleEncoding(int[] values)
         {
             return "s:" + simpleEncode(values);
         }
 
-        public String SimpleEncoding(Collection<int[]> values)
+        public String simpleEncoding(Collection<int[]> values)
         {
             StringBuilder chartValues = new StringBuilder();
             
@@ -93,12 +93,12 @@ public class Encoder implements IEncoder {
             return chartValues.toString();            
         }
       
-        public String TextEncoding(float[] data)
+        public String textEncoding(float[] data)
         {
             return "t:" + textEncode(data);
         }
 
-        public String TextEncoding(Collection<float[]> values)
+        public String textEncoding(Collection<float[]> values)
         {
             StringBuilder chartValues = new StringBuilder();
             chartValues.append("t:");
@@ -133,12 +133,12 @@ public class Encoder implements IEncoder {
         }
       
 
-        public String ExtendedEncoding(int[] values)
+        public String extendedEncoding(int[] values)
         {
             return "e:" + extendedEncode(values);
         }
 
-        public String ExtendedEncoding(Collection<int[]> values)
+        public String extendedEncoding(Collection<int[]> values)
         {
             StringBuilder chartValues = new StringBuilder();
             chartValues.append("e:");

@@ -1,6 +1,4 @@
 package googlechartwrapper.data;
-
-
 /**
  * 
  * @author steffan
@@ -8,10 +6,21 @@ package googlechartwrapper.data;
  */
 public interface IChartDataable {
 	
+	/**
+	 * 
+	 * @param cd
+	 */
 	public void setChartData(ChartData cd);
 	
+	/**
+	 * 
+	 */
 	public void removeChartData();
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public ChartData getChartData();
 
 }

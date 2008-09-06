@@ -1,5 +1,10 @@
 package googlechartwrapper;
 
+/**
+ * 
+ * @author steffan
+ *
+ */
 public enum ChartTypeFeature {
 
 	Marker("chm"),
@@ -12,7 +17,9 @@ public enum ChartTypeFeature {
 	AxisLabel("chxt"),
 	LinearStripes("chf"),
 	ChartLegend("chdl"),
-	ChartData("chd");
+	ChartData("chd"),
+	ChartColor("chco"),
+	DataScaling("chds");
 	
 	
 	private String prefix;

@@ -29,7 +29,7 @@ public void addChartColor(ChartColors cc);
 	 * @param cc
 	 * @return
 	 */
-	public boolean removeFilChartColors(ChartColors cc);
+	public boolean removeChartColors(ChartColors cc);
 	
 	/**
 	 * 

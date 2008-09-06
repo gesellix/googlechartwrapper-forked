@@ -1,18 +1,24 @@
 package googlechartwrapper;
 
+import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.color.ChartColors;
+import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
-import googlechartwrapper.data.ChartData;
-import googlechartwrapper.data.IChartDataable;
+import googlechartwrapper.data.DataScaling;
+import googlechartwrapper.data.VennDiagramAppender;
+import googlechartwrapper.data.VennDiagramData;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
+import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 import java.awt.Dimension;
+import java.util.List;
 
 /**
  * Specifies a venn diagram <a href="http://code.google.com/apis/chart/#venn">
@@ -21,7 +27,8 @@ import java.awt.Dimension;
  * @author steffan
  * 
  */
-public class VennDiagram extends AbstractChart implements ILinearable, IChartLegendable, IChartDataable {
+public class VennDiagram extends AbstractChart implements ILinearable,
+		IChartLegendable, IChartColorable {
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -31,8 +38,11 @@ public class VennDiagram extends AbstractChart implements ILinearable, IChartLeg
 			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<ChartData> chartDataAppender = new UpperLimitGenericAppender<ChartData>(
-			ChartTypeFeature.ChartData, 1, UpperLimitReactions.RemoveFirst);
+	protected VennDiagramAppender vennDiagramAppender = new VennDiagramAppender();
+	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+			ChartTypeFeature.ChartColor, ",");
+	protected UpperLimitGenericAppender<DataScaling> dataScalingAppender = new UpperLimitGenericAppender<DataScaling>(
+			ChartTypeFeature.DataScaling, 1, UpperLimitReactions.RemoveFirst);
 
 	/**
 	 * Constructs a venn diagram
@@ -47,16 +57,15 @@ public class VennDiagram extends AbstractChart implements ILinearable, IChartLeg
 
 	@Override
 	protected ChartType getChartType() {
-		
+
 		return ChartType.VennDiagram;
 	}
 
 	@Override
 	protected String getUrlChartType() {
-		
+
 		return "v";
 	}
-	
 
 	public void removeLinearGradient() {
 		this.linearGradientAppender.removeAll();
@@ -93,8 +102,7 @@ public class VennDiagram extends AbstractChart implements ILinearable, IChartLeg
 	}
 
 	public IEncoder getEncoder() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.vennDiagramAppender.getEncoder();
 	}
 
 	public ChartTitle getChartTitle() {
@@ -107,39 +115,75 @@ public class VennDiagram extends AbstractChart implements ILinearable, IChartLeg
 	}
 
 	public ChartLegend getChartLegend() {
-		
-		if(this.chartLegendAppender.getList().size() > 0){
-		return this.chartLegendAppender.getList().get(0);
-		}
-		else{
+
+		if (this.chartLegendAppender.getList().size() > 0) {
+			return this.chartLegendAppender.getList().get(0);
+		} else {
 			return null;
 		}
 	}
 
 	public void removeChartLegend() {
 		this.chartLegendAppender.removeAll();
-		
+
 	}
 
 	public void setChartLegend(ChartLegend legend) {
 		this.chartLegendAppender.add(legend);
-		
+
 	}
 
-	public ChartData getChartData() {
-		// TODO Auto-generated method stub
-		return null;
+	public VennDiagramData getVennDiagramData() {
+
+		return this.vennDiagramAppender.getVennDiagrammData();
 	}
 
-	public void removeChartData() {
-		// TODO Auto-generated method stub
-		
+	public void setVennDiagramData(VennDiagramData data) {
+
+		this.vennDiagramAppender.setVennDiagrammData(data);
 	}
 
-	public void setChartData(ChartData cd) {
+	public void addChartColor(ChartColors cc) {
+
+		this.chartColorAppender.add(cc);
+	}
+
+	public List<ChartColors> getChartColors() {
+
+		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
+				.getList()
+				: null;
+	}
+
+	public void removeAllChartColors() {
+		this.chartColorAppender.removeAll();
+
+	}
+
+	public ChartColors removeChartColors(int index) {
+
+		return this.chartColorAppender.remove(index);
+	}
+
+	public boolean removeChartColors(ChartColors cc) {
+
+		return this.chartColorAppender.remove(cc);
+	}
+
+	public DataScaling getDataScaling() {
+
+		return this.dataScalingAppender.getList().size() > 0 ? this.dataScalingAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void setDataScaling(DataScaling ds) {	
+			
+		this.dataScalingAppender.add(ds);
 		
-		this.chartDataAppender.add(cd);
-		
+		if(ds != null)
+			this.vennDiagramAppender.setEncoder(new DataScalingTextEncoder());
+
 	}
 
 }

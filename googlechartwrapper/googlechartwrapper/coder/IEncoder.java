@@ -1,7 +1,5 @@
 package googlechartwrapper.coder;
 
-import googlechartwrapper.Chart;
-
 import java.util.Collection;
 
 /**
