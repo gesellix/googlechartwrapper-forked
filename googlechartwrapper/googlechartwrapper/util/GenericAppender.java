@@ -10,15 +10,32 @@ public class GenericAppender< T extends IFeatureAppender> implements IExtendedFe
 	
 	protected List<T> list;
 	protected String prefix;
+	protected String separator;
 	
 	public GenericAppender(ChartTypeFeature m){
-		list = new ArrayList<T>();
-		prefix = m.getPrefix();
+		this(m,"|");
 	}
 	
 	public GenericAppender(String stm){
+		this(stm,"|");
+	}
+	
+	public GenericAppender (ChartTypeFeature m, String separator){
+		if (separator == null){
+			throw new IllegalArgumentException("sep cannot be null");
+		}
+		list = new ArrayList<T>();
+		prefix = m.getPrefix();
+		this.separator = separator;
+	}
+	
+	public GenericAppender(String stm, String separator){
+		if (separator == null){
+			throw new IllegalArgumentException("sep cannot be null");
+		}
 		list = new ArrayList<T>();
 		prefix = stm;
+		this.separator = separator;
 	}
 	
 	public void add (T m){
@@ -71,7 +88,7 @@ public class GenericAppender< T extends IFeatureAppender> implements IExtendedFe
 				String app = m.getAppendableString(otherAppenders);
 				if (app.length()>0){
 					bf.append(app);
-					bf.append("|");		
+					bf.append(separator);		
 				}
 				//bf.append(m.getAppendableString(otherAppenders));
 						
