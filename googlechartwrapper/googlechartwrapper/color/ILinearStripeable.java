@@ -17,5 +17,11 @@ public interface ILinearStripeable {
 	 * 
 	 */
 	public void removeLinearStripes();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public LinearStripes getLinearStripes();
 
 }

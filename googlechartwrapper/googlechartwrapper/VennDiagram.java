@@ -186,4 +186,9 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 
 	}
 
+	public LinearStripes getLinearStripes() {
+		
+		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender.getList().get(0) : null;
+	}
+
 }

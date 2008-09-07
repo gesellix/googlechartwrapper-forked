@@ -22,7 +22,7 @@ import java.util.Queue;
  */
 public abstract class AbstractChart implements Chart {
 
-	private static final String googleAPI = "http://chart.apis.google.com/chart?";
+	public static final String googleAPI = "http://chart.apis.google.com/chart?";
 	//TODO mva: googleAPI string austauschbar machen?
 	/**
 	 * default separator for parameters.
@@ -36,6 +36,9 @@ public abstract class AbstractChart implements Chart {
 	//protected Color[] dataColors;
 
 	public AbstractChart(Dimension chartDimension) {
+		
+		if(chartDimension == null)
+			throw new IllegalArgumentException("chartDimension can not be null");
 		this.chartDimension = chartDimension;
 	}
 

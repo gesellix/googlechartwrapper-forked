@@ -230,4 +230,9 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 		
 	}
 
+	public LinearStripes getLinearStripes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -7,8 +7,21 @@ package googlechartwrapper.style;
  */
 public interface IGridLineable {
 	
+	/**
+	 * 
+	 * @param gl
+	 */
 	public void setGridLine(GridLine gl);
 	
+	/**
+	 * 
+	 */
 	public void removeGridLine();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public GridLine getGridLine();
 
 }

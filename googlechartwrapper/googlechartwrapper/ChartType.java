@@ -9,6 +9,7 @@ public enum ChartType {
 	    PieChart,
 	    GoogleOMeter,
 	    Map,
-	    RadarChart;
+	    RadarChart,
+	    QRCode;
 
 }
