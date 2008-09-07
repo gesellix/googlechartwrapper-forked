@@ -1,19 +1,14 @@
 package googlechartwrapper;
 
-import googlechartwrapper.coder.Encoder;
-import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.util.ArrayUtils;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
-import googlechartwrapper.util.MiscUtils;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,13 +17,17 @@ import java.util.Queue;
 
 /**
  * base class for every chart
- * @author steffan,
+ * @author steffan
  * @author martin
  */
 public abstract class AbstractChart implements Chart {
 
 	private static final String googleAPI = "http://chart.apis.google.com/chart?";
 	//TODO mva: googleAPI string austauschbar machen?
+	/**
+	 * default separator for parameters.
+	 */
+	public static final String AMPERSAND_SEPARATOR = "&";
 	protected Queue<String> urlElements = new LinkedList<String>();
 	
 	protected Dimension chartDimension;
@@ -162,9 +161,9 @@ public abstract class AbstractChart implements Chart {
 			//solange noch etwas drin, an die url mit dem Trennzeichen & anhängen
 			String urlElem = urlElements.poll();
 			if (urlElem.length()>0){
-				url.append("&" + urlElem);
+				url.append(AMPERSAND_SEPARATOR + urlElem);
 			}
-			 //TODO mva: & auslagern
+			 //TODO mva: & konfigurierbar auslagern
 		}
 		return url.toString();
 	}
