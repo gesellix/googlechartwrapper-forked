@@ -18,5 +18,10 @@ public interface IDataScaleable {
 	 * @return
 	 */
 	public DataScaling getDataScaling();
+	
+	/**
+	 * 
+	 */
+	public void removeDataScaling();
 
 }

@@ -6,6 +6,7 @@ import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.color.SolidFill;
+import googlechartwrapper.data.DataScaling;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.interfaces.IStyleable;
@@ -14,7 +15,6 @@ import googlechartwrapper.label.AxisLabelSummary;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
-import googlechartwrapper.style.ILineStyle;
 import googlechartwrapper.style.LineStyle;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
@@ -294,15 +294,7 @@ public class BarChart extends AbstractChart implements IMarkable,ILinearable,ISt
 		
 	}
 
-	public void addLineStyle(ILineStyle lineStyle) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public List<ILineStyle> getLineStyles() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	public void removeAllLineStyles() {
 		// TODO Auto-generated method stub
@@ -320,6 +312,51 @@ public class BarChart extends AbstractChart implements IMarkable,ILinearable,ISt
 	}
 
 	public IEncoder getEncoder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public GridLine getGridLine() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public LinearGradient getLinearGradient() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ChartTitle getChartTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public LinearStripes getLinearStripes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public DataScaling getDataScaling() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void removeDataScaling() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setDataScaling(DataScaling ds) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addLineStyle(LineStyle lineStyle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<LineStyle> getLineStyles() {
 		// TODO Auto-generated method stub
 		return null;
 	}

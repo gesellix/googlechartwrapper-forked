@@ -80,4 +80,9 @@ public class ChartData implements IFeatureAppender, IEncodeable {
 		return c;
 	}
 
+	public void removeEncoder() {
+		
+		this.encoder = new Encoder();		
+	}
+
 }

@@ -162,8 +162,20 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 	}
 
 	public IEncoder getEncoder() {
-		// TODO mva Auto-generated method stub
+		
+		//TODO ka, wie das der radar chart so macht, siehe venndigramm
+		
 		return null;
+	}
+
+	public GridLine getGridLine() {
+		
+		return this.gridLines.getList().size() > 0 ? this.gridLines.getList().get(0) : null;
+	}
+
+	public ChartTitle getChartTitle() {
+		
+		return this.title.getList().size() > 0 ? this.title.getList().get(0) : null;
 	}	
 
 }

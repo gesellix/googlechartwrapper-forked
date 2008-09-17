@@ -15,7 +15,7 @@ import googlechartwrapper.label.AxisLabelSummary;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
-import googlechartwrapper.style.ILineStyle;
+
 import googlechartwrapper.style.LineStyle;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
@@ -291,13 +291,9 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 			// TODO Auto-generated method stub
 			
 		}
+	
 
-		public void addLineStyle(ILineStyle lineStyle) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public List<ILineStyle> getLineStyles() {
+		public List<LineStyle> getLineStyles() {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -320,6 +316,21 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 		public IEncoder getEncoder() {
 			// TODO Auto-generated method stub
 			return null;
+		}
+
+		public LinearGradient getLinearGradient() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public void removeDataScaling() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void addLineStyle(LineStyle lineStyle) {
+			// TODO Auto-generated method stub
+			
 		}
 
 		

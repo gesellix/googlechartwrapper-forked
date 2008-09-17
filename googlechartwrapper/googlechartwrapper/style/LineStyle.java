@@ -9,7 +9,7 @@ import googlechartwrapper.util.IFeatureAppender;
  * @author steffan
  *
  */
-public class LineStyle implements IFeatureAppender, ILineStyle{
+public class LineStyle implements IFeatureAppender{
 	
 	private float thickniss;
 	private float lengthOfLineSegment;

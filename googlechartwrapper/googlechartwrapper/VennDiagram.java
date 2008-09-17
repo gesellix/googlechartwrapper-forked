@@ -1,6 +1,7 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.DataScalingTextEncoder;
+import googlechartwrapper.coder.Encoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.IChartColorable;
@@ -189,6 +190,19 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 	public LinearStripes getLinearStripes() {
 		
 		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender.getList().get(0) : null;
+	}
+
+	public LinearGradient getLinearGradient() {
+		
+		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender.getList().get(0) : null;
+	}
+
+	public void removeDataScaling() {
+		
+		this.dataScalingAppender.removeAll();
+		
+		this.vennDiagramAppender.setEncoder(new Encoder());
+		
 	}
 
 }

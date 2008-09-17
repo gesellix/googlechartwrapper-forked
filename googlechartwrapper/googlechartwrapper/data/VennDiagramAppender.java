@@ -61,4 +61,10 @@ public class VennDiagramAppender implements IExtendedFeatureAppender, IEncodeabl
 		return ChartTypeFeature.ChartData.getPrefix();
 	}
 
+	public void removeEncoder() {
+		
+		this.encoder = new Encoder();
+		
+	}
+
 }

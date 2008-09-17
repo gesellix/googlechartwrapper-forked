@@ -231,8 +231,13 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 	}
 
 	public LinearStripes getLinearStripes() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender.getList().get(0) : null;
+	}
+
+	public LinearGradient getLinearGradient() {
+		
+		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender.getList().get(0) : null;
 	}
 
 }

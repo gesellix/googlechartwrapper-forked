@@ -17,5 +17,11 @@ public interface ILinearGradientable {
 	 * 
 	 */
 	public void removeLinearGradient();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public LinearGradient getLinearGradient();
 
 }
