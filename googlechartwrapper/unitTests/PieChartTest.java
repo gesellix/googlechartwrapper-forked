@@ -28,7 +28,7 @@ public class PieChartTest {
 		chart.addPieChartSlice(new PieChartSlice(54620000-16620000-13840000
 				-4384000-3251000,"rest", null));
 		
-		System.out.println(chart.getUrl());
+		//System.out.println(chart.getUrl());
 		assertEquals("http://chart.apis.google.com/chart?cht=p3&chs=400x180&chtt=GDP+" +
 				"(nominal)&chco=&chl=EU|USA|Japan|China|rest&chd=t:30,25,8,5,30", 
 				chart.getUrl());
@@ -54,7 +54,8 @@ public class PieChartTest {
 		
 		chart.setLinearStripes(new LinearStripes(LinearStripesDestination.Background,30,Color.ORANGE,0.1f, Color.YELLOW, 0.4f));
 			
-		System.out.println(chart.getUrl());
+		//System.out.println(chart.getUrl());
+		//TODO assert???
 	}
 	
 	

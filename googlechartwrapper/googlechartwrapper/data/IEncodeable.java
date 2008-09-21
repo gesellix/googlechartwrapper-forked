@@ -16,6 +16,7 @@ public interface IEncodeable {
 	public IEncoder getEncoder();
 	
 	/**
+	 * If the argument is null we use the default implementation of the encoder
 	 * 
 	 * @param encoder
 	 */

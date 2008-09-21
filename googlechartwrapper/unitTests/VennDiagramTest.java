@@ -47,7 +47,7 @@ public class VennDiagramTest {
 
 		diagram.setChartLegend(new ChartLegend(l));
 
-		System.out.println(diagram.getUrl());
+		//System.out.println(diagram.getUrl());
 		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chtt=VennDiagramm&chco=00ff00,0000ff,ff0000&chd=e:BkBQA8AeAeAeAK&chdl=A|C|V";
 		
 		Assert.assertEquals(target, diagram.getUrl());
@@ -80,7 +80,7 @@ public class VennDiagramTest {
 		
 		diagram.setChartLegend(new ChartLegend(l));
 
-		System.out.println(diagram.getUrl());
+		//System.out.println(diagram.getUrl());
 		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chf=bg,lg,10,000000,0.5,ff0000,1.0&chtt=VennDiagramm&chco=00ff00,0000ff,ff0000&chds=10,50&chd=t:100,80,60,30,30,30,1&chdl=A|C|V";
 
 		
@@ -109,7 +109,7 @@ public class VennDiagramTest {
 				LinearStripesDestination.Background, 1, Color.CYAN, 0.5f,
 				Color.LIGHT_GRAY, 1f));
 
-		System.out.println(diagram.getUrl());
+		//System.out.println(diagram.getUrl());
 		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chf=bg,ls,1,00ffff,0.5,c0c0c0,1.0&chtt=VennDiagramm&chd=e:BaBGAUAKAFAFAK&chdl=A|C|V";
 
 		
@@ -132,8 +132,8 @@ public class VennDiagramTest {
 				10));
 		
 
-		System.out.println(diagram.getUrl());
-		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chtt=VennDiagramm&chds=10,50&chd=e:BkBQA8AeAeAeAK";
+		//System.out.println(diagram.getUrl());
+		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chtt=VennDiagramm&chds=10,50&chd=t:100,80,60,30,30,30,1";
 		
 		Assert.assertEquals(target, diagram.getUrl());
 	}

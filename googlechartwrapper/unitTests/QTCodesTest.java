@@ -20,7 +20,7 @@ public class QTCodesTest {
 		
 		QRCode q = new QRCode(new Dimension(300,300),"Hello World");
 		
-		System.out.println(q.getUrl());
+		//System.out.println(q.getUrl());
 		
 		String target = "http://chart.apis.google.com/chart?chs=300x300&cht=qr&chl=Hello World&choe=UTF-8";
 		
@@ -34,7 +34,7 @@ public class QTCodesTest {
 		
 		q.setTextToEncode("anotherText");		
 				
-		System.out.println(q.getUrl());
+		//System.out.println(q.getUrl());
 		
 		String target ="http://chart.apis.google.com/chart?chs=300x300&cht=qr&chl=anotherText&choe=UTF-8&chld=M|10";
 		

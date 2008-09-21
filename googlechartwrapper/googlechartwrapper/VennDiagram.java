@@ -8,7 +8,7 @@ import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.data.DataScaling;
-import googlechartwrapper.data.VennDiagramAppender;
+import googlechartwrapper.data.VennDiagramDataAppender;
 import googlechartwrapper.data.VennDiagramData;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.label.ChartLegend;
@@ -39,7 +39,7 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
-	protected VennDiagramAppender vennDiagramAppender = new VennDiagramAppender();
+	protected VennDiagramDataAppender vennDiagramAppender = new VennDiagramDataAppender();
 	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
 			ChartTypeFeature.ChartColor, ",");
 	protected UpperLimitGenericAppender<DataScaling> dataScalingAppender = new UpperLimitGenericAppender<DataScaling>(

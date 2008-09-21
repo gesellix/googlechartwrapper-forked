@@ -13,16 +13,13 @@ import googlechartwrapper.util.IFeatureAppender;
  * @author steffan
  *
  */
-public class VennDiagramAppender implements IExtendedFeatureAppender, IEncodeable{
+public class VennDiagramDataAppender implements IExtendedFeatureAppender, IEncodeable{
 	
 	private VennDiagramData data;
-	private IEncoder encoder;
+	private IEncoder encoder = new Encoder();
 	
-	public void setVennDiagrammData(VennDiagramData data) {
-		
-		this.data = data;
-		
-		this.encoder = new Encoder();
+	public void setVennDiagrammData(VennDiagramData data) {		
+		this.data = data;				
 	}
 	
 	public VennDiagramData getVennDiagrammData() {
@@ -53,11 +50,15 @@ public class VennDiagramAppender implements IExtendedFeatureAppender, IEncodeabl
 	}
 
 	public void setEncoder(IEncoder encoder) {
-		this.encoder = encoder;		
+		
+		this.encoder = encoder;
+		
+		if(encoder == null){
+			this.encoder = new Encoder();
+		}	
 	}
 
-	public String getFeaturePrefix() {
-		// TODO Auto-generated method stub
+	public String getFeaturePrefix() {		
 		return ChartTypeFeature.ChartData.getPrefix();
 	}
 
