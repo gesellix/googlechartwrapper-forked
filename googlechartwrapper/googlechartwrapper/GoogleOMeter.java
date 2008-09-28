@@ -148,9 +148,9 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 			}
 			//http://chart.apis.google.com/chart?chs=225x125&cht=gom&chd=t:70&chl=Hello
 			//chd=t:70:
-			String ret = values.substring(0,values.length()-2);
+			String ret = values.substring(0,values.length()-1);
 			if (hadLabels){
-				ret = ret + "&chl="+labels.substring(0, labels.length()-2);
+				ret = ret + "&chl="+labels.substring(0, labels.length()-1);
 			}			
 			return ret;
 		}
