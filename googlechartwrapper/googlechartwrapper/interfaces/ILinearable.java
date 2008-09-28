@@ -2,7 +2,7 @@ package googlechartwrapper.interfaces;
 
 import googlechartwrapper.color.ILinearGradientable;
 import googlechartwrapper.color.ILinearStripeable;
-import googlechartwrapper.data.IDataScaleable;
+import googlechartwrapper.data.ISingleDataScaleable;
 import googlechartwrapper.label.IChartTitleable;
 
 /**
@@ -11,6 +11,6 @@ import googlechartwrapper.label.IChartTitleable;
  *
  */
 
-public interface ILinearable extends ILinearGradientable, IChartTitleable, ILinearStripeable, IDataScaleable {
+public interface ILinearable extends ILinearGradientable, IChartTitleable, ILinearStripeable, ISingleDataScaleable {
 
 }

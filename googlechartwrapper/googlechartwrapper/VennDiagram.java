@@ -7,7 +7,7 @@ import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
-import googlechartwrapper.data.DataScaling;
+import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.VennDiagramDataAppender;
 import googlechartwrapper.data.VennDiagramData;
 import googlechartwrapper.interfaces.ILinearable;
@@ -42,7 +42,7 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 	protected VennDiagramDataAppender vennDiagramAppender = new VennDiagramDataAppender();
 	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
 			ChartTypeFeature.ChartColor, ",");
-	protected UpperLimitGenericAppender<DataScaling> dataScalingAppender = new UpperLimitGenericAppender<DataScaling>(
+	protected UpperLimitGenericAppender<DataScalingSet> dataScalingAppender = new UpperLimitGenericAppender<DataScalingSet>(
 			ChartTypeFeature.DataScaling, 1, UpperLimitReactions.RemoveFirst);
 
 	/**
@@ -171,14 +171,14 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 		return this.chartColorAppender.remove(cc);
 	}
 
-	public DataScaling getDataScaling() {
+	public DataScalingSet getDataScaling() {
 
 		return this.dataScalingAppender.getList().size() > 0 ? this.dataScalingAppender
 				.getList().get(0)
 				: null;
 	}
 
-	public void setDataScaling(DataScaling ds) {	
+	public void setDataScaling(DataScalingSet ds) {	
 			
 		this.dataScalingAppender.add(ds);
 		

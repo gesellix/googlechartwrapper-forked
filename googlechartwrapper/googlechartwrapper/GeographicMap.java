@@ -1,5 +1,6 @@
 package googlechartwrapper;
 
+import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.SolidFill.ChartFillDestination;
@@ -12,7 +13,7 @@ import java.util.List;
 
 /**
  * Specifies a map <a href="http://code.google.com/apis/chart/#map">
-	 * http://code.google.com/apis/chart/#map</a> with geographic areas found in 
+ * http://code.google.com/apis/chart/#map</a> with geographic areas found in 
  * @author martin
  *
  */
@@ -144,5 +145,10 @@ public class GeographicMap extends AbstractChart implements ISolidFillable{
 
 	public boolean removeSolidFill(SolidFill sf) {
 		return solidFill.remove(sf);
+	}
+
+	public IEncoder getEncoder() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -7,19 +7,19 @@ import googlechartwrapper.util.IFeatureAppender;
 /**
  * 
  * @author steffan
+ * @author martin
  *
  */
-//TODO multi datascaling
-public class DataScaling implements IFeatureAppender{
+public class DataScalingSet implements IFeatureAppender{
 	
-	private int minimumValue;
-	private int maximumValue;
+	private double minimumValue;
+	private double maximumValue;
 
 	/**
 	 * @param maximumValue
 	 * @param minimumValue
 	 */
-	public DataScaling(int minimumValue, int maximumValue) {
+	public DataScalingSet(double minimumValue, double maximumValue) {
 		
 		this.maximumValue = maximumValue;
 		this.minimumValue = minimumValue;
@@ -35,6 +35,22 @@ public class DataScaling implements IFeatureAppender{
 		builder.append(this.maximumValue);
 
 		return builder.toString();
+	}
+
+	public double getMaximumValue() {
+		return maximumValue;
+	}
+
+	public void setMaximumValue(double maximumValue) {
+		this.maximumValue = maximumValue;
+	}
+
+	public double getMinimumValue() {
+		return minimumValue;
+	}
+
+	public void setMinimumValue(double minimumValue) {
+		this.minimumValue = minimumValue;
 	}
 
 }

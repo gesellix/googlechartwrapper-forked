@@ -39,6 +39,12 @@ public class UpperLimitGenericAppender<T extends IFeatureAppender>
 		this.upperLimit = upperLimit;
 	}
 	
+	public UpperLimitGenericAppender(ChartTypeFeature m, int upperLimit, 
+			UpperLimitReactions action, String separator) {
+		this(m,upperLimit,action);
+		this.separator = separator;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see googlechartwrapper.util.

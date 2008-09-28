@@ -6,7 +6,7 @@ import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.color.SolidFill;
-import googlechartwrapper.data.DataScaling;
+import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.interfaces.IStyleable;
@@ -336,7 +336,7 @@ public class BarChart extends AbstractChart implements IMarkable,ILinearable,ISt
 		return null;
 	}
 
-	public DataScaling getDataScaling() {
+	public DataScalingSet getDataScaling() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -346,7 +346,7 @@ public class BarChart extends AbstractChart implements IMarkable,ILinearable,ISt
 		
 	}
 
-	public void setDataScaling(DataScaling ds) {
+	public void setDataScaling(DataScalingSet ds) {
 		// TODO Auto-generated method stub
 		
 	}

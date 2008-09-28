@@ -191,6 +191,10 @@ public class GenericAppender< T extends IFeatureAppender> implements
 		return Collections.unmodifiableList(list);
 	}
 	
+	public int getListSize (){
+		return list.size();
+	}
+	
 	/**
 	 * Returns the list of all T elements added to this appender. 
 	 * It returns an unmodifiable view of the value list.

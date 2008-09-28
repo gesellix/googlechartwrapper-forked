@@ -5,19 +5,19 @@ package googlechartwrapper.data;
  * @author steffan
  *
  */
-public interface IDataScaleable {
+public interface ISingleDataScaleable {
 	
 	/**
 	 * 
 	 * @param ds
 	 */
-	public void setDataScaling(DataScaling ds);
+	public void setDataScaling(DataScalingSet ds);
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public DataScaling getDataScaling();
+	public DataScalingSet getDataScaling();
 	
 	/**
 	 * 
