@@ -153,32 +153,34 @@ public class Encoder implements IEncoder {
             //return chartData.TrimEnd(",".ToCharArray());
         }
 
+        private static final String[] extendedEncoding = new String[4096];
+        
         private String extendedEncode(int[] values)
         {
-           final String extendedEncoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.";
-            StringBuilder chartValues = new StringBuilder();
-
-            for(int value : values){
-            	//FIXME das mit -1 und so muss nicht sein
-            	if(value == -1){
-            		
-            		chartValues.append("__");
-            	}
-            	else{
-            		
-            		int firstCharPos = (int)(Math.floor((double)(value / extendedEncoding.length())));
-                    int secondCharPos =(int)(Math.floor((double)(value % extendedEncoding.length())));
-
-                    chartValues.append(extendedEncoding.charAt(firstCharPos));
-                  chartValues.append(extendedEncoding.charAt(secondCharPos));
-                
-            	}
-            }
-          
-
-                   
-
-            return chartValues.toString();
+        	final char[] extendedEncodingChars = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 
+        			'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 
+        			'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 
+        			'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 
+        			'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', 
+        			'7', '8', '9', '-', '.' }; 
+        	
+        	int cnt = 0; for (int i = 0; i < extendedEncodingChars.length; i++) { 
+        		for (int j = 0; j < extendedEncodingChars.length; j++) { 
+        			extendedEncoding[cnt++] = extendedEncodingChars[i] + "" + 
+        			extendedEncodingChars[j]; 
+        		}
+        	}
+        	
+        	if (values == null || values.length == 0) { return ""; }  
+        	final StringBuilder encodedData = new StringBuilder(); 
+        	
+        	for (int datum : values) { 
+        		int index = (datum >= 0f && datum <= 100f) ? 
+        				Math.round((datum/100f) * (extendedEncoding.length-1)) : -1;
+        				encodedData.append((index < 0 || index > 
+        				(extendedEncoding.length-1)) ? "__" : extendedEncoding[index]); }
+        	
+        	return encodedData.toString(); 
         }
 
         
