@@ -11,6 +11,6 @@ import googlechartwrapper.label.IChartTitleable;
  *
  */
 
-public interface ILinearable extends ILinearGradientable, IChartTitleable, ILinearStripeable, ISingleDataScaleable {
+public interface ILinearable extends ILinearGradientable, IChartTitleable, ILinearStripeable {
 
 }

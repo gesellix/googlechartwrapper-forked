@@ -7,6 +7,7 @@ import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.data.DataScalingSet;
+import googlechartwrapper.data.IMultiDataScaleable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.interfaces.IStyleable;
@@ -31,7 +32,7 @@ import java.util.List;
  * @author steffan
  *
  */
-public class LineChart extends AbstractChart implements IMarkable,ILinearable,IStyleable, IGridLineable, ISolidFillable{
+public class LineChart extends AbstractChart implements IMarkable,ILinearable,IStyleable, IGridLineable, ISolidFillable, IMultiDataScaleable{
 
 
 	private LineChartType lineChartType;
@@ -331,6 +332,31 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 		public void addLineStyle(LineStyle lineStyle) {
 			// TODO Auto-generated method stub
 			
+		}
+
+		public void addDataScalingSet(DataScalingSet ds) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public List<DataScalingSet> getDataScalings() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public void removeAllDataScalings() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public DataScalingSet removeDataScalingSet(int index) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public boolean removeDataScalingSet(DataScalingSet set) {
+			// TODO Auto-generated method stub
+			return false;
 		}
 
 		

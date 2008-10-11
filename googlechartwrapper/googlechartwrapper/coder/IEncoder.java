@@ -1,6 +1,6 @@
 package googlechartwrapper.coder;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * The Interface for the Encoder. The Encoder defines the way how your data will be encoded.<br />
@@ -30,13 +30,18 @@ public interface IEncoder {
 	 * @param values collection of integer arrays 
 	 * @return encoded string
 	 */
-	public String encodeIntegerCollection(Collection<int[]> values);
+	public String encodeIntegerCollection(List<int[]> values);
+	
+	public String encodeIntegerCollection(List<int[]> values, String sep);
 	
 	/**
 	 * Encodes the given argument.
 	 * @param values collection of float arrays
 	 * @return encoded string
 	 */
-	public String encodeFloatCollection(Collection<float[]> values);	
+	public String encodeFloatCollection(List<float[]> values);
+	
+	public String encodeFloatCollection(List<float[]> values, String sep);
+		
 
 }

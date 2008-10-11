@@ -3,7 +3,7 @@ package googlechartwrapper.data;
 import java.util.List;
 
 import googlechartwrapper.ChartTypeFeature;
-import googlechartwrapper.coder.Encoder;
+import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
@@ -16,7 +16,7 @@ import googlechartwrapper.util.IFeatureAppender;
 public class VennDiagramDataAppender implements IExtendedFeatureAppender, IEncodeable{
 	
 	private VennDiagramData data;
-	private IEncoder encoder = new Encoder();
+	private IEncoder encoder = new AutoEncoder();
 	
 	public void setVennDiagrammData(VennDiagramData data) {		
 		this.data = data;				
@@ -54,7 +54,7 @@ public class VennDiagramDataAppender implements IExtendedFeatureAppender, IEncod
 		this.encoder = encoder;
 		
 		if(encoder == null){
-			this.encoder = new Encoder();
+			this.encoder = new AutoEncoder();
 		}	
 	}
 
@@ -64,7 +64,7 @@ public class VennDiagramDataAppender implements IExtendedFeatureAppender, IEncod
 
 	public void removeEncoder() {
 		
-		this.encoder = new Encoder();
+		this.encoder = new AutoEncoder();
 		
 	}
 

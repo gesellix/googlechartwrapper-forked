@@ -1,13 +1,14 @@
 package googlechartwrapper.data;
 
 import googlechartwrapper.ChartTypeFeature;
-import googlechartwrapper.coder.Encoder;
+import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncodeable{
 	
-	private IEncoder encoder = new Encoder();
+	private IEncoder encoder = new AutoEncoder();
 	private ScatterPlotData data;
 
 	public String getFeaturePrefix() {
@@ -49,10 +50,14 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 				valuesY[i] = ((ArrayList<Point>) data.getDataSet()).get(i).y;			
 				
 			}
-			builder.append(this.encoder.encode(valuesX));
-			builder.append(',');
+			List<int[]> data = new LinkedList<int[]>();
+			data.add(valuesX);
+			data.add(valuesY);
+			builder.append(this.encoder.encodeIntegerCollection(data));
+			//builder.append(this.encoder.encode(valuesX));
+			//builder.append(',');
 			//HACK
-			builder.append(this.encoder.encode(valuesY).substring(2));
+			//builder.append(this.encoder.encode(valuesY).substring(2));
 			
 			return builder.toString();
 			
@@ -68,7 +73,7 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 	}
 
 	public void removeEncoder() {
-		this.encoder = new Encoder();
+		this.encoder = new AutoEncoder();
 		
 	}
 
@@ -77,7 +82,7 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 		this.encoder = encoder;
 		
 		if(encoder == null){
-			this.encoder = new Encoder();
+			this.encoder = new AutoEncoder();
 		}	
 		
 	}

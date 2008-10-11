@@ -1,6 +1,6 @@
 package googlechartwrapper.data;
 
-import googlechartwrapper.coder.Encoder;
+import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.util.IFeatureAppender;
 
@@ -17,7 +17,7 @@ public class ChartData implements IFeatureAppender, IEncodeable {
 
 	private Collection<Integer> chartData;
 
-	private IEncoder encoder = new Encoder();
+	private IEncoder encoder = new AutoEncoder();
 
 	/**
 	 * 
@@ -82,7 +82,7 @@ public class ChartData implements IFeatureAppender, IEncodeable {
 
 	public void removeEncoder() {
 		
-		this.encoder = new Encoder();		
+		this.encoder = new AutoEncoder();		
 	}
 
 }

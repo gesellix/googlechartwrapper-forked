@@ -9,6 +9,7 @@ import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.LinearGradient.GradientFillDestination;
 import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
+import googlechartwrapper.data.ISingleDataScaleable;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.data.PieChartSliceAppender;
 import googlechartwrapper.label.ChartTitle;
@@ -18,11 +19,10 @@ import googlechartwrapper.util.UpperLimitGenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 import java.awt.Dimension;
-import java.util.Collection;
 import java.util.List;
 
 public class PieChart extends AbstractChart implements ISolidFillable,
-		ILinearGradientable, ILinearStripeable, IChartTitleable {
+		ILinearGradientable, ILinearStripeable, IChartTitleable{
 
 	private boolean threeD;
 	protected PieChartSliceAppender dataAppender = new PieChartSliceAppender();
@@ -219,11 +219,11 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 			return null;
 		}
 
-		public String encodeFloatCollection(Collection<float[]> values) {
+		public String encodeFloatCollection(List<float[]> values) {
 			return null;
 		}
 
-		public String encodeIntegerCollection(Collection<int[]> values) {
+		public String encodeIntegerCollection(List<int[]> values) {
 			
 			return null;
 		}

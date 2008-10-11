@@ -1,8 +1,8 @@
 package googlechartwrapper.coder;
 
-import java.util.Collection;
+import java.util.List;
 
-public class DataScalingTextEncoder implements IEncoder{
+public class DataScalingTextEncoder extends AbstractEncoder implements IEncoder{
 
 	/*
 	 * Text encoding
@@ -47,7 +47,7 @@ public class DataScalingTextEncoder implements IEncoder{
 		return bf.substring(0, bf.length()-2);
 	}
 
-	public String encodeFloatCollection(Collection<float[]> values) {
+	public String encodeFloatCollection(List<float[]> values) {
 		StringBuffer bf = new StringBuffer();
 		for (float[] t: values){
 			bf.append(internalEncode(t));
@@ -56,7 +56,7 @@ public class DataScalingTextEncoder implements IEncoder{
 		return "t:"+bf.substring(0, bf.length()-2);
 	}
 
-	public String encodeIntegerCollection(Collection<int[]> values) {
+	public String encodeIntegerCollection(List<int[]> values) {
 		StringBuffer bf = new StringBuffer();
 		for (int[] t: values){
 			bf.append(internalEncode(t));
@@ -64,5 +64,7 @@ public class DataScalingTextEncoder implements IEncoder{
 		}
 		return "t:"+bf.substring(0, bf.length()-2);
 	}
+
+	
 
 }

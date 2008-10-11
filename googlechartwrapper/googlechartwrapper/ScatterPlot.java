@@ -1,13 +1,14 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.DataScalingTextEncoder;
-import googlechartwrapper.coder.Encoder;
+import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.data.DataScalingSet;
+import googlechartwrapper.data.IMultiDataScaleable;
 import googlechartwrapper.data.ScatterPlotData;
 import googlechartwrapper.data.ScatterPlotDataAppender;
 import googlechartwrapper.interfaces.ILinearable;
@@ -35,7 +36,7 @@ import java.util.List;
  * @author steffan
  *
  */
-public class ScatterPlot extends AbstractChart implements ILinearable, IMarkable, IChartLegendable, IChartColorable, IChartTitleable{
+public class ScatterPlot extends AbstractChart implements ILinearable, IMarkable, IChartLegendable, IChartColorable, IChartTitleable, IMultiDataScaleable{
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -201,7 +202,7 @@ public class ScatterPlot extends AbstractChart implements ILinearable, IMarkable
 			
 			this.dataScalingAppender.removeAll();
 			
-			this.scatterPlotDataAppender.setEncoder(new Encoder());			
+			this.scatterPlotDataAppender.setEncoder(new AutoEncoder());			
 			
 		}
 
@@ -309,6 +310,31 @@ public class ScatterPlot extends AbstractChart implements ILinearable, IMarkable
 		public ScatterPlotData getScatterPlotData() {
 			
 			return this.scatterPlotDataAppender.getScatterPlotData();
+		}
+
+		public void addDataScalingSet(DataScalingSet ds) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public List<DataScalingSet> getDataScalings() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public void removeAllDataScalings() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public DataScalingSet removeDataScalingSet(int index) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public boolean removeDataScalingSet(DataScalingSet set) {
+			// TODO Auto-generated method stub
+			return false;
 		}
 
 }
