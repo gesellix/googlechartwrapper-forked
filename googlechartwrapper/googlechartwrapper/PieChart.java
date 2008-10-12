@@ -227,6 +227,16 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 			
 			return null;
 		}
+
+		public String encodeFloatCollection(List<float[]> values, String sep) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public String encodeIntegerCollection(List<int[]> values, String sep) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 		
 	}
 
