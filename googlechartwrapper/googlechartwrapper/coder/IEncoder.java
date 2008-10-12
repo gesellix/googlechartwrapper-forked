@@ -12,14 +12,16 @@ import java.util.List;
 public interface IEncoder {
 	
 	/**
-	 * Encodes the given argument.
+	 * Encodes the given argument. If an empty array or null is 
+	 * used, the resulting datastring will be an empty string "".
 	 * @param values array of integers to encode
 	 * @return encoded string
 	 */
 	public String encode(int[] values);
 	
 	/**
-	 * Encodes the given argument.
+	 * Encodes the given argument. If an empty array or null is 
+	 * used, the resulting datastring will be an empty string "".
 	 * @param values array of float to encode
 	 * @return encoded string
 	 */
@@ -32,6 +34,13 @@ public interface IEncoder {
 	 */
 	public String encodeIntegerCollection(List<int[]> values);
 	
+	/**
+	 * Encodes the given list of int values, separating each dataset string 
+	 * ("array") with the given sep value.
+	 * @param values list of values to encode
+	 * @param sep separator between each dataset
+	 * @return encoded string
+	 */
 	public String encodeIntegerCollection(List<int[]> values, String sep);
 	
 	/**
@@ -41,6 +50,13 @@ public interface IEncoder {
 	 */
 	public String encodeFloatCollection(List<float[]> values);
 	
+	/**
+	 * Encodes the given list of int values, separating each dataset string 
+	 * ("array") with the given sep value.
+	 * @param values list of values to encode
+	 * @param sep separator between each dataset
+	 * @return encoded string
+	 */
 	public String encodeFloatCollection(List<float[]> values, String sep);
 		
 
