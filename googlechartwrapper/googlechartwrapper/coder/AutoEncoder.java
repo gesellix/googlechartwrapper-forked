@@ -32,10 +32,12 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		}
 		IEncoder encoder = EncoderFactory.getEncoder(encodingType);
 		
+		String result = encodingType.getCompletePrefix() + encoder.encode(values);
+		
 		if (!isCollection){
 			encodingType = null;
 		}
-		return encoder.encode(values);
+		return result;
 	}
 
 	public String encode(float[] values) {
@@ -44,10 +46,12 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		}
 		IEncoder encoder = EncoderFactory.getEncoder(encodingType);
 		
+		String result = encodingType.getCompletePrefix() + encoder.encode(values);
+		
 		if (!isCollection){
 			encodingType = null;
 		}
-		return encoder.encode(values);
+		return result;
 	}
 
 	@Override
@@ -55,13 +59,13 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		EncodingType highest = EncodingType.SimpleEncoding;
 		for (int i = 0; i < values.size(); i++){
 			EncodingType temp = EncoderFactory.getSuggestedEncodingType(values.get(i));	
-			if (temp.compareTo(highest)>0){
+			if(temp.getRank() > highest.getRank()){
 				highest = temp;
-			}
+			}			
 		}
 		encodingType = highest;
 		isCollection = true;
-		String s =  super.encodeFloatCollection(values, sep);
+		String s =  encodingType.getCompletePrefix() + super.encodeFloatCollection(values, sep);
 		encodingType = null;
 		isCollection = false;
 		return s;
@@ -72,15 +76,15 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		EncodingType highest = EncodingType.SimpleEncoding;
 		for (int i = 0; i < values.size(); i++){
 			EncodingType temp = EncoderFactory.getSuggestedEncodingType(values.get(i));	
-			if (temp.compareTo(highest)>0){
+			if(temp.getRank() > highest.getRank()){
 				highest = temp;
-			}
+			}	
 		}
 		encodingType = highest;
 		isCollection = true;
-		String s =  super.encodeIntegerCollection(values, sep);
+		String s = encodingType.getCompletePrefix() + super.encodeIntegerCollection(values, sep);
 		encodingType = null;
 		isCollection = false;
-		return s;
+		return  s;
 	}
 }
