@@ -37,11 +37,12 @@ public class ScatterPlotTest {
 		p.add(new Point(15,45));
 		
 		
+
 		
 		
 		s.setScatterPlotData(new ScatterPlotData(p));
 		
-		System.out.println(s.getUrl());
+		//System.out.println(s.getUrl());
 		
 		String target = "http://chart.apis.google.com/chart?chs=300x300&cht=qr&chl=Hello World&choe=UTF-8";
 		

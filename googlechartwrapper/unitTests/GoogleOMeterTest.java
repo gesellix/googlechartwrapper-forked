@@ -13,8 +13,7 @@ import org.junit.Test;
 public class GoogleOMeterTest {
 
 	@Test
-	public void testSimpleExample (){
-		
+	public void testSimpleExample (){		
 		GoogleOMeter meter = new GoogleOMeter(new Dimension(225,125));
 		meter.addGoogleOMeterValue(new GoogleOMeterValue("Hello",70));
 		
