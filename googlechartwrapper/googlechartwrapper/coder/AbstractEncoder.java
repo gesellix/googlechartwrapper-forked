@@ -16,7 +16,7 @@ import java.util.List;
  * @see ExtendedEncoder
  * @author martin
  */
-abstract class AbstractEncoder implements IEncoder{
+public abstract class AbstractEncoder implements IEncoder{
 	
 	/**
 	 * Default separator for datasets (pipe symbol)
@@ -25,7 +25,8 @@ abstract class AbstractEncoder implements IEncoder{
 	
 
 	/**
-	 * Encodes the collection by calling the {@link IEncoder#encode(float[])}
+	 * Encodes the collection by calling the 
+	 * {@link AbstractEncoder#collectionEncode(float[])}
 	 * method for each value in the valueslist. Each dataset is seperated by
 	 * the {@link #DEFAULT_SEPARATOR}.
 	 * @param values value list (!= null) 
@@ -35,7 +36,8 @@ abstract class AbstractEncoder implements IEncoder{
 	}
 
 	/**
-	 * Encodes the collection by calling the {@link IEncoder#encode(float[])}
+	 * Encodes the collection by calling the 
+	 * {@link AbstractEncoder#collectionEncode(float[])}
 	 * method for each value in the valueslist. Each dataset is seperated by
 	 * the sep-parameter.
 	 * @param values value list (!= null) 
@@ -45,14 +47,22 @@ abstract class AbstractEncoder implements IEncoder{
 		
 		StringBuilder bf = new StringBuilder(values.size()*10);
 		for (float current[]:values){
-			bf.append(encode(current));
+			bf.append(collectionEncode(current));
 			bf.append(separator);
 		}
 		return bf.substring(0,bf.length()-2);
 	}
 	
 	/**
-	 * Encodes the collection by calling the {@link IEncoder#encode(int[])}
+	 * Encodes the value array and returns the encoded data without the encoder prefix.
+	 * @param values data to encode
+	 * @return encoded data without (full) encoder prefix
+	 */
+	protected abstract String collectionEncode (float[] values);
+	
+	/**
+	 * Encodes the collection by calling the 
+	 * {@link AbstractEncoder#collectionEncode(int[])}
 	 * method for each value in the valueslist. Each dataset is seperated by
 	 * the {@link #DEFAULT_SEPARATOR}.
 	 * @param values value list (!= null) 
@@ -62,7 +72,8 @@ abstract class AbstractEncoder implements IEncoder{
 	}
 	
 	/**
-	 * Encodes the collection by calling the {@link IEncoder#encode(int[])}
+	 * Encodes the collection by calling the 
+	 * {@link AbstractEncoder#collectionEncode(int[])}
 	 * method for each value in the valueslist. Each dataset is seperated by
 	 * the sep-parameter.
 	 * @param values value list (!= null) 
@@ -71,10 +82,17 @@ abstract class AbstractEncoder implements IEncoder{
 	public String encodeIntegerCollection(List<int[]> values, String sep) {
 		StringBuilder bf = new StringBuilder(values.size()*10);
 		for (int current[]:values){
-			bf.append(encode(current));
+			bf.append(collectionEncode(current));
 			bf.append(sep);
 		}
 		return bf.substring(0,bf.length()-2);
 	}
+	
+	/**
+	 * Encodes the value array and returns the encoded data without the encoder prefix.
+	 * @param values data to encode
+	 * @return encoded data without (full) encoder prefix
+	 */
+	protected abstract String collectionEncode (int[] values);
 		
 }

@@ -49,7 +49,14 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 	 * @return encoded string
 	 */
 	public String encode(int[] values) {
-		
+		if (values == null || values.length == 0) {
+			return "";
+		}
+		return EncodingType.ExtendedEncoding.getCompletePrefix()+collectionEncode(values);
+	}
+	
+	@Override
+	protected String collectionEncode(int[] values) {
 		if (values == null || values.length == 0) {
 			return "";
 		}
@@ -61,7 +68,7 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 							: extendedEncoding[current]);
 		}
 		return encodedData.toString();
-	}	
+	}
 		
 
 	/**
@@ -76,6 +83,16 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 		if (values == null || values.length == 0) {
 			return "";
 		}
+		return EncodingType.ExtendedEncoding.getCompletePrefix()+collectionEncode(values);
+	}
+
+
+	@Override
+	protected String collectionEncode(float[] values) {
+
+		if (values == null || values.length == 0) {
+			return "";
+		}
 
 		final StringBuilder encodedData = new StringBuilder();
 		for (float cur : values) {
@@ -85,6 +102,6 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 							: extendedEncoding[current]);
 		}
 		return encodedData.toString();
-	}	
+	}
 
 }

@@ -35,6 +35,14 @@ public class SimpleEncoder extends AbstractEncoder implements IEncoder{
 		if (values == null || values.length == 0) {
 			return "";
 		}
+		return EncodingType.SimpleEncoding.getCompletePrefix()+collectionEncode(values);
+	}
+	
+	@Override
+	protected String collectionEncode(int[] values) {
+		if (values == null || values.length == 0) {
+			return "";
+		}
 
 		final StringBuilder encodedData = new StringBuilder();
 		for (int current : values) {
@@ -43,7 +51,7 @@ public class SimpleEncoder extends AbstractEncoder implements IEncoder{
 		}
 		return encodedData.toString();
 	}
-
+	
 	/**
 	 * Encodes the given argument. If an empty array or null is 
 	 * used, the resulting datastring will be an empty string "".
@@ -56,6 +64,14 @@ public class SimpleEncoder extends AbstractEncoder implements IEncoder{
 		if (values == null || values.length == 0) {
 			return "";
 		}
+		return EncodingType.SimpleEncoding.getCompletePrefix()+collectionEncode(values);
+	}
+
+	@Override
+	protected String collectionEncode(float[] values) {
+		if (values == null || values.length == 0) {
+			return "";
+		}
 
 		final StringBuilder encodedData = new StringBuilder();
 		for (float cur : values) {
@@ -65,5 +81,8 @@ public class SimpleEncoder extends AbstractEncoder implements IEncoder{
 		}
 		return encodedData.toString();
 	}
+
+
+	
 
 }

@@ -32,16 +32,9 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		}
 		IEncoder encoder = EncoderFactory.getEncoder(encodingType);
 		
-		String result = "";
-		
-		//because a collection needs only one e: oder s:
-		if(isCollection){
-		 result = encoder.encode(values);
-		}
-		
+		String result = encoder.encode(values);
+				
 		if (!isCollection){
-			//include prefix
-			result = encodingType.getCompletePrefix() + encoder.encode(values);
 			encodingType = null;
 		}
 		return result;
@@ -53,16 +46,9 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		}
 		IEncoder encoder = EncoderFactory.getEncoder(encodingType);
 		
-		String result = "";
-		
-		//because a collection needs only one e: oder s:
-		if(isCollection){
-		 result = encoder.encode(values);
-		}
+		String result = encoder.encode(values);
 		
 		if (!isCollection){
-			//include prefix
-			result = encodingType.getCompletePrefix() + encoder.encode(values);
 			encodingType = null;
 		}
 		return result;
@@ -80,7 +66,7 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		encodingType = highest;
 		isCollection = true;
 		
-		String s =  encodingType.getCompletePrefix() + super.encodeFloatCollection(values, sep);
+		String s = super.encodeFloatCollection(values, sep);
 		
 		encodingType = null;
 		isCollection = false;
@@ -99,10 +85,25 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		encodingType = highest;
 		isCollection = true;
 		
-		String s = encodingType.getCompletePrefix() + super.encodeIntegerCollection(values, sep);
+		String s = super.encodeIntegerCollection(values, sep);
 		
 		encodingType = null;
 		isCollection = false;
 		return  s;
+	}
+
+	/**
+	 * Does nothing currently.
+	 * @param values data to encode
+	 * @return <code>null</code>
+	 */
+	@Override
+	protected String collectionEncode(float[] values) {
+		return null; //TODO mva: think about implementation (should there be one?)
+	}
+
+	@Override
+	protected String collectionEncode(int[] values) {
+		return null;
 	}
 }

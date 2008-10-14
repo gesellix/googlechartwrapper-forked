@@ -65,6 +65,18 @@ public class DataScalingTextEncoder extends AbstractEncoder implements IEncoder{
 		return "t:"+bf.substring(0, bf.length()-2);
 	}
 
+	@Override
+	protected String collectionEncode(float[] values) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String collectionEncode(int[] values) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }
