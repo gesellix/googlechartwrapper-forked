@@ -53,7 +53,7 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 			List<int[]> data = new LinkedList<int[]>();
 			data.add(valuesX);
 			data.add(valuesY);
-			builder.append(this.encoder.encodeIntegerCollection(data));
+			builder.append(this.encoder.encodeIntegerCollection(data,","));
 			//builder.append(this.encoder.encode(valuesX));
 			//builder.append(',');
 			//HACK

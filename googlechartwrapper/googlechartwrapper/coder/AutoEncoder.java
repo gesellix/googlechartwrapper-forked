@@ -32,9 +32,16 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		}
 		IEncoder encoder = EncoderFactory.getEncoder(encodingType);
 		
-		String result = encodingType.getCompletePrefix() + encoder.encode(values);
+		String result = "";
+		
+		//because a collection needs only one e: oder s:
+		if(isCollection){
+		 result = encoder.encode(values);
+		}
 		
 		if (!isCollection){
+			//include prefix
+			result = encodingType.getCompletePrefix() + encoder.encode(values);
 			encodingType = null;
 		}
 		return result;
@@ -46,9 +53,16 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		}
 		IEncoder encoder = EncoderFactory.getEncoder(encodingType);
 		
-		String result = encodingType.getCompletePrefix() + encoder.encode(values);
+		String result = "";
+		
+		//because a collection needs only one e: oder s:
+		if(isCollection){
+		 result = encoder.encode(values);
+		}
 		
 		if (!isCollection){
+			//include prefix
+			result = encodingType.getCompletePrefix() + encoder.encode(values);
 			encodingType = null;
 		}
 		return result;
@@ -65,7 +79,9 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		}
 		encodingType = highest;
 		isCollection = true;
+		
 		String s =  encodingType.getCompletePrefix() + super.encodeFloatCollection(values, sep);
+		
 		encodingType = null;
 		isCollection = false;
 		return s;
@@ -82,7 +98,9 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		}
 		encodingType = highest;
 		isCollection = true;
+		
 		String s = encodingType.getCompletePrefix() + super.encodeIntegerCollection(values, sep);
+		
 		encodingType = null;
 		isCollection = false;
 		return  s;

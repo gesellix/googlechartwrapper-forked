@@ -124,7 +124,7 @@ public class QRCode extends AbstractChart {
 	@Override
 	protected String getUrlChartType() {
 
-		return "qr";
+		return ChartType.QRCode.getPrefix();
 	}
 
 	public IEncoder getEncoder() {

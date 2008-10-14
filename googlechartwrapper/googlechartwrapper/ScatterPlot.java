@@ -74,7 +74,7 @@ public class ScatterPlot extends AbstractChart implements ILinearable, IMarkable
 	@Override
 	protected String getUrlChartType() {
 		
-		return "s";
+		return ChartType.ScatterPlot.getPrefix();
 	}
 
 	

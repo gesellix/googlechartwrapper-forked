@@ -49,6 +49,7 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 	 * @return encoded string
 	 */
 	public String encode(int[] values) {
+		
 		if (values == null || values.length == 0) {
 			return "";
 		}
@@ -60,7 +61,8 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 							: extendedEncoding[current]);
 		}
 		return encodedData.toString();
-	}
+	}	
+		
 
 	/**
 	 * Encodes the given argument. If an empty array or null is 

@@ -47,12 +47,12 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 
 	@Override
 	protected ChartType getChartType() {
-		return ChartType.RadarChart;
+		return ChartType.RadarChartStraightLines;
 	}
 
 	@Override
 	protected String getUrlChartType() {
-		return curved?"r":"rs";
+		return curved ? ChartType.RadarChartStraightLines.getPrefix() : ChartType.RadarChartSplines.getPrefix();
 	}
 
 	public void setGridLine(GridLine gl) {
