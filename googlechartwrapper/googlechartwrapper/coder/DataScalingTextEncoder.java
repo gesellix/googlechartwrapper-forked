@@ -4,6 +4,11 @@ import java.util.List;
 
 public class DataScalingTextEncoder extends AbstractEncoder implements IEncoder{
 
+	public DataScalingTextEncoder() {
+		super("todo");
+		// TODO Auto-generated constructor stub
+	}
+
 	/*
 	 * Text encoding
 

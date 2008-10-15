@@ -25,13 +25,16 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 	 */
 	private boolean isCollection = false;
 	
+	public AutoEncoder(){
+		super("");
+	}
 
 	public String encode(int[] values) {
 		if (encodingType == null){
 			encodingType = EncoderFactory.getSuggestedEncodingType(values);	
 		}
-		IEncoder encoder = EncoderFactory.getEncoder(encodingType);
 		
+		IEncoder encoder = EncoderFactory.getEncoder(encodingType);	
 		String result = encoder.encode(values);
 				
 		if (!isCollection){
@@ -44,8 +47,8 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		if (encodingType == null){
 			encodingType = EncoderFactory.getSuggestedEncodingType(values);	
 		}
-		IEncoder encoder = EncoderFactory.getEncoder(encodingType);
 		
+		IEncoder encoder = EncoderFactory.getEncoder(encodingType);	
 		String result = encoder.encode(values);
 		
 		if (!isCollection){
@@ -66,7 +69,8 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		encodingType = highest;
 		isCollection = true;
 		
-		String s = super.encodeFloatCollection(values, sep);
+		String s = encodingType.getCompletePrefix()+
+			super.encodeFloatCollection(values, sep);
 		
 		encodingType = null;
 		isCollection = false;
@@ -85,25 +89,41 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		encodingType = highest;
 		isCollection = true;
 		
-		String s = super.encodeIntegerCollection(values, sep);
+		String s = encodingType.getCompletePrefix()+
+			super.encodeIntegerCollection(values, sep);
 		
 		encodingType = null;
 		isCollection = false;
 		return  s;
 	}
 
-	/**
-	 * Does nothing currently.
-	 * @param values data to encode
-	 * @return <code>null</code>
-	 */
 	@Override
 	protected String collectionEncode(float[] values) {
-		return null; //TODO mva: think about implementation (should there be one?)
+		String s = encode(values);
+		if (s.length()>=encodingType.getCompletePrefix().length()){
+			return s.substring(encodingType.getCompletePrefix().length());
+		}
+		else {
+			return s;
+		}
 	}
 
 	@Override
 	protected String collectionEncode(int[] values) {
-		return null;
+		IEncoder encoder = EncoderFactory.getEncoder(encodingType);
+		if ((encoder instanceof AbstractEncoder)){ 
+			//Maintainability: should we discourage that? 
+			return ((AbstractEncoder)encoder).collectionEncode(values);
+		}
+		else {
+			String s = encode(values);
+			if (s.length()>=encodingType.getCompletePrefix().length()){
+				return s.substring(encodingType.getCompletePrefix().length());
+			}
+			else {
+				return s;
+			}
+		}
+		
 	}
 }

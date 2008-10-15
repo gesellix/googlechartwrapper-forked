@@ -29,6 +29,8 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 	 * resulting pairs of characters for each value between 0 and 4095
 	 */
 	private static final String[] extendedEncoding = new String[4096];	
+	
+	private static final EncodingType TYPE = EncodingType.ExtendedEncoding;
 
 	static { // Fill the encoding arrays in static block.
 		int cnt = 0;
@@ -38,6 +40,12 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 						+ extendedEncodingChars[j];
 			}
 		}
+	}
+	
+	
+
+	public ExtendedEncoder() {
+		super(TYPE);
 	}
 
 	/**
@@ -52,7 +60,7 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 		if (values == null || values.length == 0) {
 			return "";
 		}
-		return EncodingType.ExtendedEncoding.getCompletePrefix()+collectionEncode(values);
+		return TYPE.getCompletePrefix()+collectionEncode(values);
 	}
 	
 	@Override
@@ -83,7 +91,7 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 		if (values == null || values.length == 0) {
 			return "";
 		}
-		return EncodingType.ExtendedEncoding.getCompletePrefix()+collectionEncode(values);
+		return TYPE.getCompletePrefix()+collectionEncode(values);
 	}
 
 
