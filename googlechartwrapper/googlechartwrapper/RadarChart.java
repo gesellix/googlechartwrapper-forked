@@ -5,7 +5,7 @@ import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.IFillAreaable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.label.AxisLabelAppender;
-import googlechartwrapper.label.AxisLabelSummary;
+import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IAxisLabelable;
 import googlechartwrapper.label.IChartTitleable;
@@ -108,11 +108,11 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 		return shapeMarker.remove(sm);
 	}
 
-	public void addAxisLabelSummary(AxisLabelSummary labelSummary) {
+	public void addAxisLabelSummary(AxisLabelContainer labelSummary) {
 		axisLabels.addAxis(labelSummary);
 	}
 
-	public List<AxisLabelSummary> getAxisLabelSummaries() {
+	public List<AxisLabelContainer> getAxisLabelSummaries() {
 		return axisLabels.getList();
 	}
 
@@ -120,11 +120,11 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 		axisLabels.removeAll();
 	}
 
-	public AxisLabelSummary removeAxisLabelSummary(int index) {
+	public AxisLabelContainer removeAxisLabelSummary(int index) {
 		return axisLabels.removeAxis(index);
 	}
 
-	public boolean removeAxisLabelSummary(AxisLabelSummary labelSummary) {
+	public boolean removeAxisLabelSummary(AxisLabelContainer labelSummary) {
 		return axisLabels.removeAxis(labelSummary);
 	}
 

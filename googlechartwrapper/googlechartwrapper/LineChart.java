@@ -12,7 +12,7 @@ import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.interfaces.IStyleable;
 import googlechartwrapper.label.AxisLabelAppender;
-import googlechartwrapper.label.AxisLabelSummary;
+import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
@@ -223,12 +223,12 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 			return this.solidFillAppender.remove(sf);
 		}
 
-		public void addAxisLabelSummary(AxisLabelSummary labelSummary) {
+		public void addAxisLabelSummary(AxisLabelContainer labelSummary) {
 			
 			this.axisLabelAppender.addAxis(labelSummary);
 		}
 
-		public List<AxisLabelSummary> getAxisLabelSummaries() {
+		public List<AxisLabelContainer> getAxisLabelSummaries() {
 			
 			return this.axisLabelAppender.getList();
 		}
@@ -238,12 +238,12 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 			
 		}
 
-		public AxisLabelSummary removeAxisLabelSummary(int index) {
+		public AxisLabelContainer removeAxisLabelSummary(int index) {
 			
 			return this.axisLabelAppender.removeAxis(index);
 		}
 
-		public boolean removeAxisLabelSummary(AxisLabelSummary labelSummary) {
+		public boolean removeAxisLabelSummary(AxisLabelContainer labelSummary) {
 			
 			return this.axisLabelAppender.removeAxis(labelSummary);
 		}

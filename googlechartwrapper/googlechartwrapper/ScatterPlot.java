@@ -14,7 +14,7 @@ import googlechartwrapper.data.ScatterPlotDataAppender;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.label.AxisLabelAppender;
-import googlechartwrapper.label.AxisLabelSummary;
+import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
@@ -278,12 +278,12 @@ public class ScatterPlot extends AbstractChart implements ILinearable, IMarkable
 			
 		}
 
-		public void addAxisLabelSummary(AxisLabelSummary labelSummary) {
+		public void addAxisLabelSummary(AxisLabelContainer labelSummary) {
 			
 			this.axisLabelAppender.addAxis(labelSummary);
 		}
 
-		public List<AxisLabelSummary> getAxisLabelSummaries() {
+		public List<AxisLabelContainer> getAxisLabelSummaries() {
 			
 			return this.axisLabelAppender.getList();
 		}
@@ -293,12 +293,12 @@ public class ScatterPlot extends AbstractChart implements ILinearable, IMarkable
 			
 		}
 
-		public AxisLabelSummary removeAxisLabelSummary(int index) {
+		public AxisLabelContainer removeAxisLabelSummary(int index) {
 			
 			return this.axisLabelAppender.removeAxis(index);
 		}
 
-		public boolean removeAxisLabelSummary(AxisLabelSummary labelSummary) {
+		public boolean removeAxisLabelSummary(AxisLabelContainer labelSummary) {
 			
 			return this.axisLabelAppender.removeAxis(labelSummary);
 		}

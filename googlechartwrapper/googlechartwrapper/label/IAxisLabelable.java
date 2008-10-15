@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface IAxisLabelable {
 	
-	public void addAxisLabelSummary (AxisLabelSummary labelSummary);
+	public void addAxisLabelSummary (AxisLabelContainer labelSummary);
 	
-	public List<AxisLabelSummary> getAxisLabelSummaries();
+	public List<AxisLabelContainer> getAxisLabelSummaries();
 	
-	public AxisLabelSummary removeAxisLabelSummary(int index);
+	public AxisLabelContainer removeAxisLabelSummary(int index);
 	
-	public boolean removeAxisLabelSummary(AxisLabelSummary labelSummary);
+	public boolean removeAxisLabelSummary(AxisLabelContainer labelSummary);
 
 	public void removeAllAxisLabelSummaries();
 

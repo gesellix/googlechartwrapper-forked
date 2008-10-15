@@ -10,7 +10,7 @@ import googlechartwrapper.util.MiscUtils;
 
 public class AxisLabelAppender implements IExtendedFeatureAppender{
 	
-	List<AxisLabelSummary> axis = new ArrayList<AxisLabelSummary>();
+	List<AxisLabelContainer> axis = new ArrayList<AxisLabelContainer>();
 
 	public String getFeaturePrefix() {
 		return "chxt";
@@ -31,7 +31,7 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 		StringBuffer axisLabels = new StringBuffer(axis.size()*5+1);
 		//chxl= <axis index>:|<label 1>|<label n>|
 		for (int i = 0; i < axis.size(); i++){
-			AxisLabelSummary sum = axis.get(i);
+			AxisLabelContainer sum = axis.get(i);
 			if (sum.getLabels().size() > 0){
 				if (sum.isUseLabels()){
 					axisLabels.append(i);
@@ -49,7 +49,7 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 
 		StringBuffer axisLabelsPos = new StringBuffer(axis.size()*5+1);
 		for (int i = 0; i < axis.size(); i++){
-			AxisLabelSummary sum = axis.get(i);
+			AxisLabelContainer sum = axis.get(i);
 			if (sum.isUseLabelPositions()){
 				if (sum.getLabels().size() > 0){
 					axisLabelsPos.append(i);
@@ -69,7 +69,7 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 
 		StringBuffer axisRange = new StringBuffer(axis.size()*5+1);
 		for (int i = 0; i < axis.size(); i++){
-			AxisLabelSummary sum = axis.get(i);
+			AxisLabelContainer sum = axis.get(i);
 			if (sum.getAxisRange() != null){
 				axisRange.append(i);
 				axisRange.append(",");
@@ -84,7 +84,7 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 		//chxs= <axis index>,<color>,<font size>,<alignment>|
 		StringBuffer axisStyle = new StringBuffer(axis.size()*5+1);
 		for (int i = 0; i < axis.size(); i++){
-			AxisLabelSummary sum = axis.get(i);
+			AxisLabelContainer sum = axis.get(i);
 			if (sum.getAxisStyle()!= null){
 				axisStyle.append(i);
 				axisStyle.append(",");
@@ -134,15 +134,15 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 		return ret;
 	}
 	
-	public void addAxis (AxisLabelSummary axis){
+	public void addAxis (AxisLabelContainer axis){
 		this.axis.add(axis);
 	}
 	
-	public boolean removeAxis (AxisLabelSummary axis){
+	public boolean removeAxis (AxisLabelContainer axis){
 		return this.axis.remove(axis);
 	}
 	
-	public AxisLabelSummary removeAxis (int index){
+	public AxisLabelContainer removeAxis (int index){
 		return axis.remove(index);
 	}
 	
@@ -152,7 +152,7 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 		}
 	}
 	
-	public List<AxisLabelSummary> getList (){
+	public List<AxisLabelContainer> getList (){
 		return Collections.unmodifiableList(axis);
 	}
 	
