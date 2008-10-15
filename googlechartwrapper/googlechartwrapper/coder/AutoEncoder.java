@@ -25,6 +25,9 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 	 */
 	private boolean isCollection = false;
 	
+	/**
+	 * Constructs a new AutoEncoder with no specific encoder prefix.
+	 */
 	public AutoEncoder(){
 		super("");
 	}

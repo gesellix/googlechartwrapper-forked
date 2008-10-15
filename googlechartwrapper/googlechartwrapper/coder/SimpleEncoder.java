@@ -23,8 +23,14 @@ public class SimpleEncoder extends AbstractEncoder implements IEncoder{
 		'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3',
 		'4', '5', '6', '7', '8', '9' };
 	
+	/**
+	 * type of the encoder
+	 */
 	private static final EncodingType TYPE = EncodingType.SimpleEncoding;
 
+	/**
+	 * Constructs a new SimpleEncoder which provides a resolution of 62 values.
+	 */
 	public SimpleEncoder() {
 		super(TYPE);
 	}

@@ -24,8 +24,16 @@ public abstract class AbstractEncoder implements IEncoder{
 	 */
 	public final String DEFAULT_SEPARATOR = "|";
 	
+	/**
+	 * encoder prefix which will be appended to encoded strings ("ahead")
+	 */
 	private final String prefix;
 	
+	/**
+	 * Constructs an AbstractEncoder with the given prefix.
+	 * @param prefix the prefix which will be appended to the encoded string
+	 * @throws IllegalArgumentException if prefix == null
+	 */
 	public AbstractEncoder(String prefix){
 		if (prefix == null){
 			throw new IllegalArgumentException("prefix shall not be null");
@@ -33,6 +41,12 @@ public abstract class AbstractEncoder implements IEncoder{
 		this.prefix = prefix;
 	}
 	
+	/**
+	 * Constructs an AbstractEncoder with the prefix which is associated with the
+	 * type-parameter. The prefix is resolved by invoking the 
+	 * {@link EncodingType#getCompletePrefix()} method.
+	 * @param type prefix for the encoder based on the type
+	 */
 	public AbstractEncoder(EncodingType type){
 		this(type.getCompletePrefix());
 	}
@@ -41,7 +55,8 @@ public abstract class AbstractEncoder implements IEncoder{
 	/**
 	 * Encodes the collection by calling the 
 	 * {@link AbstractEncoder#collectionEncode(float[])}
-	 * method for each value in the valueslist. Each dataset is seperated by
+	 * method for each value in the valueslist. The returned string
+	 * contains the encoded data and the encoder prefix. Each dataset is seperated by
 	 * the {@link #DEFAULT_SEPARATOR}.
 	 * @param values value list (!= null) 
 	 */
@@ -52,7 +67,8 @@ public abstract class AbstractEncoder implements IEncoder{
 	/**
 	 * Encodes the collection by calling the 
 	 * {@link AbstractEncoder#collectionEncode(float[])}
-	 * method for each value in the valueslist. Each dataset is seperated by
+	 * method for each value in the valueslist. The returned string
+	 * contains the encoded data and the encoder prefix. Each dataset is seperated by
 	 * the sep-parameter.
 	 * @param values value list (!= null) 
 	 * @param separator the separator separating each encoded single dataset array
@@ -78,8 +94,9 @@ public abstract class AbstractEncoder implements IEncoder{
 	/**
 	 * Encodes the collection by calling the 
 	 * {@link AbstractEncoder#collectionEncode(int[])}
-	 * method for each value in the valueslist. Each dataset is seperated by
-	 * the {@link #DEFAULT_SEPARATOR}.
+	 * method for each value in the valueslist.
+	 * The returned string contains the encoded data and the encoder prefix. 
+	 * Each dataset is seperated by the {@link #DEFAULT_SEPARATOR}.
 	 * @param values value list (!= null) 
 	 */
 	public String encodeIntegerCollection(List<int[]> values) {
@@ -89,7 +106,8 @@ public abstract class AbstractEncoder implements IEncoder{
 	/**
 	 * Encodes the collection by calling the 
 	 * {@link AbstractEncoder#collectionEncode(int[])}
-	 * method for each value in the valueslist. Each dataset is seperated by
+	 * method for each value in the valueslist. The returned string
+	 * contains the encoded data and the encoder prefix. Each dataset is seperated by
 	 * the sep-parameter.
 	 * @param values value list (!= null) 
 	 * @param sep the separator separating each encoded single dataset array

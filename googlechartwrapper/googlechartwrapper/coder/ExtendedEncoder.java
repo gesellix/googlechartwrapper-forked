@@ -30,6 +30,9 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 	 */
 	private static final String[] extendedEncoding = new String[4096];	
 	
+	/**
+	 * associated enum type of the encoder.
+	 */
 	private static final EncodingType TYPE = EncodingType.ExtendedEncoding;
 
 	static { // Fill the encoding arrays in static block.
@@ -42,8 +45,10 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 		}
 	}
 	
-	
-
+	/**
+	 * Constructs a new ExtendedEncoder which provides a resolution of 
+	 * 4,096 different values.
+	 */
 	public ExtendedEncoder() {
 		super(TYPE);
 	}
