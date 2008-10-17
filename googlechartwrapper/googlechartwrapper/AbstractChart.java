@@ -9,6 +9,9 @@ import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -79,6 +82,7 @@ public abstract class AbstractChart implements Chart {
 			new ArrayList<IExtendedFeatureAppender>(5); 
 		
 		Field[] fields = this.getClass().getDeclaredFields(); //alle Felder
+		
 		for (Field f: fields){
 			if (ArrayUtils.linearSearch(f.getType().getInterfaces(), IExtendedFeatureAppender.class)>=0){
 				//if field implements the IExtendedFeatureAppender - so e.g. a genericAppender
@@ -147,6 +151,14 @@ public abstract class AbstractChart implements Chart {
 		
 		List<FeatureAppender<IExtendedFeatureAppender>> values = 
 			new ArrayList<FeatureAppender<IExtendedFeatureAppender>>(m.values());
+		
+		Collections.sort(values, new Comparator<IExtendedFeatureAppender>(){
+			public int compare(IExtendedFeatureAppender arg0, 
+					IExtendedFeatureAppender arg1) {
+				return arg0.getFeaturePrefix().compareTo(arg1.getFeaturePrefix());
+			}			
+		}); //for unittests, steffans idea; I thinks that is bad and even unnecessary
+		
 		for (FeatureAppender<IExtendedFeatureAppender> ap : values) {
 			//alle appender durchlaufen und der url hinzufügen
 			urlElements.offer(ap.getAppendableString(values));
@@ -170,10 +182,6 @@ public abstract class AbstractChart implements Chart {
 		}
 		return url.toString();
 	}
-
-	/*public void setDataColors(Color[] dataColors) {
-		this.dataColors = dataColors;
-	}*/
 
 	private class FeatureAppender<T extends IExtendedFeatureAppender> extends
 			GenericAppender<T> {
