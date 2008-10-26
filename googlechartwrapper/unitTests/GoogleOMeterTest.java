@@ -34,8 +34,7 @@ public class GoogleOMeterTest {
 		meter.setDataScaling(new DataScalingSet(200,400));
 		
 		String actual = meter.getUrl();
-		String expected = "http://chart.apis.google.com/chart?cht=gom&chs=225x125&" +
-				"chds=200.0,400.0&chd=t:225.0,370.0&chl=Hello|Hello Nr 2";
+		String expected = "http://chart.apis.google.com/chart?cht=gom&chs=225x125&chd=t:225.0,370.0&chl=Hello|Hello Nr 2&chds=200.0,400.0";
 		
 		assertEquals(expected, actual);
 	}

@@ -1,5 +1,6 @@
 package googlechartwrapper;
 
+import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.ILinearGradientable;
 import googlechartwrapper.color.ILinearStripeable;
@@ -9,9 +10,9 @@ import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.LinearGradient.GradientFillDestination;
 import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
-import googlechartwrapper.data.ISingleDataScaleable;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.data.PieChartSliceAppender;
+import googlechartwrapper.interfaces.IPercentageScaleable;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartTitleable;
 import googlechartwrapper.util.GenericAppender;
@@ -22,7 +23,7 @@ import java.awt.Dimension;
 import java.util.List;
 
 public class PieChart extends AbstractChart implements ISolidFillable,
-		ILinearGradientable, ILinearStripeable, IChartTitleable{
+		ILinearGradientable, ILinearStripeable, IChartTitleable, IPercentageScaleable{
 
 	private boolean threeD;
 	protected PieChartSliceAppender dataAppender = new PieChartSliceAppender();
@@ -187,6 +188,7 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 
 	}
 	
+	//FIXME delete!
 	/**
 	 * from 0..100 percent
 	 * @author mart
@@ -248,6 +250,16 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 	public LinearGradient getLinearGradient() {
 		
 		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender.getList().get(0) : null;
+	}
+	
+	public void setPercentageScaling(boolean b) {
+
+		if (b) {
+			this.dataAppender.setEncoder(new PercentageEncoder());
+		} else {
+			this.dataAppender.setEncoder(new AutoEncoder());
+		}
+
 	}
 
 }

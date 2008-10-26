@@ -32,7 +32,8 @@ public class ShapeMarker implements IFeatureAppender {
 	 * @throws IllegalArgumentException
 	 */
 	public ShapeMarker(MarkerTyp markerTyp, Color color, int dataSetIndex, float dataPoint, int size){
-	
+			
+		
 		if(markerTyp == null)
 			throw new IllegalArgumentException("markerTyp can not be null");		
 		if(color == null)
@@ -42,8 +43,8 @@ public class ShapeMarker implements IFeatureAppender {
 		if(size < 0)
 			throw new IllegalArgumentException("size out of range");
 		
-		this.markerTyp = markerTyp;
-		this.color = color;
+		this.color = new Color(color.getRGB());
+		this.markerTyp = markerTyp;		
 		this.dataPoint = dataPoint;
 		this.size = size;
 	
@@ -62,6 +63,8 @@ public class ShapeMarker implements IFeatureAppender {
 	 */
 	public ShapeMarker(MarkerTyp markerTyp, Color color, int dataSetIndex, float dataPoint, int size,Priority priority){
 		
+		
+		
 		if(dataSetIndex < 0)
 			throw new IllegalArgumentException("dataSetIndex must be 0 or higher");
 		if(markerTyp == null)
@@ -73,8 +76,8 @@ public class ShapeMarker implements IFeatureAppender {
 		if(size < 0)
 			throw new IllegalArgumentException("size out of range");
 		
-		this.markerTyp = markerTyp;
-		this.color = color;
+		this.color = new Color(color.getRGB());
+		this.markerTyp = markerTyp;		
 		this.dataPoint = dataPoint;
 		this.size = size;
 		this.priority = priority;
@@ -83,16 +86,23 @@ public class ShapeMarker implements IFeatureAppender {
 	/**
 	 * 
 	 * @param color
+	 * 
+	 * @throws IllegalArgumentException
 	 */
-	public void setColor(Color color){
-		this.color = color;
+	public void setColor(Color color){			
+		
+		if(color == null)
+			throw new IllegalArgumentException("color can not be null");
+		
+		this.color = new Color(color.getRGB());
+		
 	}
 	/**
 	 * 
 	 * @return
 	 */
 	public Color getColor(){
-		return this.color;
+		return new Color(this.color.getRGB());
 	}
 	/**
 	 * 

@@ -29,8 +29,7 @@ public class PieChartTest {
 				-4384000-3251000,"rest", null));
 		
 		//System.out.println(chart.getUrl());
-		assertEquals("http://chart.apis.google.com/chart?cht=p3&chs=400x180&chtt=GDP+" +
-				"(nominal)&chco=&chl=EU|USA|Japan|China|rest&chd=t:30,25,8,5,30", 
+		assertEquals("http://chart.apis.google.com/chart?cht=p3&chs=400x180&chco=&chl=EU|USA|Japan|China|rest&chd=t:30,25,8,5,30&chtt=GDP+(nominal)", 
 				chart.getUrl());
 	}
 	

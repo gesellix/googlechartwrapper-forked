@@ -29,6 +29,7 @@ public class RangeMarker implements IFeatureAppender {
 	 */
 	public RangeMarker(Alignment align, Color color, float startPoint,float endPoint){
 		
+		
 		if(color == null)
 			throw new IllegalArgumentException("color can not be null");
 		if(startPoint < 0.0f || startPoint > 1.0f)
@@ -36,7 +37,7 @@ public class RangeMarker implements IFeatureAppender {
 		if(endPoint < 0.0f || endPoint > 1.0f)
 			throw new IllegalArgumentException("endPoint out of range");		
 		
-		this.color = color;
+		this.color = new Color(color.getRGB());
 		this.startPoint = startPoint;
 		this.endPoint = endPoint;
 		this.align = align;
@@ -51,7 +52,7 @@ public class RangeMarker implements IFeatureAppender {
 	public void setColor(Color color){
 		if(color == null)
 			throw new IllegalArgumentException("color can not be null");
-		this.color = color;
+		this.color = new Color(color.getRGB());
 	}
 	/**
 	 * 
@@ -76,7 +77,7 @@ public class RangeMarker implements IFeatureAppender {
 	 */
 	public Color getColor(){
 		
-		return this.color;
+		return new Color(this.color.getRGB());
 	}
 	/**
 	 * 

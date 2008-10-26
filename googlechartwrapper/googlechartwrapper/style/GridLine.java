@@ -9,6 +9,7 @@ import googlechartwrapper.util.IFeatureAppender;
  * @author steffan
  *
  */
+//TODO check range
 public class GridLine implements IFeatureAppender {
 	
 	private float xAxisStepSize;

@@ -3,6 +3,7 @@ package googlechartwrapper;
 import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.LinearGradient;
@@ -12,6 +13,7 @@ import googlechartwrapper.data.ISingleDataScaleable;
 import googlechartwrapper.data.VennDiagramDataAppender;
 import googlechartwrapper.data.VennDiagramData;
 import googlechartwrapper.interfaces.ILinearable;
+import googlechartwrapper.interfaces.IPercentageScaleable;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
@@ -30,7 +32,7 @@ import java.util.List;
  * 
  */
 public class VennDiagram extends AbstractChart implements ILinearable,
-		IChartLegendable, IChartColorable, ISingleDataScaleable{
+		IChartLegendable, IChartColorable, ISingleDataScaleable, IPercentageScaleable{
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -204,6 +206,15 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 		
 		this.vennDiagramAppender.setEncoder(new AutoEncoder());
 		
+	}
+	public void setPercentageScaling(boolean b) {
+
+		if (b) {
+			this.vennDiagramAppender.setEncoder(new PercentageEncoder());
+		} else {
+			this.vennDiagramAppender.setEncoder(new AutoEncoder());
+		}
+
 	}
 
 }

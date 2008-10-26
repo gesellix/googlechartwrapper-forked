@@ -27,7 +27,7 @@ public class QRCode extends AbstractChart {
 	 * @throws IllegalArgumentException
 	 */
 	public QRCode(Dimension chartDimension, String textToEncode) {
-		super(chartDimension);
+		super(new Dimension(chartDimension));
 
 		if (textToEncode == null)
 			throw new IllegalArgumentException("textToEncode can not be null");
@@ -46,7 +46,8 @@ public class QRCode extends AbstractChart {
 	 */
 	public QRCode(Dimension chartDimension, String textToEncode,
 			ECLevel ecLevel, int margin) {
-		super(chartDimension);
+		
+		super(new Dimension(chartDimension));
 
 		if (textToEncode == null)
 			throw new IllegalArgumentException("textToEncode can not be null");

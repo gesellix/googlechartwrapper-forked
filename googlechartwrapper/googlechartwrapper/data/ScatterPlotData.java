@@ -1,7 +1,7 @@
 package googlechartwrapper.data;
 
 import java.awt.Point;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * 
@@ -10,10 +10,10 @@ import java.util.Collection;
  */ 
 public class ScatterPlotData {
 	
-	private Collection<Point> dataSet;	
-	private Collection<Integer> dataSetSize;
+	private List<Point> dataSet;	
+	private List<Integer> dataSetSize;
 	
-	public ScatterPlotData(Collection<Point> dataSet){
+	public ScatterPlotData(List<Point> dataSet){
 		
 		if(dataSet == null)
 			throw new IllegalArgumentException("dataSet can not be null");
@@ -31,7 +31,7 @@ public class ScatterPlotData {
 		
 	}
 	
-	public ScatterPlotData(Collection<Point> dataSet, Collection<Integer> dataSetSize){
+	public ScatterPlotData(List<Point> dataSet, List<Integer> dataSetSize){
 		
 		if(dataSet == null)
 			throw new IllegalArgumentException("dataSet can not be null");
@@ -54,7 +54,7 @@ public class ScatterPlotData {
 	/**
 	 * @return the dataSetX
 	 */
-	public Collection<Point> getDataSet() {
+	public List<Point> getDataSet() {
 		return dataSet;
 	}
 
@@ -63,7 +63,7 @@ public class ScatterPlotData {
 	 * 
 	 * @throws IllegalArgumentException
 	 */
-	public void setDataSet(Collection<Point> dataSet) {
+	public void setDataSet(List<Point> dataSet) {
 		
 		if(dataSet == null)
 			throw new IllegalArgumentException("dataSet can not be null");
@@ -82,7 +82,7 @@ public class ScatterPlotData {
 	/**
 	 * @return the dataSetSize
 	 */
-	public Collection<Integer> getDataSetSize() {
+	public List<Integer> getDataSetSize() {
 		return dataSetSize;
 	}
 
@@ -91,7 +91,7 @@ public class ScatterPlotData {
 	 * 
 	 * @throws IllegalArgumentException
 	 */
-	public void setDataSetSize(Collection<Integer> dataSetSize) {
+	public void setDataSetSize(List<Integer> dataSetSize) {
 		
 		if(dataSetSize == null)
 			throw new IllegalArgumentException("dataSetSize can not be null");		
