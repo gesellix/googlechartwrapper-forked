@@ -2,6 +2,7 @@ package googlechartwrapper.data;
 
 import java.awt.Color;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 
@@ -10,11 +11,11 @@ import java.util.Collection;
  */
 public class BarChartDataSeries {
 	
-	private Collection<Integer> data;
+	private List<Integer> data;
 	private Color color;
 	private String label;
 	
-	public BarChartDataSeries(Collection<Integer> data, Color color, String label) {
+	public BarChartDataSeries(List<Integer> data, Color color, String label) {
 		
 		if(data == null)
 			throw new IllegalArgumentException("data can not be null");
@@ -28,14 +29,14 @@ public class BarChartDataSeries {
 	/**
 	 * @return the data
 	 */
-	public Collection<Integer> getData() {
+	public List<Integer> getData() {
 		return data;
 	}
 
 	/**
 	 * @param data the data to set
 	 */
-	public void setData(Collection<Integer> data) {
+	public void setData(List<Integer> data) {
 		this.data = data;
 	}
 

@@ -1,8 +1,11 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.AutoEncoder;
+import googlechartwrapper.coder.EncoderFactory;
+import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
+import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.LinearGradient;
@@ -11,6 +14,7 @@ import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.IMultiDataScaleable;
 import googlechartwrapper.data.ScatterPlotData;
 import googlechartwrapper.data.ScatterPlotDataAppender;
+import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.interfaces.IPercentageScaleable;
@@ -39,7 +43,7 @@ import java.util.List;
  */
 public class ScatterPlot extends AbstractChart implements ILinearable,
 		IMarkable, IChartLegendable, IChartColorable, IMultiDataScaleable,
-		IPercentageScaleable {
+		IPercentageScaleable, IEncodeable {
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -304,11 +308,10 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 		return this.scatterPlotDataAppender.getScatterPlotData();
 	}
 
-	//TODO encoder
+	
 	public void addDataScalingSet(DataScalingSet ds) {
-
-		this.dataScalingAppender.add(ds);
-
+		this.dataScalingAppender.add(ds);		
+		this.scatterPlotDataAppender.setEncoder(new DataScalingTextEncoder(dataScalingAppender));
 	}
 
 	public List<DataScalingSet> getDataScalings() {
@@ -322,28 +325,33 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 		this.dataScalingAppender.removeAll();
 
-		this.scatterPlotDataAppender.setEncoder(new AutoEncoder());
+		//this.scatterPlotDataAppender.setEncoder(new AutoEncoder());
 
 	}
 
 	public DataScalingSet removeDataScalingSet(int index) {
-
 		return this.dataScalingAppender.remove(index);
 	}
 
 	public boolean removeDataScalingSet(DataScalingSet set) {
-
 		return this.dataScalingAppender.remove(set);
 	}
 
 	public void setPercentageScaling(boolean b) {
-
 		if (b) {
 			this.scatterPlotDataAppender.setEncoder(new PercentageEncoder());
 		} else {
 			this.scatterPlotDataAppender.setEncoder(new AutoEncoder());
 		}
 
+	}
+
+	public void removeEncoder() {		
+		this.scatterPlotDataAppender.removeEncoder();
+	}
+
+	public void setEncoder(IEncoder encoder) {		
+		this.scatterPlotDataAppender.setEncoder(encoder);		
 	}
 
 }

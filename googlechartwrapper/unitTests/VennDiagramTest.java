@@ -80,7 +80,7 @@ public class VennDiagramTest {
 		diagram.setChartLegend(new ChartLegend(l));
 
 		//System.out.println(diagram.getUrl());
-		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chco=00ff00,0000ff,ff0000&chd=t:100,80,60,30,30,30,1&chdl=A|C|V&chds=10.0,50.0&chf=bg,lg,10,000000,0.5,ff0000,1.0&chtt=VennDiagramm";
+		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chco=00ff00,0000ff,ff0000&chd=t:100,80,60,30,30,30,10&chdl=A|C|V&chds=10.0,50.0&chf=bg,lg,10,000000,0.5,ff0000,1.0&chtt=VennDiagramm";
 
 		
 		Assert.assertEquals(target, diagram.getUrl());
@@ -132,7 +132,7 @@ public class VennDiagramTest {
 		
 
 		//System.out.println(diagram.getUrl());
-		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chd=t:100,80,60,30,30,30,1&chds=10.0,50.0&chtt=VennDiagramm";
+		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chd=t:100,80,60,30,30,30,10&chds=10.0,50.0&chtt=VennDiagramm";
 		
 		Assert.assertEquals(target, diagram.getUrl());
 	}

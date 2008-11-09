@@ -22,12 +22,14 @@ public abstract class AbstractEncoder implements IEncoder{
 	/**
 	 * Default separator for datasets (pipe symbol)
 	 */
-	public final String DEFAULT_SEPARATOR = "|";
+	public static final String DEFAULT_SEPARATOR = "|";
 	
 	/**
 	 * encoder prefix which will be appended to encoded strings ("ahead")
 	 */
 	private final String prefix;
+	
+	private final String separator;
 	
 	/**
 	 * Constructs an AbstractEncoder with the given prefix.
@@ -35,10 +37,15 @@ public abstract class AbstractEncoder implements IEncoder{
 	 * @throws IllegalArgumentException if prefix == null
 	 */
 	public AbstractEncoder(String prefix){
+		this(prefix, DEFAULT_SEPARATOR);
+	}
+	
+	public AbstractEncoder(String prefix, String separator){
 		if (prefix == null){
 			throw new IllegalArgumentException("prefix shall not be null");
 		}
 		this.prefix = prefix;
+		this.separator = separator;
 	}
 	
 	/**
@@ -48,9 +55,12 @@ public abstract class AbstractEncoder implements IEncoder{
 	 * @param type prefix for the encoder based on the type
 	 */
 	public AbstractEncoder(EncodingType type){
-		this(type.getCompletePrefix());
+		this(type.getCompletePrefix(), DEFAULT_SEPARATOR);
 	}
 	
+	public AbstractEncoder(EncodingType type, String separator){
+		this(type.getCompletePrefix(), separator);
+	}
 
 	/**
 	 * Encodes the collection by calling the 
@@ -61,7 +71,7 @@ public abstract class AbstractEncoder implements IEncoder{
 	 * @param values value list (!= null) 
 	 */
 	public String encodeFloatCollection(List<float[]> values) {
-		return encodeFloatCollection(values, DEFAULT_SEPARATOR);
+		return encodeFloatCollection(values, separator);
 	}
 
 	/**
@@ -100,7 +110,7 @@ public abstract class AbstractEncoder implements IEncoder{
 	 * @param values value list (!= null) 
 	 */
 	public String encodeIntegerCollection(List<int[]> values) {
-		return encodeIntegerCollection(values, DEFAULT_SEPARATOR);
+		return encodeIntegerCollection(values, separator);
 	}
 	
 	/**

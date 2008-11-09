@@ -2,6 +2,7 @@ package googlechartwrapper.data;
 
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class ChartData implements IFeatureAppender, IEncodeable {
 
-	private Collection<Integer> chartData;
+	private List<Integer> chartData;
 
 	private IEncoder encoder = new AutoEncoder();
 
@@ -25,7 +26,7 @@ public class ChartData implements IFeatureAppender, IEncodeable {
 	 * 
 	 * @throws IllegalArgumentException
 	 */
-	public ChartData(Collection<Integer> chartData) {
+	public ChartData(List<Integer> chartData) {
 
 		
 		if (chartData == null)
@@ -70,8 +71,8 @@ public class ChartData implements IFeatureAppender, IEncodeable {
 
 	}
 
-	private Collection<Integer> arrayToCollection(int[] data) {
-		Collection<Integer> c = new ArrayList<Integer>();
+	private List<Integer> arrayToCollection(int[] data) {
+		List<Integer> c = new ArrayList<Integer>();
 
 		for (int i = 0; i < data.length; i++) {
 			c.add(data[i]);

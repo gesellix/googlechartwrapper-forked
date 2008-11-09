@@ -3,10 +3,10 @@ package googlechartwrapper.data;
 import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,6 +39,7 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 		
 		StringBuilder builder = new StringBuilder();	
 		
+		//build to arrays, for x and y
 		if(this.data != null){
 			
 			int [] valuesX = new int[data.getDataSet().size()];
@@ -46,19 +47,34 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 			
 			for(int i = 0; i < data.getDataSet().size(); i++){
 				
-				valuesX[i] = ((ArrayList<Point>) data.getDataSet()).get(i).x;
-				valuesY[i] = ((ArrayList<Point>) data.getDataSet()).get(i).y;			
+				valuesX[i] = ((ArrayList<ScatterPlotPoint>) data.getDataSet()).get(i).getXCoordinate();
+				valuesY[i] = ((ArrayList<ScatterPlotPoint>) data.getDataSet()).get(i).getYCoordinate();
 				
 			}
+			
+			
+			int [] valuesSize = new int[data.getDataSet().size()];
+			boolean isSizeGiven = false;
+			//check if their is a least one point size given
+			for(int i= 0; i < data.getDataSet().size(); i++){
+				
+				
+				if(((ArrayList<ScatterPlotPoint>) data.getDataSet()).get(i).isSizeSet()){
+					//we have at least one given size
+					isSizeGiven = true;
+				}
+				valuesSize[i] = ((ArrayList<ScatterPlotPoint>) data.getDataSet()).get(i).getSize();
+			}
+			
 			List<int[]> data = new LinkedList<int[]>();
 			data.add(valuesX);
 			data.add(valuesY);
-			builder.append(this.encoder.encodeIntegerCollection(data,","));
-			//builder.append(this.encoder.encode(valuesX));
-			//builder.append(',');
-			//HACK
-			//builder.append(this.encoder.encode(valuesY).substring(2));
-			
+			//and if the size is given we add the size array
+			if(isSizeGiven){
+				data.add(valuesSize);
+			}
+			builder.append(this.encoder.encodeIntegerCollection(data,"|"));
+						
 			return builder.toString();
 			
 		}

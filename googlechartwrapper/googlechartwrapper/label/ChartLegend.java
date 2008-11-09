@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class ChartLegend implements IFeatureAppender {
 
-	private Collection<String> label = new ArrayList<String>();
+	private List<String> label = new ArrayList<String>();
 	private ChartLegendPosition chartLegendPosition = null;
 
 	/**
@@ -22,7 +22,7 @@ public class ChartLegend implements IFeatureAppender {
 	 * 
 	 * @throws IllegalArgumentException
 	 */
-	public ChartLegend(Collection<String> label) {
+	public ChartLegend(List<String> label) {
 
 		if (label == null)
 			throw new IllegalArgumentException("label can not be null");
@@ -38,7 +38,7 @@ public class ChartLegend implements IFeatureAppender {
 	 * 
 	 * @throws IllegalArgumentException
 	 */
-	public ChartLegend(Collection<String> label,
+	public ChartLegend(List<String> label,
 			ChartLegendPosition chartLegendPosition) {
 
 		if (label == null)
@@ -77,7 +77,7 @@ public class ChartLegend implements IFeatureAppender {
 	/**
 	 * @return the label
 	 */
-	public Collection<String> getLabel() {
+	public List<String> getLabel() {
 		return label;
 	}
 
@@ -88,7 +88,7 @@ public class ChartLegend implements IFeatureAppender {
 	 * @throws IllegalArgumentException
 	 *             if label is <code>null</code>
 	 */
-	public void setLabel(Collection<String> label) {
+	public void setLabel(List<String> label) {
 		if (label == null)
 			throw new IllegalArgumentException("label can not be null");
 		this.label = label;

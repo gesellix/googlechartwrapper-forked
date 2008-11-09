@@ -1,4 +1,4 @@
-package googlechartwrapper.data;
+package googlechartwrapper.interfaces;
 
 import googlechartwrapper.coder.IEncoder;
 

@@ -112,7 +112,7 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 		return null;
 	}
 
-	protected class GoogleOMeterValueAppender implements IExtendedFeatureAppender {
+	protected final class GoogleOMeterValueAppender implements IExtendedFeatureAppender {
 		
 		/**
 		 * list of elements/features
