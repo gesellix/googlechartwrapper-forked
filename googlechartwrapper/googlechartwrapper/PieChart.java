@@ -22,6 +22,11 @@ import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 import java.awt.Dimension;
 import java.util.List;
 
+/**
+ * Specifies a PieChart
+ * @author martin
+ *
+ */
 public class PieChart extends AbstractChart implements ISolidFillable,
 		ILinearGradientable, ILinearStripeable, IChartTitleable, IPercentageScaleable{
 

@@ -18,6 +18,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Specifies a GoogleOMeter
+ * @author mart
+ *
+ */
 public class GoogleOMeter extends AbstractChart implements ISolidFillable, 
 	ISingleDataScaleable{
 	

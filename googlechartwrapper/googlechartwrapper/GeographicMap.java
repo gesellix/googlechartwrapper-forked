@@ -15,6 +15,7 @@ import java.util.List;
  * Specifies a map <a href="http://code.google.com/apis/chart/#map">
  * http://code.google.com/apis/chart/#map</a> with geographic areas found in 
  * @author martin
+ * @deprecated unfinished class
  *
  */
 public class GeographicMap extends AbstractChart implements ISolidFillable{
@@ -78,7 +79,7 @@ public class GeographicMap extends AbstractChart implements ISolidFillable{
 	 * color number 2 is gradient for 0%, number 3 for 50% and so on.
 	 */
 	public void setDataColors(Color[] dataColors) {
-		super.setDataColors(dataColors);
+		//super.setDataColors(dataColors);
 	}
 	
 	public void setColoredStates (Collection<String> countries){
@@ -95,9 +96,9 @@ public class GeographicMap extends AbstractChart implements ISolidFillable{
    	 	urlElements.offer(MessageFormat.format("chs={0}x{1}", 
    	 			this.chartDimension.width, this.chartDimension.height));
    	 	//dimension (max 440x220)*/
-   	 	if (values == null){
+   	 	/*if (values == null){
    	 		urlElements.offer("chd=s:_"); 
-   	 	}
+   	 	}*/
    	 	
         urlElements.offer("chtm="+area.getAreaCode()); //area code
         

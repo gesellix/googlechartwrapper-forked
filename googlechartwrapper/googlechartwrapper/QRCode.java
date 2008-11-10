@@ -160,7 +160,7 @@ public class QRCode extends AbstractChart {
 		StringBuilder builder = new StringBuilder();
 		
 		//first of all, the api
-		builder.append(AbstractChart.googleAPI);
+		builder.append(AbstractChart.GOOGLE_API);
 		
 		//size		
 		builder.append("chs=");
