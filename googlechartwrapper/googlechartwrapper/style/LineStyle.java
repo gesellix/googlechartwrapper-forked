@@ -5,13 +5,14 @@ import java.util.List;
 import googlechartwrapper.util.IFeatureAppender;
 
 /**
+ * Specifies a GridLine <a href="http://code.google.com/apis/chart/styles.html#line_styles"> http://code.google.com/apis/chart/styles.html#line_styles</a> 
  * 
  * @author steffan
  *
  */
 public class LineStyle implements IFeatureAppender{
 	
-	private float thickniss;
+	private float thickness;
 	private float lengthOfLineSegment;
 	private float lengthOfBlankSegment;
 	
@@ -24,7 +25,7 @@ public class LineStyle implements IFeatureAppender{
 	 */
 	public LineStyle(float thickness,float lengthOfLineSegment, float lengthOfBlankSegment) {
 		
-		this.thickniss = thickness;
+		this.thickness = thickness;
 		this.lengthOfBlankSegment = lengthOfBlankSegment;
 		this.lengthOfLineSegment = lengthOfBlankSegment;
 	}
@@ -32,7 +33,7 @@ public class LineStyle implements IFeatureAppender{
 	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new StringBuilder();
-		builder.append(this.thickniss);
+		builder.append(this.thickness);
 		builder.append(',');
 		builder.append(this.lengthOfLineSegment);
 		builder.append(',');
@@ -42,17 +43,17 @@ public class LineStyle implements IFeatureAppender{
 	}
 
 	/**
-	 * @return the thickniss
+	 * @return the thickness
 	 */
-	public float getThickniss() {
-		return thickniss;
+	public float getthickness() {
+		return thickness;
 	}
 
 	/**
-	 * @param thickniss the thickniss to set
+	 * @param thickness the thickness to set
 	 */
-	public void setThickniss(float thickniss) {
-		this.thickniss = thickniss;
+	public void setthickness(float thickness) {
+		this.thickness = thickness;
 	}
 
 	/**

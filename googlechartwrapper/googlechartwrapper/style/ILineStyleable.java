@@ -14,6 +14,7 @@ public interface ILineStyleable {
 	
 	/**
 	 * 
+	 * 
 	 * @param lineStyle
 	 */
 	public void addLineStyle(LineStyle lineStyle);

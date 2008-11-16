@@ -1,11 +1,9 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.AutoEncoder;
-import googlechartwrapper.coder.EncoderFactory;
-import googlechartwrapper.coder.EncodingType;
+import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
-import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.LinearGradient;
@@ -192,14 +190,7 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 				: null;
 	}
 
-	public void removeDataScaling() {
-
-		this.dataScalingAppender.removeAll();
-
-		this.scatterPlotDataAppender.setEncoder(new AutoEncoder());
-
-	}
-
+	
 	public void addRangeMarker(RangeMarker rm) {
 
 		this.rangeMarkerAppender.add(rm);

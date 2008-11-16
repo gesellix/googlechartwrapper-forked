@@ -7,7 +7,8 @@ import java.awt.Color;
 import java.util.List;
 
 /**
- * 
+ * Specifies a LinearGradient <a href="http://code.google.com/apis/chart/colors.html#linear_gradient">http://code.google.com/apis/chart/colors.html#linear_gradient</a>
+ *  
  * @author steffan
  *
  */
@@ -50,8 +51,8 @@ public class LinearGradient implements IFeatureAppender{
 		
 		this.fillDestination = fillDestination;
 		this.angle = angle;
-		this.startColor = startColor;
-		this.endColor = endColor;
+		this.startColor = new Color(startColor.getRGB());
+		this.endColor = new Color(endColor.getRGB());
 		this.startOffset = startOffset;
 		this.endOffset = endOffset;
 		
@@ -59,6 +60,8 @@ public class LinearGradient implements IFeatureAppender{
 	}
 	
 	/**
+	 * Return the fillDestination.
+	 * 
 	 * @return the fillDestination
 	 */
 	public GradientFillDestination getFillDestination() {
@@ -77,6 +80,8 @@ public class LinearGradient implements IFeatureAppender{
 	}
 
 	/**
+	 * Returns the angle.
+	 * 
 	 * @return the angle
 	 */
 	public int getAngle() {
@@ -84,7 +89,9 @@ public class LinearGradient implements IFeatureAppender{
 	}
 
 	/**
-	 * @param angle the angle to setm integer between 0 and 90
+	 * Sets the angle.
+	 * 
+	 * @param angle the angle to set, integer between 0 and 90
 	 * 
 	 * @throws IllegalArgumentException if angle out of range
 	 */
@@ -95,6 +102,8 @@ public class LinearGradient implements IFeatureAppender{
 	}
 
 	/**
+	 * Returns the startOffset.
+	 * 
 	 * @return the startOffset
 	 */
 	public float getStartOffset() {
@@ -102,6 +111,8 @@ public class LinearGradient implements IFeatureAppender{
 	}
 
 	/**
+	 * Sets the startOffset.
+	 * 
 	 * @param startOffset the startOffset to set
 	 * 
 	 * @throws IllegalArgumentException if startOffset <code>null</code>
@@ -113,6 +124,8 @@ public class LinearGradient implements IFeatureAppender{
 	}
 
 	/**
+	 * Returns the endOffset.
+	 * 
 	 * @return the endOffset
 	 */
 	public float getEndOffset() {
@@ -120,6 +133,8 @@ public class LinearGradient implements IFeatureAppender{
 	}
 
 	/**
+	 * Sets the endOffset.
+	 * 
 	 * @param endOffset the endOffset to set float between 0 and 1
 	 * 
 	 * @throws IllegalArgumentException if endOffset out of range
@@ -131,13 +146,17 @@ public class LinearGradient implements IFeatureAppender{
 	}
 
 	/**
+	 * Returns the startColor.
+	 * 
 	 * @return the startColor
 	 */
 	public Color getStartColor() {
-		return startColor;
+		return new Color(startColor.getRGB());
 	}
 
 	/**
+	 * Sets the startColor
+	 * 
 	 * @param startColor the startColor to set
 	 * 
 	 * @throws IllegalArgumentException if startColor <code>null</code>
@@ -145,17 +164,21 @@ public class LinearGradient implements IFeatureAppender{
 	public void setStartColor(Color startColor) {
 		if(startColor == null)
 			throw new IllegalArgumentException("startColor can not be null");
-		this.startColor = startColor;
+		this.startColor = new Color(startColor.getRGB());
 	}
 
 	/**
+	 * Return the endColor.
+	 * 
 	 * @return the endColor
 	 */
 	public Color getEndColor() {
-		return endColor;
+		return new Color(endColor.getRGB());
 	}
 
 	/**
+	 * Sets the endColor.
+	 * 
 	 * @param endColor the endColor to set
 	 * 
 	 * @throws IllegalArgumentException if endColor <code>null</code>
@@ -212,6 +235,11 @@ public class LinearGradient implements IFeatureAppender{
 		this.destination = destination;
 	}
 
+   	/**
+   	 * Return the fillDestination
+   	 * 
+   	 * @return fillDestination
+   	 */
 	public String getDestination() {
 		return this.destination;
 

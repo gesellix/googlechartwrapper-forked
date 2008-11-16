@@ -5,6 +5,7 @@ import java.util.List;
 import googlechartwrapper.util.IFeatureAppender;
 
 /**
+ * Specifies a GridLine <a href="http:http://code.google.com/apis/chart/styles.html#grid"> http://code.google.com/apis/chart/styles.html#grid</a> 
  * 
  * @author steffan
  *
@@ -20,7 +21,7 @@ public class GridLine implements IFeatureAppender {
 	
 	/**
 	 * Constructs the grid line. <br />
-	 * Note parameters can have only a single decimal place.
+	 * Note parameters only have a single decimal place, if the are longer, they will be cut.
 	 * 
 	 * @param xAxisStepSize
 	 * @param yAxisStepSize
@@ -32,7 +33,7 @@ public class GridLine implements IFeatureAppender {
 	}
 	/**
 	 * Constructs the grid line. <br />
-	 * Note parameters can have only a single decimal place.
+	 * Note parameters only have a single decimal place, if the are longer, they will be cut.
 	 * 
 	 * @param xAxisStepSize
 	 * @param yAxisStepSize

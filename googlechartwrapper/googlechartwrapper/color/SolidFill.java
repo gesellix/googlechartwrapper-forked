@@ -8,8 +8,8 @@ import java.util.List;
 
 /**
  * Specifies a SolidFill <a
- * href="http://code.google.com/apis/chart/#solid_fill">
- * http://code.google.com/apis/chart/#solid_fill</a>
+ * href="http://code.google.com/apis/chart/colors.html#solid_fill">
+ * http://code.google.com/apis/chart/colors.html#solid_fill</a>
  * <br />
  * <br /> 
  * <b>Note</b> <br />
@@ -42,18 +42,20 @@ public class SolidFill implements IFeatureAppender
     		throw new IllegalArgumentException("fillDestination can not be null");
     	
     	this.fillDestination = fillDestination;
-    	this.color = color;
+    	this.color = new Color(color.getRGB());
     	
     }
    
     /**
+     * Returns the chartFillDestination.
      * 
-     * @return the choosen destination
+     * @return the chosen destination
      */
     public ChartFillDestination getChartFillDestination(){
     	return this.fillDestination;
     }
     /**
+     * Sets the ChartFillDestination.
      * 
      * @param destination 
      * 
@@ -65,6 +67,7 @@ public class SolidFill implements IFeatureAppender
     	this.fillDestination = fillDestination;
     }
     /**
+     * Sets the color.
      * 
      * @param color
      * 
@@ -73,15 +76,16 @@ public class SolidFill implements IFeatureAppender
     public void setColor(Color color){
     	if(color == null)
     		throw new IllegalArgumentException("color can not be null");
-    	this.color = color;
+    	this.color = new Color(color.getRGB());
     }
     /**
+     * Returns the Color.
      * 
-     * @return
+     * @return color
      */
     public Color getColor(){
     	
-    	return this.color;
+    	return new Color(this.color.getRGB());
     } 
    
      public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
@@ -125,6 +129,11 @@ public class SolidFill implements IFeatureAppender
 		this.destination = destination;
 	}
 
+   	/**
+   	 * Returns the destination.
+   	 * 
+   	 * @return destination
+   	 */
 	public String getDestination() {
 		return this.destination;
 

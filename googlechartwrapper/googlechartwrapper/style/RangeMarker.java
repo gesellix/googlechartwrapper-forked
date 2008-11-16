@@ -19,7 +19,7 @@ public class RangeMarker implements IFeatureAppender {
 	private Alignment align;
 	
 	/**
-	 * Constructs the horizontal range marker
+	 * Constructs the range marker
 	 * 
 	 * @param align 
 	 * @param color color of range

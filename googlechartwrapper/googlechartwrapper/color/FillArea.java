@@ -7,9 +7,9 @@ import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
 
 /**
- * Specifies a RangeMarker <a
- * href="http://code.google.com/apis/chart/#fill_area_marker">
- * http://code.google.com/apis/chart/#fill_area_marker</a>
+ * Specifies a FillArea <a
+ * href="http://code.google.com/apis/chart/colors.html#fill_area_marker">
+ * http://code.google.com/apis/chart/colors.html#fill_area_marker</a>
  * 
  * @author steffan
  * 
@@ -45,7 +45,7 @@ public class FillArea implements IFeatureAppender {
 		if (color == null)
 			throw new IllegalArgumentException("color can not be null");
 
-		this.color = color;
+		this.color = new Color(color.getRGB());
 		this.startLineIndex = startLineIndex;
 		this.endLineIndex = endLineIndex;
 		this.dataSetKind = kind;
@@ -78,13 +78,16 @@ public class FillArea implements IFeatureAppender {
 	}
 
 	/**
+	 * Return the color.
+	 * 
 	 * @return the color
 	 */
 	public Color getColor() {
-		return color;
+		return new Color(color.getRGB());
 	}
 
 	/**
+	 * Set the new Color.
 	 * @param color the color to set
 	 * 
 	 * @throws IllegalArgumentException if color is <code>null</code>
@@ -92,10 +95,12 @@ public class FillArea implements IFeatureAppender {
 	public void setColor(Color color) {
 		if (color == null)
 			throw new IllegalArgumentException("color can not be null");
-		this.color = color;
+		this.color = new Color(color.getRGB());
 	}
 
 	/**
+	 * Returns the startLineIndex.
+	 * 
 	 * @return the startLineIndex
 	 */
 	public int getStartLineIndex() {
@@ -103,6 +108,8 @@ public class FillArea implements IFeatureAppender {
 	}
 
 	/**
+	 * Sets the new StartLineIndex.
+	 * 
 	 * @param startLineIndex the startLineIndex to set
 	 * 
 	 * @throws IllegalArgumentException if color startindex is out of range
@@ -115,6 +122,8 @@ public class FillArea implements IFeatureAppender {
 	}
 
 	/**
+	 * Returns the endlineIndex.
+	 * 
 	 * @return the endLineIndex
 	 */
 	public int getEndLineIndex() {
@@ -122,6 +131,7 @@ public class FillArea implements IFeatureAppender {
 	}
 
 	/**
+	 * Sets the endlineIndex
 	 * @param endLineIndex the endLineIndex to set
 	 * 
 	 * @throws IllegalArgumentException if color endindex is out of range
@@ -134,6 +144,8 @@ public class FillArea implements IFeatureAppender {
 	}
 
 	/**
+	 * Returns the dataSetKind
+	 * 
 	 * @return the dataSetKind
 	 */
 	public DataSetKind getDataSetKind() {
@@ -148,6 +160,7 @@ public class FillArea implements IFeatureAppender {
 	}
 
 	/**
+	 * The API provides two different kinds, single and multi.
 	 * 
 	 * @author steffan
 	 *
@@ -162,6 +175,11 @@ public class FillArea implements IFeatureAppender {
 			this.kind = kind;
 		}
 
+		/**
+		 * Returns the DataSetKind
+		 * 
+		 * @return dataSetKind
+		 */
 		public char getDataSetKind() {
 			return this.kind;
 
