@@ -306,7 +306,7 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 	
 	public void addDataScalingSet(DataScalingSet ds) {
 		this.dataScalingAppender.add(ds);		
-		this.scatterPlotDataAppender.setEncoder(new DataScalingTextEncoder(dataScalingAppender));
+		this.scatterPlotDataAppender.setEncoder(new DataScalingTextEncoder());
 	}
 
 	public List<DataScalingSet> getDataScalings() {

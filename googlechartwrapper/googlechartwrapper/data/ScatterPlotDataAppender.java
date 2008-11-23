@@ -75,8 +75,14 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 			//and if the size is given we add the size array
 			if(isSizeGiven){
 				data.add(valuesSize);
+				
+				//in this case we return and encode mit | because, if we have 3 blocks, we need the | separator
+				builder.append(this.encoder.encodeIntegerCollection(data,"|"));
+				
+				return builder.toString();
 			}
-			builder.append(this.encoder.encodeIntegerCollection(data,"|"));
+			//in the other case we separat with ,, becasue we have only 2 value blocks
+			builder.append(this.encoder.encodeIntegerCollection(data,","));
 						
 			return builder.toString();
 			
