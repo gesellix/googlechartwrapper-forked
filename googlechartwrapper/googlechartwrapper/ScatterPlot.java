@@ -6,8 +6,10 @@ import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.IChartColorable;
+import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
+import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.IMultiDataScaleable;
 import googlechartwrapper.data.ScatterPlotData;
@@ -41,7 +43,7 @@ import java.util.List;
  */
 public class ScatterPlot extends AbstractChart implements ILinearable,
 		IMarkable, IChartLegendable, IChartColorable, IMultiDataScaleable,
-		IPercentageScaleable, IEncodeable {
+		IPercentageScaleable, IEncodeable, ISolidFillable {
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -63,6 +65,8 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 			ChartTypeFeature.GridLine, 1, UpperLimitReactions.RemoveFirst);
 	protected AxisLabelAppender axisLabelAppender = new AxisLabelAppender();
 	protected ScatterPlotDataAppender scatterPlotDataAppender = new ScatterPlotDataAppender();
+	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
+			ChartTypeFeature.SolidFill);
 
 	public ScatterPlot(Dimension chartDimension) {
 		super(chartDimension);
@@ -302,7 +306,7 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 	
 	public void addDataScalingSet(DataScalingSet ds) {
 		this.dataScalingAppender.add(ds);		
-		this.scatterPlotDataAppender.setEncoder(new DataScalingTextEncoder());
+		this.scatterPlotDataAppender.setEncoder(new DataScalingTextEncoder(dataScalingAppender));
 	}
 
 	public List<DataScalingSet> getDataScalings() {
@@ -353,4 +357,26 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 		this.scatterPlotDataAppender.setEncoder(encoder);		
 	}
 
+	public void addSolidFill(SolidFill sf) {
+		this.solidFillAppender.add(sf);
+
+	}
+
+	public List<SolidFill> getSolidFills() {
+
+		return this.solidFillAppender.getList();
+	}
+
+	public void removeAllSolidFills() {
+		this.solidFillAppender.removeAll();
+
+	}
+
+	public SolidFill removeSolidFill(int index) {
+		return this.solidFillAppender.remove(index);
+	}
+
+	public boolean removeSolidFill(SolidFill sf) {
+		return this.solidFillAppender.remove(sf);
+	}
 }
