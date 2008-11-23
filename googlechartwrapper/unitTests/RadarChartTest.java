@@ -1,14 +1,6 @@
 package unitTests;
 
-import static org.junit.Assert.*;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
+import static org.junit.Assert.assertEquals;
 import googlechartwrapper.RadarChart;
 import googlechartwrapper.coder.EncoderFactory;
 import googlechartwrapper.coder.EncodingType;
@@ -21,6 +13,11 @@ import googlechartwrapper.label.AxisRange;
 import googlechartwrapper.label.AxisType;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.style.GridLine;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 

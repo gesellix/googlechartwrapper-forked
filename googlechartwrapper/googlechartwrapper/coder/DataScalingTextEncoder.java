@@ -1,7 +1,5 @@
 package googlechartwrapper.coder;
 
-import googlechartwrapper.data.DataScalingSet;
-import googlechartwrapper.util.GenericAppender;
 
 public class DataScalingTextEncoder extends AbstractEncoder implements IEncoder{
 	
