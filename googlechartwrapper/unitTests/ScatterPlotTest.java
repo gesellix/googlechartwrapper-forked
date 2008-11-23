@@ -45,8 +45,6 @@ public class ScatterPlotTest {
 		s.setScatterPlotData(new ScatterPlotData(p));		
 		
 		
-		System.out.println(s.getUrl());
-		
 		String target = "http://chart.apis.google.com/chart?cht=s&chs=300x300&chd=e:H0O2ISK8H0,DIO2GkNSH0&chtt=Simple ScatterPlot&chts=808080,12";
 		
 		Assert.assertEquals(target, s.getUrl());
