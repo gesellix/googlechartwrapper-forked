@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>charts4j Overview</title>
+</head>
+<body>
+
+<a href="http://charts4j.googlecode.com">Java Google Chart Wrapper</a>
+Java Libary for <a href="http://code.google.com/apis/chart/">Googles Chart API</a> 
+which supports developers to generate charts 
+programmatically within the java environment.
+Most features of the google API are supported and it is easily expandable 
+to match own requirements. 
+
+<h3>Notes</h3>
+
+<p>The download of the API (googlechartwrapper.jar) is available at 
+<a href="http://sourceforge.net/projects/googlechartwrap">sourceforge</a> 
+and only needs to be include in the classpath of the project.
+file. The generated strings and therefore chart urls may need a connection to the 
+Internet because the charts are ultimately rendered by the Google Chart API server
+or the <a href="http://www.jfree.org/eastwood/">Eastwood project</a>.</p>
+
+<h3>Usage</h3>
+
+<p>If you are using the API for the first time you may want to start
+with the examples in the unittest package available on sourceforge. 
+Each chart has its own class and every feature is added or removed
+via similar named methods as addXYZ and removeXYZ, as getXYZ</p>
+
+<p>The following charts are supported in version 0.2:
+<ul>
+	<li>{@link googlechartwrapper.BarChart}</li>
+	<li>{@link googlechartwrapper.GeographicMap}</li>
+	<li>{@link googlechartwrapper.GoogleOMeter}</li>
+	<li>{@link googlechartwrapper.LineChart}</li>
+	<li>{@link googlechartwrapper.PieChart}</li>
+	<li>{@link googlechartwrapper.QRCode}</li>
+	<li>{@link googlechartwrapper.RadarChart}</li>
+	<li>{@link googlechartwrapper.ScatterPlot}</li>
+	<li>{@link googlechartwrapper.VennDiagram}</li>
+</ul></p>
+
+<p>The data displayed in the charts is encoded in various forms to minimize the
+length of the url. Some charts will react to a change of the encoder and 
+the displayed result may vary in some forms. For details reference the 
+google API <a href="http://code.google.com/apis/chart/">documentation</a></p>
+
+<p>Developers who are interested in understanding the technic behind this API
+(feature system, reflection mechanism) and want to develop own charts based on it
+should see the following classes:
+<ul>
+	<li>{@link googlechartwrapper.AbstractChart}</li>
+	<li>{@link googlechartwrapper.coder.AbstractEncoder}</li>
+	<li>{@link googlechartwrapper.util.GenericAppender}</li>
+	<li>{@link googlechartwrapper.util.UpperLimitGenericAppender}</li>
+</ul>
+</p>
+
+<br>
+<br>
+@author steffan
+@author	martin
+</body>
+</html>
