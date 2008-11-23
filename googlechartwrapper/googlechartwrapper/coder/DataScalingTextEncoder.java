@@ -5,21 +5,20 @@ import googlechartwrapper.util.GenericAppender;
 
 public class DataScalingTextEncoder extends AbstractEncoder implements IEncoder{
 	
-	private GenericAppender<DataScalingSet> scales;
+	//private GenericAppender<DataScalingSet> scales;
 	
 	/**
 	 * type of the encoder
 	 */
 	private static final EncodingType TYPE = EncodingType.TextEncodingWithDataScaling;
 	
-	public DataScalingTextEncoder (GenericAppender<DataScalingSet> scales){
+	/*public DataScalingTextEncoder (GenericAppender<DataScalingSet> scales){
 		super(TYPE);
 		this.scales = scales;
-	}
+	}*/
 
 	public DataScalingTextEncoder() {
-		super("todo");
-		// TODO Auto-generated constructor stub
+		super(TYPE);
 	}
 
 	/*

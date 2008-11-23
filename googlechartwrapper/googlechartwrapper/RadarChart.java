@@ -3,6 +3,8 @@ package googlechartwrapper;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.IFillAreaable;
+import googlechartwrapper.data.RadarChartLine;
+import googlechartwrapper.data.RadarChartLineAppender;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelContainer;
@@ -35,10 +37,13 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 		new GenericAppender<ShapeMarker>(ChartTypeFeature.Marker);
 	protected AxisLabelAppender axisLabels = 
 		new AxisLabelAppender();
-	protected GenericAppender<FillArea> fillAreas = new GenericAppender<FillArea>(ChartTypeFeature.FillArea);
+	protected GenericAppender<FillArea> fillAreas = 
+		new GenericAppender<FillArea>(ChartTypeFeature.FillArea);
 	protected GenericAppender<ChartTitle> title = 
 		new UpperLimitGenericAppender<ChartTitle>(ChartTypeFeature.ChartTitle,
 			1,UpperLimitReactions.RemoveAll);
+	protected RadarChartLineAppender radarChartLineAppender = 
+		new RadarChartLineAppender();
 	
 	public RadarChart(Dimension chartDimension, boolean curved) {
 		super(chartDimension);
@@ -54,7 +59,72 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 	protected String getUrlChartType() {
 		return curved ? ChartType.RadarChartStraightLines.getPrefix() : ChartType.RadarChartSplines.getPrefix();
 	}
+	
+	/**
+	 * Adds a {@link RadarChartLine} to the {@link RadarChartLineAppender}
+	 * of this charts' instance.
+	 * @param line line to add
+	 * @see RadarChartLineAppender#add(RadarChartLine)
+	 */
+	public void addRadarChartLine (RadarChartLine line){
+		radarChartLineAppender.add(line);
+	}
+	
+	/**
+	 * Removes a {@link RadarChartLine} of the {@link RadarChartLineAppender}
+	 * of this charts' instance.
+	 * @param line line to remove
+	 * @see RadarChartLineAppender#remove(RadarChartLine)
+	 */
+	public boolean removeRadarChartLine (RadarChartLine m){
+		return radarChartLineAppender.remove(m);
+	}
+	
+	/**
+	 * Removes a {@link RadarChartLine} of the {@link RadarChartLineAppender}
+	 * of this charts' instance.
+	 * @param index index to remove
+	 * @see RadarChartLineAppender#remove(int)
+	 */
+	public RadarChartLine removeRadarChartLine (int index){
+		return radarChartLineAppender.remove(index);
+	}
+	
+	/**
+	 * Removes all {@link RadarChartLine}s of this chart.
+	 */
+	public void removeAllRadarChartLines (){
+		radarChartLineAppender.removeAll();
+	}
+	
+	/**
+	 * Returns the list of all {@link RadarChartLine} elements added to this chart. 
+	 * It returns an unmodifiable view of the value list.
+	 * Consequently "read-only" access is possible.
+	 * @return unmodifiable view of the values
+	 */
+	public List<? extends RadarChartLine> getRadarChartLineList (){
+		return radarChartLineAppender.getList();
+	}
 
+	/**
+	 * Returns the encoder of the underlying {@link RadarChartLineAppender}.
+	 */
+	public IEncoder getEncoder() {
+		return radarChartLineAppender.getEncoder();
+	}
+	
+	/**
+	 * Sets the {@link IEncoder} of the underlying {@link RadarChartLineAppender}.
+	 * Note, that Points of value zero (0, A or AA depending on the type of encoding) 
+	 * are drawn at the center while those with the maximum value for the encoding 
+	 * used are drawn at the perimeter.
+	 * @param encoder encoder to set.
+	 */
+	public void setEncoder (IEncoder encoder){		
+		radarChartLineAppender.setEncoder(encoder);
+	}
+	
 	public void setGridLine(GridLine gl) {
 		if (gl == null){
 			gridLines.removeAll();
@@ -161,12 +231,7 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 		}
 	}
 
-	public IEncoder getEncoder() {
-		
-		//TODO ka, wie das der radar chart so macht, siehe venndigramm
-		
-		return null;
-	}
+	
 
 	public GridLine getGridLine() {
 		
