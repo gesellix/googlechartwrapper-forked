@@ -234,6 +234,7 @@ public class LinearStripes implements IFeatureAppender {
 	}
 
 	/**
+	 * The API provides background and chartarea destination for linearstripes.
 	 * 
 	 * @author steffan
 	 * 

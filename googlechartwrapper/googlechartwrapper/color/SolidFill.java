@@ -104,6 +104,7 @@ public class SolidFill implements IFeatureAppender
 	}
     
     /**
+     * The API provides background, chartarea and transparency for as chartfill destinations.
      * 
      * @author steffan
      *

@@ -213,6 +213,7 @@ public class LinearGradient implements IFeatureAppender{
 	
 	
 	 /**
+	  * The API provides background and chartareafill.
      * 
      * @author steffan
      *
