@@ -1,7 +1,6 @@
 package googlechartwrapper.data;
 
 import java.awt.Color;
-import java.util.Collection;
 import java.util.List;
 
 /**

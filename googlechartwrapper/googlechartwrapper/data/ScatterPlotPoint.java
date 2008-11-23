@@ -58,6 +58,7 @@ public class ScatterPlotPoint {
 	}
 
 	/**
+	 * Returns the xCoordinate of the scatterplot point.
 	 * @return the xCoordinate
 	 */
 	public int getXCoordinate() {
@@ -65,6 +66,7 @@ public class ScatterPlotPoint {
 	}
 
 	/**
+	 * Sets the xCoordinate.
 	 * @param coordinate the xCoordinate to set
 	 * 
 	 * @throws IllegalArgumentException if coordinate is out of range
@@ -78,6 +80,7 @@ public class ScatterPlotPoint {
 	}
 
 	/**
+	 * Returns the yCoordinate.
 	 * @return the yCoordinate
 	 */
 	public int getYCoordinate() {
@@ -85,6 +88,7 @@ public class ScatterPlotPoint {
 	}
 
 	/**
+	 * Sets the yCoordinate. (>= 0)
 	 * @param coordinate the yCoordinate to set
 	 * 
 	 * @throws IllegalArgumentException if coordinate is of range
@@ -97,6 +101,7 @@ public class ScatterPlotPoint {
 	}
 
 	/**
+	 * Returns the size of the scatterplot point.
 	 * @return the size
 	 */
 	public int getSize() {
@@ -104,6 +109,7 @@ public class ScatterPlotPoint {
 	}
 
 	/**
+	 * Sets the size of the point.
 	 * @param size the size to set
 	 */
 	public void setSize(int size) {
@@ -113,6 +119,8 @@ public class ScatterPlotPoint {
 	}
 	
 	/**
+	 * Returns whether the size of the point was modified by the user or is
+	 * still the default value.
 	 * @return the isSizeSet
 	 */
 	public boolean isSizeSet() {

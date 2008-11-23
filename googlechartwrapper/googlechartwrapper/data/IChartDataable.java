@@ -2,7 +2,7 @@ package googlechartwrapper.data;
 /**
  * 
  * @author steffan
- *
+ * @deprecated unused
  */
 public interface IChartDataable {
 	

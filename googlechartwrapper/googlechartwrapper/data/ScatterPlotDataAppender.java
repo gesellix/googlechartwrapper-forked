@@ -12,7 +12,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 
+ * Appender for scatterplot data. If none of the provided individual 
+ * {@link ScatterPlotPoint}s has an user set size, the 
+ * 3rd data set (size) is ommited. That means, that for any 
+ * {@link ScatterPlotPoint#isSizeSet()} call <code>false</code> is returned.
  * @author steffan
  *
  */

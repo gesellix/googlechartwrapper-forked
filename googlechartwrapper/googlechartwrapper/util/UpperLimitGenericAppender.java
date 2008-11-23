@@ -39,6 +39,16 @@ public class UpperLimitGenericAppender<T extends IFeatureAppender>
 		this.upperLimit = upperLimit;
 	}
 	
+	/**
+	 * Constructs an empty feature list with an upper limit and
+	 * a reaction if the limit is exceeded. 
+	 * @@param m type of feature for this appender: type of the parameter: 
+	 * &lt;type&gt;=&lt;parameter data&gt;, e.g  chs=250x100
+	 * @param upperLimit upper limit of element count
+	 * @param action reaction if the limit is exceeded
+	 * @throws IllegalArgumentException if upperLimit &lt; 0 or action == null
+	 * @param separator separator for individual features
+	 */
 	public UpperLimitGenericAppender(ChartTypeFeature m, int upperLimit, 
 			UpperLimitReactions action, String separator) {
 		this(m,upperLimit,action);

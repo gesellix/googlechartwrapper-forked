@@ -3,6 +3,12 @@ package googlechartwrapper.label;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Container for a specific axis with its labels, style. 
+ * http://code.google.com/apis/chart/labels.html#multiple_axes_labels
+ * @author martin
+ *
+ */
 public class AxisLabelContainer {
 	
 	protected AxisType type; //chxt
@@ -12,6 +18,10 @@ public class AxisLabelContainer {
 	protected AxisRange axisRange; //chxr
 	protected AxisStyle axisStyle; //chxs
 
+	/**
+	 * Constructs a new container for the axistype. 
+	 * @param type shall not be null.
+	 */
 	public AxisLabelContainer(AxisType type) {
 		if (type == null){
 			throw new IllegalArgumentException("AxisType type cannot be null");
@@ -43,6 +53,7 @@ public class AxisLabelContainer {
 	 * The first label is placed at the start, 
 	 * the last at the end, others are uniformly spaced in between.
 	 * @param label
+	 * @see #setUseLabelPositions(boolean)
 	 */
 	public void addLabel (AxisLabel label){
 		labels.add(label);

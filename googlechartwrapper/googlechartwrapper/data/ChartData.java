@@ -6,7 +6,6 @@ import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**

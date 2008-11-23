@@ -8,6 +8,11 @@ import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
 
+/**
+ * Collects all axis label containers and appends it to the url.
+ * @author martin
+ *
+ */
 public class AxisLabelAppender implements IExtendedFeatureAppender{
 	
 	List<AxisLabelContainer> axis = new ArrayList<AxisLabelContainer>();

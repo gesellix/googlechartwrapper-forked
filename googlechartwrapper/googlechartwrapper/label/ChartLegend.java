@@ -3,11 +3,10 @@ package googlechartwrapper.label;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
- * 
+ * Specifies a chart legend.
  * @author steffan
  * 
  */
@@ -17,7 +16,7 @@ public class ChartLegend implements IFeatureAppender {
 	private ChartLegendPosition chartLegendPosition = null;
 
 	/**
-	 * 
+	 * Constructs a chart legend.
 	 * @param label
 	 * 
 	 * @throws IllegalArgumentException
