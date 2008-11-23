@@ -264,7 +264,7 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 		} else {
 			this.dataAppender.setEncoder(new AutoEncoder());
 		}
-
+		
 	}
 
 }

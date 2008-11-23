@@ -33,8 +33,8 @@ import java.util.List;
 
 /**
  * Specifies a scatter plot <a
- * href="http://code.google.com/apis/chart/#scatter_plot">
- * http://code.google.com/apis/chart/#scatter_plot</a>
+ * href="http://code.google.com/apis/chart/types.html#scatter_plot">
+ * http://code.google.com/apis/chart/types.html#scatter_plot</a>
  * 
  * @author steffan
  * 
@@ -312,10 +312,16 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 				: null;
 	}
 
+	/**
+	 * Removes all datascalings and sets the default encoder.
+	 * 
+	 * @see ScatterPlot#getEncoder()
+	 */
 	public void removeAllDataScalings() {
 
 		this.dataScalingAppender.removeAll();
-
+		
+		this.scatterPlotDataAppender.removeEncoder();
 		//this.scatterPlotDataAppender.setEncoder(new AutoEncoder());
 
 	}
@@ -334,6 +340,8 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 		} else {
 			this.scatterPlotDataAppender.setEncoder(new AutoEncoder());
 		}
+		
+		this.dataScalingAppender.removeAll();
 
 	}
 

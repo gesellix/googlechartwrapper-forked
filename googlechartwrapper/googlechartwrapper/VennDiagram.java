@@ -214,6 +214,8 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 		} else {
 			this.vennDiagramAppender.setEncoder(new AutoEncoder());
 		}
+		
+		this.dataScalingAppender.removeAll();
 
 	}
 

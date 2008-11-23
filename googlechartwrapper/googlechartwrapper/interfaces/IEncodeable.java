@@ -4,14 +4,17 @@ import googlechartwrapper.coder.IEncoder;
 
 /**
  * 
+ * The interface for every class which deals with encoder.
+ * 
  * @author steffan
  *
  */
 public interface IEncodeable {
 
 	/**
+	 * Returns the encoder.
 	 * 
-	 * @return
+	 * @return the encoder
 	 */
 	public IEncoder getEncoder();
 	
