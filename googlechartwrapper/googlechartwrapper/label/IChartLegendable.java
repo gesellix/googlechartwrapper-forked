@@ -8,7 +8,8 @@ package googlechartwrapper.label;
  */
 public interface IChartLegendable {
 	
-	/**
+	/**If you set a new ChartLegendable the old one will be overwritten. <br />
+	 * If you set <code> null </null> the ChartLegendable will be removed.
 	 * 
 	 * @param legend
 	 */

@@ -5,13 +5,14 @@ import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.color.ChartColors;
-import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
+import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.ISingleDataScaleable;
 import googlechartwrapper.data.VennDiagramDataAppender;
 import googlechartwrapper.data.VennDiagramData;
+import googlechartwrapper.interfaces.IColorable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IPercentageScaleable;
 import googlechartwrapper.label.ChartLegend;
@@ -32,7 +33,7 @@ import java.util.List;
  * 
  */
 public class VennDiagram extends AbstractChart implements ILinearable,
-		IChartLegendable, IChartColorable, ISingleDataScaleable, IPercentageScaleable{
+		IChartLegendable, ISingleDataScaleable, IPercentageScaleable, IColorable{
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -47,6 +48,8 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 			ChartTypeFeature.ChartColor, ",");
 	protected UpperLimitGenericAppender<DataScalingSet> dataScalingAppender = new UpperLimitGenericAppender<DataScalingSet>(
 			ChartTypeFeature.DataScaling, 1, UpperLimitReactions.RemoveFirst);
+	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
+			ChartTypeFeature.SolidFill);
 
 	/**
 	 * Constructs a venn diagram
@@ -77,7 +80,12 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 	}
 
 	public void setLinearGradient(LinearGradient lg) {
+		if(lg == null){
+			this.removeLinearGradient();
+		}
+		else{
 		this.linearGradientAppender.add(lg);
+		}
 
 	}
 
@@ -217,6 +225,29 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 		
 		this.dataScalingAppender.removeAll();
 
+	}
+
+	public void addSolidFill(SolidFill sf) {
+		this.solidFillAppender.add(sf);
+
+	}
+
+	public List<SolidFill> getSolidFills() {
+
+		return this.solidFillAppender.getList();
+	}
+
+	public void removeAllSolidFills() {
+		this.solidFillAppender.removeAll();
+
+	}
+
+	public SolidFill removeSolidFill(int index) {
+		return this.solidFillAppender.remove(index);
+	}
+
+	public boolean removeSolidFill(SolidFill sf) {
+		return this.solidFillAppender.remove(sf);
 	}
 
 }

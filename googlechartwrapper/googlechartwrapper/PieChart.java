@@ -2,6 +2,8 @@ package googlechartwrapper;
 
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.coder.PercentageEncoder;
+import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.ILinearGradientable;
 import googlechartwrapper.color.ILinearStripeable;
 import googlechartwrapper.color.ISolidFillable;
@@ -12,8 +14,11 @@ import googlechartwrapper.color.LinearGradient.GradientFillDestination;
 import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.data.PieChartSliceAppender;
+import googlechartwrapper.interfaces.IColorable;
 import googlechartwrapper.interfaces.IPercentageScaleable;
+import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
+import googlechartwrapper.label.IChartLegendable;
 import googlechartwrapper.label.IChartTitleable;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender;
@@ -25,10 +30,11 @@ import java.util.List;
 /**
  * Specifies a PieChart
  * @author martin
+ * @author steffan
  *
  */
 public class PieChart extends AbstractChart implements ISolidFillable,
-		ILinearGradientable, ILinearStripeable, IChartTitleable, IPercentageScaleable{
+		ILinearGradientable, ILinearStripeable, IChartTitleable, IPercentageScaleable, IColorable, IChartLegendable{
 
 	private boolean threeD;
 	protected PieChartSliceAppender dataAppender = new PieChartSliceAppender();
@@ -40,6 +46,10 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartTitle> chartTitleAppender = new UpperLimitGenericAppender<ChartTitle>(
 			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
+			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
+	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+			ChartTypeFeature.ChartColor, ",");
 
 	public PieChart(Dimension chartDimension, boolean threeD) {
 		super(chartDimension);
@@ -193,60 +203,6 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 
 	}
 	
-	//FIXME delete!
-	/**
-	 * from 0..100 percent
-	 * @author mart
-	 *
-	 */
-	public static class PercentageEncoder implements IEncoder{
-
-		public String encode(int[] values) {
-			int sum = 0;
-			for (int i = 0; i < values.length; i++){
-				sum = sum+values[i];
-			}
-			StringBuffer bf = new StringBuffer(values.length*3+5);
-			bf.append("chd=t:");
-			for (int i = 0; i < values.length; i++){
-				bf.append(Integer.toString((values[i]*100/sum)));
-				bf.append(",");
-			}
-			return bf.substring(0, bf.length()-1);
-		}
-
-		public String encode(float[] values) {
-			/*StringBuffer bf = new StringBuffer(values.length*3+5);
-			bf.append("chd=t:");
-			for (int i = 0; i < values.length; i++){
-				bf.append((int)values[i]%100);
-				bf.append(",");
-			}
-			return bf.substring(0, bf.length()-1);*/
-			return null;
-		}
-
-		public String encodeFloatCollection(List<float[]> values) {
-			return null;
-		}
-
-		public String encodeIntegerCollection(List<int[]> values) {
-			
-			return null;
-		}
-
-		public String encodeFloatCollection(List<float[]> values, String sep) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public String encodeIntegerCollection(List<int[]> values, String sep) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		
-	}
-
 	public LinearStripes getLinearStripes() {
 
 		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender.getList().get(0) : null;
@@ -265,6 +221,56 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 			this.dataAppender.setEncoder(new AutoEncoder());
 		}
 		
+	}
+
+	public void addChartColor(ChartColors cc) {
+
+		this.chartColorAppender.add(cc);
+	}
+
+	public List<ChartColors> getChartColors() {
+
+		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
+				.getList()
+				: null;
+	}
+
+	public void removeAllChartColors() {
+		this.chartColorAppender.removeAll();
+
+	}
+
+	public ChartColors removeChartColors(int index) {
+
+		return this.chartColorAppender.remove(index);
+	}
+
+	public boolean removeChartColors(ChartColors cc) {
+
+		return this.chartColorAppender.remove(cc);
+	}
+
+	public ChartLegend getChartLegend() {
+
+		if (this.chartLegendAppender.getList().size() > 0) {
+			return this.chartLegendAppender.getList().get(0);
+		} else {
+			return null;
+		}
+	}
+
+	public void removeChartLegend() {
+		this.chartLegendAppender.removeAll();
+
+	}
+
+	public void setChartLegend(ChartLegend legend) {
+		
+		if(legend == null){
+			this.removeChartLegend();
+		}
+		this.chartLegendAppender.add(legend);
+
 	}
 
 }

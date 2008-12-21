@@ -5,7 +5,6 @@ import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.color.ChartColors;
-import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
@@ -14,6 +13,7 @@ import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.IMultiDataScaleable;
 import googlechartwrapper.data.ScatterPlotData;
 import googlechartwrapper.data.ScatterPlotDataAppender;
+import googlechartwrapper.interfaces.IColorable;
 import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
@@ -42,8 +42,8 @@ import java.util.List;
  * 
  */
 public class ScatterPlot extends AbstractChart implements ILinearable,
-		IMarkable, IChartLegendable, IChartColorable, IMultiDataScaleable,
-		IPercentageScaleable, IEncodeable, ISolidFillable {
+		IMarkable, IChartLegendable, IMultiDataScaleable,
+		IPercentageScaleable, IEncodeable, ISolidFillable, IColorable{
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);

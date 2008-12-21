@@ -2,57 +2,70 @@ package googlechartwrapper;
 
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.ISolidFillable;
+import googlechartwrapper.color.LinearGradient;
+import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.color.SolidFill;
+import googlechartwrapper.color.LinearGradient.GradientFillDestination;
+import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
 import googlechartwrapper.color.SolidFill.ChartFillDestination;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.GoogleOMeterValue;
+import googlechartwrapper.data.GoogleOMeterValueAppender;
 import googlechartwrapper.data.ISingleDataScaleable;
+import googlechartwrapper.interfaces.ILinearable;
+import googlechartwrapper.label.ChartLegend;
+import googlechartwrapper.label.ChartTitle;
+import googlechartwrapper.label.IChartLegendable;
 import googlechartwrapper.util.GenericAppender;
-import googlechartwrapper.util.IExtendedFeatureAppender;
-import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Specifies a GoogleOMeter
+ * 
  * @author mart
- *
+ * @author steffan
+ * 
  */
-public class GoogleOMeter extends AbstractChart implements ISolidFillable, 
-	ISingleDataScaleable{
-	
-	protected GenericAppender<SolidFill> solidFillAppender = new 
-		GenericAppender<SolidFill>(ChartTypeFeature.SolidFill);
+public class GoogleOMeter extends AbstractChart implements ISolidFillable,
+		ISingleDataScaleable, ILinearable, IChartLegendable {
+
+	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
+			ChartTypeFeature.SolidFill);
 	protected GoogleOMeterValueAppender valueAppender = new GoogleOMeterValueAppender();
-	protected UpperLimitGenericAppender<DataScalingSet> dataScalingAppender = new 
-		UpperLimitGenericAppender<DataScalingSet>(ChartTypeFeature.DataScaling,
-				1,UpperLimitReactions.RemoveAll,",");
-	
-	//TODO martin: add data scaling
+	protected UpperLimitGenericAppender<DataScalingSet> dataScalingAppender = new UpperLimitGenericAppender<DataScalingSet>(
+			ChartTypeFeature.DataScaling, 1, UpperLimitReactions.RemoveAll, ",");
+	protected UpperLimitGenericAppender<ChartTitle> chartTitleAppender = new UpperLimitGenericAppender<ChartTitle>(
+			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
+			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
+			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<LinearStripes> linearStripesAppender = new UpperLimitGenericAppender<LinearStripes>(
+			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
 	
 	public GoogleOMeter(Dimension chartDimension) {
 		super(chartDimension);
 	}
-	
+
 	@Override
-	protected ChartType getChartType() {		
+	protected ChartType getChartType() {
 		return ChartType.GoogleOMeter;
 	}
 
 	@Override
 	protected String getUrlChartType() {
-		return "gom";
+		return ChartType.GoogleOMeter.getPrefix();
 	}
-	
+
 	public void addSolidFill(SolidFill sf) {
-		if (!sf.getChartFillDestination().equals(ChartFillDestination.Background)){
-			throw new IllegalArgumentException("only SolidFill " +
-					"ChartFillDestination.Background allowed");
+		if (!sf.getChartFillDestination().equals(
+				ChartFillDestination.Background)) {
+			throw new IllegalArgumentException("only SolidFill "
+					+ "ChartFillDestination.Background allowed");
 		}
 		this.solidFillAppender.add(sf);
 	}
@@ -73,11 +86,11 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	public boolean removeSolidFill(SolidFill sf) {
 		return this.solidFillAppender.remove(sf);
 	}
-	
-	public void addGoogleOMeterValue (GoogleOMeterValue value){
+
+	public void addGoogleOMeterValue(GoogleOMeterValue value) {
 		valueAppender.add(value);
 	}
-	
+
 	public List<GoogleOMeterValue> getGoogleOMeterValues() {
 		return this.valueAppender.getList();
 	}
@@ -93,11 +106,10 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	public boolean removeGoogleOMeterValue(GoogleOMeterValue sf) {
 		return this.valueAppender.remove(sf);
 	}
-	
 
 	public DataScalingSet getDataScaling() {
-		return dataScalingAppender.getListSize() > 0 ? 
-				dataScalingAppender.getList().get(0) : null;
+		return dataScalingAppender.getListSize() > 0 ? dataScalingAppender
+				.getList().get(0) : null;
 	}
 
 	public void removeDataScaling() {
@@ -105,120 +117,125 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	}
 
 	public void setDataScaling(DataScalingSet ds) {
-		if (ds == null){
+		if (ds == null) {
 			dataScalingAppender.removeAll();
-			return ;
+			return;
 		}
 		dataScalingAppender.add(ds);
 	}
 
 	public IEncoder getEncoder() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.valueAppender.getEncoder();
 	}
 
-	protected final class GoogleOMeterValueAppender implements IExtendedFeatureAppender {
-		
-		/**
-		 * list of elements/features
-		 */
-		protected List<GoogleOMeterValue> list = new ArrayList<GoogleOMeterValue>(1);
+	public LinearGradient getLinearGradient() {
 
-		public String getFeaturePrefix() {
-			return "chd";
+		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeLinearGradient() {
+		this.linearGradientAppender.removeAll();
+
+	}
+
+	/**
+	 * {@inheritDoc} The GoogleOMeter supports only Background as
+	 * FillDestination.
+	 */
+	public void setLinearGradient(LinearGradient lg) {
+
+		if (lg == null) {
+			this.removeLinearGradient();
+		} else {
+			if (!lg.getFillDestination().equals(
+					GradientFillDestination.Background))
+				throw new IllegalArgumentException("only LinearGradient "
+						+ "GradientFillDestination.Background allowed");
+
+			this.linearGradientAppender.add(lg);
 		}
 
-		public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
-			if (list.size() == 0){
-				return "";
-			}
+	}
+
+	public ChartTitle getChartTitle() {
+
+		if (this.chartTitleAppender.getList().size() > 0) {
+			return this.chartTitleAppender.getList().get(0);
+		} else {
+			return null;
+		}
+	}
+
+	public void removeChartTitle() {
+		this.chartTitleAppender.removeAll();
+
+	}
+
+	public void setChartTitle(ChartTitle title) {
+		if (title == null) {
+			removeChartTitle();
+			return;
+		}
+		this.chartTitleAppender.add(title);
+
+	}
+
+	public LinearStripes getLinearStripes() {
+
+		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeLinearStripes() {
+		this.linearStripesAppender.removeAll();
+
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * The GoogleOMeter supports only Background as
+	 * FillDestination.
+	 * 
+	 */
+	public void setLinearStripes(LinearStripes ls) {
+
+		if (ls == null) {
+			this.removeLinearStripes();
+		} else {
 			
-			boolean hadLabels = false;
-			StringBuilder values = new StringBuilder(list.size()*2+5);
-			StringBuilder labels = new StringBuilder(list.size()*5+5);
-			
-			values.append("t:");
-			
-			for (GoogleOMeterValue val : list){
-				values.append(val.getValue());
-				values.append(",");
-				if (val.getLabel()==null){
-					labels.append("|");
-				}
-				else {
-					labels.append(val.getLabel());
-					labels.append("|");
-					hadLabels = true;
-				}
-			}
-			//http://chart.apis.google.com/chart?chs=225x125&cht=gom&chd=t:70&chl=Hello
-			//chd=t:70:
-			String ret = values.substring(0,values.length()-1);
-			if (hadLabels){
-				ret = ret + "&chl="+labels.substring(0, labels.length()-1);
-			}			
-			return ret;
+			if (!ls.getFillDestination().equals(
+					LinearStripesDestination.Background))
+				throw new IllegalArgumentException("only Linearstripes "
+						+ "LinearStripesDestination.Background allowed");
+
+			this.linearStripesAppender.add(ls);
 		}
-		
-		/**
-		 * Appends the specified element to the end of this appender. 
-		 * @param m element to be appended to this list.
-		 * @throws IllegalArgumentException if, and only if m == null
-		 */
-		public void add (GoogleOMeterValue m){
-			if (m == null){
-				throw new IllegalArgumentException("new element cannot be null");
-			}
-			list.add(m);
+	}
+
+	public ChartLegend getChartLegend() {
+
+		if (this.chartLegendAppender.getList().size() > 0) {
+			return this.chartLegendAppender.getList().get(0);
+		} else {
+			return null;
 		}
+	}
+
+	public void removeChartLegend() {
+		this.chartLegendAppender.removeAll();
+
+	}
+
+	public void setChartLegend(ChartLegend legend) {
 		
-		/**
-		 * Removes the first occurrence in this list of the specified element 
-		 * (optional operation). If this list does not contain the element, it is 
-		 * unchanged. More formally, removes the element with the lowest index i 
-		 * such that <code>(o==null ? get(i)==null : o.equals(get(i))) </code>
-		 * (if such an element exists). 
-		 * @param m element to be removed from this list, if present
-		 * @return <code>true</code> if this list contained the specified element
-		 */
-		public boolean remove (GoogleOMeterValue m){
-			return list.remove(m);
+		if(legend == null){
+			this.removeChartLegend();
 		}
-		
-		/**
-		 * Removes the element at the specified position in this feature list. 
-		 * Shifts any subsequent elements to the left 
-		 * (subtracts one from their indices). Returns the element that was 
-		 * removed from the feature list. 
-		 * @param index the index of the element to removed
-		 * @return the element previously at the specified position
-		 * @throws IndexOutOfBoundsException if the index is out of 
-		 * range (index < 0 || index >= size of this feature list).
-		 */
-		public GoogleOMeterValue remove (int index){
-			return list.remove(index);
-		}
-		
-		/**
-		 * Removes all of the elements from this appender.
-		 * This appender feature list will be empty after this call returns.
-		 *
-		 */
-		public void removeAll (){
-			for (int i = 0; i < list.size();){
-				list.remove(i);
-			}
-		}
-		
-		/**
-		 * Returns the list of all T elements added to this appender. 
-		 * It returns an unmodifiable view of the value list.
-		 * Consequently "read-only" access is possible
-		 * @return unmodifiable view of the values
-		 */
-		public List<GoogleOMeterValue> getList (){
-			return Collections.unmodifiableList(list);
-		}
-		
-	}	
+		this.chartLegendAppender.add(legend);
+
+	}
 }

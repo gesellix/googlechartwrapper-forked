@@ -1,6 +1,7 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
@@ -8,6 +9,7 @@ import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.IMultiDataScaleable;
+import googlechartwrapper.interfaces.IColorable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.interfaces.IStyleable;
@@ -32,7 +34,8 @@ import java.util.List;
  * @author steffan
  *
  */
-public class LineChart extends AbstractChart implements IMarkable,ILinearable,IStyleable, IGridLineable, ISolidFillable, IMultiDataScaleable{
+public class LineChart extends AbstractChart implements IMarkable,ILinearable,IStyleable, IGridLineable,
+ ISolidFillable, IMultiDataScaleable, IColorable{
 
 
 	private LineChartType lineChartType;
@@ -355,6 +358,31 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 		}
 
 		public boolean removeDataScalingSet(DataScalingSet set) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		public void addChartColor(ChartColors cc) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public List<ChartColors> getChartColors() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public void removeAllChartColors() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public ChartColors removeChartColors(int index) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public boolean removeChartColors(ChartColors cc) {
 			// TODO Auto-generated method stub
 			return false;
 		}

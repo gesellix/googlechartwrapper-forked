@@ -1,10 +1,13 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.IFillAreaable;
+import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.data.RadarChartLine;
 import googlechartwrapper.data.RadarChartLineAppender;
+import googlechartwrapper.interfaces.IColorable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelContainer;
@@ -24,7 +27,7 @@ import java.awt.Dimension;
 import java.util.List;
 
 public class RadarChart extends AbstractChart implements IGridLineable, IShapeMarkable, 
-	IAxisLabelable, IFillAreaable, IChartTitleable, IMarkable{
+	IAxisLabelable, IFillAreaable, IChartTitleable, IMarkable, IColorable{
 	
 	private boolean curved;
 	
@@ -241,6 +244,56 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 	public ChartTitle getChartTitle() {
 		
 		return this.title.getList().size() > 0 ? this.title.getList().get(0) : null;
+	}
+
+	public void addChartColor(ChartColors cc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<ChartColors> getChartColors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void removeAllChartColors() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ChartColors removeChartColors(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean removeChartColors(ChartColors cc) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void addSolidFill(SolidFill sf) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<SolidFill> getSolidFills() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void removeAllSolidFills() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public SolidFill removeSolidFill(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean removeSolidFill(SolidFill sf) {
+		// TODO Auto-generated method stub
+		return false;
 	}	
 
 }
