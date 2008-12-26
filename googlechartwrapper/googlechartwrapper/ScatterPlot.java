@@ -91,7 +91,14 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 	}
 
 	public void setLinearGradient(LinearGradient lg) {
-		this.linearGradientAppender.add(lg);
+		
+		if(lg == null){
+			this.removeLinearGradient();
+		}
+		else{
+			this.linearGradientAppender.add(lg);
+		}
+		
 
 	}
 

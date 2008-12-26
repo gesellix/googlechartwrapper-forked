@@ -21,6 +21,7 @@ import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
 import googlechartwrapper.label.IChartTitleable;
 import googlechartwrapper.util.GenericAppender;
+import googlechartwrapper.util.PrimitivesAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
@@ -29,6 +30,8 @@ import java.util.List;
 
 /**
  * Specifies a PieChart
+ * <a href="http://code.google.com/intl/de-DE/apis/chart/types.html#pie_charts">
+ * http://code.google.com/intl/de-DE/apis/chart/types.html#pie_charts</a>
  * @author martin
  * @author steffan
  *
@@ -36,7 +39,7 @@ import java.util.List;
 public class PieChart extends AbstractChart implements ISolidFillable,
 		ILinearGradientable, ILinearStripeable, IChartTitleable, IPercentageScaleable, IColorable, IChartLegendable{
 
-	private boolean threeD;
+	private boolean threeD;	
 	protected PieChartSliceAppender dataAppender = new PieChartSliceAppender();
 	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
 			ChartTypeFeature.SolidFill);
@@ -50,6 +53,9 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
 	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
 			ChartTypeFeature.ChartColor, ",");
+	
+	protected PrimitivesAppender<Float> pieChartOrientationAppender = new PrimitivesAppender<Float>(
+			ChartTypeFeature.PieChartOrientation);
 
 	public PieChart(Dimension chartDimension, boolean threeD) {
 		super(chartDimension);
@@ -271,6 +277,21 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 		}
 		this.chartLegendAppender.add(legend);
 
+	}
+	/**
+	 * Sets the pie chart orientation.
+	 * 
+	 * @param angle number as radian
+	 */
+	public void setPieChartOrientation(float angle){
+				
+		this.pieChartOrientationAppender.set(angle);
+	}
+	/**
+	 * Removes the pie chart orientation.
+	 */
+	public void removePieChartOrientation(){
+		this.pieChartOrientationAppender.removeAll();
 	}
 
 }

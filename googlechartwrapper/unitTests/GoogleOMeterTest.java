@@ -1,20 +1,17 @@
 package unitTests;
 
-import static org.junit.Assert.*;
-
-import java.awt.Color;
-import java.awt.Dimension;
-
+import static org.junit.Assert.assertEquals;
 import googlechartwrapper.GoogleOMeter;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
-import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.LinearGradient.GradientFillDestination;
 import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
-import googlechartwrapper.color.SolidFill.ChartFillDestination;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.GoogleOMeterValue;
 import googlechartwrapper.label.ChartTitle;
+
+import java.awt.Color;
+import java.awt.Dimension;
 
 import org.junit.Test;
 

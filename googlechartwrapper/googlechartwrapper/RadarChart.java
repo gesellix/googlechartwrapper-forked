@@ -26,6 +26,11 @@ import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 import java.awt.Dimension;
 import java.util.List;
 
+/**
+ * @author mart
+ * @author steffan
+ *
+ */
 public class RadarChart extends AbstractChart implements IGridLineable, IShapeMarkable, 
 	IAxisLabelable, IFillAreaable, IChartTitleable, IMarkable, IColorable{
 	

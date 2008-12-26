@@ -19,7 +19,8 @@ public enum ChartTypeFeature {
 	ChartLegend("chdl"),
 	ChartData("chd"),
 	ChartColor("chco"),
-	DataScaling("chds");
+	DataScaling("chds"),
+	PieChartOrientation("chp");
 	
 	
 	private String prefix;

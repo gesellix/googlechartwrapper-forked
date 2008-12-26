@@ -56,8 +56,19 @@ public class PieChartTest {
 		//System.out.println(chart.getUrl());
 		//TODO assert???
 	}
-	
-	
-
+	@Test
+	public void example1(){
+		
+		PieChart chart = new PieChart(new Dimension(400,180),false);
+		chart.setChartTitle(new ChartTitle("GDP of the world(nominal)"));
+		chart.addPieChartSlice(new PieChartSlice(80,"USA", Color.BLUE));
+		chart.addPieChartSlice(new PieChartSlice(20,"Canada", null));
+		chart.setPieChartOrientation(2.5f);
+		//chart.removePieChartOrientation();
+		
+		
+		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chco=0000ff&chl=USA|Canada&chd=t:80,20&chp=2.5&chtt=GDP+of+the+world(nominal)"
+				,chart.getUrl());
+	}
 	
 }
