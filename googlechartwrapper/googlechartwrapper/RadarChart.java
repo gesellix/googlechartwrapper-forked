@@ -4,19 +4,26 @@ import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.IFillAreaable;
+import googlechartwrapper.color.LinearGradient;
+import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.color.SolidFill;
+import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
 import googlechartwrapper.data.RadarChartLine;
 import googlechartwrapper.data.RadarChartLineAppender;
 import googlechartwrapper.interfaces.IColorable;
+import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IAxisLabelable;
 import googlechartwrapper.label.IChartTitleable;
+import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
+import googlechartwrapper.style.ILineStyleable;
 import googlechartwrapper.style.IShapeMarkable;
+import googlechartwrapper.style.LineStyle;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
 import googlechartwrapper.util.GenericAppender;
@@ -27,35 +34,48 @@ import java.awt.Dimension;
 import java.util.List;
 
 /**
+ * Specifies a radar chart<a
+ * href="http://code.google.com/intl/de-DE/apis/chart/types.html#radar">
+ * http://code.google.com/intl/de-DE/apis/chart/types.html#radar</a>
+ * 
  * @author mart
  * @author steffan
- *
+ * 
  */
-public class RadarChart extends AbstractChart implements IGridLineable, IShapeMarkable, 
-	IAxisLabelable, IFillAreaable, IChartTitleable, IMarkable, IColorable{
-	
+public class RadarChart extends AbstractChart implements IGridLineable,
+		IShapeMarkable, IAxisLabelable, IFillAreaable, IChartTitleable,
+		IMarkable, IColorable, ILinearable, ILineStyleable {
+
 	private boolean curved;
-	
-	protected GenericAppender<GridLine> gridLines = 
-		new UpperLimitGenericAppender<GridLine>(ChartTypeFeature.GridLine,
-				1,UpperLimitReactions.RemoveAll);
-	protected GenericAppender<RangeMarker> rangeMarker = 
-		new GenericAppender<RangeMarker>(ChartTypeFeature.Marker);
-	protected GenericAppender<ShapeMarker> shapeMarker = 
-		new GenericAppender<ShapeMarker>(ChartTypeFeature.Marker);
-	protected AxisLabelAppender axisLabels = 
-		new AxisLabelAppender();
-	protected GenericAppender<FillArea> fillAreas = 
-		new GenericAppender<FillArea>(ChartTypeFeature.FillArea);
-	protected GenericAppender<ChartTitle> title = 
-		new UpperLimitGenericAppender<ChartTitle>(ChartTypeFeature.ChartTitle,
-			1,UpperLimitReactions.RemoveAll);
-	protected RadarChartLineAppender radarChartLineAppender = 
-		new RadarChartLineAppender();
-	
+
+	protected GenericAppender<GridLine> gridLines = new UpperLimitGenericAppender<GridLine>(
+			ChartTypeFeature.GridLine, 1, UpperLimitReactions.RemoveAll);
+	protected GenericAppender<RangeMarker> rangeMarker = new GenericAppender<RangeMarker>(
+			ChartTypeFeature.Marker);
+	protected GenericAppender<ShapeMarker> shapeMarker = new GenericAppender<ShapeMarker>(
+			ChartTypeFeature.Marker);
+	protected AxisLabelAppender axisLabels = new AxisLabelAppender();
+	protected GenericAppender<FillArea> fillAreas = new GenericAppender<FillArea>(
+			ChartTypeFeature.FillArea);
+	protected GenericAppender<ChartTitle> title = new UpperLimitGenericAppender<ChartTitle>(
+			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveAll);
+	protected RadarChartLineAppender radarChartLineAppender = new RadarChartLineAppender();
+	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
+			ChartTypeFeature.SolidFill);
+	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+			ChartTypeFeature.ChartColor, ",");
+	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
+			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<LinearStripes> linearStripesAppender = new UpperLimitGenericAppender<LinearStripes>(
+			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
+			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
+	protected GenericAppender<LineStyle> lineStyleAppender = new GenericAppender<LineStyle>(
+			ChartTypeFeature.LineStyle, ",");
+
 	public RadarChart(Dimension chartDimension, boolean curved) {
 		super(chartDimension);
-		this.curved= curved;
+		this.curved = curved;
 	}
 
 	@Override
@@ -65,53 +85,61 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 
 	@Override
 	protected String getUrlChartType() {
-		return curved ? ChartType.RadarChartStraightLines.getPrefix() : ChartType.RadarChartSplines.getPrefix();
+		return curved ? ChartType.RadarChartStraightLines.getPrefix()
+				: ChartType.RadarChartSplines.getPrefix();
 	}
-	
+
 	/**
-	 * Adds a {@link RadarChartLine} to the {@link RadarChartLineAppender}
-	 * of this charts' instance.
-	 * @param line line to add
+	 * Adds a {@link RadarChartLine} to the {@link RadarChartLineAppender} of
+	 * this charts' instance.
+	 * 
+	 * @param line
+	 *            line to add
 	 * @see RadarChartLineAppender#add(RadarChartLine)
 	 */
-	public void addRadarChartLine (RadarChartLine line){
+	public void addRadarChartLine(RadarChartLine line) {
 		radarChartLineAppender.add(line);
 	}
-	
+
 	/**
-	 * Removes a {@link RadarChartLine} of the {@link RadarChartLineAppender}
-	 * of this charts' instance.
-	 * @param line line to remove
+	 * Removes a {@link RadarChartLine} of the {@link RadarChartLineAppender} of
+	 * this charts' instance.
+	 * 
+	 * @param line
+	 *            line to remove
 	 * @see RadarChartLineAppender#remove(RadarChartLine)
 	 */
-	public boolean removeRadarChartLine (RadarChartLine m){
+	public boolean removeRadarChartLine(RadarChartLine m) {
 		return radarChartLineAppender.remove(m);
 	}
-	
+
 	/**
-	 * Removes a {@link RadarChartLine} of the {@link RadarChartLineAppender}
-	 * of this charts' instance.
-	 * @param index index to remove
+	 * Removes a {@link RadarChartLine} of the {@link RadarChartLineAppender} of
+	 * this charts' instance.
+	 * 
+	 * @param index
+	 *            index to remove
 	 * @see RadarChartLineAppender#remove(int)
 	 */
-	public RadarChartLine removeRadarChartLine (int index){
+	public RadarChartLine removeRadarChartLine(int index) {
 		return radarChartLineAppender.remove(index);
 	}
-	
+
 	/**
 	 * Removes all {@link RadarChartLine}s of this chart.
 	 */
-	public void removeAllRadarChartLines (){
+	public void removeAllRadarChartLines() {
 		radarChartLineAppender.removeAll();
 	}
-	
+
 	/**
-	 * Returns the list of all {@link RadarChartLine} elements added to this chart. 
-	 * It returns an unmodifiable view of the value list.
-	 * Consequently "read-only" access is possible.
+	 * Returns the list of all {@link RadarChartLine} elements added to this
+	 * chart. It returns an unmodifiable view of the value list. Consequently
+	 * "read-only" access is possible.
+	 * 
 	 * @return unmodifiable view of the values
 	 */
-	public List<? extends RadarChartLine> getRadarChartLineList (){
+	public List<? extends RadarChartLine> getRadarChartLineList() {
 		return radarChartLineAppender.getList();
 	}
 
@@ -121,27 +149,28 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 	public IEncoder getEncoder() {
 		return radarChartLineAppender.getEncoder();
 	}
-	
+
 	/**
-	 * Sets the {@link IEncoder} of the underlying {@link RadarChartLineAppender}.
-	 * Note, that Points of value zero (0, A or AA depending on the type of encoding) 
-	 * are drawn at the center while those with the maximum value for the encoding 
-	 * used are drawn at the perimeter.
-	 * @param encoder encoder to set.
+	 * Sets the {@link IEncoder} of the underlying
+	 * {@link RadarChartLineAppender}. Note, that Points of value zero (0, A or
+	 * AA depending on the type of encoding) are drawn at the center while those
+	 * with the maximum value for the encoding used are drawn at the perimeter.
+	 * 
+	 * @param encoder
+	 *            encoder to set.
 	 */
-	public void setEncoder (IEncoder encoder){		
+	public void setEncoder(IEncoder encoder) {
 		radarChartLineAppender.setEncoder(encoder);
 	}
-	
+
 	public void setGridLine(GridLine gl) {
-		if (gl == null){
+		if (gl == null) {
 			gridLines.removeAll();
-		}
-		else {
+		} else {
 			gridLines.add(gl);
 		}
 	}
-	
+
 	public void removeGridLine() {
 		gridLines.removeAll();
 	}
@@ -231,74 +260,160 @@ public class RadarChart extends AbstractChart implements IGridLineable, IShapeMa
 	}
 
 	public void setChartTitle(ChartTitle title) {
-		if (title == null){
+		if (title == null) {
 			this.title.removeAll();
-		}
-		else {
+		} else {
 			this.title.add(title);
 		}
 	}
 
-	
-
 	public GridLine getGridLine() {
-		
-		return this.gridLines.getList().size() > 0 ? this.gridLines.getList().get(0) : null;
+
+		return this.gridLines.getList().size() > 0 ? this.gridLines.getList()
+				.get(0) : null;
 	}
 
 	public ChartTitle getChartTitle() {
-		
-		return this.title.getList().size() > 0 ? this.title.getList().get(0) : null;
+
+		return this.title.getList().size() > 0 ? this.title.getList().get(0)
+				: null;
 	}
 
 	public void addChartColor(ChartColors cc) {
-		// TODO Auto-generated method stub
-		
+
+		this.chartColorAppender.add(cc);
 	}
 
 	public List<ChartColors> getChartColors() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
+				.getList()
+				: null;
 	}
 
 	public void removeAllChartColors() {
-		// TODO Auto-generated method stub
-		
+		this.chartColorAppender.removeAll();
+
 	}
 
 	public ChartColors removeChartColors(int index) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return this.chartColorAppender.remove(index);
 	}
 
 	public boolean removeChartColors(ChartColors cc) {
-		// TODO Auto-generated method stub
-		return false;
+
+		return this.chartColorAppender.remove(cc);
 	}
 
 	public void addSolidFill(SolidFill sf) {
-		// TODO Auto-generated method stub
-		
+		this.solidFillAppender.add(sf);
+
 	}
 
 	public List<SolidFill> getSolidFills() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return this.solidFillAppender.getList();
 	}
 
 	public void removeAllSolidFills() {
-		// TODO Auto-generated method stub
-		
+		this.solidFillAppender.removeAll();
+
 	}
 
 	public SolidFill removeSolidFill(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.solidFillAppender.remove(index);
 	}
 
 	public boolean removeSolidFill(SolidFill sf) {
-		// TODO Auto-generated method stub
-		return false;
-	}	
+		return this.solidFillAppender.remove(sf);
+	}
+
+	public ChartMargin getChartMargin() {
+		return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeChartMargin() {
+		this.chartMarginAppender.removeAll();
+
+	}
+
+	public void setChartMargin(ChartMargin cm) {
+		if (cm == null) {
+			this.chartMarginAppender.removeAll();
+		} else {
+			this.chartMarginAppender.add(cm);
+		}
+	}
+
+	public LinearGradient getLinearGradient() {
+
+		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeLinearGradient() {
+		linearGradientAppender.removeAll();
+	}
+
+	public void setLinearGradient(LinearGradient lg) {
+		if (lg == null) {
+			linearGradientAppender.removeAll();
+			return;
+		} else {
+			this.linearGradientAppender.add(lg);
+		}
+	}
+
+	public LinearStripes getLinearStripes() {
+
+		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeLinearStripes() {
+		linearStripesAppender.removeAll();
+	}
+
+	public void setLinearStripes(LinearStripes ls) {
+		if (ls == null) {
+			linearStripesAppender.removeAll();
+			return;
+		}
+		if (!ls.getFillDestination()
+				.equals(LinearStripesDestination.Background)) {
+			throw new IllegalArgumentException("only LinearStripesDestination"
+					+ ".Background supported");
+		}
+		this.linearStripesAppender.add(ls);
+	}
+
+	public void addLineStyle(LineStyle lineStyle) {
+		this.lineStyleAppender.add(lineStyle);
+		
+	}
+
+	public List<LineStyle> getLineStyles() {
+		return this.lineStyleAppender.getList();
+	}
+
+	public void removeAllLineStyles() {
+		this.lineStyleAppender.removeAll();
+		
+	}
+
+	public LineStyle removeLineStyle(int index) {
+		
+		return this.lineStyleAppender.remove(index);
+	}
+
+	public boolean removeLineStyle(LineStyle lineStyle) {
+		
+		return this.lineStyleAppender.remove(lineStyle);
+	}
 
 }

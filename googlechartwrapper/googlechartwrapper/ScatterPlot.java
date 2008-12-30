@@ -23,6 +23,7 @@ import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
+import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
@@ -42,8 +43,8 @@ import java.util.List;
  * 
  */
 public class ScatterPlot extends AbstractChart implements ILinearable,
-		IMarkable, IChartLegendable, IMultiDataScaleable,
-		IPercentageScaleable, IEncodeable, ISolidFillable, IColorable{
+		IMarkable, IChartLegendable, IMultiDataScaleable, IPercentageScaleable,
+		IEncodeable, ISolidFillable, IColorable {
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -67,6 +68,8 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 	protected ScatterPlotDataAppender scatterPlotDataAppender = new ScatterPlotDataAppender();
 	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
 			ChartTypeFeature.SolidFill);
+	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
+			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
 
 	public ScatterPlot(Dimension chartDimension) {
 		super(chartDimension);
@@ -91,14 +94,12 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 	}
 
 	public void setLinearGradient(LinearGradient lg) {
-		
-		if(lg == null){
+
+		if (lg == null) {
 			this.removeLinearGradient();
-		}
-		else{
+		} else {
 			this.linearGradientAppender.add(lg);
 		}
-		
 
 	}
 
@@ -185,7 +186,6 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 		return this.chartColorAppender.remove(cc);
 	}
-	
 
 	public LinearStripes getLinearStripes() {
 
@@ -201,7 +201,6 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 				: null;
 	}
 
-	
 	public void addRangeMarker(RangeMarker rm) {
 
 		this.rangeMarkerAppender.add(rm);
@@ -310,9 +309,8 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 		return this.scatterPlotDataAppender.getScatterPlotData();
 	}
 
-	
 	public void addDataScalingSet(DataScalingSet ds) {
-		this.dataScalingAppender.add(ds);		
+		this.dataScalingAppender.add(ds);
 		this.scatterPlotDataAppender.setEncoder(new DataScalingTextEncoder());
 	}
 
@@ -331,9 +329,9 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 	public void removeAllDataScalings() {
 
 		this.dataScalingAppender.removeAll();
-		
+
 		this.scatterPlotDataAppender.removeEncoder();
-		//this.scatterPlotDataAppender.setEncoder(new AutoEncoder());
+		// this.scatterPlotDataAppender.setEncoder(new AutoEncoder());
 
 	}
 
@@ -351,17 +349,17 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 		} else {
 			this.scatterPlotDataAppender.setEncoder(new AutoEncoder());
 		}
-		
+
 		this.dataScalingAppender.removeAll();
 
 	}
 
-	public void removeEncoder() {		
+	public void removeEncoder() {
 		this.scatterPlotDataAppender.removeEncoder();
 	}
 
-	public void setEncoder(IEncoder encoder) {		
-		this.scatterPlotDataAppender.setEncoder(encoder);		
+	public void setEncoder(IEncoder encoder) {
+		this.scatterPlotDataAppender.setEncoder(encoder);
 	}
 
 	public void addSolidFill(SolidFill sf) {
@@ -385,5 +383,23 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 	public boolean removeSolidFill(SolidFill sf) {
 		return this.solidFillAppender.remove(sf);
+	}
+	public ChartMargin getChartMargin() {
+		return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeChartMargin() {
+		this.chartMarginAppender.removeAll();
+
+	}
+
+	public void setChartMargin(ChartMargin cm) {
+		if (cm == null) {
+			this.chartMarginAppender.removeAll();
+		} else {
+			this.chartMarginAppender.add(cm);
+		}
 	}
 }

@@ -1,6 +1,7 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.color.ChartColors;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
@@ -12,10 +13,12 @@ import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.GoogleOMeterValue;
 import googlechartwrapper.data.GoogleOMeterValueAppender;
 import googlechartwrapper.data.ISingleDataScaleable;
+import googlechartwrapper.interfaces.IColorable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
+import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
@@ -31,7 +34,7 @@ import java.util.List;
  * 
  */
 public class GoogleOMeter extends AbstractChart implements ISolidFillable,
-		ISingleDataScaleable, ILinearable, IChartLegendable {
+		ISingleDataScaleable, ILinearable, IChartLegendable, IColorable{
 
 	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
 			ChartTypeFeature.SolidFill);
@@ -46,6 +49,10 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<LinearStripes> linearStripesAppender = new UpperLimitGenericAppender<LinearStripes>(
 			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
+	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+			ChartTypeFeature.ChartColor, ",");
+	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
+			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
 	
 	public GoogleOMeter(Dimension chartDimension) {
 		super(chartDimension);
@@ -237,5 +244,50 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 		}
 		this.chartLegendAppender.add(legend);
 
+	}
+
+	public void addChartColor(ChartColors cc) {
+
+		this.chartColorAppender.add(cc);
+	}
+
+	public List<ChartColors> getChartColors() {
+
+		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
+				.getList()
+				: null;
+	}
+
+	public void removeAllChartColors() {
+		this.chartColorAppender.removeAll();
+
+	}
+
+	public ChartColors removeChartColors(int index) {
+
+		return this.chartColorAppender.remove(index);
+	}
+
+	public boolean removeChartColors(ChartColors cc) {
+
+		return this.chartColorAppender.remove(cc);
+	}
+	public ChartMargin getChartMargin() {
+		return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeChartMargin() {
+		this.chartMarginAppender.removeAll();
+
+	}
+
+	public void setChartMargin(ChartMargin cm) {
+		if (cm == null) {
+			this.chartMarginAppender.removeAll();
+		} else {
+			this.chartMarginAppender.add(cm);
+		}
 	}
 }

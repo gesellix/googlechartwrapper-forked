@@ -90,6 +90,6 @@ public class ScatterPlotTest {
 		String target = "http://chart.apis.google.com/chart?cht=s&chs=600x450&chd=t:100,200,100,150,140,130,120,110|100,200,200,50,50,50,50,50|200,100,3000,240,230,220,210,200&chdl=first|second&chds=0.0,200.0&chf=c,lg,12,0000ff,0.1,ffc800,0.7|bg,s,000000&chtt=ScatterPlot&chts=ffffff,12";
 		
 		Assert.assertEquals(target, plot.getUrl());
-	}
+	}	
 
 }

@@ -5,6 +5,7 @@ package googlechartwrapper.interfaces;
 
 import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.ISolidFillable;
+import googlechartwrapper.style.IChartMarginable;
 
 /**
  * The interface provides the two top level interfaces {@link IChartColorable} and {@link ISolidFillable}, used
@@ -13,6 +14,6 @@ import googlechartwrapper.color.ISolidFillable;
  * @author steffan
  *
  */
-public interface IColorable extends IChartColorable, ISolidFillable{
+public interface IColorable extends IChartColorable, ISolidFillable, IChartMarginable{
 
 }

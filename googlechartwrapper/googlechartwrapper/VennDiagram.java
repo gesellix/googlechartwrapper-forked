@@ -18,6 +18,7 @@ import googlechartwrapper.interfaces.IPercentageScaleable;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
+import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
@@ -50,6 +51,8 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 			ChartTypeFeature.DataScaling, 1, UpperLimitReactions.RemoveFirst);
 	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
 			ChartTypeFeature.SolidFill);
+	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
+			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
 
 	/**
 	 * Constructs a venn diagram
@@ -249,5 +252,24 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 	public boolean removeSolidFill(SolidFill sf) {
 		return this.solidFillAppender.remove(sf);
 	}
+	public ChartMargin getChartMargin() {
+		return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeChartMargin() {
+		this.chartMarginAppender.removeAll();
+
+	}
+
+	public void setChartMargin(ChartMargin cm) {
+		if (cm == null) {
+			this.chartMarginAppender.removeAll();
+		} else {
+			this.chartMarginAppender.add(cm);
+		}
+	}
+
 
 }

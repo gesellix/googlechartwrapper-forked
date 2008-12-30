@@ -4,8 +4,6 @@ import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.color.ChartColors;
-import googlechartwrapper.color.ILinearGradientable;
-import googlechartwrapper.color.ILinearStripeable;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripes;
@@ -15,11 +13,12 @@ import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.data.PieChartSliceAppender;
 import googlechartwrapper.interfaces.IColorable;
+import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IPercentageScaleable;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
-import googlechartwrapper.label.IChartTitleable;
+import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.PrimitivesAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender;
@@ -29,17 +28,18 @@ import java.awt.Dimension;
 import java.util.List;
 
 /**
- * Specifies a PieChart
- * <a href="http://code.google.com/intl/de-DE/apis/chart/types.html#pie_charts">
+ * Specifies a PieChart <a
+ * href="http://code.google.com/intl/de-DE/apis/chart/types.html#pie_charts">
  * http://code.google.com/intl/de-DE/apis/chart/types.html#pie_charts</a>
+ * 
  * @author martin
  * @author steffan
- *
+ * 
  */
-public class PieChart extends AbstractChart implements ISolidFillable,
-		ILinearGradientable, ILinearStripeable, IChartTitleable, IPercentageScaleable, IColorable, IChartLegendable{
+public class PieChart extends AbstractChart implements ISolidFillable,		 
+		IPercentageScaleable, IColorable, IChartLegendable, ILinearable {
 
-	private boolean threeD;	
+	private boolean threeD;
 	protected PieChartSliceAppender dataAppender = new PieChartSliceAppender();
 	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
 			ChartTypeFeature.SolidFill);
@@ -53,7 +53,9 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
 	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
 			ChartTypeFeature.ChartColor, ",");
-	
+	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
+			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
+
 	protected PrimitivesAppender<Float> pieChartOrientationAppender = new PrimitivesAppender<Float>(
 			ChartTypeFeature.PieChartOrientation);
 
@@ -208,17 +210,21 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 		}
 
 	}
-	
+
 	public LinearStripes getLinearStripes() {
 
-		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender.getList().get(0) : null;
+		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
+				.getList().get(0)
+				: null;
 	}
 
 	public LinearGradient getLinearGradient() {
-		
-		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender.getList().get(0) : null;
+
+		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender
+				.getList().get(0)
+				: null;
 	}
-	
+
 	public void setPercentageScaling(boolean b) {
 
 		if (b) {
@@ -226,7 +232,7 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 		} else {
 			this.dataAppender.setEncoder(new AutoEncoder());
 		}
-		
+
 	}
 
 	public void addChartColor(ChartColors cc) {
@@ -271,27 +277,49 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 	}
 
 	public void setChartLegend(ChartLegend legend) {
-		
-		if(legend == null){
+
+		if (legend == null) {
 			this.removeChartLegend();
 		}
 		this.chartLegendAppender.add(legend);
 
 	}
+
 	/**
 	 * Sets the pie chart orientation.
 	 * 
-	 * @param angle number as radian
+	 * @param angle
+	 *            number as radian
 	 */
-	public void setPieChartOrientation(float angle){
-				
+	public void setPieChartOrientation(float angle) {
+
 		this.pieChartOrientationAppender.set(angle);
 	}
+
 	/**
 	 * Removes the pie chart orientation.
 	 */
-	public void removePieChartOrientation(){
+	public void removePieChartOrientation() {
 		this.pieChartOrientationAppender.removeAll();
+	}
+
+	public ChartMargin getChartMargin() {
+		return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeChartMargin() {
+		this.chartMarginAppender.removeAll();
+
+	}
+
+	public void setChartMargin(ChartMargin cm) {
+		if (cm == null) {
+			this.chartMarginAppender.removeAll();
+		} else {
+			this.chartMarginAppender.add(cm);
+		}
 	}
 
 }

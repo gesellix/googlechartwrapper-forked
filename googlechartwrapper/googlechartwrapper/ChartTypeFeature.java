@@ -20,7 +20,9 @@ public enum ChartTypeFeature {
 	ChartData("chd"),
 	ChartColor("chco"),
 	DataScaling("chds"),
-	PieChartOrientation("chp");
+	PieChartOrientation("chp"),
+	ChartMargin("chma"),
+	LineStyle("chls");
 	
 	
 	private String prefix;

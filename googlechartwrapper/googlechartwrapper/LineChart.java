@@ -16,9 +16,9 @@ import googlechartwrapper.interfaces.IStyleable;
 import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartTitle;
+import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
-
 import googlechartwrapper.style.LineStyle;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
@@ -52,6 +52,15 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 	    protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(ChartTypeFeature.SolidFill);
 	    protected UpperLimitGenericAppender<ChartTitle>  chartTitleAppender =
 	    	new UpperLimitGenericAppender<ChartTitle>(ChartTypeFeature.ChartTitle, 1,UpperLimitReactions.RemoveFirst);
+		protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
+				ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
+		protected UpperLimitGenericAppender<LinearStripes> linearStripesAppender = new UpperLimitGenericAppender<LinearStripes>(
+				ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
+		protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+				ChartTypeFeature.ChartColor, ",");
+		protected GenericAppender<LineStyle> lineStyleAppender = new GenericAppender<LineStyle>(
+				ChartTypeFeature.LineStyle, ",");
+		
 	    
 	    protected AxisLabelAppender axisLabelAppender = 
 			new AxisLabelAppender();
@@ -170,11 +179,7 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 			this.linearGradientAppender.removeAll();
 			
 		}
-
-		public void setLinearGradient(LinearGradient lg) {
-			this.linearGradientAppender.add(lg);
-			
-		}
+	
 
 		public void addFillArea(FillArea fa) {
 			this.fillAreaAppender.add(fa);
@@ -262,28 +267,37 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 		}
 
 		public GridLine getGridLine() {
-			// TODO Auto-generated method stub
-			return null;
+
+			return this.gridLineAppender.getList().size() > 0 ? this.gridLineAppender.getList()
+					.get(0) : null;
 		}
 
 		public ChartTitle getChartTitle() {
-			// TODO Auto-generated method stub
-			return null;
+
+			return this.chartTitleAppender.getList().size() > 0 ? this.chartTitleAppender.getList().get(0)
+					: null;
+		}
+
+		
+
+		public void setLinearGradient(LinearGradient lg) {
+			if (lg == null) {
+				linearGradientAppender.removeAll();
+				return;
+			} else {
+				this.linearGradientAppender.add(lg);
+			}
 		}
 
 		public LinearStripes getLinearStripes() {
-			// TODO Auto-generated method stub
-			return null;
+
+			return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
+					.getList().get(0)
+					: null;
 		}
 
 		public void removeLinearStripes() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void setLinearStripes(LinearStripes ls) {
-			// TODO Auto-generated method stub
-			
+			linearStripesAppender.removeAll();
 		}
 
 		public DataScalingSet getDataScaling() {
@@ -297,24 +311,28 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 		}
 	
 
+		public void addLineStyle(LineStyle lineStyle) {
+			this.lineStyleAppender.add(lineStyle);
+			
+		}
+
 		public List<LineStyle> getLineStyles() {
-			// TODO Auto-generated method stub
-			return null;
+			return this.lineStyleAppender.getList();
 		}
 
 		public void removeAllLineStyles() {
-			// TODO Auto-generated method stub
+			this.lineStyleAppender.removeAll();
 			
 		}
 
 		public LineStyle removeLineStyle(int index) {
-			// TODO Auto-generated method stub
-			return null;
+			
+			return this.lineStyleAppender.remove(index);
 		}
 
 		public boolean removeLineStyle(LineStyle lineStyle) {
-			// TODO Auto-generated method stub
-			return false;
+			
+			return this.lineStyleAppender.remove(lineStyle);
 		}
 
 		public IEncoder getEncoder() {
@@ -323,19 +341,17 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 		}
 
 		public LinearGradient getLinearGradient() {
-			// TODO Auto-generated method stub
-			return null;
+
+			return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender
+					.getList().get(0)
+					: null;
 		}
 
 		public void removeDataScaling() {
 			// TODO Auto-generated method stub
 			
 		}
-
-		public void addLineStyle(LineStyle lineStyle) {
-			// TODO Auto-generated method stub
-			
-		}
+		
 
 		public void addDataScalingSet(DataScalingSet ds) {
 			// TODO Auto-generated method stub
@@ -363,29 +379,60 @@ public class LineChart extends AbstractChart implements IMarkable,ILinearable,IS
 		}
 
 		public void addChartColor(ChartColors cc) {
-			// TODO Auto-generated method stub
-			
+
+			this.chartColorAppender.add(cc);
 		}
 
 		public List<ChartColors> getChartColors() {
-			// TODO Auto-generated method stub
-			return null;
+
+			return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
+					.getList()
+					: null;
 		}
 
 		public void removeAllChartColors() {
-			// TODO Auto-generated method stub
-			
+			this.chartColorAppender.removeAll();
+
 		}
 
 		public ChartColors removeChartColors(int index) {
-			// TODO Auto-generated method stub
-			return null;
+
+			return this.chartColorAppender.remove(index);
 		}
 
 		public boolean removeChartColors(ChartColors cc) {
-			// TODO Auto-generated method stub
-			return false;
+
+			return this.chartColorAppender.remove(cc);
 		}
+		public ChartMargin getChartMargin() {
+			return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
+					.getList().get(0)
+					: null;
+		}
+
+		public void removeChartMargin() {
+			this.chartMarginAppender.removeAll();
+
+		}
+
+		public void setChartMargin(ChartMargin cm) {
+			if (cm == null) {
+				this.chartMarginAppender.removeAll();
+			} else {
+				this.chartMarginAppender.add(cm);
+			}
+		}
+
+		public void setLinearStripes(LinearStripes ls) {
+			if (ls == null) {
+				linearStripesAppender.removeAll();
+				return;
+			}
+			else{
+			this.linearStripesAppender.add(ls);
+			}
+		}
+
 
 		
 }

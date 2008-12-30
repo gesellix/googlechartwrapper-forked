@@ -16,6 +16,7 @@ import googlechartwrapper.interfaces.IStyleable;
 import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartTitle;
+import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
 import googlechartwrapper.style.LineStyle;
@@ -55,6 +56,10 @@ ISolidFillable, IMultiDataScaleable, IColorable{
     protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(ChartTypeFeature.SolidFill);
     protected UpperLimitGenericAppender<ChartTitle>  chartTitleAppender =
     	new UpperLimitGenericAppender<ChartTitle>(ChartTypeFeature.ChartTitle, 1,UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
+			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<LinearStripes> linearStripesAppender = new UpperLimitGenericAppender<LinearStripes>(
+			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
     
     protected AxisLabelAppender axisLabelAppender = 
 		new AxisLabelAppender();
@@ -198,11 +203,7 @@ ISolidFillable, IMultiDataScaleable, IColorable{
 		
 	}
 
-	public void setLinearGradient(LinearGradient lg) {
-		this.linearGradientAppender.add(lg);
-		
-	}
-
+	
 	public void addFillArea(FillArea fa) {
 		this.fillAreaAppender.add(fa);
 		
@@ -288,14 +289,26 @@ ISolidFillable, IMultiDataScaleable, IColorable{
 		
 	}
 
-	public void removeLinearStripes() {
-		// TODO Auto-generated method stub
-		
+	
+
+	public void setLinearGradient(LinearGradient lg) {
+		if (lg == null) {
+			linearGradientAppender.removeAll();
+			return;
+		} else {
+			this.linearGradientAppender.add(lg);
+		}
 	}
 
-	public void setLinearStripes(LinearStripes ls) {
-		// TODO Auto-generated method stub
-		
+	public LinearStripes getLinearStripes() {
+
+		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeLinearStripes() {
+		linearStripesAppender.removeAll();
 	}
 
 	
@@ -335,10 +348,7 @@ ISolidFillable, IMultiDataScaleable, IColorable{
 		return null;
 	}
 
-	public LinearStripes getLinearStripes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	public DataScalingSet getDataScaling() {
 		// TODO Auto-generated method stub
@@ -413,6 +423,34 @@ ISolidFillable, IMultiDataScaleable, IColorable{
 	public boolean removeChartColors(ChartColors cc) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	public ChartMargin getChartMargin() {
+		return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeChartMargin() {
+		this.chartMarginAppender.removeAll();
+
+	}
+
+	public void setChartMargin(ChartMargin cm) {
+		if (cm == null) {
+			this.chartMarginAppender.removeAll();
+		} else {
+			this.chartMarginAppender.add(cm);
+		}
+	}
+
+	public void setLinearStripes(LinearStripes ls) {
+		if (ls == null) {
+			linearStripesAppender.removeAll();
+			return;
+		}
+		else{
+		this.linearStripesAppender.add(ls);
+		}
 	}
 
 	
