@@ -48,7 +48,8 @@ public class RadarChartTest {
 				Color.ORANGE.getRed(), Color.ORANGE.getGreen(), Color.ORANGE
 						.getBlue(), 80), 0, 1));
 
-		chart.setGridLine(new GridLine(25, 25));
+		
+		chart.setGridLine(new GridLine.Builder(25,25).build());
 
 		chart.setChartTitle(new ChartTitle("Java Google Chart Wrapper"));
 

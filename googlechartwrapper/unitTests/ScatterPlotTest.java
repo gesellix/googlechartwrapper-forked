@@ -10,6 +10,7 @@ import googlechartwrapper.data.ScatterPlotData;
 import googlechartwrapper.data.ScatterPlotPoint;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
+import googlechartwrapper.style.GridLine;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -44,8 +45,11 @@ public class ScatterPlotTest {
 		
 		s.setScatterPlotData(new ScatterPlotData(p));		
 		
+		//builder pattern in action
+		s.setGridLine(new GridLine.Builder(30,15).segment(12, 2).offset(25, 25).build());
 		
-		String target = "http://chart.apis.google.com/chart?cht=s&chs=300x300&chd=e:H0O2ISK8H0,DIO2GkNSH0&chtt=Simple ScatterPlot&chts=808080,12";
+		
+		String target = "http://chart.apis.google.com/chart?cht=s&chs=300x300&chd=e:H0O2ISK8H0,DIO2GkNSH0&chg=30.0,15.0,12.0,12.0,25.0,25.0&chtt=Simple ScatterPlot&chts=808080,12";
 		
 		Assert.assertEquals(target, s.getUrl());
 		

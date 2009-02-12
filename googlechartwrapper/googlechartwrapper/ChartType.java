@@ -8,7 +8,7 @@ package googlechartwrapper;
 public enum ChartType {
 	
 	  	LineChart("lc"),
-	  	LineChartPair("lxy"),
+	  	LineChartPair("lxy"),	  	
 	  	SparkLine("ls"),
 	    ScatterPlot("s"),
 	    BarChartStackedH("bhs"),

@@ -22,7 +22,8 @@ public enum ChartTypeFeature {
 	DataScaling("chds"),
 	PieChartOrientation("chp"),
 	ChartMargin("chma"),
-	LineStyle("chls");
+	LineStyle("chls"),
+	BarWidthAndSpacing("chbh");
 	
 	
 	private String prefix;
