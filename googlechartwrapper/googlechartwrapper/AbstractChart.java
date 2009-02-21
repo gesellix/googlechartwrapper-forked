@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -119,7 +120,14 @@ public abstract class AbstractChart implements Chart {
 		List<IExtendedFeatureAppender> allExtendedFeatureAppenders = 
 			new ArrayList<IExtendedFeatureAppender>(5); 
 		
-		Field[] fields = this.getClass().getDeclaredFields(); //alle Felder
+		List<Field> fields = new ArrayList<Field>(); //every field (appenders)
+		fields.addAll(Arrays.asList(this.getClass().getDeclaredFields()));
+		Class current = this.getClass().getSuperclass(); //to deal with inheritance
+		if (current.getSuperclass()!= null){
+			fields.addAll(Arrays.asList(current.getDeclaredFields()));
+			current = current.getSuperclass();
+		}
+		//Field[] fields = this.getClass().getDeclaredFields(); //alle Felder
 		
 		for (Field f: fields){
 			if (ArrayUtils.linearSearch(f.getType().getInterfaces(), IExtendedFeatureAppender.class)>=0){
