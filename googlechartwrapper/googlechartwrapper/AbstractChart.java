@@ -123,7 +123,7 @@ public abstract class AbstractChart implements Chart {
 		List<Field> fields = new ArrayList<Field>(); //every field (appenders)
 		fields.addAll(Arrays.asList(this.getClass().getDeclaredFields()));
 		Class current = this.getClass().getSuperclass(); //to deal with inheritance
-		if (current.getSuperclass()!= null){
+		while (current.getSuperclass()!= null){
 			fields.addAll(Arrays.asList(current.getDeclaredFields()));
 			current = current.getSuperclass();
 		}
