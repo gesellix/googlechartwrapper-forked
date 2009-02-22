@@ -26,6 +26,7 @@ public enum ChartTypeFeature {
 	BarWidthAndSpacing("chbh");
 	
 	
+	
 	private String prefix;
 		
 	ChartTypeFeature(String prefix) {

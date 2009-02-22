@@ -10,6 +10,8 @@ import googlechartwrapper.util.IFeatureAppender;
  * http
  * ://code.google.com/intl/de-DE/apis/chart/styles.html#financial_markers</a>
  * <br />
+ * <h2>Important</h2> <br />
+ * You need 4 datasets. <br />
  * <b>Note</b> <br />
  * To draw financial markers, your chart must include at least four data sets. The bottom of the vertical line is drawn on the data set provided in the <data set index>. The bottom of the rectangle is drawn on the next data set. The top of the rectangle is drawn on the data set which has an index of <data set index> + 2, and the top of the vertical line is drawn on the data set which has an index of <data set index> + 3.
  * 
@@ -26,7 +28,7 @@ public class FinancialMarker implements IFeatureAppender {
 	private int size;
 
 	/**
-	 * Constructs a shapemarker.
+	 * Constructs a financialMarker.
 	 * 
 	 * @param dataSetIndex value >=0
 	 * @param dataPoint {@link DataPoint} can build all dataPoints
@@ -88,6 +90,7 @@ public class FinancialMarker implements IFeatureAppender {
 
 		StringBuilder builder = new StringBuilder();
 
+		builder.append("F,");
 		// optional
 		if (color != null) {
 			builder.append(Integer.toHexString(this.color.getRGB()).substring(

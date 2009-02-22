@@ -46,7 +46,7 @@ public class ScatterPlotTest {
 		s.setScatterPlotData(new ScatterPlotData(p));		
 		
 		//builder pattern in action
-		s.setGridLine(new GridLine.Builder(30,15).segment(12, 2).offset(25, 25).build());
+		s.setGridLine(new GridLine.GridLineBuilder(30,15).segment(12, 2).offset(25, 25).build());
 		
 		
 		String target = "http://chart.apis.google.com/chart?cht=s&chs=300x300&chd=e:H0O2ISK8H0,DIO2GkNSH0&chg=30.0,15.0,12.0,12.0,25.0,25.0&chtt=Simple ScatterPlot&chts=808080,12";

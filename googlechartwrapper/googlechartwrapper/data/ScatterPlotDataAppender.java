@@ -14,8 +14,9 @@ import java.util.List;
 /**
  * Appender for scatterplot data. If none of the provided individual 
  * {@link ScatterPlotPoint}s has an user set size, the 
- * 3rd data set (size) is ommited. That means, that for any 
+ * 3rd data set (size) is omitted. That means, that for any 
  * {@link ScatterPlotPoint#isSizeSet()} call <code>false</code> is returned.
+ * 
  * @author steffan
  *
  */
@@ -76,12 +77,12 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 			if(isSizeGiven){
 				data.add(valuesSize);
 				
-				//in this case we return and encode mit | because, if we have 3 blocks, we need the | separator
+				//in this case we return and encode with | because, if we have 3 blocks, we need the | separator
 				builder.append(this.encoder.encodeIntegerCollection(data,"|"));
 				
 				return builder.toString();
 			}
-			//in the other case we separat with ,, becasue we have only 2 value blocks
+			//in the other case we separate with ,, because we have only 2 value blocks
 			builder.append(this.encoder.encodeIntegerCollection(data,","));
 						
 			return builder.toString();

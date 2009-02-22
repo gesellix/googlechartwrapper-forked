@@ -9,7 +9,7 @@ import java.util.List;
  * href="http://code.google.com/intl/de-DE/apis/chart/styles.html#grid>
  * http://code.google.com/intl/de-DE/apis/chart/styles.html#grid</a>
  * <br />
- * To construct a {@link GridLine}{@link #GridLine(Builder)} you have to use the builder pattern {@link Builder}.
+ * To construct a {@link GridLine}{@link #GridLine(GridLineBuilder)} you have to use the builder pattern {@link GridLineBuilder}.
  * 
  * @author steffan
  *  
@@ -26,7 +26,7 @@ public class GridLine implements IFeatureAppender {
 	private float xOffset;
 	private float yOffset;
 
-	public GridLine(Builder builder) {
+	public GridLine(GridLineBuilder builder) {
 
 		this.xAxisStepSize = builder.xAxisStepSize;
 		this.yAxisStepSize = builder.yAxisStepSize;
@@ -124,7 +124,7 @@ public class GridLine implements IFeatureAppender {
 	}
 
 	/**
-	 * <b>Important</b> You must also call {@link Builder}{@link #segment(float, float)}.
+	 * <b>Important</b> You must also call {@link GridLineBuilder}{@link #segment(float, float)}.
 	 * 
 	 * @param xOffset
 	 * @param yOffset
@@ -211,12 +211,12 @@ public class GridLine implements IFeatureAppender {
 	}
 
 	/**
-	 * Provides the builder, necessary for {@link GridLine#GridLine(Builder)}.
+	 * Provides the builder, necessary for {@link GridLine#GridLine(GridLineBuilder)}.
 	 * 
 	 * @author steffan
 	 * 
 	 */
-	public static class Builder {
+	public static class GridLineBuilder {
 
 		// required
 		private float xAxisStepSize;
@@ -243,7 +243,7 @@ public class GridLine implements IFeatureAppender {
 		 * @throws IllegalArgumentException
 		 *             if xAxisStepSize < 0 and/or yAxisStepSize < 0
 		 */
-		public Builder(float xAxisStepSize, float yAxisStepSize) {
+		public GridLineBuilder(float xAxisStepSize, float yAxisStepSize) {
 
 			if (xAxisStepSize < 0)
 				throw new IllegalArgumentException(
@@ -266,12 +266,12 @@ public class GridLine implements IFeatureAppender {
 		 *            value > 0
 		 * @param lengthBlankSegment
 		 *            - 0 (default) for solid line
-		 * @return {@link Builder}
+		 * @return {@link GridLineBuilder}
 		 * 
 		 * @throws IllegalArgumentException
 		 *             if lengthLineSegment < 0 and/or lengthBlankSegment < 0
 		 */
-		public Builder segment(float lengthLineSegment, float lengthBlankSegment) {
+		public GridLineBuilder segment(float lengthLineSegment, float lengthBlankSegment) {
 
 			if (lengthBlankSegment < 0)
 				throw new IllegalArgumentException(
@@ -292,19 +292,19 @@ public class GridLine implements IFeatureAppender {
 		 * 
 		 * Note parameters have only a single decimal place, if the are longer,
 		 * they will be cut. <br />
-		 * <b>Important</b> You must also call {@link Builder}{@link #segment(float, float)}.
+		 * <b>Important</b> You must also call {@link GridLineBuilder}{@link #segment(float, float)}.
 		 * 
 		 * 
 		 * @param xOffset
 		 *            value >= 0
 		 * @param yOffset
 		 *            value >= 0
-		 * @return {@link Builder}
+		 * @return {@link GridLineBuilder}
 		 * 
 		 * @throws IllegalArgumentException
 		 *             if xOffset < 0 and/or yOffset < 0
 		 */
-		public Builder offset(float xOffset, float yOffset) {
+		public GridLineBuilder offset(float xOffset, float yOffset) {
 
 			if (xOffset < 0)
 				throw new IllegalArgumentException("xOffset can not be < 0");

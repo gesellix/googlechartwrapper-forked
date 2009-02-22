@@ -49,7 +49,7 @@ public class RadarChartTest {
 						.getBlue(), 80), 0, 1));
 
 		
-		chart.setGridLine(new GridLine.Builder(25,25).build());
+		chart.setGridLine(new GridLine.GridLineBuilder(25,25).build());
 
 		chart.setChartTitle(new ChartTitle("Java Google Chart Wrapper"));
 

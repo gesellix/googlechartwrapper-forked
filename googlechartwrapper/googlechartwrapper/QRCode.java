@@ -6,8 +6,8 @@ import java.awt.Dimension;
 
 /**
  * 
- * Specifies a bar chart <a href="http://code.google.com/apis/chart/#qrcodes">
- * http://code.google.com/apis/chart/#qrcodes</a>
+ * Specifies a qrcodes <a href="http://code.google.com/intl/de-DE/apis/chart/types.html#qrcodes">
+ * http://code.google.com/intl/de-DE/apis/chart/types.html#qrcodes</a>
  * 
  * @author steffan
  * 

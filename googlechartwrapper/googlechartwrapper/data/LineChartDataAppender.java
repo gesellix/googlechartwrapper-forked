@@ -1,43 +1,105 @@
 package googlechartwrapper.data;
 
-import java.util.List;
-
+import googlechartwrapper.ChartTypeFeature;
+import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * 
  * @author steffan
- *
+ * 
  */
-public class LineChartDataAppender implements IExtendedFeatureAppender, IEncodeable{
+public class LineChartDataAppender implements IExtendedFeatureAppender,
+		IEncodeable {
+
+	private IEncoder encoder = new AutoEncoder();
+	private List<LineChartData> data = new ArrayList<LineChartData>();
 
 	public String getFeaturePrefix() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return ChartTypeFeature.ChartData.getPrefix();
 	}
 
+	/**
+	 * 
+	 * @param data
+	 * 
+	 * @throws IllegalArgumentException if data is {@code null}
+	 */
+	public void addLineChartData(LineChartData data) {		
+		if(data == null)
+			throw new IllegalArgumentException("data can not be nulll");
+		this.data.add(data);				
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * 
+	 * @throws IllegalArgumentException if collection is {@code null} or value is {@code null}
+	 */
+	public void addLineChartData(List<LineChartData> data){
+		
+		if(data == null){
+			throw new IllegalArgumentException("data can not be null");
+		}
+		else{
+		for(LineChartData temp : Collections.unmodifiableCollection(data)){
+			if(temp == null)
+				throw new IllegalArgumentException("value can not be null");
+		}
+		this.data.addAll(Collections.unmodifiableList(data));
+		}
+	}
 	public String getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		StringBuilder builder = new StringBuilder();
+		
+		//TODO
+		List<int[]> data = new LinkedList<int[]>();
+		
+		for(int z = 0; z < this.data.size(); z++){
+			
+			int values[] = new int[this.data.get(z).getDataSet().size()]; 
+			//copy elements
+			for(int u = 0; u< this.data.get(z).getDataSet().size(); u++){
+				values[u] = this.data.get(z).getDataSet().get(u);
+			}
+			data.add(values);
+		}
+		
+		builder.append(this.encoder.encodeIntegerCollection(data,","));
+		
+		return builder.toString();
 	}
 
 	public IEncoder getEncoder() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return this.encoder;
 	}
 
 	public void removeEncoder() {
-		// TODO Auto-generated method stub
-		
+		this.encoder = new AutoEncoder();
+
 	}
 
 	public void setEncoder(IEncoder encoder) {
-		// TODO Auto-generated method stub
-		
+
+		this.encoder = encoder;
+
+		if (encoder == null) {
+			this.encoder = new AutoEncoder();
+		}
+
 	}
 
 }

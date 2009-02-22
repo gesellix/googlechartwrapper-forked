@@ -1,16 +1,15 @@
 package unitTests;
 
-import static org.junit.Assert.*;
-
-import java.awt.Color;
-import java.awt.Dimension;
-
+import static org.junit.Assert.assertEquals;
 import googlechartwrapper.PieChart;
 import googlechartwrapper.color.LinearStripes;
 import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.style.ChartMargin;
+
+import java.awt.Color;
+import java.awt.Dimension;
 
 import org.junit.Test;
 
