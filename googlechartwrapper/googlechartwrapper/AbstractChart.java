@@ -51,12 +51,19 @@ public abstract class AbstractChart implements Chart {
 	/**
 	 * Generates an AbstractChart with the given chartDimension.
 	 * @param chartDimension size of the chart in pixel
-	 * @throws IllegalArgumentException if chartDimension == null
+	 * 
+	 * @throws IllegalArgumentException if chartDimension is {@code null}
+	 * @throws IllegalArgumentException if height > 1000 and/or weight > 1000
+	 * @throws IllegalArgumentException if area is > 300000
 	 */
 	public AbstractChart(Dimension chartDimension) {
 		
 		if(chartDimension == null)
 			throw new IllegalArgumentException("chartDimension can not be null");
+		if(chartDimension.getHeight() > 1000 || chartDimension.getWidth() > 1000)
+			throw new IllegalArgumentException("height and/or width can not be > 1000");
+		if((chartDimension.getHeight()*chartDimension.getWidth()) > 300000)
+			throw new IllegalArgumentException("the largest possible area can not be > 300000");
 		this.chartDimension = chartDimension;
 	}
 
@@ -122,7 +129,7 @@ public abstract class AbstractChart implements Chart {
 		
 		List<Field> fields = new ArrayList<Field>(); //every field (appenders)
 		fields.addAll(Arrays.asList(this.getClass().getDeclaredFields()));
-		Class current = this.getClass().getSuperclass(); //to deal with inheritance
+		Class<?> current = this.getClass().getSuperclass(); //to deal with inheritance
 		while (current.getSuperclass()!= null){
 			fields.addAll(Arrays.asList(current.getDeclaredFields()));
 			current = current.getSuperclass();

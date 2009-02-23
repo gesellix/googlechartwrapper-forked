@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 public class LineChartData {
-
+//TODO LineStyle
 	private List<Integer> dataSet = null;
 	private Color color = null;
 	private String label = null;

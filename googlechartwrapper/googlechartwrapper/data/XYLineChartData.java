@@ -13,7 +13,7 @@ import java.util.List;
  *
  */
 public class XYLineChartData {
-	
+	//TODO LineStyle
 	private Pair<List<Integer>, List<Integer>> dataSet = null;
 	private Color color = null;
 	private String label = null;

@@ -127,7 +127,10 @@ public class QRCode extends AbstractChart {
 
 		return ChartType.QRCode.getPrefix();
 	}
-
+	
+	/**
+	 * Does not make sense in this case, return always {@code null}.
+	 */
 	public IEncoder getEncoder() {
 
 		return null;

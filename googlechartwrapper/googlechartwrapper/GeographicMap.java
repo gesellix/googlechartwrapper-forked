@@ -1,6 +1,8 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.color.ChartColors;
+import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.SolidFill.ChartFillDestination;
@@ -12,18 +14,21 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Specifies a map <a href="http://code.google.com/apis/chart/#map">
- * http://code.google.com/apis/chart/#map</a> with geographic areas found in 
+ * Specifies a map <a href="http://code.google.com/apis/chart/types.html#maps">
+ * http://code.google.com/apis/chart/types.html#maps</a> with geographic areas found in 
  * @author martin
+ * @author steffan
  * @deprecated unfinished class
  *
  */
-public class GeographicMap extends AbstractChart implements ISolidFillable{
+public class GeographicMap extends AbstractChart implements ISolidFillable, IChartColorable{
 	
 	private GeographicalArea area;
 	private Collection<String> coloredStates;
 	protected GenericAppender<SolidFill> solidFill = 
-		new GenericAppender<SolidFill>("chf");
+		new GenericAppender<SolidFill>(ChartTypeFeature.SolidFill);
+	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+			ChartTypeFeature.ChartColor, ",");
 	
 	public enum GeographicalArea {
 		AFRICA,
@@ -68,7 +73,7 @@ public class GeographicMap extends AbstractChart implements ISolidFillable{
 
 	@Override
 	protected String getUrlChartType() {
-		return "t"; //cht=t and chtm=<geographical area>
+		return ChartType.Map.getPrefix();
 	}
 	
 	/**
@@ -151,5 +156,32 @@ public class GeographicMap extends AbstractChart implements ISolidFillable{
 	public IEncoder getEncoder() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void addChartColor(ChartColors cc) {
+
+		this.chartColorAppender.add(cc);
+	}
+
+	public List<ChartColors> getChartColors() {
+
+		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
+				.getList()
+				: null;
+	}
+
+	public void removeAllChartColors() {
+		this.chartColorAppender.removeAll();
+
+	}
+
+	public ChartColors removeChartColors(int index) {
+
+		return this.chartColorAppender.remove(index);
+	}
+
+	public boolean removeChartColors(ChartColors cc) {
+
+		return this.chartColorAppender.remove(cc);
 	}
 }

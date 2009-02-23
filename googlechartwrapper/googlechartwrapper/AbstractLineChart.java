@@ -70,6 +70,8 @@ public abstract class AbstractLineChart extends AbstractChart implements
 			ChartTypeFeature.LineStyle, ",");
 	protected GenericAppender<FinancialMarker> financialMarker = new GenericAppender<FinancialMarker>(
 			ChartTypeFeature.Marker);
+	protected UpperLimitGenericAppender<DataScalingSet> dataScalingAppender = new UpperLimitGenericAppender<DataScalingSet>(
+			ChartTypeFeature.DataScaling, 1, UpperLimitReactions.RemoveFirst);
 
 	protected AxisLabelAppender axisLabelAppender = new AxisLabelAppender();
 
@@ -273,16 +275,6 @@ public abstract class AbstractLineChart extends AbstractChart implements
 		linearStripesAppender.removeAll();
 	}
 
-	public DataScalingSet getDataScaling() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setDataScaling(DataScalingSet ds) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void addLineStyle(LineStyle lineStyle) {
 		this.lineStyleAppender.add(lineStyle);
 
@@ -307,46 +299,13 @@ public abstract class AbstractLineChart extends AbstractChart implements
 		return this.lineStyleAppender.remove(lineStyle);
 	}
 
-	public IEncoder getEncoder() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract IEncoder getEncoder();
 
 	public LinearGradient getLinearGradient() {
 
 		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender
 				.getList().get(0)
 				: null;
-	}
-
-	public void removeDataScaling() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void addDataScalingSet(DataScalingSet ds) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public List<DataScalingSet> getDataScalings() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void removeAllDataScalings() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public DataScalingSet removeDataScalingSet(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean removeDataScalingSet(DataScalingSet set) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	public void addChartColor(ChartColors cc) {
@@ -428,6 +387,30 @@ public abstract class AbstractLineChart extends AbstractChart implements
 	public FinancialMarker removeFinancialMarker(int index) {
 
 		return this.financialMarker.remove(index);
+	}
+
+	public abstract void addDataScalingSet(DataScalingSet ds);
+
+	public List<DataScalingSet> getDataScalings() {
+
+		return this.dataScalingAppender.getList().size() > 0 ? this.dataScalingAppender
+				.getList()
+				: null;
+	}
+
+	/**
+	 * Removes all datascalings and sets the default encoder.
+	 * 
+	 * @see ScatterPlot#getEncoder()
+	 */
+	public abstract void removeAllDataScalings();
+
+	public DataScalingSet removeDataScalingSet(int index) {
+		return this.dataScalingAppender.remove(index);
+	}
+
+	public boolean removeDataScalingSet(DataScalingSet set) {
+		return this.dataScalingAppender.remove(set);
 	}
 
 }

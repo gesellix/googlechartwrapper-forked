@@ -47,5 +47,25 @@ String target = "http://chart.apis.google.com/chart?cht=s&chs=300x300&chd=e:H0O2
 		Assert.assertEquals(target, l.getUrl());
 		
 	}
+	@Test
+	public void example2(){
+		
+		LineChart l = new LineChart(new Dimension(300,300));
+		l.setChartTitle(new ChartTitle("linechart"));
+		
+		l.addLineChartData(new LineChartData.LineChartDataBuilder(Arrays.asList(20,30,40)).build());
+		
+		l.setSparkline();
+		
+		System.out.println(l.isLineChart());
+		System.out.println(l.isSparkline());
+		
+		System.out.println(l.getUrl());
+		
+String target = "http://chart.apis.google.com/chart?cht=s&chs=300x300&chd=e:H0O2ISK8H0,DIO2GkNSH0&chg=30.0,15.0,12.0,12.0,25.0,25.0&chtt=Simple ScatterPlot&chts=808080,12";
+		
+		Assert.assertEquals(target, l.getUrl());
+		
+	}
 }
 

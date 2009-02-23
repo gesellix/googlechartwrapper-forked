@@ -1,5 +1,8 @@
 package googlechartwrapper;
 
+import googlechartwrapper.coder.DataScalingTextEncoder;
+import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.LineChartData;
 import googlechartwrapper.data.LineChartDataAppender;
 
@@ -7,6 +10,8 @@ import java.awt.Dimension;
 import java.util.List;
 
 /**
+ * Specifies a line chart <a href="http://code.google.com/apis/chart/types.html#line_charts">
+ * http://code.google.com/apis/chart/types.html#line_charts</a>
  * 
  * @author steffan
  * 
@@ -34,7 +39,7 @@ public class LineChart extends AbstractLineChart {
 	}
 
 	public boolean isLineChart() {
-		return (ChartType.SparkLine.equals(type));
+		return (ChartType.LineChart.equals(type));
 	}
 
 	public void setLineChart() {
@@ -57,4 +62,26 @@ public class LineChart extends AbstractLineChart {
 		return type.getPrefix();
 
 	}
+
+	@Override
+	public IEncoder getEncoder() {
+		
+		return this.lineChartDataAppender.getEncoder();
+	}
+	
+	@Override
+	public void addDataScalingSet(DataScalingSet ds) {
+		this.dataScalingAppender.add(ds);
+		this.lineChartDataAppender.setEncoder(new DataScalingTextEncoder());
+	}
+	
+	@Override
+	public void removeAllDataScalings() {
+
+		this.dataScalingAppender.removeAll();
+
+		this.lineChartDataAppender.removeEncoder();
+		
+	}
+	
 }

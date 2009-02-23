@@ -3,6 +3,9 @@
  */
 package googlechartwrapper;
 
+import googlechartwrapper.coder.DataScalingTextEncoder;
+import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.XYLineChartData;
 import googlechartwrapper.data.XYLineChartDataAppender;
 
@@ -63,4 +66,22 @@ public class XYLineChart extends AbstractLineChart{
 		return ChartType.LineChartPair.getPrefix();
 	}
 
+	@Override
+	public IEncoder getEncoder() {
+		
+		return this.xyLineChartDataAppender.getEncoder();
+	}
+	@Override
+	public void addDataScalingSet(DataScalingSet ds) {
+		this.dataScalingAppender.add(ds);
+		this.xyLineChartDataAppender.setEncoder(new DataScalingTextEncoder());
+	}
+	@Override
+	public void removeAllDataScalings() {
+
+		this.dataScalingAppender.removeAll();
+
+		this.xyLineChartDataAppender.removeEncoder();
+		
+	}
 }
