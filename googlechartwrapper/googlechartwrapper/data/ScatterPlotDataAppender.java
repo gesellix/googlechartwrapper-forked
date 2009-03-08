@@ -81,16 +81,26 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 				//in this case we return and encode with | because, if we have 3 blocks, we need the | separator
 				builder.append(this.encoder.encodeIntegerCollection(data,"|"));
 				
-				return builder.toString();
+				List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+				
+		        feature.add(new AppendableFeature(builder.toString(), 
+		                  ChartTypeFeature.ChartData)); 
+		        
+				return feature;
 			}
 			//in the other case we separate with ,, because we have only 2 value blocks
 			builder.append(this.encoder.encodeIntegerCollection(data,","));
 						
-			return builder.toString();
+			List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+			
+	        feature.add(new AppendableFeature(builder.toString(), 
+	                  ChartTypeFeature.ChartData)); 
+	        
+			return feature;
 			
 		}
-		
-		return "";
+		//empty list - no pain
+		return new ArrayList<AppendableFeature>();
 		
 	}
 

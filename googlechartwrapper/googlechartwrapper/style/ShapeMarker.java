@@ -1,9 +1,11 @@
 package googlechartwrapper.style;
 
+import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -259,7 +261,12 @@ public class ShapeMarker implements IFeatureAppender {
 			builder.append(this.priority.getPriority());
 		}
 
-		return builder.toString();
+List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(builder.toString(), 
+                  ChartTypeFeature.ChartData)); 
+        
+		return feature;
 	}
 
 	/**

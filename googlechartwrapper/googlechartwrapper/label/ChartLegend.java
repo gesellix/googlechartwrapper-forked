@@ -1,5 +1,6 @@
 package googlechartwrapper.label;
 
+import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
@@ -71,7 +72,12 @@ public class ChartLegend implements IFeatureAppender {
 			builder.append(this.chartLegendPosition.getPosition());
 		}
 
-		return builder.toString();
+		List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(builder.toString(), 
+                  ChartTypeFeature.ChartLegend)); 
+        
+		return feature;
 	}
 
 	/**

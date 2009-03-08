@@ -1,7 +1,9 @@
 package googlechartwrapper.style;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
@@ -40,7 +42,12 @@ public class LineStyle implements IFeatureAppender{
 		builder.append(',');
 		builder.append(this.lengthOfBlankSegment);	
 		
-		return builder.toString();
+List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(builder.toString(), 
+                  ChartTypeFeature.ChartData)); 
+        
+		return feature;
 	}
 
 	/**

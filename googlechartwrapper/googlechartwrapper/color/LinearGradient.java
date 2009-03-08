@@ -1,10 +1,12 @@
 package googlechartwrapper.color;
 
+import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -208,7 +210,12 @@ public class LinearGradient implements IFeatureAppender{
 		builder.append(',');
 		builder.append(this.endOffset);
 		
-		return builder.toString();
+List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(builder.toString(), 
+                  ChartTypeFeature.LinearGradient)); 
+        
+		return feature;
 	}
 	
 	

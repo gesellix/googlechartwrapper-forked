@@ -1,5 +1,6 @@
 package googlechartwrapper.data;
 
+import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
@@ -33,9 +34,9 @@ public class GoogleOMeterValueAppender implements IExtendedFeatureAppender,
 	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 		if (list.size() == 0) {
-			return "";
+			return null;
 		}
-
+//TODO evil thrash
 		boolean hadLabels = false;
 		StringBuilder values = new StringBuilder(list.size() * 2 + 5);
 		StringBuilder labels = new StringBuilder(list.size() * 5 + 5);
@@ -59,7 +60,12 @@ public class GoogleOMeterValueAppender implements IExtendedFeatureAppender,
 		if (hadLabels) {
 			ret = ret + "&chl=" + labels.substring(0, labels.length() - 1);
 		}
-		return ret;
+List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(ret, 
+                  ChartTypeFeature.ChartData)); 
+        
+		return feature;
 	}
 
 	/**

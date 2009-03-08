@@ -1,5 +1,6 @@
 package googlechartwrapper.data;
 
+import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
@@ -54,7 +55,12 @@ public class ChartData implements IFeatureAppender, IEncodeable {
 
 		builder.append(encoder.encode(a));
 
-		return builder.toString();
+List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(builder.toString(), 
+                  ChartTypeFeature.ChartData)); 
+        
+		return feature;
 	}
 
 	public IEncoder getEncoder() {

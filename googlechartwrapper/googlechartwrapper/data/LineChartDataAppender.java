@@ -80,7 +80,12 @@ public class LineChartDataAppender implements IExtendedFeatureAppender,
 		
 		builder.append(this.encoder.encodeIntegerCollection(data,","));
 		
-		return builder.toString();
+List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(builder.toString(), 
+                  ChartTypeFeature.ChartData)); 
+        
+		return feature;
 	}
 
 	public IEncoder getEncoder() {

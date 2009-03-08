@@ -8,6 +8,7 @@ import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -63,7 +64,13 @@ public class BarChartDataSeriesAppender implements IExtendedFeatureAppender,
 			}
 		}
 		builder.append("s:hello,world");
-		return builder.toString();
+		
+List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(builder.toString(), 
+                  ChartTypeFeature.ChartData)); 
+        
+		return feature;
 	}
 
 	private int getLongestDataSeriesSize() {

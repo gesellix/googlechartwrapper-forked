@@ -60,7 +60,16 @@ public class RadarChartLineAppender implements IExtendedFeatureAppender {
 		}
 		String val = encoder.encodeIntegerCollection(toEncVal);
 				
-		return val+"&"+color;
+		//return val+"&"+color;
+		return null;
+		//TODO
+		/*
+List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(builder.toString(), 
+                  ChartTypeFeature.ChartLegend)); 
+        
+		return feature;*/
 	}
 	
 	public void add (RadarChartLine m){

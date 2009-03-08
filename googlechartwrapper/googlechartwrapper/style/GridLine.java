@@ -1,8 +1,10 @@
 package googlechartwrapper.style;
 
+import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -190,7 +192,12 @@ public class GridLine implements IFeatureAppender {
 			builder.append(this.CutNumber(yOffset));
 
 		}
-		return builder.toString();
+List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(builder.toString(), 
+                  ChartTypeFeature.ChartData)); 
+        
+		return feature;
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package googlechartwrapper.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import googlechartwrapper.ChartTypeFeature;
@@ -83,11 +84,16 @@ public class PrimitivesAppender <T extends Number> implements IExtendedFeatureAp
 			builder.append(this.primitive.toString());
 			
 			
-			return builder.toString();
+			List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+			
+	        feature.add(new AppendableFeature(builder.toString(), 
+	                  ChartTypeFeature.ChartData)); 
+	        
+			return feature;
 			
 		}
 		else{
-			return "";
+			return new ArrayList<AppendableFeature>();
 		}
 	}
 	/**

@@ -1,5 +1,6 @@
 package googlechartwrapper.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import googlechartwrapper.ChartTypeFeature;
@@ -40,10 +41,16 @@ public class VennDiagramDataAppender implements IExtendedFeatureAppender, IEncod
 					this.data.getAreaABC()
 					};
 			
-			return this.encoder.encode(values);
+			//return this.encoder.encode(values);
+			List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+			
+	        feature.add(new AppendableFeature(this.encoder.encode(values), 
+	                  ChartTypeFeature.ChartData)); 
+	        
+			return feature;
 			
 		}		
-		return "";			
+		return new ArrayList<AppendableFeature>();		
 	}
 
 	public IEncoder getEncoder() {

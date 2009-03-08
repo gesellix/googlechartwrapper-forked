@@ -1,9 +1,11 @@
 package googlechartwrapper.color;
 
+import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,7 +61,13 @@ public class ChartColors implements IFeatureAppender {
 		StringBuilder builder = new StringBuilder();
 
 		builder.append(Integer.toHexString(color.getRGB()).substring(2, 8));
-		return builder.toString();
+		
+List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(builder.toString(), 
+                  ChartTypeFeature.ChartColor)); 
+        
+		return feature;
 	}
 
 }

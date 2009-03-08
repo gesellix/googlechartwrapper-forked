@@ -7,6 +7,7 @@ import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -95,7 +96,12 @@ public class ChartTitle implements IExtendedFeatureAppender{
 			ret.append(",");
 			ret.append(fontsize);
 		}
-		return ret.toString();
+		List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature(ret.toString(), 
+                  ChartTypeFeature.ChartData)); 
+        
+		return feature;
 	}
 
 

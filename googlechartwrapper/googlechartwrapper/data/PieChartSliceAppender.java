@@ -1,5 +1,6 @@
 package googlechartwrapper.data;
 
+import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.util.AppendableFeature;
@@ -7,6 +8,7 @@ import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -101,8 +103,14 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 		else {
 			colors = colorbf.substring(0, colorbf.length()-1 );
 		}
-				
-		return colors+"&"+labels+"&"+val;
+			//TODO evil	
+		//return colors+"&"+labels+"&"+val;
+List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
+        feature.add(new AppendableFeature("", 
+                  ChartTypeFeature.ChartData)); 
+        
+		return feature;
 	}	
 
 }
