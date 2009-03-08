@@ -289,7 +289,7 @@ public abstract class AbstractChart implements Chart {
 				 bf.append(separator);
 			 }
 			 if (bf.length() > 0){
-				 return prefix + bf.substring(0,bf.length()-1);
+				 return prefix +"="+ bf.substring(0,bf.length()-1);
 			 }
 			return "";
 		}
