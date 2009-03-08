@@ -71,7 +71,7 @@ public class RadarChartTest {
 		chart.setEncoder(EncoderFactory.getEncoder(EncodingType.TextEncoding));
 
 		chart.addShapeMarker(new ShapeMarker(MarkerTyp.Cross, Color.ORANGE, 0,
-				DataPoint.drawNPoint(2), 15));
+				DataPoint.newDrawNPoint(2), 15));
 
 		String expected = "http://chart.apis.google.com/chart?cht=rs&chs=200x200&chd=t:10,20,30,50,70,90,100,120&ffc800&chm=c,ffc800,0,-2,15";
 		assertEquals(expected, chart.getUrl());

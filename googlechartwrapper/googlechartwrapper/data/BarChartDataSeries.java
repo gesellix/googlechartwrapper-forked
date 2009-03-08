@@ -15,7 +15,7 @@ public class BarChartDataSeries {
 	private String label;
 	
 	public BarChartDataSeries(List<Integer> data, Color color, String label) {
-		
+		// TODO builder pattern
 		if(data == null)
 			throw new IllegalArgumentException("data can not be null");
 		if(color == null)

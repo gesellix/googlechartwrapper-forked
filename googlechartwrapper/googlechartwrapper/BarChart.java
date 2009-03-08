@@ -18,9 +18,15 @@ import googlechartwrapper.interfaces.IStyleable;
 import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartTitle;
+import googlechartwrapper.label.DataPointLabel;
+import googlechartwrapper.label.IDataPointLabelable;
+import googlechartwrapper.style.BarChartZeroLine;
+import googlechartwrapper.style.BarWidthAndSpacing;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.style.FinancialMarker;
 import googlechartwrapper.style.GridLine;
+import googlechartwrapper.style.IBarChartZeroLineable;
+import googlechartwrapper.style.IBarWidthAndSpacingable;
 import googlechartwrapper.style.IFinancialMarkable;
 import googlechartwrapper.style.IGridLineable;
 import googlechartwrapper.style.LineStyle;
@@ -44,7 +50,8 @@ import java.util.List;
  */
 public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 		IStyleable, IGridLineable, ISolidFillable, IMultiDataScaleable,
-		IColorable, IFinancialMarkable {
+		IColorable, IFinancialMarkable, IBarChartZeroLineable,
+		IBarWidthAndSpacingable, IDataPointLabelable {
 
 	private BarChartOrientation orientation;
 	private BarChartStyle style;
@@ -78,6 +85,14 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 			ChartTypeFeature.LineStyle, ",");
 	protected AxisLabelAppender axisLabelAppender = new AxisLabelAppender();
 	protected BarChartDataSeriesAppender barChartDataSeriesAppender = new BarChartDataSeriesAppender();
+	protected UpperLimitGenericAppender<BarChartZeroLine> barChartZeroLineAppender = new UpperLimitGenericAppender<BarChartZeroLine>(
+			ChartTypeFeature.BarChartZeroLine, 1,
+			UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<BarWidthAndSpacing> barWidthAndSpacingAppender = new UpperLimitGenericAppender<BarWidthAndSpacing>(
+			ChartTypeFeature.BarWidthAndSpacing, 1,
+			UpperLimitReactions.RemoveFirst);
+	protected GenericAppender<DataPointLabel> dataPointLabelAppender = new GenericAppender<DataPointLabel>(
+			ChartTypeFeature.Marker);
 
 	/**
 	 * Constructs a bar chart
@@ -485,6 +500,65 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 	public FinancialMarker removeFinancialMarker(int index) {
 
 		return this.financialMarker.remove(index);
+	}
+
+	public BarChartZeroLine getBarChartZeroLine() {
+		return this.barChartZeroLineAppender.getList().size() > 0 ? this.barChartZeroLineAppender
+				.getList().get(0)
+				: null;
+
+	}
+
+	public void removeBarChartZeroLine() {
+
+		this.barChartZeroLineAppender.removeAll();
+
+	}
+
+	public void setBarChartZeroLine(BarChartZeroLine bzl) {
+
+		this.barChartZeroLineAppender.add(bzl);
+
+	}
+
+	public BarWidthAndSpacing getBarWidthAndSpacing() {
+		return this.barWidthAndSpacingAppender.getList().size() > 0 ? this.barWidthAndSpacingAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeBarWidthAndSpacing() {
+
+		this.barWidthAndSpacingAppender.removeAll();
+
+	}
+
+	public void setBarWidthAndSpacing(BarWidthAndSpacing ws) {
+		this.barWidthAndSpacingAppender.add(ws);
+
+	}
+
+	public void addDataPointLabel(DataPointLabel dpl) {
+		this.dataPointLabelAppender.add(dpl);
+
+	}
+
+	public List<DataPointLabel> getDataPointLabels() {
+
+		return this.dataPointLabelAppender.getList();
+	}
+
+	public DataPointLabel removeDataPointLabel(int index) {
+		return this.dataPointLabelAppender.remove(index);
+	}
+
+	public boolean removeDataPointLabel(DataPointLabel dpl) {
+		return this.dataPointLabelAppender.remove(dpl);
+	}
+
+	public void removeDataPointLabels() {
+		this.dataPointLabelAppender.removeAll();
+
 	}
 
 }

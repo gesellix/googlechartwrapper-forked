@@ -47,7 +47,7 @@ public class BarChartDataSeriesAppender implements IExtendedFeatureAppender,
 	public String getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 		// TODO
-		// TODO builder pattern
+		
 		StringBuilder builder = new StringBuilder();
 		// data
 		for (int i = 0; i < this.getLongestDataSeriesSize(); i++) {
@@ -61,8 +61,8 @@ public class BarChartDataSeriesAppender implements IExtendedFeatureAppender,
 				}
 			}
 		}
-
-		return null;
+		builder.append("s:hello,world");
+		return builder.toString();
 	}
 
 	private int getLongestDataSeriesSize() {

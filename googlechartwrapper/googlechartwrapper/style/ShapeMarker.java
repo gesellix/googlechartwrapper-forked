@@ -330,7 +330,7 @@ public class ShapeMarker implements IFeatureAppender {
 		 * 
 		 * @return {@link IDataPoint}
 		 */
-		public static IDataPoint drawEachPoint() {
+		public static IDataPoint newDrawEachPoint() {
 
 			return new IDataPoint() {
 
@@ -362,7 +362,7 @@ public class ShapeMarker implements IFeatureAppender {
 		 * @throws IllegalArgumentException
 		 *             if n is < 0
 		 */
-		public static IDataPoint drawNPoint(final int n) {
+		public static IDataPoint newDrawNPoint(final int n) {
 
 			if (n < 0)
 				throw new IllegalArgumentException("n can not < 0");
@@ -400,7 +400,7 @@ public class ShapeMarker implements IFeatureAppender {
 		 * @throws IllegalArgumentException
 		 *             if n < 0;
 		 */
-		public static IDataPoint drawPoint(final float n) {
+		public static IDataPoint newDrawPoint(final float n) {
 
 			if (n < 0)
 				throw new IllegalArgumentException("n can not be < 0");
@@ -440,7 +440,7 @@ public class ShapeMarker implements IFeatureAppender {
 		 * @throws IllegalArgumentException
 		 *             if < 0 and/or high < low
 		 */
-		public static IDataPoint drawNPoint(final int low, final int high,
+		public static IDataPoint newDrawNPoint(final int low, final int high,
 				final int n) {
 
 			if (high < low)
@@ -491,7 +491,7 @@ public class ShapeMarker implements IFeatureAppender {
 		 * @throws IllegalArgumentException
 		 *             if x and/or y , < 0 and/or > 0
 		 */
-		public static IDataPoint drawSpecificPoint(final float x, final float y) {
+		public static IDataPoint newDrawSpecificPoint(final float x, final float y) {
 
 			if (x < 0 || x > 1)
 				throw new IllegalArgumentException(
@@ -544,7 +544,7 @@ public class ShapeMarker implements IFeatureAppender {
 		 * @throws IllegalArgumentException
 		 *             if n < 0 
 		 */
-		public static IDataPoint drawHorizontalLine(final float n) {
+		public static IDataPoint newDrawHorizontalLine(final float n) {
 
 			
 			if (n < 0)

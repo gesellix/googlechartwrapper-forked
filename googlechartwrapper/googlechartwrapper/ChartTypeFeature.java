@@ -23,7 +23,8 @@ public enum ChartTypeFeature {
 	PieChartOrientation("chp"),
 	ChartMargin("chma"),
 	LineStyle("chls"),
-	BarWidthAndSpacing("chbh");
+	BarWidthAndSpacing("chbh"),
+	BarChartZeroLine("chp");
 	
 	
 	
