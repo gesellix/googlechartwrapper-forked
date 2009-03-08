@@ -3,6 +3,7 @@ package googlechartwrapper.data;
 import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
@@ -30,7 +31,7 @@ public class RadarChartLineAppender implements IExtendedFeatureAppender {
 		return ChartTypeFeature.ChartData.getPrefix();
 	}
 
-	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		//chco fuer colors of slices
 		//chartdata vom encoder
 		boolean colorUsed= false;

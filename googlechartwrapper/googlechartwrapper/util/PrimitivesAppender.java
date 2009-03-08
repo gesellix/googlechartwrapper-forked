@@ -74,7 +74,7 @@ public class PrimitivesAppender <T extends Number> implements IExtendedFeatureAp
 		
 		return this.feature.getPrefix();
 	}
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 		if(this.primitive != null){

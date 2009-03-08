@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
@@ -21,9 +22,9 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 		return "chxt";
 	}
 
-	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		if (axis.size() < 1){
-			return "";
+			return new ArrayList<AppendableFeature>();
 		}
 		
 		StringBuffer axisTypes = new StringBuffer(axis.size()+1);
@@ -109,34 +110,48 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 		}		
 		
 		
-		String axis = axisTypes.substring(0, axisTypes.length()-1);		
-		String ret = axis;
+		//String axis = axisTypes.substring(0, axisTypes.length()-1);		
+		//String ret = axis;
 		
-		String axisLabelsS ="";//chxl= <axis index>:|<label 1>|<label n>|
-
+		//String axisLabelsS ="";//chxl= <axis index>:|<label 1>|<label n>|
+		List<AppendableFeature> features = new ArrayList<AppendableFeature>();
+		
+		features.add(new AppendableFeature(axisTypes.substring(0, axisTypes.length()-1),
+				getFeaturePrefix()));
+		
+		
 		if (axisLabels.length()>1){
-			axisLabelsS="chxl="+axisLabels.substring(0, axisLabels.length()-1);			
-			ret = ret +"&"+axisLabelsS;
+			features.add(new AppendableFeature(axisLabels.substring(0, 
+					axisLabels.length()-1),"chxl"));
+			//axisLabelsS="chxl="+axisLabels.substring(0, axisLabels.length()-1);			
+			//ret = ret +"&"+axisLabelsS;
 		}
 		
-		String axisPos=""; //chxp= <axis index>,<label 1 position>,<label n position>|
+		//String axisPos=""; //chxp= <axis index>,<label 1 position>,<label n position>|
 		if (axisLabelsPos.length()>1){
-			axisPos="chxp="+axisLabelsPos.substring(0, axisLabelsPos.length()-1);
-			ret = ret +"&"+axisPos;
+			features.add(new AppendableFeature(axisLabelsPos.substring(0, 
+					axisLabelsPos.length()-1),"chxp"));
+			//axisPos="chxp="+axisLabelsPos.substring(0, axisLabelsPos.length()-1);
+			//ret = ret +"&"+axisPos;
 		}
 		
-		String axisRangeS=""; //chxr= <axis index>,<start of range>,<end of range>|
+		//String axisRangeS=""; //chxr= <axis index>,<start of range>,<end of range>|
 		if (axisRange.length()>1){
-			axisRangeS="chxr="+axisRange.substring(0, axisRange.length()-1);
-			ret = ret +"&"+axisRangeS;
+			features.add(new AppendableFeature(axisRange.substring(0, 
+					axisRange.length()-1),"chxr"));
+			//axisRangeS="chxr="+axisRange.substring(0, axisRange.length()-1);
+			//ret = ret +"&"+axisRangeS;
 		}
 		
 		String axisStyleS=""; //chxs= <axis index>,<color>,<font size>,<alignment>|
 		if (axisStyle.length()>1){
-			axisStyleS="chxs="+axisStyle.substring(0, axisStyle.length()-1);
-			ret = ret +"&"+axisStyleS;
+			features.add(new AppendableFeature(axisStyle.substring(0, 
+					axisStyle.length()-1),"chxs"));
+			//axisStyleS="chxs="+axisStyle.substring(0, axisStyle.length()-1);
+			//ret = ret +"&"+axisStyleS;
 		}
-		return ret;
+		return features;
+		//return ret;
 	}
 	
 	public void addAxis (AxisLabelContainer axis){

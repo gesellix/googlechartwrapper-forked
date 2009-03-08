@@ -2,6 +2,7 @@ package googlechartwrapper.style;
 
 import java.util.List;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 /**
@@ -30,7 +31,7 @@ public class LineStyle implements IFeatureAppender{
 		this.lengthOfLineSegment = lengthOfBlankSegment;
 	}
 
-	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new StringBuilder();
 		builder.append(this.thickness);

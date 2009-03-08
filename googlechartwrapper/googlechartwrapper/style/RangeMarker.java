@@ -1,5 +1,6 @@
 package googlechartwrapper.style;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Color;
@@ -94,7 +95,7 @@ public class RangeMarker implements IFeatureAppender {
 		return this.endPoint;
 	}
 	
-	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new StringBuilder();
 		

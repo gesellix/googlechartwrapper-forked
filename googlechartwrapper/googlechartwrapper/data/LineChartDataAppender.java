@@ -4,6 +4,7 @@ import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 
@@ -59,7 +60,7 @@ public class LineChartDataAppender implements IExtendedFeatureAppender,
 		this.data.addAll(Collections.unmodifiableList(data));
 		}
 	}
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new StringBuilder();

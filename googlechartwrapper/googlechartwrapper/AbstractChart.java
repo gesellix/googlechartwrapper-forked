@@ -1,5 +1,6 @@
 package googlechartwrapper;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.ArrayUtils;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.IExtendedFeatureAppender;
@@ -247,7 +248,7 @@ public abstract class AbstractChart implements Chart {
 		}
 
 		@Override
-		public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+		public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 			String appString = super.getAppendableString(otherAppenders);
 			
 			return appString.length()>0? getFeaturePrefix() + "="

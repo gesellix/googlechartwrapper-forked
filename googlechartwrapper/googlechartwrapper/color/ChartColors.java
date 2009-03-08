@@ -1,5 +1,6 @@
 package googlechartwrapper.color;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Color;
@@ -52,7 +53,7 @@ public class ChartColors implements IFeatureAppender {
 		this.color = new Color(color.getRGB());
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		StringBuilder builder = new StringBuilder();

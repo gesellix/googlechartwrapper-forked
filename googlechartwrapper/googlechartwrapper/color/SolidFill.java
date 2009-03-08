@@ -1,5 +1,6 @@
 package googlechartwrapper.color;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
 
@@ -88,7 +89,7 @@ public class SolidFill implements IFeatureAppender
     	return new Color(this.color.getRGB());
     } 
    
-     public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+     public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		
     	 StringBuilder builder = new StringBuilder();
     	 

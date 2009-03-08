@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.data.DataScalingSet;
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 /**
@@ -90,7 +91,7 @@ public class BarChartZeroLine implements IFeatureAppender{
 		this.dataSets = zeroLine;
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 		//this should not be

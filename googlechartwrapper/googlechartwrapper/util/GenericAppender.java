@@ -212,7 +212,7 @@ public class GenericAppender< T extends IFeatureAppender> implements
 	 * (non-Javadoc)
 	 * @see googlechartwrapper.util.IFeatureAppender#getAppendableString(java.util.List)
 	 */
-	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		
 		if (list.size() > 0){
 			StringBuilder bf = new StringBuilder(list.size()*10);

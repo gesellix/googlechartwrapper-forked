@@ -3,6 +3,7 @@ package googlechartwrapper.data;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class ChartData implements IFeatureAppender, IEncodeable {
 		this.chartData = this.arrayToCollection(chartData);
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		StringBuilder builder = new StringBuilder();

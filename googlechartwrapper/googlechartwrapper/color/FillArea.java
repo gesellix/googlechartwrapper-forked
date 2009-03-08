@@ -3,6 +3,7 @@ package googlechartwrapper.color;
 import java.awt.Color;
 import java.util.List;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
 
@@ -51,7 +52,7 @@ public class FillArea implements IFeatureAppender {
 		this.dataSetKind = kind;
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new StringBuilder();

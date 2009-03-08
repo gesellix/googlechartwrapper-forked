@@ -1,6 +1,8 @@
 package googlechartwrapper.style;
 
 import java.util.List;
+
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 /**
@@ -221,7 +223,7 @@ public class ChartMargin implements IFeatureAppender {
 		this.legendHeight = legendHeight;
 	}	
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 		StringBuilder builder = new StringBuilder();
 

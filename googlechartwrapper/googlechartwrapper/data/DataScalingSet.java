@@ -2,6 +2,7 @@ package googlechartwrapper.data;
 
 import java.util.List;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 /**
@@ -32,7 +33,7 @@ public class DataScalingSet implements IFeatureAppender{
 		this.minimumValue = minimumValue;
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new StringBuilder();

@@ -1,5 +1,6 @@
 package googlechartwrapper.label;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class ChartLegend implements IFeatureAppender {
 
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		StringBuilder builder = new StringBuilder();

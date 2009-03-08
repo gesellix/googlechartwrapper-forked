@@ -1,5 +1,6 @@
 package googlechartwrapper.style;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.util.List;
@@ -159,7 +160,7 @@ public class GridLine implements IFeatureAppender {
 		return yOffset;
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		//because the api, needs the 2 parameters 

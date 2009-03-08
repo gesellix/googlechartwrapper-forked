@@ -1,6 +1,7 @@
 package googlechartwrapper.label;
 
 import googlechartwrapper.ChartTypeFeature;
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
@@ -80,7 +81,7 @@ public class ChartTitle implements IExtendedFeatureAppender{
 	 * (non-Javadoc)
 	 * @see googlechartwrapper.util.IFeatureAppender#getAppendableString(java.util.List)
 	 */
-	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		StringBuffer ret = new StringBuffer(title.length()+15);
 		//ret.append(ChartTypeFeature.ChartTitle.getPrefix());
 		//ret.append("=");

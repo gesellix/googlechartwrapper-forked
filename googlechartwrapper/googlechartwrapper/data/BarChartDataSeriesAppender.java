@@ -4,6 +4,7 @@ import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 
@@ -44,7 +45,7 @@ public class BarChartDataSeriesAppender implements IExtendedFeatureAppender,
 		return ChartTypeFeature.ChartData.getPrefix();
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 		// TODO
 		

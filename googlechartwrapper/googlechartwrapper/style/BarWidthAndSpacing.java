@@ -2,6 +2,7 @@ package googlechartwrapper.style;
 
 import java.util.List;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 /**
@@ -31,7 +32,7 @@ public class BarWidthAndSpacing implements IFeatureAppender {
 		return new BarWidthAndSpacing() {
 
 			@Override
-			public String getAppendableString(
+			public List<AppendableFeature> getAppendableString(
 					List<? extends IFeatureAppender> otherAppenders) {
 
 				StringBuilder builder = new StringBuilder();
@@ -71,7 +72,7 @@ public class BarWidthAndSpacing implements IFeatureAppender {
 		return new BarWidthAndSpacing() {
 
 			@Override
-			public String getAppendableString(
+			public List<AppendableFeature> getAppendableString(
 					List<? extends IFeatureAppender> otherAppenders) {
 
 				StringBuilder builder = new StringBuilder();
@@ -107,7 +108,7 @@ public class BarWidthAndSpacing implements IFeatureAppender {
 
 		return new BarWidthAndSpacing() {
 			@Override
-			public String getAppendableString(
+			public List<AppendableFeature> getAppendableString(
 					List<? extends IFeatureAppender> otherAppenders) {
 				StringBuilder builder = new StringBuilder();
 				
@@ -124,7 +125,7 @@ public class BarWidthAndSpacing implements IFeatureAppender {
 		};
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		return null;

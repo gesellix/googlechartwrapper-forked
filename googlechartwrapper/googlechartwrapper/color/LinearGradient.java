@@ -1,5 +1,6 @@
 package googlechartwrapper.color;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
 
@@ -189,7 +190,7 @@ public class LinearGradient implements IFeatureAppender{
 		this.endColor = endColor;
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new  StringBuilder();

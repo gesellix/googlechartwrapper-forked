@@ -2,6 +2,8 @@ package googlechartwrapper.style;
 
 import java.awt.Color;
 import java.util.List;
+
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 /**
@@ -85,7 +87,7 @@ public class FinancialMarker implements IFeatureAppender {
 		this.size = size;
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		StringBuilder builder = new StringBuilder();

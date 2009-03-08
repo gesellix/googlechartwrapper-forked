@@ -3,6 +3,7 @@ package googlechartwrapper.data;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 
@@ -29,7 +30,7 @@ public class GoogleOMeterValueAppender implements IExtendedFeatureAppender,
 		return "chd";
 	}
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 		if (list.size() == 0) {
 			return "";

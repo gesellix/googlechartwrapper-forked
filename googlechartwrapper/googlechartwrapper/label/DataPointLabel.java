@@ -3,6 +3,7 @@
  */
 package googlechartwrapper.label;
 
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Color;
@@ -43,7 +44,7 @@ public class DataPointLabel implements IFeatureAppender {
 		this.priority = priority;
 	}	
 
-	public String getAppendableString(
+	public List<AppendableFeature> getAppendableString(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		StringBuilder builder = new StringBuilder();

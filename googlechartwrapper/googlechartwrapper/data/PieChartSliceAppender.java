@@ -2,6 +2,7 @@ package googlechartwrapper.data;
 
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
+import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
@@ -58,7 +59,7 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 		return "chco";
 	}
 
-	public String getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
 		//chco fuer colors of slices
 		//chl fuer labels
 		//chartdata vom encoder
