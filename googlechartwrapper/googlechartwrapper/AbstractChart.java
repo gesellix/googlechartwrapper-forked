@@ -189,13 +189,26 @@ public abstract class AbstractChart implements Chart {
 
 	protected void collectUrlElements(List<IExtendedFeatureAppender> appenders) {
 		collectUrlElements(); //alle Grundelemente laden
-		Map<String, FeatureAppender<IExtendedFeatureAppender>> m = 
-			new HashMap<String, FeatureAppender<IExtendedFeatureAppender>>();
+		Map<String, FeatureAppender> m = 
+			new HashMap<String, FeatureAppender>();
+			//new HashMap<String, FeatureAppender<IExtendedFeatureAppender>>();
 		//map fuer key=featureprefixstring (z.b. chm) 
 		//value=Appender für alle von diesem Typen
 		
 		for (IExtendedFeatureAppender ap : appenders) {
-			if (m.containsKey(ap.getFeaturePrefix())) { //wenn schon appender vorhanden
+			for (AppendableFeature feature : ap.getAppendableString(appenders)){
+				if (m.containsKey(feature.getPrefix())){
+					m.get(feature.getPrefix()).add(feature);
+				}
+				else { 
+					//ansonsten muss neuer appender für diesen feature typ angelegt werden
+					FeatureAppender fa = new FeatureAppender(
+							ap.getFeaturePrefix());
+					fa.add(feature);
+					m.put(ap.getFeaturePrefix(), fa);
+				}
+			}
+			/*if (m.containsKey(ap.getFeaturePrefix())) { //wenn schon appender vorhanden
 				m.get(ap.getFeaturePrefix()).add(ap); //einfach hinzufügen
 			} else { 
 				//ansonsten muss neuer appender für diesen feature typ angelegt werden
@@ -203,25 +216,24 @@ public abstract class AbstractChart implements Chart {
 						ap.getFeaturePrefix());
 				fa.add(ap);
 				m.put(ap.getFeaturePrefix(), fa);
-			}
+			}*/
 		}
 		
-		List<FeatureAppender<IExtendedFeatureAppender>> values = 
-			new ArrayList<FeatureAppender<IExtendedFeatureAppender>>(m.values());
+		List<FeatureAppender> values = new ArrayList<FeatureAppender>(m.values());
 		
-		Collections.sort(values, new Comparator<IExtendedFeatureAppender>(){
-			public int compare(IExtendedFeatureAppender arg0, 
-					IExtendedFeatureAppender arg1) {
-				return arg0.getFeaturePrefix().compareTo(arg1.getFeaturePrefix());
+		Collections.sort(values, new Comparator<FeatureAppender>(){
+			public int compare(FeatureAppender arg0, 
+					FeatureAppender arg1) {
+				return arg0.prefix.compareTo(arg1.prefix);
 			}			
 		}); //for unittests, steffans idea; I thinks that is bad and even unnecessary
 		
-		for (FeatureAppender<IExtendedFeatureAppender> ap : values) {
+		for (FeatureAppender ap : values) {
 			//alle appender durchlaufen und der url hinzufügen
-			urlElements.offer(ap.getAppendableString(values));
+			//urlElements.offer(ap.getAppendableString(values));
+			//TODO
+			urlElements.offer(ap.getUrlString());
 		}
-		// for (IExtendedFeatureAppender ap : appenders){
-		// urlElements.offer(ap.getAppendableString(appenders));
 	}
 
 	protected String generateUrlString(String baseUrl) {
@@ -240,19 +252,50 @@ public abstract class AbstractChart implements Chart {
 		return url.toString();
 	}
 
-	private class FeatureAppender<T extends IExtendedFeatureAppender> extends
-			GenericAppender<T> {
+	private class FeatureAppender{
 
+		/**
+		 * list of elements/features
+		 */
+		protected List<AppendableFeature> list;
+		/**
+		 * type of the parameter: &lt;type&gt;=&lt;parameter data&gt;, e.g
+		 * chs=250x100
+		 */
+		protected String prefix;
+		/**
+		 * separator for each single feature, e.g. the pipe symbol or a comma
+		 */
+		protected String separator;
+		
 		public FeatureAppender(String stm) {
-			super(stm);
+			this(stm,"|");
 		}
-
-		@Override
-		public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
-			String appString = super.getAppendableString(otherAppenders);
-			
-			return appString.length()>0? getFeaturePrefix() + "="
-					+ appString : "";
+		
+		public FeatureAppender (String m, String separator){
+			if (separator == null){
+				throw new IllegalArgumentException("sep cannot be null");
+			}
+			list = new ArrayList<AppendableFeature>();
+			prefix = m;
+			this.separator = separator;
+		}
+		
+		public String getUrlString (){
+			 List<AppendableFeature> features = list;
+			 StringBuilder bf = new StringBuilder();
+			 for (AppendableFeature f:features){
+				 bf.append(f.getData());
+				 bf.append(separator);
+			 }
+			 if (bf.length() > 0){
+				 return prefix + bf.substring(0,bf.length()-1);
+			 }
+			return "";
+		}
+		
+		public void add (AppendableFeature m){
+			list.add(m);
 		}
 	}
 }

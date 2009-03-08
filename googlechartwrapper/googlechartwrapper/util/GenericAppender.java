@@ -13,7 +13,7 @@ import googlechartwrapper.ChartTypeFeature;
  * @param <T> type of elements to append to an url 
  * (must implement {@link IFeatureAppender})
  */
-public class GenericAppender< T extends IFeatureAppender> implements 
+public class GenericAppender<T extends IFeatureAppender> implements 
 	IExtendedFeatureAppender{
 	
 	/**
@@ -212,29 +212,61 @@ public class GenericAppender< T extends IFeatureAppender> implements
 	 * (non-Javadoc)
 	 * @see googlechartwrapper.util.IFeatureAppender#getAppendableString(java.util.List)
 	 */
-	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
-		
-		if (list.size() > 0){
+	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> 
+		otherAppenders) {
+		if (list.size() > 0){			
 			StringBuilder bf = new StringBuilder(list.size()*10);
-			//bf.append("chm=");
+			
 			for (IFeatureAppender m:list){
-				String app = m.getAppendableString(otherAppenders);
+				List<AppendableFeature> features = m.getAppendableString(otherAppenders);
+				String app = "";
+				for (AppendableFeature ap : features){
+					app = app +ap.getData()+ separator;
+				}
 				if (app.length()>0){
-					bf.append(app);
+					bf.append(app.substring(0,app.length()-1));
 					bf.append(separator);		
 				}
-				//bf.append(m.getAppendableString(otherAppenders));
-						
+									
 			}
 			if (bf.length()>0){
-				return bf.substring(0, bf.length()-1);
+				List<AppendableFeature> features = new ArrayList<AppendableFeature>();
+				features.add(new AppendableFeature(bf.substring(0, bf.length()-1),
+						getFeaturePrefix()));
+				return features;
 			}
 			else {
-				return "";
+				return new ArrayList<AppendableFeature>();
 			}
 			
 		}
-		else return "";
+		else {
+			return new ArrayList<AppendableFeature>();
+		}
+		
+		
+		
+//		if (list.size() > 0){
+//			StringBuilder bf = new StringBuilder(list.size()*10);
+//			//bf.append("chm=");
+//			for (IFeatureAppender m:list){
+//				String app = m.getAppendableString(otherAppenders);
+//				if (app.length()>0){
+//					bf.append(app);
+//					bf.append(separator);		
+//				}
+//				//bf.append(m.getAppendableString(otherAppenders));
+//						
+//			}
+//			if (bf.length()>0){
+//				return bf.substring(0, bf.length()-1);
+//			}
+//			else {
+//				return "";
+//			}
+//			
+//		}
+//		else return "";
 	}
 	
 	/*
