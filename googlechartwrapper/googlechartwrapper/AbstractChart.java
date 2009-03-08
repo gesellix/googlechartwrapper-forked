@@ -196,16 +196,17 @@ public abstract class AbstractChart implements Chart {
 		//value=Appender für alle von diesem Typen
 		
 		for (IExtendedFeatureAppender ap : appenders) {
-			for (AppendableFeature feature : ap.getAppendableString(appenders)){
+			List<AppendableFeature> ft = ap.getAppendableString(appenders);
+			for (AppendableFeature feature : ft){
 				if (m.containsKey(feature.getPrefix())){
 					m.get(feature.getPrefix()).add(feature);
 				}
 				else { 
 					//ansonsten muss neuer appender für diesen feature typ angelegt werden
 					FeatureAppender fa = new FeatureAppender(
-							ap.getFeaturePrefix());
+							feature.getPrefix());
 					fa.add(feature);
-					m.put(ap.getFeaturePrefix(), fa);
+					m.put(fa.getPrefix(),fa);
 				}
 			}
 			/*if (m.containsKey(ap.getFeaturePrefix())) { //wenn schon appender vorhanden
@@ -281,6 +282,10 @@ public abstract class AbstractChart implements Chart {
 			this.separator = separator;
 		}
 		
+		public String getPrefix (){
+			return prefix;
+		}
+		
 		public String getUrlString (){
 			 List<AppendableFeature> features = list;
 			 StringBuilder bf = new StringBuilder();
@@ -289,7 +294,12 @@ public abstract class AbstractChart implements Chart {
 				 bf.append(separator);
 			 }
 			 if (bf.length() > 0){
-				 return prefix +"="+ bf.substring(0,bf.length()-1);
+				 if (prefix.equals("")){
+					 return  bf.substring(0,bf.length()-1);
+				 }
+				 else {
+					 return prefix +"="+ bf.substring(0,bf.length()-1);
+				 }
 			 }
 			return "";
 		}

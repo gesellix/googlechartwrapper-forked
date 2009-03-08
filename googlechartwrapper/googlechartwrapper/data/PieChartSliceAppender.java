@@ -67,7 +67,7 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 		//chartdata vom encoder
 		int values[] = new int[list.size()];
 		StringBuilder labelbf = new StringBuilder(values.length*7);
-		labelbf.append("chl=");
+		//labelbf.append("chl=");
 		StringBuilder colorbf = new StringBuilder(values.length*7+4);
 				
 		for (int i = 0, size = list.size(); i < size; i++){
@@ -85,30 +85,31 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 			}			
 		}
 		
+		List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		
 		String val = encoder.encode(values);		
 		
 		String labels;
-		if (labelbf.length()<6){ //keine labels
+		if (labelbf.length()<1){ //keine labels
 			labels = "";
 			labelbf = null;
 		}
 		else {
 			labels = labelbf.substring(0, labelbf.length()-1);
+			feature.add(new AppendableFeature(labels, "chl"));
 		}
 		
-		String colors;
-		if (colorbf.length()==0){
-			colors = "";
-		}
-		else {
-			colors = colorbf.substring(0, colorbf.length()-1 );
-		}
-			//TODO evil	
-		//return colors+"&"+labels+"&"+val;
-List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		//
+		//if (colorbf.length()==0){
+		//	colors = "";
+		//}
+		if (colorbf.length()!=0) {			
+			String colors = colorbf.substring(0, colorbf.length()-1 );
+			feature.add(new AppendableFeature(colors, "chco"));
+		}		
 		
-        feature.add(new AppendableFeature("", 
-                  ChartTypeFeature.ChartData)); 
+        
+        feature.add(new AppendableFeature(val, ChartTypeFeature.ChartDataAppender));
         
 		return feature;
 	}	

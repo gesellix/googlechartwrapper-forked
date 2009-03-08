@@ -18,6 +18,7 @@ public enum ChartTypeFeature {
 	LinearStripes("chf"),
 	ChartLegend("chdl"),
 	ChartData("chd"),
+	ChartDataAppender(""),
 	ChartColor("chco"),
 	DataScaling("chds"),
 	PieChartOrientation("chp"),
