@@ -1,11 +1,11 @@
 package unitTests;
 
 import googlechartwrapper.VennDiagram;
-import googlechartwrapper.color.ChartColors;
+import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.LinearStripes;
+import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.LinearGradient.GradientFillDestination;
-import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
+import googlechartwrapper.color.LinearStripe.LinearStripesDestination;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.VennDiagramData;
 import googlechartwrapper.label.ChartLegend;
@@ -36,9 +36,9 @@ public class VennDiagramTest {
 		diagram.setVennDiagramData(new VennDiagramData(100, 80, 60, 30, 30, 30,
 				10));
 
-		diagram.addChartColor(new ChartColors(Color.GREEN));
-		diagram.addChartColor(new ChartColors(Color.BLUE));
-		diagram.addChartColor(new ChartColors(Color.RED));
+		diagram.addChartColor(new ChartColor(Color.GREEN));
+		diagram.addChartColor(new ChartColor(Color.BLUE));
+		diagram.addChartColor(new ChartColor(Color.RED));
 		
 		List<String> l = new ArrayList<String>();
 		l.add("A");
@@ -62,9 +62,9 @@ public class VennDiagramTest {
 		diagram.setVennDiagramData(new VennDiagramData(100, 80, 60, 30, 30, 30,
 				10));
 
-		diagram.addChartColor(new ChartColors(Color.GREEN));
-		diagram.addChartColor(new ChartColors(Color.BLUE));
-		diagram.addChartColor(new ChartColors(Color.RED));
+		diagram.addChartColor(new ChartColor(Color.GREEN));
+		diagram.addChartColor(new ChartColor(Color.BLUE));
+		diagram.addChartColor(new ChartColor(Color.RED));
 
 		diagram.setDataScaling(new DataScalingSet(10,50));
 
@@ -104,7 +104,7 @@ public class VennDiagramTest {
 
 		diagram.setChartLegend(new ChartLegend(l));
 
-		diagram.setLinearStripes(new LinearStripes(
+		diagram.setLinearStripes(new LinearStripe(
 				LinearStripesDestination.Background, 1, Color.CYAN, 0.5f,
 				Color.LIGHT_GRAY, 1f));
 

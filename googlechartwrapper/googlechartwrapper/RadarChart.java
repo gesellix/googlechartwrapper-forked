@@ -1,13 +1,13 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.IEncoder;
-import googlechartwrapper.color.ChartColors;
+import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.IFillAreaable;
 import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.LinearStripes;
+import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.SolidFill;
-import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
+import googlechartwrapper.color.LinearStripe.LinearStripesDestination;
 import googlechartwrapper.data.RadarChartLine;
 import googlechartwrapper.data.RadarChartLineAppender;
 import googlechartwrapper.interfaces.IColorable;
@@ -62,11 +62,11 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 	protected RadarChartLineAppender radarChartLineAppender = new RadarChartLineAppender();
 	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
 			ChartTypeFeature.SolidFill);
-	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
 			ChartTypeFeature.ChartColor, ",");
 	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<LinearStripes> linearStripesAppender = new UpperLimitGenericAppender<LinearStripes>(
+	protected UpperLimitGenericAppender<LinearStripe> linearStripesAppender = new UpperLimitGenericAppender<LinearStripe>(
 			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -279,12 +279,12 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 				: null;
 	}
 
-	public void addChartColor(ChartColors cc) {
+	public void addChartColor(ChartColor cc) {
 
 		this.chartColorAppender.add(cc);
 	}
 
-	public List<ChartColors> getChartColors() {
+	public List<ChartColor> getChartColors() {
 
 		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
 				.getList()
@@ -296,12 +296,12 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 
 	}
 
-	public ChartColors removeChartColors(int index) {
+	public ChartColor removeChartColors(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColors cc) {
+	public boolean removeChartColors(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}
@@ -368,7 +368,7 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 		}
 	}
 
-	public LinearStripes getLinearStripes() {
+	public LinearStripe getLinearStripes() {
 
 		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
 				.getList().get(0)
@@ -379,7 +379,7 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 		linearStripesAppender.removeAll();
 	}
 
-	public void setLinearStripes(LinearStripes ls) {
+	public void setLinearStripes(LinearStripe ls) {
 		if (ls == null) {
 			linearStripesAppender.removeAll();
 			return;

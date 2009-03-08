@@ -52,7 +52,7 @@ public class ChartLegend implements IFeatureAppender {
 
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		StringBuilder builder = new StringBuilder();

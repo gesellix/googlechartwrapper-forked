@@ -54,7 +54,7 @@ public class FillArea implements IFeatureAppender {
 		this.dataSetKind = kind;
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new StringBuilder();

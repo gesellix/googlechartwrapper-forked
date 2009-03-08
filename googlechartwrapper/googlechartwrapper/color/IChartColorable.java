@@ -17,14 +17,14 @@ public interface IChartColorable {
 	 * 
 	 * @throws IllegalArgumentException if you try to add null
 	 */
-	public void addChartColor(ChartColors cc);
+	public void addChartColor(ChartColor cc);
 	
 	/**
 	 * Returns a unmodifiable list of ChartColors
 	 * 
 	 * @return list of ChartColors, can be empty
 	 */
-	public List<ChartColors> getChartColors();
+	public List<ChartColor> getChartColors();
 	
 	/**
 	 * Removes ChartColor at the given position.
@@ -35,7 +35,7 @@ public interface IChartColorable {
 	 * 
 	 * @throws IndexOutOfBoundsException if the index is out of range
 	 */
-	public ChartColors removeChartColors(int index);
+	public ChartColor removeChartColors(int index);
 	
 	/**
 	 * Removes an given ChartColors object. 
@@ -44,7 +44,7 @@ public interface IChartColorable {
 	 * 
 	 * @return true if the remove was successful
 	 */
-	public boolean removeChartColors(ChartColors cc);
+	public boolean removeChartColors(ChartColor cc);
 	
 	/**
 	 * Removes all ChartColors in the list.

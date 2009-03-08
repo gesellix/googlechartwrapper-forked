@@ -34,7 +34,7 @@ public class BarWidthAndSpacing implements IFeatureAppender {
 		return new BarWidthAndSpacing() {
 
 			@Override
-			public List<AppendableFeature> getAppendableString(
+			public List<AppendableFeature> getAppendableFeatures(
 					List<? extends IFeatureAppender> otherAppenders) {
 
 				StringBuilder builder = new StringBuilder();
@@ -79,7 +79,7 @@ public class BarWidthAndSpacing implements IFeatureAppender {
 		return new BarWidthAndSpacing() {
 
 			@Override
-			public List<AppendableFeature> getAppendableString(
+			public List<AppendableFeature> getAppendableFeatures(
 					List<? extends IFeatureAppender> otherAppenders) {
 
 				StringBuilder builder = new StringBuilder();
@@ -120,7 +120,7 @@ public class BarWidthAndSpacing implements IFeatureAppender {
 
 		return new BarWidthAndSpacing() {
 			@Override
-			public List<AppendableFeature> getAppendableString(
+			public List<AppendableFeature> getAppendableFeatures(
 					List<? extends IFeatureAppender> otherAppenders) {
 				StringBuilder builder = new StringBuilder();
 				
@@ -142,7 +142,7 @@ public class BarWidthAndSpacing implements IFeatureAppender {
 		};
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		return null;

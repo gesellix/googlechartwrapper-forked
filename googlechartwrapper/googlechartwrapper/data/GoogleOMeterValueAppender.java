@@ -31,7 +31,7 @@ public class GoogleOMeterValueAppender implements IExtendedFeatureAppender,
 		return "chd";
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		if (list.size() == 0) {
 			return null;

@@ -22,7 +22,7 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 		return "chxt";
 	}
 
-	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableFeatures(List<? extends IFeatureAppender> otherAppenders) {
 		if (axis.size() < 1){
 			return new ArrayList<AppendableFeature>();
 		}

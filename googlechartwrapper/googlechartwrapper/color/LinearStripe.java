@@ -18,7 +18,7 @@ import googlechartwrapper.util.MiscUtils;
  * @author steffan
  * 
  */
-public class LinearStripes implements IFeatureAppender {
+public class LinearStripe implements IFeatureAppender {
 
 	private LinearStripesDestination fillDestination;
 	private int angle;
@@ -42,7 +42,7 @@ public class LinearStripes implements IFeatureAppender {
 	 * 
 	 * @throws IllegalArgumentException
 	 */
-	public LinearStripes(LinearStripesDestination fillDestination, int angle,
+	public LinearStripe(LinearStripesDestination fillDestination, int angle,
 			Color firstColor, float firstWidth, Color secondColor,
 			float secondWith) {
 
@@ -68,7 +68,7 @@ public class LinearStripes implements IFeatureAppender {
 		this.secondWith = secondWith;
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		StringBuilder builder = new StringBuilder();

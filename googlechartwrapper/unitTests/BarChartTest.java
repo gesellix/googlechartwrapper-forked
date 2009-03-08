@@ -9,7 +9,7 @@ import java.awt.Dimension;
 import googlechartwrapper.BarChart;
 import googlechartwrapper.BarChart.BarChartOrientation;
 import googlechartwrapper.BarChart.BarChartStyle;
-import googlechartwrapper.color.ChartColors;
+import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.DataPointLabel;
 import googlechartwrapper.label.DataPointLabel.FloatingPointNumberBuilder;
@@ -29,8 +29,8 @@ public class BarChartTest {
 		
 		BarChart bc = new BarChart(new Dimension(300,300),BarChartOrientation.Horizontal,BarChartStyle.Grouped);
 		bc.setChartTitle(new ChartTitle("bar chart"));
-		bc.addChartColor(new ChartColors(Color.BLACK));
-		bc.addChartColor(new ChartColors(Color.GREEN));
+		bc.addChartColor(new ChartColor(Color.BLACK));
+		bc.addChartColor(new ChartColor(Color.GREEN));
 		//bc.addChartColor(new ChartColors(Color.BLUE));
 		
 		bc.setBarWidthAndSpacing(BarWidthAndSpacing.newRelativeResize(0.5f,0.1f));

@@ -1,7 +1,7 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.IEncoder;
-import googlechartwrapper.color.ChartColors;
+import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.SolidFill;
@@ -27,7 +27,7 @@ public class GeographicMap extends AbstractChart implements ISolidFillable, ICha
 	private Collection<String> coloredStates;
 	protected GenericAppender<SolidFill> solidFill = 
 		new GenericAppender<SolidFill>(ChartTypeFeature.SolidFill);
-	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
 			ChartTypeFeature.ChartColor, ",");
 	
 	public enum GeographicalArea {
@@ -158,12 +158,12 @@ public class GeographicMap extends AbstractChart implements ISolidFillable, ICha
 		return null;
 	}
 
-	public void addChartColor(ChartColors cc) {
+	public void addChartColor(ChartColor cc) {
 
 		this.chartColorAppender.add(cc);
 	}
 
-	public List<ChartColors> getChartColors() {
+	public List<ChartColor> getChartColors() {
 
 		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
 				.getList()
@@ -175,12 +175,12 @@ public class GeographicMap extends AbstractChart implements ISolidFillable, ICha
 
 	}
 
-	public ChartColors removeChartColors(int index) {
+	public ChartColor removeChartColors(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColors cc) {
+	public boolean removeChartColors(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}

@@ -3,13 +3,13 @@ package googlechartwrapper;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
-import googlechartwrapper.color.ChartColors;
+import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.LinearStripes;
+import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.LinearGradient.GradientFillDestination;
-import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
+import googlechartwrapper.color.LinearStripe.LinearStripesDestination;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.data.PieChartSliceAppender;
 import googlechartwrapper.interfaces.IColorable;
@@ -45,13 +45,13 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 			ChartTypeFeature.SolidFill);
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<LinearStripes> linearStripesAppender = new UpperLimitGenericAppender<LinearStripes>(
+	protected UpperLimitGenericAppender<LinearStripe> linearStripesAppender = new UpperLimitGenericAppender<LinearStripe>(
 			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartTitle> chartTitleAppender = new UpperLimitGenericAppender<ChartTitle>(
 			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
-	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
 			ChartTypeFeature.ChartColor, ",");
 	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
@@ -173,7 +173,7 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 		linearStripesAppender.removeAll();
 	}
 
-	public void setLinearStripes(LinearStripes ls) {
+	public void setLinearStripes(LinearStripe ls) {
 		if (ls == null) {
 			linearStripesAppender.removeAll();
 			return;
@@ -211,7 +211,7 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 
 	}
 
-	public LinearStripes getLinearStripes() {
+	public LinearStripe getLinearStripes() {
 
 		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
 				.getList().get(0)
@@ -235,12 +235,12 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 
 	}
 
-	public void addChartColor(ChartColors cc) {
+	public void addChartColor(ChartColor cc) {
 
 		this.chartColorAppender.add(cc);
 	}
 
-	public List<ChartColors> getChartColors() {
+	public List<ChartColor> getChartColors() {
 
 		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
 				.getList()
@@ -252,12 +252,12 @@ public class PieChart extends AbstractChart implements ISolidFillable,
 
 	}
 
-	public ChartColors removeChartColors(int index) {
+	public ChartColor removeChartColors(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColors cc) {
+	public boolean removeChartColors(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}

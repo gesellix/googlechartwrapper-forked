@@ -2,8 +2,8 @@ package unitTests;
 
 import static org.junit.Assert.assertEquals;
 import googlechartwrapper.PieChart;
-import googlechartwrapper.color.LinearStripes;
-import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
+import googlechartwrapper.color.LinearStripe;
+import googlechartwrapper.color.LinearStripe.LinearStripesDestination;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.style.ChartMargin;
@@ -28,8 +28,8 @@ public class PieChartTest {
 		chart.addPieChartSlice(new PieChartSlice(54620000-16620000-13840000
 				-4384000-3251000,"rest", null));
 		
-		//System.out.println(chart.getUrl());
-		assertEquals("http://chart.apis.google.com/chart?cht=p3&chs=400x180&chco=&chl=EU|USA|Japan|China|rest&chd=t:30,25,8,5,30&chtt=GDP+(nominal)", 
+		
+		assertEquals("http://chart.apis.google.com/chart?cht=p3&chs=400x180&chd=t:30,25,8,5,30&chl=EU|USA|Japan|China|rest&chtt=GDP+(nominal)", 
 				chart.getUrl());
 	}
 	
@@ -51,7 +51,7 @@ public class PieChartTest {
 		chart.addPieChartSlice(new PieChartSlice(54620000-13840000-4384000-3322000-
 				3251000-2773000-2560000-2105000-1439000-1432000-1314000,"other", null));
 		
-		chart.setLinearStripes(new LinearStripes(LinearStripesDestination.Background,30,Color.ORANGE,0.1f, Color.YELLOW, 0.4f));
+		chart.setLinearStripes(new LinearStripe(LinearStripesDestination.Background,30,Color.ORANGE,0.1f, Color.YELLOW, 0.4f));
 			
 		//System.out.println(chart.getUrl());
 		//TODO assert???
@@ -64,10 +64,9 @@ public class PieChartTest {
 		chart.addPieChartSlice(new PieChartSlice(80,"USA", Color.BLUE));
 		chart.addPieChartSlice(new PieChartSlice(20,"Canada", null));
 		chart.setPieChartOrientation(2.5f);
-		//chart.removePieChartOrientation();
+		//chart.removePieChartOrientation();		
 		
-		
-		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chco=0000ff&chl=USA|Canada&chd=t:80,20&chp=2.5&chtt=GDP+of+the+world(nominal)"
+		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chd=t:80,20&chco=0000ff&chl=USA|Canada&chp=2.5&chtt=GDP+of+the+world(nominal)"
 				,chart.getUrl());
 	}
 	@Test
@@ -78,8 +77,8 @@ public class PieChartTest {
 		chart.addPieChartSlice(new PieChartSlice(80,"USA", Color.BLUE));
 		chart.addPieChartSlice(new PieChartSlice(20,"Canada", null));
 		chart.setChartMargin(new ChartMargin(40,40,40,40));
-		
-		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chco=0000ff&chl=USA|Canada&chd=t:80,20&chma=40,40,40,40&chtt=GDP+of+the+world(nominal)"
+	
+		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chd=t:80,20&chco=0000ff&chl=USA|Canada&chma=40,40,40,40&chtt=GDP+of+the+world(nominal)"
 				,chart.getUrl());
 		
 		

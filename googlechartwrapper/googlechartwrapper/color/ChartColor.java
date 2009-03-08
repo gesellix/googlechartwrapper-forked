@@ -14,7 +14,7 @@ import java.util.List;
  * @author steffan
  * 
  */
-public class ChartColors implements IFeatureAppender {
+public class ChartColor implements IFeatureAppender {
 
 	private Color color;
 
@@ -25,7 +25,7 @@ public class ChartColors implements IFeatureAppender {
 	 * 
 	 * @throws IllegalArgumentException if color is null
 	 */
-	public ChartColors(Color color) {
+	public ChartColor(Color color) {
 
 		if (color == null)
 			throw new IllegalArgumentException("color can not be null");
@@ -55,7 +55,7 @@ public class ChartColors implements IFeatureAppender {
 		this.color = new Color(color.getRGB());
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		StringBuilder builder = new StringBuilder();

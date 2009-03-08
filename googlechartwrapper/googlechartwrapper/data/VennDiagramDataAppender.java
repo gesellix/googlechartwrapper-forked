@@ -30,7 +30,7 @@ public class VennDiagramDataAppender implements IExtendedFeatureAppender, IEncod
 		return this.data;
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 			

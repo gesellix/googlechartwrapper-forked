@@ -39,7 +39,7 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 		return this.data;
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new StringBuilder();	

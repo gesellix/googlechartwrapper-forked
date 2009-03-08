@@ -162,7 +162,7 @@ public class GridLine implements IFeatureAppender {
 		return yOffset;
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		//because the api, needs the 2 parameters 

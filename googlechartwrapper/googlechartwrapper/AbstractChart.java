@@ -2,9 +2,7 @@ package googlechartwrapper;
 
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.ArrayUtils;
-import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.IExtendedFeatureAppender;
-import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Dimension;
 import java.lang.reflect.Field;
@@ -196,7 +194,7 @@ public abstract class AbstractChart implements Chart {
 		//value=Appender für alle von diesem Typen
 		
 		for (IExtendedFeatureAppender ap : appenders) {
-			List<AppendableFeature> ft = ap.getAppendableString(appenders);
+			List<AppendableFeature> ft = ap.getAppendableFeatures(appenders);
 			for (AppendableFeature feature : ft){
 				if (m.containsKey(feature.getPrefix())){
 					m.get(feature.getPrefix()).add(feature);

@@ -53,10 +53,8 @@ public class RadarChartTest {
 
 		chart.setChartTitle(new ChartTitle("Java Google Chart Wrapper"));
 
-		String expected = "http://chart.apis.google.com/chart?cht=rs&chs=200x200&"
-				+ "chd=t:10,20,30,50,70,90,100,120&ffc800&chg=25.0,25.0&"
-				+ "chm=B,ffc800,0,1,0&chtt=Java+Google+Chart+Wrapper&chxt=x&"
-				+ "chxl=0:|0|45|90|135|180|225|270|315&chxr=0,0,360";
+		
+		String expected = "http://chart.apis.google.com/chart?cht=rs&chs=200x200&chd=t:10,20,30,50,70,90,100,120&chg=25.0,25.0&chm=B,ffc800,0,1,0&chtt=Java+Google+Chart+Wrapper&chxl=0:|0|45|90|135|180|225|270|315&chxr=0,0,360&chxt=x";
 		assertEquals(expected, chart.getUrl());
 	}
 
@@ -73,7 +71,8 @@ public class RadarChartTest {
 		chart.addShapeMarker(new ShapeMarker(MarkerTyp.Cross, Color.ORANGE, 0,
 				DataPoint.newDrawNPoint(2), 15));
 
-		String expected = "http://chart.apis.google.com/chart?cht=rs&chs=200x200&chd=t:10,20,30,50,70,90,100,120&ffc800&chm=c,ffc800,0,-2,15";
+		
+		String expected = "http://chart.apis.google.com/chart?cht=rs&chs=200x200&chd=t:10,20,30,50,70,90,100,120&chm=c,ffc800,0,-2,15";
 		assertEquals(expected, chart.getUrl());
 
 	}

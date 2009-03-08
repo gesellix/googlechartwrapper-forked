@@ -61,7 +61,7 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 		return "chco";
 	}
 
-	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableFeatures(List<? extends IFeatureAppender> otherAppenders) {
 		//chco fuer colors of slices
 		//chl fuer labels
 		//chartdata vom encoder

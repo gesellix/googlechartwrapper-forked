@@ -16,6 +16,6 @@ public interface IFeatureAppender {
 	 * @param otherAppenders other appenders of the chart
 	 * @return List of google api formated string for features with prefix
 	 */
-	public List<AppendableFeature> getAppendableString (List<? extends IFeatureAppender> otherAppenders);
+	public List<AppendableFeature> getAppendableFeatures (List<? extends IFeatureAppender> otherAppenders);
 
 }

@@ -21,17 +21,17 @@ public class BarChartDataSeriesAppender implements IExtendedFeatureAppender,
 		IEncodeable {
 
 	private IEncoder encoder = new AutoEncoder();
-	protected List<BarChartDataSeries> list = new LinkedList<BarChartDataSeries>();
+	protected List<BarChartDataSerie> list = new LinkedList<BarChartDataSerie>();
 
-	public void add(BarChartDataSeries ds) {
+	public void add(BarChartDataSerie ds) {
 		list.add(ds);
 	}
 
-	public boolean remove(BarChartDataSeries ds) {
+	public boolean remove(BarChartDataSerie ds) {
 		return list.remove(ds);
 	}
 
-	public BarChartDataSeries remove(int index) {
+	public BarChartDataSerie remove(int index) {
 		return list.remove(index);
 	}
 
@@ -46,7 +46,7 @@ public class BarChartDataSeriesAppender implements IExtendedFeatureAppender,
 		return ChartTypeFeature.ChartData.getPrefix();
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		// TODO
 		
@@ -54,7 +54,7 @@ public class BarChartDataSeriesAppender implements IExtendedFeatureAppender,
 		// data
 		for (int i = 0; i < this.getLongestDataSeriesSize(); i++) {
 
-			for (BarChartDataSeries currentSeries : this.list) {
+			for (BarChartDataSerie currentSeries : this.list) {
 
 				if (currentSeries.getData().size() < i) {
 
@@ -77,7 +77,7 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 
 		int size = 0;
 
-		for (BarChartDataSeries currentSeries : this.list) {
+		for (BarChartDataSerie currentSeries : this.list) {
 
 			if (currentSeries.getData().size() > size) {
 				size = currentSeries.getData().size();

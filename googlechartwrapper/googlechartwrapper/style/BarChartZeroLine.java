@@ -103,7 +103,7 @@ public class BarChartZeroLine implements IFeatureAppender {
 		this.dataSets = zeroLine;
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		// this should not be

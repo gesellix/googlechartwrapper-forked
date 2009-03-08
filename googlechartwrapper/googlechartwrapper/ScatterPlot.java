@@ -4,10 +4,10 @@ import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
-import googlechartwrapper.color.ChartColors;
+import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.LinearStripes;
+import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.IMultiDataScaleable;
@@ -48,13 +48,13 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<LinearStripes> linearStripesAppender = new UpperLimitGenericAppender<LinearStripes>(
+	protected UpperLimitGenericAppender<LinearStripe> linearStripesAppender = new UpperLimitGenericAppender<LinearStripe>(
 			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartTitle> chartTitleAppender = new UpperLimitGenericAppender<ChartTitle>(
 			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
-	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
 			ChartTypeFeature.ChartColor, ",");
 	protected UpperLimitGenericAppender<DataScalingSet> dataScalingAppender = new UpperLimitGenericAppender<DataScalingSet>(
 			ChartTypeFeature.DataScaling, 1, UpperLimitReactions.RemoveFirst);
@@ -122,7 +122,7 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 	}
 
-	public void setLinearStripes(LinearStripes ls) {
+	public void setLinearStripes(LinearStripe ls) {
 		this.linearStripesAppender.add(ls);
 
 	}
@@ -160,12 +160,12 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 	}
 
-	public void addChartColor(ChartColors cc) {
+	public void addChartColor(ChartColor cc) {
 
 		this.chartColorAppender.add(cc);
 	}
 
-	public List<ChartColors> getChartColors() {
+	public List<ChartColor> getChartColors() {
 
 		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
 				.getList()
@@ -177,17 +177,17 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 	}
 
-	public ChartColors removeChartColors(int index) {
+	public ChartColor removeChartColors(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColors cc) {
+	public boolean removeChartColors(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}
 
-	public LinearStripes getLinearStripes() {
+	public LinearStripe getLinearStripes() {
 
 		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
 				.getList().get(0)

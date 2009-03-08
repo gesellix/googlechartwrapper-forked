@@ -192,7 +192,7 @@ public class LinearGradient implements IFeatureAppender{
 		this.endColor = endColor;
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new  StringBuilder();

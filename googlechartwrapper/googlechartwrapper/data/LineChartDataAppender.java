@@ -60,7 +60,7 @@ public class LineChartDataAppender implements IExtendedFeatureAppender,
 		this.data.addAll(Collections.unmodifiableList(data));
 		}
 	}
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new StringBuilder();

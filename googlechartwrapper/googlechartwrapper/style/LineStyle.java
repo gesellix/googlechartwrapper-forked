@@ -33,7 +33,7 @@ public class LineStyle implements IFeatureAppender{
 		this.lengthOfLineSegment = lengthOfBlankSegment;
 	}
 
-	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableFeatures(List<? extends IFeatureAppender> otherAppenders) {
 		
 		StringBuilder builder = new StringBuilder();
 		builder.append(this.thickness);

@@ -31,7 +31,7 @@ public class RadarChartLineAppender implements IExtendedFeatureAppender {
 		return ChartTypeFeature.ChartData.getPrefix();
 	}
 
-	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableFeatures(List<? extends IFeatureAppender> otherAppenders) {
 		//chco fuer colors of slices
 		//chartdata vom encoder
 		boolean colorUsed= false;
@@ -61,15 +61,15 @@ public class RadarChartLineAppender implements IExtendedFeatureAppender {
 		String val = encoder.encodeIntegerCollection(toEncVal);
 				
 		//return val+"&"+color;
-		return null;
+		//return new ArrayList<AppendableFeature>();
 		//TODO
-		/*
+		
 List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
 		
-        feature.add(new AppendableFeature(builder.toString(), 
-                  ChartTypeFeature.ChartLegend)); 
+        feature.add(new AppendableFeature(val, 
+                  ChartTypeFeature.ChartData)); 
         
-		return feature;*/
+		return feature;
 	}
 	
 	public void add (RadarChartLine m){

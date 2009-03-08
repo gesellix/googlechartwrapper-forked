@@ -225,7 +225,7 @@ public class ChartMargin implements IFeatureAppender {
 		this.legendHeight = legendHeight;
 	}	
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		StringBuilder builder = new StringBuilder();
 

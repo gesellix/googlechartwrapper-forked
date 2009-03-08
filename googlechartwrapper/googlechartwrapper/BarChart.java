@@ -2,11 +2,11 @@ package googlechartwrapper;
 
 import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.IEncoder;
-import googlechartwrapper.color.ChartColors;
+import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.LinearStripes;
+import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.data.BarChartDataSeriesAppender;
 import googlechartwrapper.data.DataScalingSet;
@@ -73,11 +73,11 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<LinearStripes> linearStripesAppender = new UpperLimitGenericAppender<LinearStripes>(
+	protected UpperLimitGenericAppender<LinearStripe> linearStripesAppender = new UpperLimitGenericAppender<LinearStripe>(
 			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
 	protected GenericAppender<FinancialMarker> financialMarker = new GenericAppender<FinancialMarker>(
 			ChartTypeFeature.Marker);
-	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
 			ChartTypeFeature.ChartColor, ",");
 	protected UpperLimitGenericAppender<DataScalingSet> dataScalingAppender = new UpperLimitGenericAppender<DataScalingSet>(
 			ChartTypeFeature.DataScaling, 1, UpperLimitReactions.RemoveFirst);
@@ -326,7 +326,7 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 		}
 	}
 
-	public LinearStripes getLinearStripes() {
+	public LinearStripe getLinearStripes() {
 
 		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
 				.getList().get(0)
@@ -421,12 +421,12 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 		return this.dataScalingAppender.remove(set);
 	}
 
-	public void addChartColor(ChartColors cc) {
+	public void addChartColor(ChartColor cc) {
 
 		this.chartColorAppender.add(cc);
 	}
 
-	public List<ChartColors> getChartColors() {
+	public List<ChartColor> getChartColors() {
 
 		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
 				.getList()
@@ -438,12 +438,12 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 
 	}
 
-	public ChartColors removeChartColors(int index) {
+	public ChartColor removeChartColors(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColors cc) {
+	public boolean removeChartColors(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}
@@ -467,7 +467,7 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 		}
 	}
 
-	public void setLinearStripes(LinearStripes ls) {
+	public void setLinearStripes(LinearStripe ls) {
 		if (ls == null) {
 			linearStripesAppender.removeAll();
 			return;

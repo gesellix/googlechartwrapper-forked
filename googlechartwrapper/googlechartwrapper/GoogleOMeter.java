@@ -1,13 +1,13 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.IEncoder;
-import googlechartwrapper.color.ChartColors;
+import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.LinearStripes;
+import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.LinearGradient.GradientFillDestination;
-import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
+import googlechartwrapper.color.LinearStripe.LinearStripesDestination;
 import googlechartwrapper.color.SolidFill.ChartFillDestination;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.GoogleOMeterValue;
@@ -47,9 +47,9 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<LinearStripes> linearStripesAppender = new UpperLimitGenericAppender<LinearStripes>(
+	protected UpperLimitGenericAppender<LinearStripe> linearStripesAppender = new UpperLimitGenericAppender<LinearStripe>(
 			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
-	protected GenericAppender<ChartColors> chartColorAppender = new GenericAppender<ChartColors>(
+	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
 			ChartTypeFeature.ChartColor, ",");
 	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
@@ -190,7 +190,7 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 
 	}
 
-	public LinearStripes getLinearStripes() {
+	public LinearStripe getLinearStripes() {
 
 		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
 				.getList().get(0)
@@ -208,7 +208,7 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	 * FillDestination.
 	 * 
 	 */
-	public void setLinearStripes(LinearStripes ls) {
+	public void setLinearStripes(LinearStripe ls) {
 
 		if (ls == null) {
 			this.removeLinearStripes();
@@ -246,12 +246,12 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 
 	}
 
-	public void addChartColor(ChartColors cc) {
+	public void addChartColor(ChartColor cc) {
 
 		this.chartColorAppender.add(cc);
 	}
 
-	public List<ChartColors> getChartColors() {
+	public List<ChartColor> getChartColors() {
 
 		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
 				.getList()
@@ -263,12 +263,12 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 
 	}
 
-	public ChartColors removeChartColors(int index) {
+	public ChartColor removeChartColors(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColors cc) {
+	public boolean removeChartColors(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}

@@ -59,7 +59,7 @@ public class XYLineChartDataAppender implements IExtendedFeatureAppender,
 		return ChartTypeFeature.ChartData.getPrefix();
 	}
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		// TODO Auto-generated method stub
 		return null;

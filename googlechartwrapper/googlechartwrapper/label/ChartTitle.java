@@ -82,7 +82,7 @@ public class ChartTitle implements IExtendedFeatureAppender{
 	 * (non-Javadoc)
 	 * @see googlechartwrapper.util.IFeatureAppender#getAppendableString(java.util.List)
 	 */
-	public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+	public List<AppendableFeature> getAppendableFeatures(List<? extends IFeatureAppender> otherAppenders) {
 		StringBuffer ret = new StringBuffer(title.length()+15);
 		//ret.append(ChartTypeFeature.ChartTitle.getPrefix());
 		//ret.append("=");

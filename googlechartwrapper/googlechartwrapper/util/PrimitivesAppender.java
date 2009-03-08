@@ -59,7 +59,7 @@ public class PrimitivesAppender <T extends Number> implements IExtendedFeatureAp
 	/**
 	 * Removes the primitive.
 	 * 
-	 * @return the primitive, can be null if no one was set, or removed
+	 * @return the primitive, can be {@code null} if no one was set, or removed
 	 */	
 	public T remove(){
 		
@@ -75,7 +75,7 @@ public class PrimitivesAppender <T extends Number> implements IExtendedFeatureAp
 		
 		return this.feature.getPrefix();
 	}
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
 		if(this.primitive != null){
@@ -87,7 +87,7 @@ public class PrimitivesAppender <T extends Number> implements IExtendedFeatureAp
 			List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
 			
 	        feature.add(new AppendableFeature(builder.toString(), 
-	                  ChartTypeFeature.ChartData)); 
+	                  this.feature)); 
 	        
 			return feature;
 			

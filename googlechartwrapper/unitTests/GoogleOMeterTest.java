@@ -3,9 +3,9 @@ package unitTests;
 import static org.junit.Assert.assertEquals;
 import googlechartwrapper.GoogleOMeter;
 import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.LinearStripes;
+import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.LinearGradient.GradientFillDestination;
-import googlechartwrapper.color.LinearStripes.LinearStripesDestination;
+import googlechartwrapper.color.LinearStripe.LinearStripesDestination;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.GoogleOMeterValue;
 import googlechartwrapper.label.ChartTitle;
@@ -78,7 +78,7 @@ public class GoogleOMeterTest {
 		GoogleOMeter meter = new GoogleOMeter(new Dimension(225,125));
 		meter.setChartTitle(new ChartTitle("title"));		
 		
-		meter.setLinearStripes(new LinearStripes(LinearStripesDestination.Background,45,Color.BLUE,0.1f,Color.GRAY,0.3f));
+		meter.setLinearStripes(new LinearStripe(LinearStripesDestination.Background,45,Color.BLUE,0.1f,Color.GRAY,0.3f));
 		meter.addGoogleOMeterValue(new GoogleOMeterValue("Hello",70));		
 		meter.setDataScaling(new DataScalingSet(10d,110d));
 		

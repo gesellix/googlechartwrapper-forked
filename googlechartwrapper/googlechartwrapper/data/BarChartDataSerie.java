@@ -8,13 +8,13 @@ import java.util.List;
  * @author steffan
  *
  */
-public class BarChartDataSeries {
+public class BarChartDataSerie {
 	
 	private List<Integer> data;
 	private Color color;
 	private String label;
 	
-	public BarChartDataSeries(List<Integer> data, Color color, String label) {
+	public BarChartDataSerie(List<Integer> data, Color color, String label) {
 		// TODO builder pattern
 		if(data == null)
 			throw new IllegalArgumentException("data can not be null");

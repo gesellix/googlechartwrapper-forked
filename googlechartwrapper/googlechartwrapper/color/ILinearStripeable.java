@@ -14,7 +14,7 @@ public interface ILinearStripeable {
 	 * 
 	 * @param ls the new GridLine
 	 */
-	public void setLinearStripes(LinearStripes ls);
+	public void setLinearStripes(LinearStripe ls);
 
 	/**
 	 * Removes the LinearStripes.
@@ -26,6 +26,6 @@ public interface ILinearStripeable {
 	 * 
 	 * @return the LinearStripes, or null if this Chart contains no LinearStripes.
 	 */
-	public LinearStripes getLinearStripes();
+	public LinearStripe getLinearStripes();
 
 }

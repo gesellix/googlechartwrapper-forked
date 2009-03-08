@@ -91,7 +91,7 @@ public class SolidFill implements IFeatureAppender
     	return new Color(this.color.getRGB());
     } 
    
-     public List<AppendableFeature> getAppendableString(List<? extends IFeatureAppender> otherAppenders) {
+     public List<AppendableFeature> getAppendableFeatures(List<? extends IFeatureAppender> otherAppenders) {
 		
     	 StringBuilder builder = new StringBuilder();
     	 

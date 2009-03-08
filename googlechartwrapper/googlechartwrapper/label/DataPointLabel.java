@@ -46,7 +46,7 @@ public class DataPointLabel implements IFeatureAppender {
 		this.priority = priority;
 	}	
 
-	public List<AppendableFeature> getAppendableString(
+	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		StringBuilder builder = new StringBuilder();
