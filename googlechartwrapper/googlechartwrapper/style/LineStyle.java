@@ -42,10 +42,10 @@ public class LineStyle implements IFeatureAppender{
 		builder.append(',');
 		builder.append(this.lengthOfBlankSegment);	
 		
-List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
 		
         feature.add(new AppendableFeature(builder.toString(), 
-                  ChartTypeFeature.ChartData)); 
+                  ChartTypeFeature.LineStyle)); 
         
 		return feature;
 	}

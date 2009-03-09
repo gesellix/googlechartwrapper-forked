@@ -17,6 +17,7 @@ import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.interfaces.IStyleable;
 import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelContainer;
+import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.DataPointLabel;
 import googlechartwrapper.label.IDataPointLabelable;
@@ -93,6 +94,8 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 			UpperLimitReactions.RemoveFirst);
 	protected GenericAppender<DataPointLabel> dataPointLabelAppender = new GenericAppender<DataPointLabel>(
 			ChartTypeFeature.Marker);
+	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
+			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
 
 	/**
 	 * Constructs a bar chart
@@ -558,6 +561,24 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 
 	public void removeDataPointLabels() {
 		this.dataPointLabelAppender.removeAll();
+
+	}
+	public ChartLegend getChartLegend() {
+
+		if (this.chartLegendAppender.getList().size() > 0) {
+			return this.chartLegendAppender.getList().get(0);
+		} else {
+			return null;
+		}
+	}
+
+	public void removeChartLegend() {
+		this.chartLegendAppender.removeAll();
+
+	}
+
+	public void setChartLegend(ChartLegend legend) {
+		this.chartLegendAppender.add(legend);
 
 	}
 

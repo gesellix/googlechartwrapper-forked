@@ -2,33 +2,81 @@ package googlechartwrapper.label;
 
 import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
+import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Specifies a chart legend.
+ * Specifies a chart legend. <a
+ * href="http://code.google.com/apis/chart/labels.html#chart_legend">
+ * http://code.google.com/apis/chart/labels.html#chart_legend</a>
+ * 
  * @author steffan
  * 
  */
-public class ChartLegend implements IFeatureAppender {
+public class ChartLegend implements IFeatureAppender{
 
-	private List<String> label = new ArrayList<String>();
-	private ChartLegendPosition chartLegendPosition = null;
+	private List<String> labelList = new ArrayList<String>();
+	private ChartLegendPosition chartLegendPosition = ChartLegendPosition.Right_Vertical;
+
+	/**
+	 * Add exactly one label to the list.
+	 * 
+	 * @param label
+	 *            the label to add
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if label is {@code null}
+	 */
+	public ChartLegend(String label) {
+
+		if (label == null)
+			throw new IllegalArgumentException("label can not be null");
+
+		this.labelList.add(label);
+
+	}
+
+	/**
+	 * Add exactly one label to the list.
+	 * 
+	 * @param label
+	 *            the label to add
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if label is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if chartLegendPosition
+	 */
+	public ChartLegend(String label, ChartLegendPosition chartLegendPosition) {
+
+		if (label == null)
+			throw new IllegalArgumentException("label can not be null");
+		if (chartLegendPosition == null)
+			throw new IllegalArgumentException(
+					"chartLegendPosition can not be null");
+
+		this.labelList.add(label);
+		this.chartLegendPosition = chartLegendPosition;
+
+	}
 
 	/**
 	 * Constructs a chart legend.
+	 * 
 	 * @param label
 	 * 
 	 * @throws IllegalArgumentException
+	 *             if label is {@code null}
 	 */
 	public ChartLegend(List<String> label) {
 
 		if (label == null)
 			throw new IllegalArgumentException("label can not be null");
 
-		this.label = label;
+		this.labelList = label;
 
 	}
 
@@ -38,6 +86,7 @@ public class ChartLegend implements IFeatureAppender {
 	 * @param chartLegendPosition
 	 * 
 	 * @throws IllegalArgumentException
+	 *             if label is {@code null}
 	 */
 	public ChartLegend(List<String> label,
 			ChartLegendPosition chartLegendPosition) {
@@ -47,7 +96,7 @@ public class ChartLegend implements IFeatureAppender {
 		if (chartLegendPosition == null)
 			throw new IllegalArgumentException("chartLegendPosition");
 
-		this.label = label;
+		this.labelList = label;
 		this.chartLegendPosition = chartLegendPosition;
 
 	}
@@ -57,34 +106,34 @@ public class ChartLegend implements IFeatureAppender {
 
 		StringBuilder builder = new StringBuilder();
 
-		for (String currentLabel : this.label) {
+		for (String currentLabel : this.labelList) {
 			builder.append(currentLabel);
 			builder.append('|');
 		}
 
 		// only if we have one or more elements
-		if (this.label.size() > 0) {
+		if (this.labelList.size() > 0) {
 			builder.deleteCharAt(builder.length() - 1);
 		}
 
-		if (this.chartLegendPosition != null) {
-			builder.append("chdlp=");
-			builder.append(this.chartLegendPosition.getPosition());
-		}
-
-		List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
+		List<AppendableFeature> features = new ArrayList<AppendableFeature>();		
 		
-        feature.add(new AppendableFeature(builder.toString(), 
-                  ChartTypeFeature.ChartLegend)); 
-        
-		return feature;
+		features.add(new AppendableFeature(builder.toString(),
+				ChartTypeFeature.ChartDataAppender));	
+		
+		/*
+		  features.add(new AppendableFeature(chartLegendPosition.getPosition(),
+				ChartTypeFeature.ChartLegendPosition));
+		 */
+	
+		return features;
 	}
 
 	/**
 	 * @return the label
 	 */
 	public List<String> getLabel() {
-		return label;
+		return labelList;
 	}
 
 	/**
@@ -97,7 +146,7 @@ public class ChartLegend implements IFeatureAppender {
 	public void setLabel(List<String> label) {
 		if (label == null)
 			throw new IllegalArgumentException("label can not be null");
-		this.label = label;
+		this.labelList.addAll(label);
 	}
 
 	/**
@@ -115,7 +164,7 @@ public class ChartLegend implements IFeatureAppender {
 	 *             if label is <code>null</code>
 	 */
 	public void setChartLegendPosition(ChartLegendPosition chartLegendPosition) {
-		if (label == null)
+		if (labelList == null)
 			throw new IllegalArgumentException("label can not be null");
 		this.chartLegendPosition = chartLegendPosition;
 	}
@@ -127,21 +176,25 @@ public class ChartLegend implements IFeatureAppender {
 	 */
 	public enum ChartLegendPosition {
 
-		Bottom('b'),
+		Bottom_Horizontal("b"),
 
-		Top('t'),
+		Top_Horizontal("t"),
 
-		Left('l'),
+		Bottom_Vertival("bv"),
 
-		Right('r');
+		Top_Vertival("tv"),
 
-		private char position;
+		Left_Vertival("l"),
 
-		ChartLegendPosition(char position) {
+		Right_Vertical("r");
+
+		private String position;
+
+		ChartLegendPosition(String position) {
 			this.position = position;
 		}
 
-		public char getPosition() {
+		public String getPosition() {
 			return this.position;
 
 		}

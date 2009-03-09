@@ -12,6 +12,6 @@ public interface IExtendedFeatureAppender extends IFeatureAppender{
 	 * Returns the prefix for the feature parameters.
 	 * @return prefix
 	 */
-	public String getFeaturePrefix ();
-
+	//public String getFeaturePrefix ();
+	//TODO usyeless???
 }

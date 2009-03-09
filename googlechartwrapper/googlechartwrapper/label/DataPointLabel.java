@@ -6,6 +6,7 @@ package googlechartwrapper.label;
 import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
+import googlechartwrapper.util.MiscUtils;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -27,39 +28,155 @@ public class DataPointLabel implements IFeatureAppender {
 	private int dataSetIndex;
 	private IDataPoint dataPoint;
 	private Priority priority;
-	private AbstractNumber number;
+	private Number number;
 	private int size;
+	private String labelContent;
+	private boolean isContentNumber = false;
 
+	/**
+	 * Constructs a new {@link DataPointLabel}. Use this constructor for plain text and flags.
+	 * 
+	 * @param labelType {@link LabelType} choose flag or plain text, if you want to use a number see {@link DataPointLabel}{@link #DataPointLabel(Number, Color, int, IDataPoint, int, Priority)}
+	 * @param labelContent the string to show
+	 * @param color color of the text
+	 * @param dataSetIndex value >= 0 
+	 * @param dataPoint see {@link DataPoint}, e.g. {@link DataPoint#newDrawEachPoint()} 
+	 * @param size the size in pixel
+	 * 
+	 * @see DataPoint
+	 * @see {@link #DataPointLabel(Number, Color, int, IDataPoint, int, Priority)} for numbers
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if labelContent is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if color is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if dataSetindex is < 0
+	 * @throws IllegalArgumentException
+	 *             if dataPoint is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if size is < 0
+	 * @throws IllegalArgumentException
+	 *             if labelType is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if priority is {@code null}
+	 */
 	public DataPointLabel(LabelType labelType, String labelContent,
-			Color color, int dataSetIndex, IDataPoint dataPoint, int size) {
-		// TODO Auto-generated constructor stub
-	}
-
-	public DataPointLabel(AbstractNumber number, Color color, int dataSetIndex,
-			IDataPoint dataPoint, int size, Priority priority) {
-
-		this.number = number;
-		this.color = color;
+			Color color, int dataSetIndex, IDataPoint dataPoint, int size, Priority priority) {
+		
+		if (labelContent == null)
+			throw new IllegalArgumentException("labelContent can not be null");
+		if (labelType == null)
+			throw new IllegalArgumentException("labelType can not be null");
+		if (color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if (dataSetIndex < 0)
+			throw new IllegalArgumentException("dataSetIndex can not be < 0");
+		if (dataPoint == null)
+			throw new IllegalArgumentException("dataPoint can not be null");
+		if (size < 0)
+			throw new IllegalArgumentException("size can not be < 0");
+		if (priority == null)
+			throw new IllegalArgumentException("priority can not be null");
+		
+		
+		this.labelType = labelType;
+		this.labelContent = labelContent;
+		this.color = new Color(color.getRGB());
 		this.dataSetIndex = dataSetIndex;
 		this.dataPoint = dataPoint;
 		this.size = size;
 		this.priority = priority;
-	}	
+	}
+
+	/**
+	 * Constructs a new {@link DataPointLabel}. This constructor creates new
+	 * {@link DataPointLabel} with a {@link Number} as label content.
+	 * 
+	 * @param number to build a number use the number builder, e.g. {@link CurrencyValueNumberBuilder} or {@link FloatingPointNumberBuilder}
+	 * @param color the color
+	 * @param dataSetIndex value >= 0
+	 * @param dataPoint see {@link DataPoint}, e.g. {@link DataPoint#newDrawEachPoint()} 
+	 * @param size the size in pixel
+	 * @param priority {@link Priority}
+	 * 
+	 * @see DataPoint
+	 * @see CurrencyValueNumberBuilder
+	 * @see FloatingPointNumberBuilder
+	 * @see PercentageValueNumberBuilder
+	 * @see ScientificNotationNumberBuilder
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if number is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if color is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if dataSetindex is < 0
+	 * @throws IllegalArgumentException
+	 *             if dataPoint is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if size is < 0
+	 * @throws IllegalArgumentException
+	 *             if priority is {@code null}
+	 */
+	public DataPointLabel(Number number, Color color, int dataSetIndex,
+			IDataPoint dataPoint, int size, Priority priority) {
+
+		if (number == null)
+			throw new IllegalArgumentException("number can not be null");
+		if (color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if (dataSetIndex < 0)
+			throw new IllegalArgumentException("dataSetIndex can not be < 0");
+		if (dataPoint == null)
+			throw new IllegalArgumentException("dataPoint can not be null");
+		if (size < 0)
+			throw new IllegalArgumentException("size can not be < 0");
+		if (priority == null)
+			throw new IllegalArgumentException("priority can not be null");
+
+		this.number = number;
+		this.color = new Color(color.getRGB());
+		this.dataSetIndex = dataSetIndex;
+		this.dataPoint = dataPoint;
+		this.size = size;
+		this.priority = priority;
+		this.isContentNumber = true;
+	}
 
 	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		StringBuilder builder = new StringBuilder();
 
-		builder.append(number.getLabelContent());
+		if (!isContentNumber) {
+			builder.append(labelType.getLabelTypeChar());
+			builder.append(labelContent);
+		}
+		if (isContentNumber) {
+			builder.append("N");
+			builder.append(number.getLabelContent());
+		}
 
-		List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
-		
-        feature.add(new AppendableFeature(builder.toString(), 
-                  ChartTypeFeature.ChartData)); 
-        
+		builder.append(",");
+		builder.append(MiscUtils.getSixCharacterHexValue(color));
+		builder.append(",");
+		builder.append(dataSetIndex);
+		builder.append(",");
+		builder.append(dataPoint.getAppendableString());
+		builder.append(",");
+		builder.append(size);
+		builder.append(",");
+		builder.append(priority.getPriority());
+
+		List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
+
+		feature.add(new AppendableFeature(builder.toString(),
+				ChartTypeFeature.ChartData));
+
 		return feature;
 	}
+
 	/**
 	 * 
 	 * @author steffan
@@ -81,8 +198,11 @@ public class DataPointLabel implements IFeatureAppender {
 	}
 
 	/**
+	 * To construct a obeject see {@link DataPoint}.
 	 * 
 	 * @author steffan
+	 * 
+	 * @see DataPoint
 	 * 
 	 */
 	public interface IDataPoint {
@@ -111,16 +231,58 @@ public class DataPointLabel implements IFeatureAppender {
 
 	}
 
-	public static abstract class AbstractNumber {
+	/**
+	 * To build a special number use one of the builder.
+	 * 
+	 * @author steffan
+	 * 
+	 * @see CurrencyValueNumberBuilder
+	 * @see FloatingPointNumberBuilder
+	 * @see PercentageValueNumberBuilder
+	 * @see ScientificNotationNumberBuilder
+	 *
+	 * 
+	 */
+	public static class Number {
 
-		public AbstractNumber(AbstractNumberBuilder builder) {
-			// TODO Auto-generated constructor stub
+		protected AbstractNumberBuilder builder;
+
+		/**
+		 * Constructs a new number. Use the builder pattern for a new number.
+		 * 
+		 * @param builder
+		 * 
+		 * @throws {@link IllegalArgumentException} if builder is {@code null}
+		 */
+		public Number(AbstractNumberBuilder builder) {
+			
+			if(builder == null)
+			throw new IllegalArgumentException("builder can not be null");
+			
+			this.builder = builder;
 		}
+		/**
+		 * This method is used to build the hole {@link DataPointLabel} string.
+		 * 
+		 * @return the complete string, which defines the number 
+		 */
+		public String getLabelContent() {
 
-		protected abstract String getLabelContent();
+			return builder.getLabelContent();
+		}
 
 	}
 
+	/**
+	 * 
+	 * @author steffan
+	 * 
+	 * @see CurrencyValueNumberBuilder
+	 * @see FloatingPointNumberBuilder
+	 * @see PercentageValueNumberBuilder
+	 * @see ScientificNotationNumberBuilder
+	 *
+	 */
 	public static abstract class AbstractNumberBuilder {
 
 		protected String before = null;
@@ -131,6 +293,13 @@ public class DataPointLabel implements IFeatureAppender {
 		protected boolean displayXCoordinate = false;
 		protected boolean displayYCoordiante = false;
 
+		/**
+		 * Constructs a new number.
+		 * 
+		 * @param precisionLevel an integer that specifies how many decimal places are used
+		 * 
+		 * @throws IllegalArgumentException if precisionLevel is < 0
+		 */
 		public AbstractNumberBuilder(int precisionLevel) {
 
 			if (precisionLevel < 0)
@@ -139,36 +308,62 @@ public class DataPointLabel implements IFeatureAppender {
 			this.precisionLevel = precisionLevel;
 		}
 
+		/**
+		 * Set the text which stands before the number.
+		 * 
+		 * @param before text before the number
+		 * @return
+		 */
 		public AbstractNumberBuilder textBefore(String before) {
 
 			this.before = before;
 
 			return this;
 		}
-
+		/**
+		 * Set the text which stands after the number-
+		 * 
+		 * @param after the text after the number
+		 * @return
+		 */
 		public AbstractNumberBuilder textAfter(String after) {
 
 			this.after = after;
 
 			return this;
 		}
-
+		/**
+		 * Call this method to displays trailing zeros.
+		 * 
+		 * @return
+		 */
 		public AbstractNumberBuilder displayTrailingZeros() {
 			this.displayTrailingZeros = true;
 			return this;
 		}
-
+		/**
+		 * Call this method to displays group separators.
+		 * @return
+		 */
 		public AbstractNumberBuilder displayGroupSeparator() {
 			this.displayGroupSeparator = true;
 			return this;
 		}
-
+		/**
+		 * Call this method to display the value of the x-coordinate at the chosen data point.
+		 * 
+		 * @return
+		 */
 		public AbstractNumberBuilder displayXCoordinateValue() {
 			this.displayXCoordinate = true;
 			this.displayYCoordiante = false;
 			return this;
 		}
-
+		/**
+		 * Call this method to display the value of the y-coordinate at the chosen data point.
+		 * 
+		 * @return
+		 */
 		public AbstractNumberBuilder displayYCoordinateValue() {
 			this.displayXCoordinate = false;
 			this.displayXCoordinate = true;
@@ -176,11 +371,22 @@ public class DataPointLabel implements IFeatureAppender {
 		}
 
 		protected abstract String getLabelContent();
-
-		public abstract AbstractNumber build();
+		
+		/**
+		 * The last method to call. This call build the object.
+		 * 
+		 * @return
+		 */
+		public abstract Number build();
 
 	}
 
+	/**
+	 * Use this class to build a FloatingPointNumber. To create the object call {@link #build()}
+	 * 
+	 * @author steffan
+	 *
+	 */
 	public static class FloatingPointNumberBuilder extends
 			AbstractNumberBuilder {
 
@@ -191,8 +397,8 @@ public class DataPointLabel implements IFeatureAppender {
 
 		}
 
-		public AbstractNumber build() {
-			return new FloatingPointNumber(this);
+		public Number build() {
+			return new Number(this);
 
 		}
 
@@ -228,13 +434,134 @@ public class DataPointLabel implements IFeatureAppender {
 		}
 
 	}
+	/**
+	 * Use this class to build a ScientificNotationNumber. To create the object call {@link #build()}
+	 * 
+	 * @author steffan
+	 *
+	 */
+	public static class ScientificNotationNumberBuilder extends
+			AbstractNumberBuilder {
 
+		private final NumberType numberType = NumberType.Scientific;
+
+		public ScientificNotationNumberBuilder(int precisionLevel) {
+			super(precisionLevel);
+
+		}
+
+		public Number build() {
+			return new Number(this);
+
+		}
+
+		@Override
+		protected String getLabelContent() {
+
+			StringBuilder builder = new StringBuilder();
+
+			if (before != null) {
+				builder.append(before);
+			}
+			builder.append("*");
+			builder.append(numberType.getLabelTypeChar());
+			builder.append(precisionLevel);
+			if (displayTrailingZeros) {
+				builder.append("z");
+			}
+			if (displayGroupSeparator) {
+				builder.append("s");
+			}
+			if (displayXCoordinate) {
+				builder.append("x");
+			}
+			if (displayYCoordiante) {
+				builder.append("y");
+			}
+			builder.append("*");
+			if (after != null) {
+				builder.append(after);
+			}
+
+			return builder.toString();
+		}
+
+	}
+	
+	/**
+	 * Use this class to build a PercentageValueNumber. To create the object call {@link #build()}
+	 * 
+	 * @author steffan
+	 *
+	 */
+	public static class PercentageValueNumberBuilder extends
+			AbstractNumberBuilder {
+
+		private NumberType numberType = NumberType.PercentageValue;
+
+		public PercentageValueNumberBuilder(int precisionLevel) {
+			super(precisionLevel);
+
+		}
+
+		@Override
+		public Number build() {
+
+			return new Number(this);
+		}
+
+		@Override
+		protected String getLabelContent() {
+
+			StringBuilder builder = new StringBuilder();
+
+			if (before != null) {
+				builder.append(before);
+			}
+			builder.append("*");
+			builder.append(numberType.getLabelTypeChar());
+			builder.append(precisionLevel);
+			if (displayTrailingZeros) {
+				builder.append("z");
+			}
+			if (displayGroupSeparator) {
+				builder.append("s");
+			}
+			if (displayXCoordinate) {
+				builder.append("x");
+			}
+			if (displayYCoordiante) {
+				builder.append("y");
+			}
+			builder.append("*");
+			if (after != null) {
+				builder.append(after);
+			}
+
+			return builder.toString();
+		}
+
+	}
+	
+	/**
+	 * Use this class to build a CurrencyValueNumber. To create the object call {@link #build()}
+	 * 
+	 * @author steffan
+	 *
+	 */
 	public static class CurrencyValueNumberBuilder extends
 			AbstractNumberBuilder {
 
 		private NumberType numberType = NumberType.Currency;
 		private String currency;
 
+		/**
+		 *  
+		 * @param precisionLevel
+		 * @param currency e.g. EUR or USD
+		 * 
+		 * @throws IllegalArgumentException if currency is {@code null}
+		 */
 		public CurrencyValueNumberBuilder(int precisionLevel, String currency) {
 			super(precisionLevel);
 
@@ -245,9 +572,9 @@ public class DataPointLabel implements IFeatureAppender {
 		}
 
 		@Override
-		public AbstractNumber build() {
+		public Number build() {
 
-			return new CurrencyValueNumber(this);
+			return new Number(this);
 		}
 
 		@Override
@@ -282,37 +609,41 @@ public class DataPointLabel implements IFeatureAppender {
 		}
 	}
 
-	public static class FloatingPointNumber extends AbstractNumber {
-
-		private AbstractNumberBuilder builder;
-
-		public FloatingPointNumber(AbstractNumberBuilder builder) {
-			super(builder);
-			this.builder = builder;
-		}
-
-		@Override
-		protected String getLabelContent() {
-
-			return builder.getLabelContent();
-		}
-	}
-
-	public static class CurrencyValueNumber extends AbstractNumber {
-
-		private AbstractNumberBuilder builder;
-
-		public CurrencyValueNumber(AbstractNumberBuilder builder) {
-			super(builder);
-			this.builder = builder;
-		}
-
-		@Override
-		protected String getLabelContent() {
-
-			return builder.getLabelContent();
-		}
-	}
+	/*
+	 * public static class FloatingPointNumber extends AbstractNumber {
+	 * 
+	 * private AbstractNumberBuilder builder;
+	 * 
+	 * public FloatingPointNumber(AbstractNumberBuilder builder) {
+	 * super(builder); this.builder = builder; }
+	 * 
+	 * @Override protected String getLabelContent() {
+	 * 
+	 * return builder.getLabelContent(); } }
+	 * 
+	 * public static class CurrencyValueNumber extends AbstractNumber {
+	 * 
+	 * private AbstractNumberBuilder builder;
+	 * 
+	 * public CurrencyValueNumber(AbstractNumberBuilder builder) {
+	 * super(builder); this.builder = builder; }
+	 * 
+	 * @Override protected String getLabelContent() {
+	 * 
+	 * return builder.getLabelContent(); } } public static class
+	 * PercentageValueNumber extends AbstractNumber{
+	 * 
+	 * 
+	 * public PercentageValueNumber(AbstractNumberBuilder builder) {
+	 * super(builder);
+	 * 
+	 * }
+	 * 
+	 * @Override protected String getLabelContent() { 
+	 * return builder.getLabelContent(); }
+	 * 
+	 * }
+	 */
 
 	/**
 	 * 
@@ -341,7 +672,24 @@ public class DataPointLabel implements IFeatureAppender {
 	 */
 	public enum Priority {
 
-		First(1), Default(0), Last(-1);
+		/**
+		 * specifies that the label is drawn before all other parts of the
+		 * chart. The label will be hidden if another chart element is drawn in
+		 * the same place.
+		 */
+		First(-1),
+		/**
+		 * specifies that the label is drawn after bars or lines, but before
+		 * other labels.
+		 */
+		Default(0),
+		/**
+		 * specifies that the label is drawn after all other parts of the chart.
+		 * If more than one label has this value, the first one specified in the
+		 * chm parameter will be drawn first, the second one specified in the
+		 * chm parameter will be drawn second, and so on.
+		 */
+		Last(1);
 
 		private int priority;
 

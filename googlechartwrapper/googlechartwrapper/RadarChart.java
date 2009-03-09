@@ -15,9 +15,12 @@ import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelContainer;
+import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
+import googlechartwrapper.label.DataPointLabel;
 import googlechartwrapper.label.IAxisLabelable;
 import googlechartwrapper.label.IChartTitleable;
+import googlechartwrapper.label.IDataPointLabelable;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
@@ -44,7 +47,7 @@ import java.util.List;
  */
 public class RadarChart extends AbstractChart implements IGridLineable,
 		IShapeMarkable, IAxisLabelable, IFillAreaable, IChartTitleable,
-		IMarkable, IColorable, ILinearable, ILineStyleable {
+		IMarkable, IColorable, ILinearable, ILineStyleable, IDataPointLabelable {
 
 	private boolean curved;
 
@@ -72,6 +75,10 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
 	protected GenericAppender<LineStyle> lineStyleAppender = new GenericAppender<LineStyle>(
 			ChartTypeFeature.LineStyle, ",");
+	protected GenericAppender<DataPointLabel> dataPointLabelAppender = new GenericAppender<DataPointLabel>(
+			ChartTypeFeature.Marker);
+	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
+			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
 
 	public RadarChart(Dimension chartDimension, boolean curved) {
 		super(chartDimension);
@@ -414,6 +421,47 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 	public boolean removeLineStyle(LineStyle lineStyle) {
 		
 		return this.lineStyleAppender.remove(lineStyle);
+	}
+	
+	public void addDataPointLabel(DataPointLabel dpl) {
+		this.dataPointLabelAppender.add(dpl);
+
+	}
+
+	public List<DataPointLabel> getDataPointLabels() {
+
+		return this.dataPointLabelAppender.getList();
+	}
+
+	public DataPointLabel removeDataPointLabel(int index) {
+		return this.dataPointLabelAppender.remove(index);
+	}
+
+	public boolean removeDataPointLabel(DataPointLabel dpl) {
+		return this.dataPointLabelAppender.remove(dpl);
+	}
+
+	public void removeDataPointLabels() {
+		this.dataPointLabelAppender.removeAll();
+
+	}
+	public ChartLegend getChartLegend() {
+
+		if (this.chartLegendAppender.getList().size() > 0) {
+			return this.chartLegendAppender.getList().get(0);
+		} else {
+			return null;
+		}
+	}
+
+	public void removeChartLegend() {
+		this.chartLegendAppender.removeAll();
+
+	}
+
+	public void setChartLegend(ChartLegend legend) {
+		this.chartLegendAppender.add(legend);
+
 	}
 
 }

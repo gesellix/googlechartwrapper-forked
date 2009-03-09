@@ -22,7 +22,9 @@ import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
+import googlechartwrapper.label.DataPointLabel;
 import googlechartwrapper.label.IChartLegendable;
+import googlechartwrapper.label.IDataPointLabelable;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.RangeMarker;
@@ -44,7 +46,7 @@ import java.util.List;
  */
 public class ScatterPlot extends AbstractChart implements ILinearable,
 		IMarkable, IChartLegendable, IMultiDataScaleable, IPercentageScaleable,
-		IEncodeable, ISolidFillable, IColorable {
+		IEncodeable, ISolidFillable, IColorable, IDataPointLabelable {
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -70,6 +72,8 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 			ChartTypeFeature.SolidFill);
 	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
+	protected GenericAppender<DataPointLabel> dataPointLabelAppender = new GenericAppender<DataPointLabel>(
+			ChartTypeFeature.Marker);
 
 	public ScatterPlot(Dimension chartDimension) {
 		super(chartDimension);
@@ -401,5 +405,27 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 		} else {
 			this.chartMarginAppender.add(cm);
 		}
+	}
+	public void addDataPointLabel(DataPointLabel dpl) {
+		this.dataPointLabelAppender.add(dpl);
+
+	}
+
+	public List<DataPointLabel> getDataPointLabels() {
+
+		return this.dataPointLabelAppender.getList();
+	}
+
+	public DataPointLabel removeDataPointLabel(int index) {
+		return this.dataPointLabelAppender.remove(index);
+	}
+
+	public boolean removeDataPointLabel(DataPointLabel dpl) {
+		return this.dataPointLabelAppender.remove(dpl);
+	}
+
+	public void removeDataPointLabels() {
+		this.dataPointLabelAppender.removeAll();
+
 	}
 }

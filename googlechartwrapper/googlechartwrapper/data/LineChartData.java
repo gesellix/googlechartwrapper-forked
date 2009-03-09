@@ -1,5 +1,9 @@
 package googlechartwrapper.data;
 
+import googlechartwrapper.LineChart;
+import googlechartwrapper.label.ChartLegend;
+import googlechartwrapper.style.LineStyle;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +12,23 @@ import java.util.List;
  * 
  * @author steffan
  * 
+ * @see LineChart
+ * 
  */
 public class LineChartData {
-//TODO LineStyle
+
 	private List<Integer> dataSet = null;
 	private Color color = null;
-	private String label = null;
+	private ChartLegend legend = null;
+	private LineStyle style = null;
 
+	/**
+	 * Use the {@link LineChartDataBuilder} to build an {@link LineChartData} object.
+	 * 
+	 * @param builder {@link LineChartDataBuilder}
+	 * 
+	 * @throws IllegalArgumentException if builder is {@code null}
+	 */
 	public LineChartData(LineChartDataBuilder builder) {
 
 		if (builder == null)
@@ -22,7 +36,8 @@ public class LineChartData {
 
 		this.dataSet = new ArrayList<Integer>(builder.dataSet);
 		this.color = builder.color;
-		this.label = builder.label;
+		this.legend = builder.legend;
+		this.style = builder.style;
 	}
 
 	/**
@@ -34,7 +49,8 @@ public class LineChartData {
 
 		private List<Integer> dataSet = null;
 		private Color color = null;
-		private String label = null;
+		private ChartLegend legend = null;
+		private LineStyle style = null;
 
 		/**
 		 * 
@@ -80,16 +96,30 @@ public class LineChartData {
 		 * @param label
 		 * @return
 		 * 
-		 * @throws IllegalArgumentException if label is {@code null}
+		 * @throws IllegalArgumentException if legend is {@code null}
 		 */
-		public LineChartDataBuilder label(String label) {
+		public LineChartDataBuilder legend(ChartLegend legend) {
 
-			if(label == null)
-			throw new IllegalArgumentException("label can not be null");
+			if(legend == null)
+			throw new IllegalArgumentException("legend can not be null");
 			
-			this.label = label;
+			this.legend = legend;
 			return this;
 
+		}
+		/**
+		 * 
+		 * @param style
+		 * @return
+		 * 
+		 * @throws IllegalArgumentException if style is {@code null}
+		 */
+		public LineChartDataBuilder lineStyle(LineStyle style){
+			
+			if(style == null)
+				throw new IllegalArgumentException("style can not be null");
+			this.style = style;
+			return this;
 		}
 		/**
 		 * 
@@ -131,13 +161,17 @@ public class LineChartData {
 	 * @return the color
 	 */
 	public Color getColor() {
+		
+		if(color != null){
 		return new Color(color.getRGB());
+		}
+		return null;
 	}
 
 	/**
 	 * @param color the color to set
 	 * 
-	 * @throws IllegalArgumentException if color ist {@code null}
+	 * @throws IllegalArgumentException if color is {@code null}
 	 */
 	public void setColor(Color color) {
 		
@@ -147,23 +181,42 @@ public class LineChartData {
 	}
 
 	/**
-	 * @return the label
+	 * @return the legend
 	 */
-	public String getLabel() {
-		return label;
+	public ChartLegend getlegend() {
+		return legend;
 	}
 
 	/**
-	 * @param label the label to set
+	 * @param legend the legend to set
 	 * 
-	 * @throws IllegalArgumentException if label is {@code null}
+	 * @throws IllegalArgumentException if legend is {@code null}
 	 */
-	public void setLabel(String label) {
+	public void setLabel(ChartLegend legend) {
 		
-		if(label == null)
-			throw new IllegalArgumentException("label can not be null");
+		if(legend == null)
+			throw new IllegalArgumentException("legend can not be null");
 		
-		this.label = label;
+		this.legend = legend;
+	}
+
+	/**
+	 * @return the style
+	 */
+	public LineStyle getStyle() {
+		return style;
+	}
+
+	/**
+	 * @param style the style to set
+	 * 
+	 * @throws IllegalArgumentException if style is {@code null}
+	 */
+	public void setStyle(LineStyle style) {
+		if(style == null)
+			throw new IllegalArgumentException("style can not be null");
+		this.style = style;
+		
 	}
 
 }
