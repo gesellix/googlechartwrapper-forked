@@ -29,12 +29,11 @@ public class ChartData implements IFeatureAppender, IEncodeable {
 	 */
 	public ChartData(List<Integer> chartData) {
 
-		
 		if (chartData == null)
 			throw new IllegalArgumentException("chartData can not be null");
 
 		this.chartData = chartData;
-		
+
 	}
 
 	public ChartData(int[] chartData) {
@@ -55,11 +54,11 @@ public class ChartData implements IFeatureAppender, IEncodeable {
 
 		builder.append(encoder.encode(a));
 
-List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
-		
-        feature.add(new AppendableFeature(builder.toString(), 
-                  ChartTypeFeature.ChartData)); 
-        
+		List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
+
+		feature.add(new AppendableFeature(builder.toString(),
+				ChartTypeFeature.ChartData));
+
 		return feature;
 	}
 
@@ -88,8 +87,8 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 	}
 
 	public void removeEncoder() {
-		
-		this.encoder = new AutoEncoder();		
+
+		this.encoder = new AutoEncoder();
 	}
 
 }

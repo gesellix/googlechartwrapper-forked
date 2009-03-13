@@ -1,5 +1,8 @@
 package googlechartwrapper;
 
+import googlechartwrapper.coder.EncoderFactory;
+import googlechartwrapper.coder.EncodingType;
+import googlechartwrapper.coder.ExtendedEncoder;
 import googlechartwrapper.coder.IEncoder;
 
 import java.awt.Dimension;
@@ -20,11 +23,12 @@ public class QRCode extends AbstractChart {
 	private OutputEncoding outputEncoding = OutputEncoding.UTF8;
 
 	/**
+	 * Constructs a QRCode.
 	 * 
 	 * @param chartDimension
 	 * @param textToEncode
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException if textToEncode is {@code null}
 	 */
 	public QRCode(Dimension chartDimension, String textToEncode) {
 		super(new Dimension(chartDimension));
@@ -40,9 +44,10 @@ public class QRCode extends AbstractChart {
 	 * @param chartDimension
 	 * @param textToEncode
 	 * @param ecLevel
-	 * @param margin
+	 * @param margin defines the margin (or blank space) around the QR code
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException if textToEncode is {@code null}
+	 * @throws IllegalArgumentException if ecLevel is {@code null}
 	 */
 	public QRCode(Dimension chartDimension, String textToEncode,
 			ECLevel ecLevel, int margin) {
@@ -70,7 +75,7 @@ public class QRCode extends AbstractChart {
 	 * @param textToEncode
 	 *            the textToEncode to set
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException if textToEncode is {@code null}
 	 */
 	public void setTextToEncode(String textToEncode) {
 
@@ -84,7 +89,7 @@ public class QRCode extends AbstractChart {
 	 * @param ecLevel
 	 *            the ecLevel to set
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException if ecLevel is {@code null}
 	 */
 	public void setEcLevel(ECLevel ecLevel) {
 
@@ -129,11 +134,11 @@ public class QRCode extends AbstractChart {
 	}
 	
 	/**
-	 * Does not make sense in this case, return always {@code null}.
+	 * Returns always {@link ExtendedEncoder}.
 	 */
 	public IEncoder getEncoder() {
 
-		return null;
+		return EncoderFactory.getEncoder(EncodingType.TextEncoding);
 	}
 
 	/**
@@ -177,7 +182,7 @@ public class QRCode extends AbstractChart {
 
 		builder.append(AbstractChart.AMPERSAND_SEPARATOR);
 		builder.append("chl=");
-		builder.append(this.textToEncode);
+		builder.append(this.textToEncode.replaceAll(" ", "%20"));
 
 		builder.append(AbstractChart.AMPERSAND_SEPARATOR);
 		builder.append("choe=");

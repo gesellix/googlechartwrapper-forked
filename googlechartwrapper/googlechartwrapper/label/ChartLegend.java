@@ -2,7 +2,6 @@ package googlechartwrapper.label;
 
 import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
-import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.util.ArrayList;
