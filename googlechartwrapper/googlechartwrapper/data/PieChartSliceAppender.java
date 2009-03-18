@@ -1,6 +1,7 @@
 package googlechartwrapper.data;
 
 import googlechartwrapper.ChartTypeFeature;
+import googlechartwrapper.DefaultValues;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.util.AppendableFeature;
@@ -13,27 +14,46 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ *   
+ * @author steffan
+ *
+ */
 public class PieChartSliceAppender implements IExtendedFeatureAppender{
 	
-	protected List<PieChartSlice> list= new LinkedList<PieChartSlice>();
+	protected List<PieChartSlice> pieChartSlices = new LinkedList<PieChartSlice>();
 	protected IEncoder encoder = new PercentageEncoder();
 	
-	public void add (PieChartSlice m){
-		list.add(m);
+	public void add (List<? extends PieChartSlice> pieChartSlices){
+		
+		List<PieChartSlice> temp = Collections.unmodifiableList(pieChartSlices);
+
+		for (PieChartSlice current : temp) {
+			if (current == null)
+				throw new IllegalArgumentException("member can not be null");
+		}
+		
+		this.pieChartSlices.addAll(pieChartSlices);
+	}
+	public void add (PieChartSlice pieChartSlice){
+		
+		if(pieChartSlice == null)
+			throw new IllegalArgumentException("pieChartSlice can not be null");
+		pieChartSlices.add(pieChartSlice);
 	}
 	
 	public boolean remove (PieChartSlice m){
-		return list.remove(m);
+		return pieChartSlices.remove(m);
 	}
 	
 	public PieChartSlice remove (int index){
-		return list.remove(index);
+		return pieChartSlices.remove(index);
 	}
 	
 	public void removeAll (){
-		for (int i = 0; i < list.size();){
-			list.remove(i);
-		}
+		for (int i = 0; i < pieChartSlices.size();){
+			pieChartSlices.remove(i);
+		}		
 	}
 	
 	/**
@@ -43,7 +63,7 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 	 * @return unmodifiable view of the values
 	 */
 	public List<? extends PieChartSlice> getList (){
-		return Collections.unmodifiableList(list);
+		return Collections.unmodifiableList(pieChartSlices);
 	}
 	
 	public void setEncoder (IEncoder encoder){
@@ -56,24 +76,23 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 	public IEncoder getEncoder (){
 		return encoder; 
 	}
-
-	public String getFeaturePrefix() {
-		return "chco";
-	}
+	
 
 	public List<AppendableFeature> getAppendableFeatures(List<? extends IFeatureAppender> otherAppenders) {
+		
+		/*
 		//chco fuer colors of slices
 		//chl fuer labels
 		//chartdata vom encoder
-		int values[] = new int[list.size()];
+		int values[] = new int[pieChartSlices.size()];
 		StringBuilder labelbf = new StringBuilder(values.length*7);
 		//labelbf.append("chl=");
 		StringBuilder colorbf = new StringBuilder(values.length*7+4);
 				
-		for (int i = 0, size = list.size(); i < size; i++){
-			values[i] = list.get(i).getData(); //val
+		for (int i = 0, size = pieChartSlices.size(); i < size; i++){
+			values[i] = pieChartSlices.get(i).getData(); //val
 			
-			PieChartSlice slice = list.get(i); //label
+			PieChartSlice slice = pieChartSlices.get(i); //label
 			if (slice.getLabel() != null){
 				labelbf.append(slice.getLabel());
 			}
@@ -107,11 +126,79 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 			String colors = colorbf.substring(0, colorbf.length()-1 );
 			feature.add(new AppendableFeature(colors, "chco"));
 		}		
+		*/
 		
-        
-        feature.add(new AppendableFeature(val, ChartTypeFeature.ChartDataAppender));
-        
-		return feature;
+		// the raw data
+		int[] data = new int[this.pieChartSlices.size()];
+
+		for (int z = 0; z < this.pieChartSlices.size(); z++) {
+			
+			data[z] = this.pieChartSlices.get(z).getValue();
+		}
+		
+		boolean isColorUsed = false;
+
+		// the color string
+		StringBuilder color = new StringBuilder();
+		for (int i = 0; i < this.pieChartSlices.size(); i++) {
+
+			// the user set a color
+			if (this.pieChartSlices.get(i).getColor() != null) {
+				isColorUsed = true;
+				color.append(MiscUtils.getSixCharacterHexValue(this.pieChartSlices.get(i)
+						.getColor()));
+			}
+			// no color was set, we add the default color
+			if (this.pieChartSlices.get(i).getColor() == null) {
+				color.append(MiscUtils
+						.getSixCharacterHexValue(DefaultValues.DataColor));
+			}
+
+			// otherwise we have a "," at the end
+			if (i < this.pieChartSlices.size() - 1) {
+				color.append(",");
+			}
+		}
+		
+		boolean isLabelUsed = false;
+		
+		// the label
+		StringBuilder label = new StringBuilder();
+		for (int u = 0; u < this.pieChartSlices.size(); u++) {
+
+			// the user set a label
+			if (this.pieChartSlices.get(u).getLabel() != null) {
+				isLabelUsed = true;
+				label.append(this.pieChartSlices.get(u).getLabel());
+			}
+			// no label was set, we add ""
+			if (this.pieChartSlices.get(u).getLabel() == null) {
+				label.append("");
+			}
+
+			// otherwise we have a "," at the end
+			if (u < this.pieChartSlices.size() - 1) {
+				label.append("|");
+			}
+		}
+		
+		List<AppendableFeature> features = new ArrayList<AppendableFeature>(); 
+		
+		features.add(new AppendableFeature(this.encoder.encode(data),ChartTypeFeature.ChartDataAppender));
+		
+		// if the user set the color we have to add the string
+		if (isColorUsed) {
+			features.add(new AppendableFeature(color.toString(),
+					ChartTypeFeature.ChartColor));
+		}
+		
+		// if the user set the label we have to add the string
+		if (isLabelUsed) {
+			features.add(new AppendableFeature(label.toString(),
+					ChartTypeFeature.PieChartLabel));
+		}
+		              
+		return features;
 	}	
 
 }

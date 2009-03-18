@@ -9,10 +9,22 @@ import java.awt.Dimension;
 
 /**
  * 
- * Specifies a qrcodes <a href="http://code.google.com/intl/de-DE/apis/chart/types.html#qrcodes">
+ * Specifies a qr code <a href="http://code.google.com/intl/de-DE/apis/chart/types.html#qrcodes">
  * http://code.google.com/intl/de-DE/apis/chart/types.html#qrcodes</a>
  * 
+ * <p>
+ * Here are some examples of how QRCode can be used:
+ * <p><blockquote><pre>
+ *     QRCode qrCode = new QRCode(new Dimension(300,300),"made in germany");
+ *     
+ *     QRCode qrCode = new QRCode(new Dimension(300,300),"example",ECLevel.Medium,10);     
+ * </pre></blockquote>
+ * <p>
+ * 
  * @author steffan
+ * @version 03/17/09 
+ * @see ECLevel
+ * @see OutputEncoding
  * 
  */
 public class QRCode extends AbstractChart {
@@ -26,7 +38,7 @@ public class QRCode extends AbstractChart {
 	 * Constructs a QRCode.
 	 * 
 	 * @param chartDimension
-	 * @param textToEncode
+	 * @param textToEncode  the text for the QR code
 	 * 
 	 * @throws IllegalArgumentException if textToEncode is {@code null}
 	 */
@@ -40,14 +52,18 @@ public class QRCode extends AbstractChart {
 	}
 
 	/**
+	 * Constructs a QRCode with {@link ECLevel}.
 	 * 
 	 * @param chartDimension
-	 * @param textToEncode
+	 * @param textToEncode  the text for the QR code
 	 * @param ecLevel
 	 * @param margin defines the margin (or blank space) around the QR code
 	 * 
 	 * @throws IllegalArgumentException if textToEncode is {@code null}
 	 * @throws IllegalArgumentException if ecLevel is {@code null}
+	 * 
+	 * @see ECLevel
+	 * 
 	 */
 	public QRCode(Dimension chartDimension, String textToEncode,
 			ECLevel ecLevel, int margin) {
@@ -86,10 +102,13 @@ public class QRCode extends AbstractChart {
 	}
 
 	/**
+	 * Setes the ECLevel.
+	 * 
 	 * @param ecLevel
 	 *            the ecLevel to set
 	 * 
 	 * @throws IllegalArgumentException if ecLevel is {@code null}
+	 * @see ECLevel
 	 */
 	public void setEcLevel(ECLevel ecLevel) {
 
@@ -100,7 +119,10 @@ public class QRCode extends AbstractChart {
 	}
 
 	/**
+	 * Returns the ECLEvel.
+	 * 
 	 * @return the ecLevel
+	 * @see ECLevel
 	 */
 	public ECLevel getEcLevel() {
 		return ecLevel;
@@ -142,17 +164,22 @@ public class QRCode extends AbstractChart {
 	}
 
 	/**
+	 * Returns the outputEncoding.
+	 * 
 	 * @return the outputEncoding
+	 * @see OutputEncoding
 	 */
 	public OutputEncoding getOutputEncoding() {
 		return outputEncoding;
 	}
 
 	/**
+	 * Sets the output encoding.
 	 * @param outputEncoding
 	 *            the outputEncoding to set
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException if outputEncoding is {@code null}
+	 * @see OutputEncoding
 	 */
 	public void setOutputEncoding(OutputEncoding outputEncoding) {
 
@@ -220,7 +247,11 @@ public class QRCode extends AbstractChart {
 		OutputEncoding(String encoding) {
 			this.encoding = encoding;
 		}
-
+		/**
+		 * Returns the encoding, e.g. UTF-8 
+		 * 
+		 * @return the encoding
+		 */
 		public String getEncoding() {
 			return this.encoding;
 		}
@@ -228,20 +259,47 @@ public class QRCode extends AbstractChart {
 	}
 
 	/**
+	 * Four levels of error correction (EC) are available. 
+	 *  <br />
+	 *  <br />
+	 *  low 	 allows 7% of a QR code to be restored <br />
+     *  medium 	 allows 15% of a QR code to be restored <br />
+	 *	quality	 allows 25% of a QR code to be restored <br />
+	 *	high	 allows 30% of a QR code to be restored <br />
 	 * 
 	 * @author steffan
 	 * 
 	 */
 	public enum ECLevel {
 
-		Low('L'), Medium('M'), Quality('Q'), High('H');
+		/**
+		 * 7%
+		 */
+		Low('L'), 
+		/**
+		 * 15%
+		 */
+		Medium('M'),
+		/**
+		 * 25%
+		 */
+		Quality('Q'), 
+		/**
+		 * 30%
+		 */
+		High('H');
 
 		private char level;
 
 		private ECLevel(char level) {
 			this.level = level;
 		}
-
+		
+		/**
+		 * Returns the ECLevel, e.g. L for low.
+		 * 
+		 * @return the ECLvele char
+		 */
 		public char getLevel() {
 			return this.level;
 		}

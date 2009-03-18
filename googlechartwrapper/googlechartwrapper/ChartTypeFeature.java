@@ -26,7 +26,8 @@ public enum ChartTypeFeature {
 	ChartMargin("chma"),
 	LineStyle("chls"),
 	BarWidthAndSpacing("chbh"),
-	BarChartZeroLine("chp");
+	BarChartZeroLine("chp"),
+	PieChartLabel("chl");
 	
 	
 	

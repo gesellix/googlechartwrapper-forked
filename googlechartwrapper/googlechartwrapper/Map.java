@@ -14,15 +14,34 @@ import java.awt.Dimension;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Specifies a map <a href="http://code.google.com/apis/chart/types.html#maps">
- * http://code.google.com/apis/chart/types.html#maps</a> with geographic areas
- * found in <br />
+/*
  * enums from <a href="http://code.google.com/p/charts4j/source/browse/trunk/src/com/googlecode/charts4j/USAState.java"
  * > here</a>
+ */
+/**
+ * Specifies a map <a href="http://code.google.com/apis/chart/types.html#maps">
+ * http://code.google.com/apis/chart/types.html#maps</a>.
+ * 
+ * <p>
+ * Here are some examples of how map can be used:
+ * <p><blockquote><pre>
+ *     List<Country> member = new LinkedList<Country>();
+ *     member.add(new Map.Country(CountryName.GERMANY,100));
+ *     
+ *     Map eu = new Map(new Dimension(400,200),GeographicalArea.EUROPE,member);
+ * </pre></blockquote>
+ * <p>
  * 
  * @author martin
  * @author steffan
+ * @version 03/17/09 
+ * @see Country
+ * @see CountryCode
+ * @see CountryName
+ * @see State
+ * @see StateCode
+ * @see StateName
+ * @see GeographicalArea
  * 
  */
 public class Map extends AbstractChart implements ISolidFillable,
@@ -37,16 +56,27 @@ public class Map extends AbstractChart implements ISolidFillable,
 	private List<State> stateList;
 	private List<Country> countryList;
 
+	/**
+	 * All possible areas.
+	 * 
+	 * @author steffan
+	 *
+	 */
 	public enum GeographicalArea {
 		AFRICA, ASIA, EUROPE, MIDDLE_EAST, SOUTH_AMERICA, USA, WORLD;
 
+		/**
+		 * Returns the name as lower case string.
+		 * 
+		 * @return lower case string
+		 */
 		public String getAreaCode() {
 			return this.toString().toLowerCase();
 		}
 	}
 
 	/**
-	 * Constructs a new map, with usa as country, the list contains all states.
+	 * Constructs a new map, with usa as {@link Country}, the list contains all states.
 	 * 
 	 * @param chartDimension
 	 * @param stateList
@@ -81,6 +111,7 @@ public class Map extends AbstractChart implements ISolidFillable,
 	}
 
 	/**
+	 * Constructs a new map, all areas are possible. If only the us is wanted choose {@link Map#Map(Dimension, List)}.
 	 * 
 	 * @param chartDimension
 	 * @param area
@@ -761,7 +792,11 @@ public class Map extends AbstractChart implements ISolidFillable,
 		private CountryName(final String name) {
 			this.name = name;
 		}
-
+		/**
+		 * Returns the country code as string, e.g. ZW for Zimbabwe.
+		 * 
+		 * @return the country code
+		 */
 		public String getCountryCode() {
 			return this.name;
 		}
@@ -1384,6 +1419,11 @@ public class Map extends AbstractChart implements ISolidFillable,
 			this.name = name;
 		}
 
+		/**
+		 * Returns the state code, e.g. WY for Wyoming.
+		 * 
+		 * @return the country code
+		 */
 		public String getStateCode() {
 			return this.name;
 		}
@@ -1591,6 +1631,8 @@ public class Map extends AbstractChart implements ISolidFillable,
 		}
 
 		/**
+		 * Returns the color level, a value between 0 and 100 to interpolate the color.
+		 * 
 		 * @return the colorLevel
 		 */
 		public int getColorLevel() {
@@ -1598,6 +1640,7 @@ public class Map extends AbstractChart implements ISolidFillable,
 		}
 
 		/**
+		 * Sets the colot level, a value between 0 and 100 to interpolate the color.
 		 * @param colorLevel
 		 *            the colorLevel to set
 		 * 
@@ -1613,7 +1656,9 @@ public class Map extends AbstractChart implements ISolidFillable,
 		}
 
 		/**
-		 * @return the code
+		 * Returns the {@link CountryCode}.
+		 * 
+		 * @return the country code
 		 */
 		public String getCode() {
 			return code;
@@ -1661,7 +1706,7 @@ public class Map extends AbstractChart implements ISolidFillable,
 		}
 
 		/**
-		 * Constructs new state fpr the {@link Map}
+		 * Constructs new state fpr the {@link Map}.
 		 * 
 		 * @param name
 		 *            {@link StateName} the to show
@@ -1692,7 +1737,7 @@ public class Map extends AbstractChart implements ISolidFillable,
 		 * enum, it its safer.
 		 * 
 		 * @param code
-		 *            e.g. CA fr california
+		 *            e.g. CA for california
 		 * @param colorLevel
 		 *            colorLevel a value between 0 and 100, the integer you
 		 *            provide here will be interpolated with the color gradient
@@ -1717,6 +1762,8 @@ public class Map extends AbstractChart implements ISolidFillable,
 		}
 
 		/**
+		 * Returns the color level, a value between 0 and 100 to interpolate the color.
+		 * 
 		 * @return the colorLevel
 		 */
 		public int getColorLevel() {
@@ -1724,6 +1771,8 @@ public class Map extends AbstractChart implements ISolidFillable,
 		}
 
 		/**
+		 * Sets the color level, a value between 0 and 100 to interpolate the color.
+		 * 
 		 * @param colorLevel
 		 *            the colorLevel to set
 		 * 

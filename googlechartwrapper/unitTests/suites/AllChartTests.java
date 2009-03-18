@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 
 import unitTests.GoogleOMeterTest;
 import unitTests.PieChartTest;
-import unitTests.QRCodesTest;
+import unitTests.QRCodeTest;
 import unitTests.RadarChartTest;
 import unitTests.ScatterPlotTest;
 import unitTests.VennDiagramTest;
@@ -14,7 +14,7 @@ import unitTests.VennDiagramTest;
 @Suite.SuiteClasses({
   GoogleOMeterTest.class,
   PieChartTest.class,
-  QRCodesTest.class,
+  QRCodeTest.class,
   ScatterPlotTest.class,
   VennDiagramTest.class,
   RadarChartTest.class

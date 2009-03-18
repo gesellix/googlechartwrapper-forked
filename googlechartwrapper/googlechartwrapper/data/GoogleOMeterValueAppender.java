@@ -2,6 +2,8 @@ package googlechartwrapper.data;
 
 import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.AutoEncoder;
+import googlechartwrapper.coder.EncoderFactory;
+import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.util.AppendableFeature;
@@ -10,6 +12,7 @@ import googlechartwrapper.util.IFeatureAppender;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -21,51 +24,65 @@ import java.util.List;
 public class GoogleOMeterValueAppender implements IExtendedFeatureAppender,
 		IEncodeable {
 
-	private IEncoder encoder = new AutoEncoder();
+	//NOTE only the TextEncodingWithDataScaling works!
+	private IEncoder encoder = EncoderFactory.getEncoder(EncodingType.TextEncodingWithDataScaling);
 	/**
 	 * list of elements/features
 	 */
 	protected List<GoogleOMeterValue> list = new ArrayList<GoogleOMeterValue>(1);
 
-	public String getFeaturePrefix() {
-		return "chd";
-	}
+	/*
+	 * public String getFeaturePrefix() { return "chd"; }
+	 */
 
 	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		if (list.size() == 0) {
-			return null;
+			return new LinkedList<AppendableFeature>();
 		}
-//TODO evil thrash
-		boolean hadLabels = false;
-		StringBuilder values = new StringBuilder(list.size() * 2 + 5);
-		StringBuilder labels = new StringBuilder(list.size() * 5 + 5);
 
-		values.append("t:");
+		// the raw data
+		float[] data = new float[this.list.size()];
 
-		for (GoogleOMeterValue val : list) {
-			values.append(val.getValue());
-			values.append(",");
-			if (val.getLabel() == null) {
-				labels.append("|");
-			} else {
-				labels.append(val.getLabel());
-				labels.append("|");
-				hadLabels = true;
+		for (int z = 0; z < this.list.size(); z++) {
+
+			data[z] = (float) this.list.get(z).getValue();
+		}
+		
+		boolean isLabelUsed = false;
+
+		// the label
+		StringBuilder label = new StringBuilder();
+		for (int u = 0; u < this.list.size(); u++) {
+
+			// the user set a label
+			if (this.list.get(u).getLabel() != null) {
+				isLabelUsed = true;
+				label.append(this.list.get(u).getLabel());
+			}
+			// no label was set, we add ""
+			if (this.list.get(u).getLabel() == null) {
+				label.append("");
+			}
+
+			// otherwise we have a "," at the end
+			if (u < this.list.size() - 1) {
+				label.append("|");
 			}
 		}
-		// http://chart.apis.google.com/chart?chs=225x125&cht=gom&chd=t:70&chl=Hello
-		// chd=t:70:
-		String ret = values.substring(0, values.length() - 1);
-		if (hadLabels) {
-			ret = ret + "&chl=" + labels.substring(0, labels.length() - 1);
-		}
-List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
 		
-        feature.add(new AppendableFeature(ret, 
-                  ChartTypeFeature.ChartData)); 
-        
-		return feature;
+		List<AppendableFeature> features = new ArrayList<AppendableFeature>();
+
+		features.add(new AppendableFeature(this.encoder.encode(data),
+				ChartTypeFeature.ChartData));
+		
+		// if the user set the label we have to add the string
+		if (isLabelUsed) {
+			features.add(new AppendableFeature(label.toString(),
+					ChartTypeFeature.PieChartLabel));
+		}
+
+		return features;
 	}
 
 	/**
@@ -79,7 +96,7 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 	 */
 	public void add(GoogleOMeterValue m) {
 		if (m == null) {
-			throw new IllegalArgumentException("new element cannot be null");
+			throw new IllegalArgumentException("value can not be null");
 		}
 		list.add(m);
 	}

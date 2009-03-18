@@ -248,7 +248,7 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 	public ShapeMarker removeShapeMarker(int index) {
 
-		return this.removeShapeMarker(index);
+		return this.shapeMarkerAppender.remove(index);
 	}
 
 	public boolean removeShapeMarker(ShapeMarker sm) {

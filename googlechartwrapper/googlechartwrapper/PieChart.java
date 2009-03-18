@@ -3,323 +3,197 @@ package googlechartwrapper;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
-import googlechartwrapper.color.ChartColor;
-import googlechartwrapper.color.ISolidFillable;
-import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.LinearStripe;
-import googlechartwrapper.color.SolidFill;
-import googlechartwrapper.color.LinearGradient.GradientFillDestination;
-import googlechartwrapper.color.LinearStripe.LinearStripesDestination;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.data.PieChartSliceAppender;
-import googlechartwrapper.interfaces.IColorable;
-import googlechartwrapper.interfaces.ILinearable;
-import googlechartwrapper.interfaces.IPercentageScaleable;
-import googlechartwrapper.label.ChartLegend;
-import googlechartwrapper.label.ChartTitle;
-import googlechartwrapper.label.IChartLegendable;
-import googlechartwrapper.style.ChartMargin;
-import googlechartwrapper.util.GenericAppender;
-import googlechartwrapper.util.PrimitivesAppender;
-import googlechartwrapper.util.UpperLimitGenericAppender;
-import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 import java.awt.Dimension;
 import java.util.List;
 
 /**
  * Specifies a PieChart <a
- * href="http://code.google.com/intl/de-DE/apis/chart/types.html#pie_charts">
- * http://code.google.com/intl/de-DE/apis/chart/types.html#pie_charts</a>
+ * href="http://code.google.com/apis/chart/types.html#pie_charts">
+ * http://code.google.com/apis/chart/types.html#pie_charts</a> <br />
+ * For Concentric pie chart see {@link ConcentricPieCharts}.
  * 
- * @author martin
+ * <p>
+ * Here are some examples of how pie chart can be used:
+ * <p>
+ * <blockquote>
+ * 
+ * <pre>
+ * PieChart chart = new PieChart(new Dimension(400, 180));
+ * 
+ * chart.setChartTitle(new ChartTitle(&quot;GDP of the world(nominal)&quot;));
+ * 
+ * chart.addPieChartSlice(new PieChartSlice.PieChartSliceBuilder(80).label(&quot;USA&quot;)
+ * 		.color(Color.BLUE).build());
+ * </pre>
+ * 
+ * </blockquote>
+ * <p>
+ * 
  * @author steffan
+ * @version 03/18/09
+ * @see PieChartSlice
+ * @see ConcentricPieCharts
+ * @see AbstractPieChart
  * 
  */
-public class PieChart extends AbstractChart implements ISolidFillable,		 
-		IPercentageScaleable, IColorable, IChartLegendable, ILinearable {
+public class PieChart extends AbstractPieChart {
 
-	private boolean threeD;
-	protected PieChartSliceAppender dataAppender = new PieChartSliceAppender();
-	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
-			ChartTypeFeature.SolidFill);
-	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
-			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<LinearStripe> linearStripesAppender = new UpperLimitGenericAppender<LinearStripe>(
-			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<ChartTitle> chartTitleAppender = new UpperLimitGenericAppender<ChartTitle>(
-			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
-			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
-	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
-			ChartTypeFeature.ChartColor, ",");
-	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
-			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
+	private ChartType type = ChartType.PieChart;
 
-	protected PrimitivesAppender<Float> pieChartOrientationAppender = new PrimitivesAppender<Float>(
-			ChartTypeFeature.PieChartOrientation);
+	protected PieChartSliceAppender pieChartSliceAppender = new PieChartSliceAppender();
 
-	public PieChart(Dimension chartDimension, boolean threeD) {
+	/**
+	 * Constructs a new pie chart.
+	 * 
+	 * @param chartDimension
+	 */
+	public PieChart(Dimension chartDimension) {
 		super(chartDimension);
-		this.threeD = threeD;
+	}
+
+	/**
+	 * Constructs a new pie chart.
+	 * 
+	 * @param chartDimension
+	 * @param pieChartSlices
+	 *            a list of {@link PieChartSlice}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if pieChatSlices is {@code null} or member
+	 */
+	public PieChart(Dimension chartDimension,
+			List<? extends PieChartSlice> pieChartSlices) {
+		super(chartDimension);
+
+		this.pieChartSliceAppender.add(pieChartSlices);
+	}
+
+	/**
+	 * Constructs a new pie chart with single slice.
+	 * 
+	 * @param pieChartSlice
+	 *            a single slice {@link PieChartSlice}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if pieChartSlice is {@code null}
+	 */
+	public PieChart(Dimension chartDimension, PieChartSlice pieChartSlice) {
+		super(chartDimension);
+
+		this.pieChartSliceAppender.add(pieChartSlice);
+	}
+	/**
+	 * Adds a {@link PieChartSlice} to the {@link PieChart}.
+	 * @param pieChartSlice
+	 * 
+	 * @throws IllegalArgumentException if pieChartSlice is {@code null}
+	 */
+	public void addPieChartSlice(PieChartSlice pieChartSlice) {
+		this.pieChartSliceAppender.add(pieChartSlice);
+	}
+	
+	/**
+	 * Adds a list of {@link PieChartSlice} to the {@link PieChart}
+	 * @param pieChartSlices
+	 * 
+	 * @throws IllegalArgumentException if list oder member is {@code null}
+	 */
+	public void addPieChartSlice(List<? extends PieChartSlice> pieChartSlices) {
+		this.pieChartSliceAppender.add(pieChartSlices);
+	}
+	/**
+	 * Removes a {@link PieChartSlice} at the given position.
+	 * @param index
+	 * @return the removed {@link PieChartSlice}
+	 * 
+	 * @throws IndexOutOfBoundsException if index is out of range
+	 */
+	public PieChartSlice removePieChartSlice(int index) {
+		return this.pieChartSliceAppender.remove(index);
+	}
+	/**
+	 * Removes a {@link PieChartSlice} object and returns the status
+	 * @param pieChartSlice {@link PieChartSlice}
+	 * 
+	 * @return {@code true} if success
+	 */
+	public boolean removePieChartSlice(PieChartSlice pieChartSlice) {
+
+		return this.pieChartSliceAppender.remove(pieChartSlice);
+	}
+	/**
+	 * Removes all {@link PieChartSlice} from the {@link PieChart}
+	 */
+	public void removeAllPieChartSlices() {
+		this.pieChartSliceAppender.removeAll();
+	}
+	/**
+	 * Returns a unmodifiable list of all {@link PieChartSlice}.
+	 * @return unmodifiable list, empty if nothing was set
+	 */
+	public List<? extends PieChartSlice> getAllPieChartSlices() {
+		return this.pieChartSliceAppender.getList();
 	}
 
 	@Override
 	protected ChartType getChartType() {
-		return ChartType.PieChart;
+
+		return this.type;
 	}
 
 	@Override
 	protected String getUrlChartType() {
-		return threeD ? "p3" : "p";
-	}
 
+		return this.type.getPrefix();
+	}
 	/**
-	 * Returns if the chart is displayed 3-dimensional or 2-dimensional.
+	 * Returns the {@link PieChart} status, if it is three dimensional pie chart or not
 	 * 
-	 * @return <code>true</code> if chart is displayed 3-dimensional;
-	 *         <code>false</code> otherwise
+	 * @return {@code true} if 3d
 	 */
-	public boolean isThreeD() {
-		return threeD;
+	public boolean is3D() {
+		return (ChartType.PieChart3d.equals(type));
 	}
-
 	/**
-	 * Sets whether the chart is displayed 3-dimensional or not.
+	 * Returns the {@link PieChart} status, if it is three dimensional pie chart or not
 	 * 
-	 * @param threeD
-	 *            <code>true</code> if chart is displayed 3-dimensional;
-	 *            <code>false</code> otherwise
+	 * @return {@code true} if not 3d
 	 */
-	public void setThreeD(boolean threeD) {
-		this.threeD = threeD;
+	public boolean isDefault() {
+		return (ChartType.PieChart.equals(type));
 	}
-
 	/**
-	 * Adds a slice to the chart. The data values are transformed into
-	 * percentages by the API. If some slices have a color set and others don't,
-	 * the color of the slices is interpolated.
-	 * 
-	 * @param slice
+	 * Enable the 3d status.
 	 */
-	public void addPieChartSlice(PieChartSlice slice) {
-		dataAppender.add(slice);
-	}
-
-	public boolean removePieChartSlice(PieChartSlice slice) {
-		return dataAppender.remove(slice);
-	}
-
-	public PieChartSlice removePieChartSlice(int index) {
-		return dataAppender.remove(index);
-	}
-
-	public void removeAllPieChartSlices() {
-		dataAppender.removeAll();
-	}
-
-	public List<? extends PieChartSlice> getAllPieChartSlices() {
-		return dataAppender.getList();
-	}
-
-	public IEncoder getEncoder() {
-		return dataAppender.getEncoder();
-	}
-
-	public void setEncoder(IEncoder encoder) {
-		dataAppender.setEncoder(encoder);
-	}
-
-	public void addSolidFill(SolidFill sf) {
-		this.solidFillAppender.add(sf);
+	public void set3D() {
+		this.type = ChartType.PieChart3d;
 
 	}
-
-	public List<SolidFill> getSolidFills() {
-
-		return this.solidFillAppender.getList();
+	/**
+	 * Enable the default status.
+	 */
+	public void setDefault() {
+		this.type = ChartType.PieChart;
 	}
-
-	public void removeAllSolidFills() {
-		this.solidFillAppender.removeAll();
-
-	}
-
-	public SolidFill removeSolidFill(int index) {
-		return this.solidFillAppender.remove(index);
-	}
-
-	public boolean removeSolidFill(SolidFill sf) {
-		return this.solidFillAppender.remove(sf);
-	}
-
-	public void removeLinearGradient() {
-		linearGradientAppender.removeAll();
-	}
-
-	public void setLinearGradient(LinearGradient lg) {
-		if (lg == null) {
-			linearGradientAppender.removeAll();
-			return;
-		}
-		if (!lg.getFillDestination().equals(GradientFillDestination.Background)) {
-			throw new IllegalArgumentException("only GradientFillDestination"
-					+ ".Background supported");
-		}
-		this.linearGradientAppender.add(lg);
-	}
-
-	public void removeLinearStripes() {
-		linearStripesAppender.removeAll();
-	}
-
-	public void setLinearStripes(LinearStripe ls) {
-		if (ls == null) {
-			linearStripesAppender.removeAll();
-			return;
-		}
-		if (!ls.getFillDestination()
-				.equals(LinearStripesDestination.Background)) {
-			throw new IllegalArgumentException("only LinearStripesDestination"
-					+ ".Background supported");
-		}
-		this.linearStripesAppender.add(ls);
-	}
-
-	public void removeChartTitle() {
-		this.chartTitleAppender.removeAll();
-
-	}
-
-	public void setChartTitle(ChartTitle title) {
-		if (title == null) {
-			removeChartTitle();
-			return;
-		}
-		this.chartTitleAppender.add(title);
-
-	}
-
-	public ChartTitle getChartTitle() {
-
-		if (this.chartTitleAppender.getList().size() > 0) {
-			return this.chartTitleAppender.getList().get(0);
-
-		} else {
-			return null;
-		}
-
-	}
-
-	public LinearStripe getLinearStripes() {
-
-		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
-				.getList().get(0)
-				: null;
-	}
-
-	public LinearGradient getLinearGradient() {
-
-		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender
-				.getList().get(0)
-				: null;
-	}
-
+	/**
+	 * Encode the values as percentages before, the api calculates the values. This can decrease the url length.
+	 */
 	public void setPercentageScaling(boolean b) {
 
 		if (b) {
-			this.dataAppender.setEncoder(new PercentageEncoder());
+			this.pieChartSliceAppender.setEncoder(new PercentageEncoder());
 		} else {
-			this.dataAppender.setEncoder(new AutoEncoder());
+			this.pieChartSliceAppender.setEncoder(new AutoEncoder());
 		}
 
 	}
 
-	public void addChartColor(ChartColor cc) {
+	public IEncoder getEncoder() {
 
-		this.chartColorAppender.add(cc);
-	}
-
-	public List<ChartColor> getChartColors() {
-
-		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
-				.getList()
-				: null;
-	}
-
-	public void removeAllChartColors() {
-		this.chartColorAppender.removeAll();
-
-	}
-
-	public ChartColor removeChartColors(int index) {
-
-		return this.chartColorAppender.remove(index);
-	}
-
-	public boolean removeChartColors(ChartColor cc) {
-
-		return this.chartColorAppender.remove(cc);
-	}
-
-	public ChartLegend getChartLegend() {
-
-		if (this.chartLegendAppender.getList().size() > 0) {
-			return this.chartLegendAppender.getList().get(0);
-		} else {
-			return null;
-		}
-	}
-
-	public void removeChartLegend() {
-		this.chartLegendAppender.removeAll();
-
-	}
-
-	public void setChartLegend(ChartLegend legend) {
-
-		if (legend == null) {
-			this.removeChartLegend();
-		}
-		this.chartLegendAppender.add(legend);
-
-	}
-
-	/**
-	 * Sets the pie chart orientation.
-	 * 
-	 * @param angle
-	 *            number as radian
-	 */
-	public void setPieChartOrientation(float angle) {
-
-		this.pieChartOrientationAppender.set(angle);
-	}
-
-	/**
-	 * Removes the pie chart orientation.
-	 */
-	public void removePieChartOrientation() {
-		this.pieChartOrientationAppender.removeAll();
-	}
-
-	public ChartMargin getChartMargin() {
-		return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
-				.getList().get(0)
-				: null;
-	}
-
-	public void removeChartMargin() {
-		this.chartMarginAppender.removeAll();
-
-	}
-
-	public void setChartMargin(ChartMargin cm) {
-		if (cm == null) {
-			this.chartMarginAppender.removeAll();
-		} else {
-			this.chartMarginAppender.add(cm);
-		}
+		return this.pieChartSliceAppender.getEncoder();
 	}
 
 }

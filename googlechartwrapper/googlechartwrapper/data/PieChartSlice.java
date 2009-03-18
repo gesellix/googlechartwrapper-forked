@@ -1,90 +1,159 @@
 package googlechartwrapper.data;
 
-import googlechartwrapper.PieChart;
+import googlechartwrapper.AbstractPieChart;
 
 import java.awt.Color;
 
 /**
- * Slice of {@link PieChart}. 
- * If the number of colors specified is less than the number of slices, 
- * then colors are interpolated.
- * @see PieChart
+ * Slice for the {@link AbstractPieChart}.
+ * 
+ * 
+ * @author steffan
+ * @version 03/18/09
+ * @see AbstractPieChart
+ * @see PieChartSliceBuilder
  */
-public class PieChartSlice{
-	
-	private int data;
-	private Color color;
-	private String label;	
-	
-	/**
-	 * Constructs a new PieChartSlice with the given data. 
-	 * @param data value, is transformed to percentages (or others) by an encoder
-	 * @param color color of the slice (optional value). If the number of colors specified is less than the number of slices, 
-	 * 			then colors are interpolated.
-	 * @param label label text (optional value)
-	 * @see PieChart#setEncoder(googlechartwrapper.coder.IEncoder)
-	 * @see PieChart#getEncoder()
-	 */
-	public PieChartSlice(int data, String label, Color color) {
-		super();
-		this.data = data;
-		this.color = color;
-		this.label = label;
-	}
+public class PieChartSlice {
+
+	private int value;
+	private Color color = null;
+	private String label = null;
 
 	/**
-	 * Constructs a new PieChartSlice with the given data. 
-	 * @param data value, is transformed to percentages by the google api
+	 * Constructs a new PieChartSlice, use the {@link PieChartSliceBuilder} and the {@link PieChartSliceBuilder#build()} method.
+	 * 
+	 * @param builder the builder {@link PieChartSliceBuilder}
+	 * 
+	 * @throws IllegalArgumentException if builder is {@code null}
+	 * 
+	 * @see PieChartSliceBuilder
 	 */
-	public PieChartSlice(int data) {
-		super();
-		if (data <0){
-			throw new IllegalArgumentException("data cannot be <0");
+	public PieChartSlice(PieChartSliceBuilder builder) {
+
+		if (builder == null) {
+			throw new IllegalArgumentException("builder can not be null");
 		}
-		this.data = data;
+		
+		this.value = builder.value;
+		this.color = builder.color;
+		this.label = builder.label;
 	}
-	
+
+
 	/**
-	 * Returns the color of the slice. If the number of colors specified is less 
-	 * than the number of slices, then colors are interpolated.
-	 * @return color or null, if none set (interpolated)
+	 * @return the value
+	 */
+	public int getValue() {
+		return value;
+	}
+
+
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+
+	/**
+	 * @return the color
 	 */
 	public Color getColor() {
 		return color;
 	}
-	
+
+
 	/**
-	 * Sets the color of the slice.
-	 * If the number of colors specified is less than the number of slices, 
-	 * then colors are interpolated.
-	 * @param color color of the slice, if none set <code>null</code>
+	 * @param color the color to set
+	 * 
+	 * @throws IllegalArgumentException if color is {@code null}
 	 */
 	public void setColor(Color color) {
-		this.color = color;
+		
+		if(color == null)
+			throw new IllegalArgumentException("color can not be null");
+		
+		this.color = new Color(color.getRGB());
 	}
-	public int getData() {
-		return data;
-	}
-	public void setData(int data) {
-		if (data <0){
-			throw new IllegalArgumentException("data cannot be <0");
-		}
-		this.data = data;
-	}
+
+
 	/**
-	 * Returns the label text for the slice.
-	 * @return label text, <code>null</code> if none set and displayed
+	 * @return the label
 	 */
 	public String getLabel() {
 		return label;
 	}
+
+
 	/**
-	 * Sets the label text for the slice.
-	 * @param label text, <code>null</code> if none set and displayed
+	 * @param label the label to set
+	 * 
+	 * @throws IllegalArgumentException if label is {@code null}
 	 */
 	public void setLabel(String label) {
+		
+		if(label == null)
+			throw new IllegalArgumentException("label can not be null");
 		this.label = label;
 	}
 
-}
 
+	public static class PieChartSliceBuilder {
+
+		private int value;
+		private Color color = null;
+		private String label = null;
+
+		public PieChartSliceBuilder(int value) {
+			this.value = value;
+		}
+		
+		/**
+		 * Adds a color to the {@link PieChartSlice} object.
+		 * 
+		 * @param color
+		 * @return {@link PieChartSliceBuilder}
+		 * 
+		 * @throws IllegalArgumentException if color is {@code null}
+		 */
+		public PieChartSliceBuilder color(Color color) {
+
+			if (color == null)
+				throw new IllegalArgumentException("color can not be null");
+
+			this.color = new Color(color.getRGB());
+
+			return this;
+		}
+		
+		/**
+		 * Adds a label to the {@link PieChartSlice} object.
+		 * 
+		 * @param label
+		 * @return {@link PieChartSliceBuilder}
+		 * 
+		 * @throws IllegalArgumentException if label is {@code null}
+		 */
+		public PieChartSliceBuilder label(String label) {
+
+			if (label == null)
+				throw new IllegalArgumentException("label can not be null");
+
+			this.label = label;
+
+			return this;
+		}
+		/**
+		 * Call this method to build the {@link PieChartSlice} object.
+		 * 
+		 * @return a {@link PieChartSlice} object
+		 */
+		public PieChartSlice build() {
+
+			return new PieChartSlice(this);
+		}
+
+	}
+
+}

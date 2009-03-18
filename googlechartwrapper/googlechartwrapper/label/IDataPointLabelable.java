@@ -1,7 +1,5 @@
 package googlechartwrapper.label;
 
-import googlechartwrapper.style.RangeMarker;
-
 import java.util.List;
 
 /**

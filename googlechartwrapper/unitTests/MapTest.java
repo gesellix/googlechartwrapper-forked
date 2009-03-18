@@ -77,7 +77,7 @@ public class MapTest {
 		eu.addSolidFill(new SolidFill(ChartFillDestination.Background,Color.BLUE));
 		eu.addChartColor(new ChartColor(Color.LIGHT_GRAY));
 		eu.addChartColor(new ChartColor(Color.YELLOW));
-		new Color(0);
+		
 		eu.addChartColor(new ChartColor(Color.decode("#FFD700")));
 	
 		final String expected = "http://chart.apis.google.com/chart?cht=t&chs=400x200&chtm=europe&chld=DEFRBEITROBGLTSEDKLVSKLUSIEEMTESFINLCZATHUGRPLGBIEPTCY&chd=t:100,100,100,100,0,0,0,0,0,0,0,100,0,0,0,0,0,100,0,0,0,0,0,0,0,0,0&chco=c0c0c0,ffff00,ffd700&chf=bg,s,0000ff";

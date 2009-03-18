@@ -13,7 +13,7 @@ import org.junit.Test;
  * @author steffan
  *
  */
-public class QRCodesTest {
+public class QRCodeTest {
 	
 	@Test
 	public void example() {

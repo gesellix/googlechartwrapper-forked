@@ -197,12 +197,12 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 
 	public RangeMarker removeRangeMarker(int index) {
 
-		return this.removeRangeMarker(index);
+		return this.rangeMarkerAppender.remove(index);
 	}
 
 	public boolean removeRangeMarker(RangeMarker rm) {
 
-		return this.removeRangeMarker(rm);
+		return this.rangeMarkerAppender.remove(rm);
 	}
 
 	public void removeAllShapeMarkers() {

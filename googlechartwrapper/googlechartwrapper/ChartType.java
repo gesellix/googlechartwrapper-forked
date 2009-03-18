@@ -19,6 +19,7 @@ public enum ChartType {
 	    VennDiagram("v"),
 	    PieChart("p"),
 	    PieChart3d("p3"),
+	    PieChartConcentric("pc"),
 	    GoogleOMeter("gom"),
 	    Map("t"),
 	    RadarChartStraightLines("r"),

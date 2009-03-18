@@ -251,7 +251,7 @@ public abstract class AbstractChart implements Chart {
 		return url.toString();
 	}
 
-	private class FeatureAppender{
+	private static class FeatureAppender{
 
 		/**
 		 * list of elements/features

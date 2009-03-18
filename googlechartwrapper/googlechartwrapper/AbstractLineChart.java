@@ -125,12 +125,12 @@ public abstract class AbstractLineChart extends AbstractChart implements
 
 	public RangeMarker removeRangeMarker(int index) {
 
-		return this.removeRangeMarker(index);
+		return this.rangeMarkerAppender.remove(index);
 	}
 
 	public boolean removeRangeMarker(RangeMarker rm) {
 
-		return this.removeRangeMarker(rm);
+		return this.rangeMarkerAppender.remove(rm);
 	}
 
 	public void removeAllShapeMarkers() {
