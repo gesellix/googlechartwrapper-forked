@@ -3,8 +3,11 @@ package googlechartwrapper;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
+import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.data.PieChartSliceAppender;
+import googlechartwrapper.interfaces.IColorable;
+import googlechartwrapper.util.GenericAppender;
 
 import java.awt.Dimension;
 import java.util.List;
@@ -13,7 +16,7 @@ import java.util.List;
  * Specifies a PieChart <a
  * href="http://code.google.com/apis/chart/types.html#pie_charts">
  * http://code.google.com/apis/chart/types.html#pie_charts</a> <br />
- * For Concentric pie chart see {@link ConcentricPieCharts}.
+ * For Concentric pie chart see {@link ConcentricPieChart}.
  * 
  * <p>
  * Here are some examples of how pie chart can be used:
@@ -35,15 +38,17 @@ import java.util.List;
  * @author steffan
  * @version 03/18/09
  * @see PieChartSlice
- * @see ConcentricPieCharts
+ * @see ConcentricPieChart
  * @see AbstractPieChart
  * 
  */
-public class PieChart extends AbstractPieChart {
+public class PieChart extends AbstractPieChart implements IColorable{
 
 	private ChartType type = ChartType.PieChart;
 
 	protected PieChartSliceAppender pieChartSliceAppender = new PieChartSliceAppender();
+	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
+			ChartTypeFeature.ChartColor, ",");
 
 	/**
 	 * Constructs a new pie chart.
@@ -194,6 +199,33 @@ public class PieChart extends AbstractPieChart {
 	public IEncoder getEncoder() {
 
 		return this.pieChartSliceAppender.getEncoder();
+	}
+	
+	public void addChartColor(ChartColor cc) {
+
+		this.chartColorAppender.add(cc);
+	}
+
+	public List<ChartColor> getChartColors() {
+
+		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
+				.getList()
+				: null;
+	}
+
+	public void removeAllChartColors() {
+		this.chartColorAppender.removeAll();
+
+	}
+
+	public ChartColor removeChartColors(int index) {
+
+		return this.chartColorAppender.remove(index);
+	}
+
+	public boolean removeChartColors(ChartColor cc) {
+
+		return this.chartColorAppender.remove(cc);
 	}
 
 }

@@ -1,13 +1,17 @@
 package unitTests;
 
 import static org.junit.Assert.assertEquals;
+import googlechartwrapper.ConcentricPieChart;
 import googlechartwrapper.PieChart;
+import googlechartwrapper.data.ConcentricPieChartSlice;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.style.ChartMargin;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -75,6 +79,33 @@ public class PieChartTest {
 					
 		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chd=t:80,20&chco=0000ff,ff9d0a&chl=USA|Canada&chma=40,40,40,40&chtt=GDP+of+the+world(nominal)"
 				,chart.getUrl());
+		
+		
+	}
+	@Test
+	public void example4(){
+		
+		ConcentricPieChart chart = new ConcentricPieChart(new Dimension(400,180));
+		
+		List<PieChartSlice> list = new ArrayList<PieChartSlice>();
+		
+		list.add(new PieChartSlice.PieChartSliceBuilder(80).label("USA").color(Color.BLUE).build());
+		list.add(new PieChartSlice.PieChartSliceBuilder(20).label("Canada").build());
+		
+		ConcentricPieChartSlice cslice = new ConcentricPieChartSlice.ConcentricPieChartSliceBuilder(list).build();
+		
+		chart.addConcentricPieChartSlice(cslice);
+		
+		List<PieChartSlice> list2 = new ArrayList<PieChartSlice>();
+		
+		list2.add(new PieChartSlice.PieChartSliceBuilder(1314000).label("Brazil").build());
+		list2.add(new PieChartSlice.PieChartSliceBuilder(4384000).label("Japan").build());
+		
+		ConcentricPieChartSlice cslice2 = new ConcentricPieChartSlice.ConcentricPieChartSliceBuilder(list2).build();
+		
+		chart.addConcentricPieChartSlice(cslice2);
+		
+		System.out.println(chart.getUrl());
 		
 		
 	}

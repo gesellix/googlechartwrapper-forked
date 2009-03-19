@@ -9,7 +9,7 @@ import java.awt.Color;
  * 
  * 
  * @author steffan
- * @version 03/18/09
+ * @version 03/19/09
  * @see AbstractPieChart
  * @see PieChartSliceBuilder
  */
@@ -98,7 +98,11 @@ public class PieChartSlice {
 		this.label = label;
 	}
 
-
+	/**
+	 * The builder class for {@link PieChartSlice#PieChartSlice(PieChartSliceBuilder)}.
+	 * @author steffan
+	 * @see PieChartSlice
+	 */
 	public static class PieChartSliceBuilder {
 
 		private int value;

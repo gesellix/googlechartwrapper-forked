@@ -1,6 +1,5 @@
 package googlechartwrapper;
 
-import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripe;
@@ -8,7 +7,6 @@ import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.LinearGradient.GradientFillDestination;
 import googlechartwrapper.color.LinearStripe.LinearStripesDestination;
 import googlechartwrapper.data.PieChartSlice;
-import googlechartwrapper.interfaces.IColorable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IPercentageScaleable;
 import googlechartwrapper.label.ChartLegend;
@@ -33,10 +31,12 @@ import java.util.List;
  * @author steffan
  * @version 03/18/09
  * @see PieChartSlice
+ * @see PieChart
+ * @see ConcentricPieChart
  * 
  */
 public abstract class AbstractPieChart extends AbstractChart implements
-		ISolidFillable, IPercentageScaleable, IColorable, IChartLegendable,
+		ISolidFillable, IPercentageScaleable, IChartLegendable,
 		ILinearable {
 
 	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
@@ -49,8 +49,7 @@ public abstract class AbstractPieChart extends AbstractChart implements
 			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
-	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
-			ChartTypeFeature.ChartColor, ",");
+	
 	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
 
@@ -172,32 +171,7 @@ public abstract class AbstractPieChart extends AbstractChart implements
 				.getList().get(0)
 				: null;
 	}	
-	public void addChartColor(ChartColor cc) {
-
-		this.chartColorAppender.add(cc);
-	}
-
-	public List<ChartColor> getChartColors() {
-
-		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
-				.getList()
-				: null;
-	}
-
-	public void removeAllChartColors() {
-		this.chartColorAppender.removeAll();
-
-	}
-
-	public ChartColor removeChartColors(int index) {
-
-		return this.chartColorAppender.remove(index);
-	}
-
-	public boolean removeChartColors(ChartColor cc) {
-
-		return this.chartColorAppender.remove(cc);
-	}
+	
 
 	public ChartLegend getChartLegend() {
 

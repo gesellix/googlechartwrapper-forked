@@ -1,5 +1,6 @@
 package googlechartwrapper;
 
+import googlechartwrapper.interfaces.IChart;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.ArrayUtils;
 import googlechartwrapper.util.IExtendedFeatureAppender;
@@ -29,7 +30,7 @@ import java.util.Queue;
  * @author steffan
  * @author martin
  */
-public abstract class AbstractChart implements Chart {
+public abstract class AbstractChart implements IChart {
 
 	/**
 	 * Default Chart API's location of the google service.

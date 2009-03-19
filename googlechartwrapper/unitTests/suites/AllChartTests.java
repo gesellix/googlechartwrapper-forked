@@ -4,6 +4,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import unitTests.GoogleOMeterTest;
+import unitTests.LineChartTest;
+import unitTests.MapTest;
 import unitTests.PieChartTest;
 import unitTests.QRCodeTest;
 import unitTests.RadarChartTest;
@@ -17,7 +19,9 @@ import unitTests.VennDiagramTest;
   QRCodeTest.class,
   ScatterPlotTest.class,
   VennDiagramTest.class,
-  RadarChartTest.class
+  RadarChartTest.class,
+  LineChartTest.class,
+  MapTest.class
 })
 
 /**

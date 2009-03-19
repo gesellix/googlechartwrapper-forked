@@ -6,6 +6,9 @@ import java.util.List;
 
 import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.AbstractPieChart;
+import googlechartwrapper.ConcentricPieChart;
+import googlechartwrapper.PieChart;
+import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
@@ -17,6 +20,9 @@ import googlechartwrapper.util.IFeatureAppender;
  * @author steffan
  * @version 03/17/09 
  * @see AbstractPieChart
+ * @see PieChart
+ * @see ConcentricPieChart
+ * @see PieChartSlice
  */
 public class PieChartLabel implements IFeatureAppender {
 

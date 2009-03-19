@@ -1,8 +1,8 @@
-package googlechartwrapper;
+package googlechartwrapper.interfaces;
 
 import googlechartwrapper.coder.IEncoder;
 
-public interface Chart {
+public interface IChart {
 	
 	public abstract IEncoder getEncoder();
 

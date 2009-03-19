@@ -2,8 +2,12 @@ package googlechartwrapper.data;
 
 import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.DefaultValues;
+import googlechartwrapper.PieChart;
+import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
+import googlechartwrapper.data.PieChartSlice.PieChartSliceBuilder;
+import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
@@ -17,13 +21,23 @@ import java.util.List;
 /**
  *   
  * @author steffan
+ * 
+ * @see PieChartSlice
+ * @see PieChartSliceBuilder
+ * @see PieChart
  *
  */
-public class PieChartSliceAppender implements IExtendedFeatureAppender{
+public class PieChartSliceAppender implements IExtendedFeatureAppender, IEncodeable{
 	
 	protected List<PieChartSlice> pieChartSlices = new LinkedList<PieChartSlice>();
 	protected IEncoder encoder = new PercentageEncoder();
 	
+	/**
+	 * 
+	 * @param pieChartSlices
+	 * 
+	 * @throws IllegalArgumentException if list or member is {@code null}
+	 */
 	public void add (List<? extends PieChartSlice> pieChartSlices){
 		
 		List<PieChartSlice> temp = Collections.unmodifiableList(pieChartSlices);
@@ -35,6 +49,13 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 		
 		this.pieChartSlices.addAll(pieChartSlices);
 	}
+	
+	/**
+	 * 
+	 * @param pieChartSlice
+	 * 
+	 * @throws IllegalArgumentException if pieChartSlice is {@code null}
+	 */
 	public void add (PieChartSlice pieChartSlice){
 		
 		if(pieChartSlice == null)
@@ -79,55 +100,7 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 	
 
 	public List<AppendableFeature> getAppendableFeatures(List<? extends IFeatureAppender> otherAppenders) {
-		
-		/*
-		//chco fuer colors of slices
-		//chl fuer labels
-		//chartdata vom encoder
-		int values[] = new int[pieChartSlices.size()];
-		StringBuilder labelbf = new StringBuilder(values.length*7);
-		//labelbf.append("chl=");
-		StringBuilder colorbf = new StringBuilder(values.length*7+4);
-				
-		for (int i = 0, size = pieChartSlices.size(); i < size; i++){
-			values[i] = pieChartSlices.get(i).getData(); //val
-			
-			PieChartSlice slice = pieChartSlices.get(i); //label
-			if (slice.getLabel() != null){
-				labelbf.append(slice.getLabel());
-			}
-			labelbf.append("|");
-			
-			if (slice.getColor() != null){
-				colorbf.append(MiscUtils.getMatchingColorHexValue(slice.getColor()));
-				colorbf.append(",");
-			}			
-		}
-		
-		List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
-		
-		String val = encoder.encode(values);		
-		
-		String labels;
-		if (labelbf.length()<1){ //keine labels
-			labels = "";
-			labelbf = null;
-		}
-		else {
-			labels = labelbf.substring(0, labelbf.length()-1);
-			feature.add(new AppendableFeature(labels, "chl"));
-		}
-		
-		//
-		//if (colorbf.length()==0){
-		//	colors = "";
-		//}
-		if (colorbf.length()!=0) {			
-			String colors = colorbf.substring(0, colorbf.length()-1 );
-			feature.add(new AppendableFeature(colors, "chco"));
-		}		
-		*/
-		
+						
 		// the raw data
 		int[] data = new int[this.pieChartSlices.size()];
 
@@ -176,7 +149,7 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 				label.append("");
 			}
 
-			// otherwise we have a "," at the end
+			// otherwise we have a "|" at the end
 			if (u < this.pieChartSlices.size() - 1) {
 				label.append("|");
 			}
@@ -199,6 +172,11 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender{
 		}
 		              
 		return features;
-	}	
+	}
+
+	public void removeEncoder() {
+		this.encoder = new AutoEncoder();
+
+	}
 
 }

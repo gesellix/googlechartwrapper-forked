@@ -1,0 +1,200 @@
+package googlechartwrapper.data;
+
+import googlechartwrapper.ChartTypeFeature;
+import googlechartwrapper.DefaultValues;
+import googlechartwrapper.coder.AutoEncoder;
+import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.data.ConcentricPieChartSlice.ConcentricPieChartSliceBuilder;
+import googlechartwrapper.interfaces.IEncodeable;
+import googlechartwrapper.util.AppendableFeature;
+import googlechartwrapper.util.IExtendedFeatureAppender;
+import googlechartwrapper.util.IFeatureAppender;
+import googlechartwrapper.util.MiscUtils;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * 
+ * @author steffan
+ * 
+ * @see ConcentricPieChartSlice
+ * @see ConcentricPieChartSliceBuilder
+ * @see ConcentricPieChartSlice
+ * 
+ */
+public class ConcentricPieChartAppender implements IExtendedFeatureAppender,
+		IEncodeable {
+
+	protected List<ConcentricPieChartSlice> concentricPieChartSlices = new LinkedList<ConcentricPieChartSlice>();
+	protected IEncoder encoder = new AutoEncoder();
+
+	// TODO use percentage encoder
+
+	public void add(
+			List<? extends ConcentricPieChartSlice> concentricPieChartSlices) {
+
+		this.concentricPieChartSlices.addAll(concentricPieChartSlices);
+	}
+
+	public void add(ConcentricPieChartSlice concentricPieChartSlice) {
+
+		this.concentricPieChartSlices.add(concentricPieChartSlice);
+	}
+
+	public ConcentricPieChartSlice removeConcentricPieChartSlice(int index) {
+		return this.concentricPieChartSlices.remove(index);
+	}
+
+	public boolean removeConcentricPieChartSlice(
+			ConcentricPieChartSlice concentricPieChartSlice) {
+		return this.concentricPieChartSlices.remove(concentricPieChartSlice);
+	}
+
+	public void removeAllConcentricPieChartSlice() {
+		this.concentricPieChartSlices.clear();
+	}
+
+	public List<AppendableFeature> getAppendableFeatures(
+			List<? extends IFeatureAppender> otherAppenders) {
+
+		// the raw data
+		List<int[]> data = new LinkedList<int[]>();
+
+		for (int z = 0; z < this.concentricPieChartSlices.size(); z++) {
+
+			int values[] = new int[this.concentricPieChartSlices.get(z)
+					.getPieChartSlices().size()];
+			// copy elements
+			for (int u = 0; u < this.concentricPieChartSlices.get(z)
+					.getPieChartSlices().size(); u++) {
+				values[u] = this.concentricPieChartSlices.get(z)
+						.getPieChartSlices().get(u).getValue();
+			}
+			data.add(values);
+		}
+
+		boolean isColorUsed = false;
+		// the color
+		StringBuilder color = new StringBuilder();
+		for (int i = 0; i < this.concentricPieChartSlices.size(); i++) {
+
+			// color for the whole concentric slice
+			if (this.concentricPieChartSlices.get(i).getColor() != null) {
+
+				isColorUsed = true;
+				color.append(MiscUtils
+						.getSixCharacterHexValue(this.concentricPieChartSlices
+								.get(i).getColor()));
+				color.append(",");
+			}
+
+			// we have to add all the colors in the slices
+			else {
+				isColorUsed = true;
+
+				for (int u = 0; u < this.concentricPieChartSlices.get(i)
+						.getPieChartSlices().size(); u++) {
+
+					// no color was set in the slice, we add the default value
+					if (this.concentricPieChartSlices.get(i)
+							.getPieChartSlices().get(u).getColor() == null) {
+						color
+								.append(MiscUtils
+										.getSixCharacterHexValue(DefaultValues.DataColor));
+					}
+					// we add the set color
+					else {
+						color
+								.append(MiscUtils
+										.getSixCharacterHexValue(this.concentricPieChartSlices
+												.get(i).getPieChartSlices()
+												.get(u).getColor()));
+					}
+					// the default delimiter					
+					if (u < this.concentricPieChartSlices.get(i)
+							.getPieChartSlices().size() - 1) {
+						color.append("|");
+					}
+				}
+			}
+			
+			// otherwise we have a "," or "|" at the end
+			if (i < this.concentricPieChartSlices.size() - 1) {
+				color.append(",");
+			}
+			
+
+		}
+		boolean isLabelUsed = false;
+
+		// the label
+		StringBuilder label = new StringBuilder();
+		for (int x = 0; x < this.concentricPieChartSlices.size(); x++) {
+
+			for (int e = 0; e < this.concentricPieChartSlices.get(x)
+					.getPieChartSlices().size(); e++) {
+
+				// the user set a label
+				if (this.concentricPieChartSlices.get(x).getPieChartSlices()
+						.get(e).getLabel() != null) {
+					isLabelUsed = true;
+					label.append(this.concentricPieChartSlices.get(x)
+							.getPieChartSlices().get(e).getLabel());
+				}
+				// no label was set, we set ""
+				else {
+					label.append("");
+
+				}
+
+				// otherwise we have a "|" at the end
+				if (e < this.concentricPieChartSlices.get(x)
+						.getPieChartSlices().size() - 1) {
+					label.append("|");
+				}
+			}
+			// otherwise we have a "|" at the end
+			if (x < this.concentricPieChartSlices.size() - 1) {
+				label.append("|");
+			}
+
+		}
+
+		List<AppendableFeature> features = new ArrayList<AppendableFeature>();
+
+		features.add(new AppendableFeature(this.encoder
+				.encodeIntegerCollection(data), ChartTypeFeature.ChartData));
+
+		// if the user set the color we have to add the string
+		if (isColorUsed) {
+			features.add(new AppendableFeature(color.toString(),
+					ChartTypeFeature.ChartColor));
+		}
+		// if the user set the label we have to add the string
+		if (isLabelUsed) {
+			features.add(new AppendableFeature(label.toString(),
+					ChartTypeFeature.PieChartLabel));
+		}
+
+		return features;
+	}
+
+	public void setEncoder(IEncoder encoder) {
+		if (encoder == null) {
+			throw new IllegalArgumentException("encoder cannot be null");
+		}
+		this.encoder = encoder;
+	}
+
+	public IEncoder getEncoder() {
+		return encoder;
+	}
+
+	public void removeEncoder() {
+		this.encoder = new AutoEncoder();
+
+	}
+
+}
