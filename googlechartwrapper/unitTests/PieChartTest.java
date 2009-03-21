@@ -99,11 +99,15 @@ public class PieChartTest {
 		List<PieChartSlice> list2 = new ArrayList<PieChartSlice>();
 		
 		list2.add(new PieChartSlice.PieChartSliceBuilder(1314000).label("Brazil").build());
-		list2.add(new PieChartSlice.PieChartSliceBuilder(4384000).label("Japan").build());
+		list2.add(new PieChartSlice.PieChartSliceBuilder(4384000).label("Japan").color(Color.GREEN).build());
 		
-		ConcentricPieChartSlice cslice2 = new ConcentricPieChartSlice.ConcentricPieChartSliceBuilder(list2).build();
+		
+		ConcentricPieChartSlice cslice2 = new ConcentricPieChartSlice.ConcentricPieChartSliceBuilder(list2).color(Color.RED).build();
+		
+		cslice2.setPieChartSlices(list2);
 		
 		chart.addConcentricPieChartSlice(cslice2);
+		
 		
 		System.out.println(chart.getUrl());
 		

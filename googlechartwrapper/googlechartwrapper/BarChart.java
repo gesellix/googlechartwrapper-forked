@@ -285,27 +285,27 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 		return this.solidFillAppender.remove(sf);
 	}
 
-	public void addAxisLabelSummary(AxisLabelContainer labelSummary) {
+	public void addAxisLabelContainer(AxisLabelContainer labelSummary) {
 
 		this.axisLabelAppender.addAxis(labelSummary);
 	}
 
-	public List<AxisLabelContainer> getAxisLabelSummaries() {
+	public List<AxisLabelContainer> getAxisLabelContainer() {
 
 		return this.axisLabelAppender.getList();
 	}
 
-	public void removeAllAxisLabelSummaries() {
+	public void removeAllAxisLabelContainer() {
 		this.axisLabelAppender.removeAll();
 
 	}
 
-	public AxisLabelContainer removeAxisLabelSummary(int index) {
+	public AxisLabelContainer removeAxisLabelContainer(int index) {
 
 		return this.axisLabelAppender.removeAxis(index);
 	}
 
-	public boolean removeAxisLabelSummary(AxisLabelContainer labelSummary) {
+	public boolean removeAxisLabelContainer(AxisLabelContainer labelSummary) {
 
 		return this.axisLabelAppender.removeAxis(labelSummary);
 	}
@@ -441,12 +441,12 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 
 	}
 
-	public ChartColor removeChartColors(int index) {
+	public ChartColor removeChartColor(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColor cc) {
+	public boolean removeChartColor(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}

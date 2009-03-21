@@ -310,12 +310,12 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 
 	}
 
-	public ChartColor removeChartColors(int index) {
+	public ChartColor removeChartColor(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColor cc) {
+	public boolean removeChartColor(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}

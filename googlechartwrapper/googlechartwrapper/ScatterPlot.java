@@ -41,7 +41,21 @@ import java.util.List;
  * href="http://code.google.com/apis/chart/types.html#scatter_plot">
  * http://code.google.com/apis/chart/types.html#scatter_plot</a>
  * 
+ * <p>
+ * Here are some examples of how scatter plot can be used:
+ * <p>
+ * <blockquote>
+ * 
+ * <pre>
+ * 
+ * </pre>
+ * 
+ * </blockquote>
+ * <p>
+ * 
  * @author steffan
+ * @version 03/21/09
+ * @see ScatterPlotData
  * 
  */
 public class ScatterPlot extends AbstractChart implements ILinearable,
@@ -75,9 +89,28 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 	protected GenericAppender<DataPointLabel> dataPointLabelAppender = new GenericAppender<DataPointLabel>(
 			ChartTypeFeature.Marker);
 
+	/**
+	 * Constructs a new {@link ScatterPlot}.
+	 * 
+	 * @param chartDimension
+	 */
 	public ScatterPlot(Dimension chartDimension) {
 		super(chartDimension);
 
+	}
+
+	/**
+	 * Constructs a new {@link ScatterPlot}.
+	 * 
+	 * @param chartDimension
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if data is {@code null}
+	 */
+	public ScatterPlot(Dimension chartDimension, ScatterPlotData data) {
+		super(chartDimension);
+
+		this.scatterPlotDataAppender.setScatterPlotData(data);
 	}
 
 	@Override
@@ -181,12 +214,12 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 	}
 
-	public ChartColor removeChartColors(int index) {
+	public ChartColor removeChartColor(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColor cc) {
+	public boolean removeChartColor(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}
@@ -279,38 +312,58 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 	}
 
-	public void addAxisLabelSummary(AxisLabelContainer labelSummary) {
+	public void addAxisLabelContainer(AxisLabelContainer labelSummary) {
 
 		this.axisLabelAppender.addAxis(labelSummary);
 	}
 
-	public List<AxisLabelContainer> getAxisLabelSummaries() {
+	public List<AxisLabelContainer> getAxisLabelContainer() {
 
 		return this.axisLabelAppender.getList();
 	}
 
-	public void removeAllAxisLabelSummaries() {
+	public void removeAllAxisLabelContainer() {
 		this.axisLabelAppender.removeAll();
 
 	}
 
-	public AxisLabelContainer removeAxisLabelSummary(int index) {
+	public AxisLabelContainer removeAxisLabelContainer(int index) {
 
 		return this.axisLabelAppender.removeAxis(index);
 	}
 
-	public boolean removeAxisLabelSummary(AxisLabelContainer labelSummary) {
+	public boolean removeAxisLabelContainer(AxisLabelContainer labelSummary) {
 
 		return this.axisLabelAppender.removeAxis(labelSummary);
 	}
 
+	/**
+	 * Sets the {@link ScatterPlotData} the old one iwll be overwritten.
+	 * 
+	 * @param data
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if data is {@code null}
+	 */
 	public void setScatterPlotData(ScatterPlotData data) {
 		this.scatterPlotDataAppender.setScatterPlotData(data);
 	}
 
+	/**
+	 * Returns the {@link ScatterPlotData} or {@code null} if nothing was set.
+	 * 
+	 * @return {@link ScatterPlot} or {@code null}
+	 */
 	public ScatterPlotData getScatterPlotData() {
 
 		return this.scatterPlotDataAppender.getScatterPlotData();
+	}
+
+	/**
+	 * Removes the {@link ScatterPlotData}.
+	 */
+	public void removeScatterPlotData() {
+		this.scatterPlotDataAppender.removeScatterPlotData();
 	}
 
 	public void addDataScalingSet(DataScalingSet ds) {
@@ -388,6 +441,7 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 	public boolean removeSolidFill(SolidFill sf) {
 		return this.solidFillAppender.remove(sf);
 	}
+
 	public ChartMargin getChartMargin() {
 		return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
 				.getList().get(0)
@@ -406,6 +460,7 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 			this.chartMarginAppender.add(cm);
 		}
 	}
+
 	public void addDataPointLabel(DataPointLabel dpl) {
 		this.dataPointLabelAppender.add(dpl);
 

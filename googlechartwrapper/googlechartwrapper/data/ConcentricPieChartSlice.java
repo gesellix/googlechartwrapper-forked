@@ -4,13 +4,25 @@ import googlechartwrapper.ConcentricPieChart;
 import googlechartwrapper.data.PieChartSlice.PieChartSliceBuilder;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
+ *  <p>
+ * Here are some examples of how ConcentricPieChartSlice can be used:
+ * <p><blockquote><pre>
+ *     List<PieChartSlice> list = new ArrayList<PieChartSlice>();
+ *      		
+ *     list.add(new PieChartSlice.PieChartSliceBuilder(80).label("USA").color(Color.BLUE).build());
+ *     list.add(new PieChartSlice.PieChartSliceBuilder(20).label("Canada").build());
+ *		
+ *     ConcentricPieChartSlice cslice = new ConcentricPieChartSlice.ConcentricPieChartSliceBuilder(list).build();
+ * </pre></blockquote>
+ * <p>
  * 
  * @author steffan
- * 
+ * @version 03/20/09 
  * @see ConcentricPieChart
  * @see ConcentricPieChartSliceBuilder
  * @see PieChartSlice
@@ -19,15 +31,18 @@ import java.util.List;
  */
 public class ConcentricPieChartSlice {
 	
-	private List<? extends PieChartSlice> pieChartSlices;
+	private List<? extends PieChartSlice> pieChartSlices = new ArrayList<PieChartSlice>();
 	private Color color = null;
 	
 	
 	/**
+	 * Use the {@link ConcentricPieChartSliceBuilder} to build a new {@link ConcentricPieChartSlice}.
 	 * 
-	 * @param builder
+	 * @param builder {@link ConcentricPieChartSliceBuilder}
 	 * 
 	 * @throws IllegalArgumentException if builder is {@code null}
+	 * 
+	 * @see ConcentricPieChartSliceBuilder
 	 */
 	public ConcentricPieChartSlice(final ConcentricPieChartSliceBuilder builder) {
 		
@@ -39,18 +54,32 @@ public class ConcentricPieChartSlice {
 	}
 	
 	/**
+	 * Returns a unmodifiable list. The list will be empty if nothing was added.
+	 * 
 	 * @return the pieChartSlices
 	 */
 	public List<? extends PieChartSlice> getPieChartSlices() {
-		return pieChartSlices;
+		return Collections.unmodifiableList(pieChartSlices);
 	}
 
 	/**
-	 * @param pieChartSlices the pieChartSlices to set
+	 * @param pieChartSlices the pieChartSlices to add
 	 */
 	public void setPieChartSlices(List<? extends PieChartSlice> pieChartSlices) {
-		this.pieChartSlices = pieChartSlices;
-	}
+		
+		if(pieChartSlices == null)
+			throw new IllegalArgumentException("pieCharSlices can not be null");
+		
+		List<? extends PieChartSlice> temp = Collections.unmodifiableList(pieChartSlices);
+		
+		for (PieChartSlice current : temp) {
+			
+			if(current == null)
+				throw new IllegalArgumentException("member can not be null");
+		}		
+		this.pieChartSlices = temp;
+		
+ }
 
 	/**
 	 * @return the color
@@ -73,6 +102,7 @@ public class ConcentricPieChartSlice {
 		this.color = new Color(color.getRGB());
 	}
 	/**
+	 * The builder for {@link ConcentricPieChartSlice#ConcentricPieChartSlice(ConcentricPieChartSliceBuilder)}.
 	 * 
 	 * @author steffan
 	 * @see ConcentricPieChartSlice
@@ -86,6 +116,12 @@ public class ConcentricPieChartSlice {
 		private List<? extends PieChartSlice> pieChartSlices;
 		private Color color = null;
 		
+		/**
+		 * 
+		 * @param pieChartSlices
+		 * 
+		 * @throws IllegalArgumentException if pieChartSlices or member is {@code null}
+		 */
 		public ConcentricPieChartSliceBuilder(final List<? extends PieChartSlice> pieChartSlices) {
 			
 			if(pieChartSlices == null)
@@ -113,14 +149,15 @@ public class ConcentricPieChartSlice {
 			if(color == null)
 				throw new IllegalArgumentException("color can not be null");
 			
-			this.color = new Color(color.getRed());
+			this.color = new Color(color.getRGB());
 			
 			return this;
 			
 		}
 		/**
+		 * Build the {@link ConcentricPieChartSlice}
 		 * 
-		 * @return
+		 * @return {@link ConcentricPieChartSlice}
 		 */
 		public ConcentricPieChartSlice build(){
 			

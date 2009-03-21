@@ -1,7 +1,7 @@
 package googlechartwrapper;
 
-import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.AutoEncoder;
+import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.color.ChartColor;
@@ -10,8 +10,8 @@ import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.ISingleDataScaleable;
-import googlechartwrapper.data.VennDiagramDataAppender;
 import googlechartwrapper.data.VennDiagramData;
+import googlechartwrapper.data.VennDiagramDataAppender;
 import googlechartwrapper.interfaces.IColorable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IPercentageScaleable;
@@ -27,14 +27,42 @@ import java.awt.Dimension;
 import java.util.List;
 
 /**
- * Specifies a venn diagram <a href="http://code.google.com/apis/chart/#venn">
- * http://code.google.com/apis/chart/#venn</a>
+ * Specifies a venn diagram <a
+ * href="http://code.google.com/apis/chart/types.html#venn">
+ * http://code.google.com/apis/chart/types.html#venn</a>
+ * 
+ * <p>
+ * Here are some examples of how pie chart can be used:
+ * <p>
+ * <blockquote>
+ * 
+ * <pre>
+ * VennDiagram diagram = new VennDiagram(new Dimension(200, 200));
+ * 
+ * diagram.setChartTitle(new ChartTitle(&quot;VennDiagramm&quot;));
+ * 
+ * diagram.setVennDiagramData(new VennDiagramData(90, 70, 20, 10, 5, 5, 10));
+ * 
+ * List&lt;String&gt; l = new ArrayList&lt;String&gt;();
+ * 
+ * l.add(&quot;A&quot;);
+ * l.add(&quot;C&quot;);
+ * l.add(&quot;V&quot;);
+ * 
+ * diagram.setChartLegend(new ChartLegend(l));
+ * </pre>
+ * 
+ * </blockquote>
+ * <p>
  * 
  * @author steffan
+ * @version 03/21/09
+ * @see VennDiagramData
  * 
  */
 public class VennDiagram extends AbstractChart implements ILinearable,
-		IChartLegendable, ISingleDataScaleable, IPercentageScaleable, IColorable{
+		IChartLegendable, ISingleDataScaleable, IPercentageScaleable,
+		IColorable {
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -65,6 +93,20 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 
 	}
 
+	/**
+	 * Constructs a venn diagram, with given {@link VennDiagramData}.
+	 * 
+	 * @param chartDimension
+	 *            the size of the diagram
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if data is {@code null}
+	 */
+	public VennDiagram(Dimension chartDimension, VennDiagramData data) {
+		super(chartDimension);
+
+	}
+
 	@Override
 	protected ChartType getChartType() {
 
@@ -74,7 +116,7 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 	@Override
 	protected String getUrlChartType() {
 
-		return "v";
+		return ChartType.VennDiagram.getPrefix();
 	}
 
 	public void removeLinearGradient() {
@@ -83,11 +125,10 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 	}
 
 	public void setLinearGradient(LinearGradient lg) {
-		if(lg == null){
+		if (lg == null) {
 			this.removeLinearGradient();
-		}
-		else{
-		this.linearGradientAppender.add(lg);
+		} else {
+			this.linearGradientAppender.add(lg);
 		}
 
 	}
@@ -148,11 +189,33 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 
 	}
 
+	/**
+	 * Returns the data, can be {@code null} if nothing was set.
+	 * 
+	 * @return {@link VennDiagramData} or {@code null}
+	 */
 	public VennDiagramData getVennDiagramData() {
 
 		return this.vennDiagramAppender.getVennDiagrammData();
 	}
 
+	/**
+	 * Removes the {@link VennDiagramData}.
+	 */
+	public void removeVennDiagrammData() {
+
+		this.vennDiagramAppender.removeVennDiagrammData();
+	}
+
+	/**
+	 * Set the data, the old one will be overwritten.
+	 * 
+	 * @param data
+	 *            {@link VennDiagramData}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if data is {@code null}
+	 */
 	public void setVennDiagramData(VennDiagramData data) {
 
 		this.vennDiagramAppender.setVennDiagrammData(data);
@@ -175,12 +238,12 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 
 	}
 
-	public ChartColor removeChartColors(int index) {
+	public ChartColor removeChartColor(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColor cc) {
+	public boolean removeChartColor(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}
@@ -192,32 +255,37 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 				: null;
 	}
 
-	public void setDataScaling(DataScalingSet ds) {	
-			
+	public void setDataScaling(DataScalingSet ds) {
+
 		this.dataScalingAppender.add(ds);
-		
-		if(ds != null)
+
+		if (ds != null)
 			this.vennDiagramAppender.setEncoder(new DataScalingTextEncoder());
 
 	}
 
 	public LinearStripe getLinearStripes() {
-		
-		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender.getList().get(0) : null;
+
+		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
+				.getList().get(0)
+				: null;
 	}
 
 	public LinearGradient getLinearGradient() {
-		
-		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender.getList().get(0) : null;
+
+		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender
+				.getList().get(0)
+				: null;
 	}
 
 	public void removeDataScaling() {
-		
+
 		this.dataScalingAppender.removeAll();
-		
+
 		this.vennDiagramAppender.setEncoder(new AutoEncoder());
-		
+
 	}
+
 	public void setPercentageScaling(boolean b) {
 
 		if (b) {
@@ -225,7 +293,7 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 		} else {
 			this.vennDiagramAppender.setEncoder(new AutoEncoder());
 		}
-		
+
 		this.dataScalingAppender.removeAll();
 
 	}
@@ -252,6 +320,7 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 	public boolean removeSolidFill(SolidFill sf) {
 		return this.solidFillAppender.remove(sf);
 	}
+
 	public ChartMargin getChartMargin() {
 		return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
 				.getList().get(0)
@@ -270,6 +339,5 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 			this.chartMarginAppender.add(cm);
 		}
 	}
-
 
 }

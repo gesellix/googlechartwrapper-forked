@@ -175,7 +175,12 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 	 */
 	public enum DataSetKind {
 
-		Single('b'), Multi('B');
+		Single('b'),
+		
+		/**
+		 * This fills the entire area under the line
+		 */
+		Multi('B');
 
 		private char kind;
 

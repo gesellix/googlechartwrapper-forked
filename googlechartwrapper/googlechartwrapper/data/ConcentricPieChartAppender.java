@@ -12,6 +12,7 @@ import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,13 +33,41 @@ public class ConcentricPieChartAppender implements IExtendedFeatureAppender,
 
 	// TODO use percentage encoder
 
+	/**
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if concentricPieChartSlices or member is {@code null}
+	 */
 	public void add(
 			List<? extends ConcentricPieChartSlice> concentricPieChartSlices) {
+
+		if (concentricPieChartSlices == null)
+			throw new IllegalArgumentException(
+					"concentricPieChartSlices can not be null");
+
+		List<ConcentricPieChartSlice> temp = Collections
+				.unmodifiableList(concentricPieChartSlices);
+
+		for (ConcentricPieChartSlice current : temp) {
+			if (current == null)
+				throw new IllegalArgumentException("member can not be null");
+		}
 
 		this.concentricPieChartSlices.addAll(concentricPieChartSlices);
 	}
 
+	/**
+	 * 
+	 * @param concentricPieChartSlice
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if concentricPieChartSlice is {@code null}
+	 */
 	public void add(ConcentricPieChartSlice concentricPieChartSlice) {
+
+		if (concentricPieChartSlice == null)
+			throw new IllegalArgumentException(
+					"concentricPieChartSlice can not be null");
 
 		this.concentricPieChartSlices.add(concentricPieChartSlice);
 	}
@@ -54,6 +83,15 @@ public class ConcentricPieChartAppender implements IExtendedFeatureAppender,
 
 	public void removeAllConcentricPieChartSlice() {
 		this.concentricPieChartSlices.clear();
+	}
+
+	/**
+	 * Returns a unmodifiable list. Empty if nothing was added.
+	 * 
+	 * @return
+	 */
+	public List<? extends ConcentricPieChartSlice> getList() {
+		return Collections.unmodifiableList(this.concentricPieChartSlices);
 	}
 
 	public List<AppendableFeature> getAppendableFeatures(
@@ -86,13 +124,11 @@ public class ConcentricPieChartAppender implements IExtendedFeatureAppender,
 				isColorUsed = true;
 				color.append(MiscUtils
 						.getSixCharacterHexValue(this.concentricPieChartSlices
-								.get(i).getColor()));
-				color.append(",");
+								.get(i).getColor()));				
 			}
 
 			// we have to add all the colors in the slices
-			else {
-				isColorUsed = true;
+			else {				
 
 				for (int u = 0; u < this.concentricPieChartSlices.get(i)
 						.getPieChartSlices().size(); u++) {
@@ -112,19 +148,18 @@ public class ConcentricPieChartAppender implements IExtendedFeatureAppender,
 												.get(i).getPieChartSlices()
 												.get(u).getColor()));
 					}
-					// the default delimiter					
+					// the default delimiter
 					if (u < this.concentricPieChartSlices.get(i)
 							.getPieChartSlices().size() - 1) {
 						color.append("|");
 					}
 				}
 			}
-			
+
 			// otherwise we have a "," or "|" at the end
 			if (i < this.concentricPieChartSlices.size() - 1) {
 				color.append(",");
 			}
-			
 
 		}
 		boolean isLabelUsed = false;

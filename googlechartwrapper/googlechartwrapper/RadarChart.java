@@ -7,7 +7,6 @@ import googlechartwrapper.color.IFillAreaable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.SolidFill;
-import googlechartwrapper.color.LinearStripe.LinearStripesDestination;
 import googlechartwrapper.data.RadarChartLine;
 import googlechartwrapper.data.RadarChartLineAppender;
 import googlechartwrapper.interfaces.IColorable;
@@ -43,13 +42,15 @@ import java.util.List;
  * 
  * @author mart
  * @author steffan
+ * @version 03/21/09
+ * @see RadarChartLine
  * 
  */
 public class RadarChart extends AbstractChart implements IGridLineable,
 		IShapeMarkable, IAxisLabelable, IFillAreaable, IChartTitleable,
 		IMarkable, IColorable, ILinearable, ILineStyleable, IDataPointLabelable {
 
-	private boolean curved;
+	private boolean isCurved = true;
 
 	protected GenericAppender<GridLine> gridLines = new UpperLimitGenericAppender<GridLine>(
 			ChartTypeFeature.GridLine, 1, UpperLimitReactions.RemoveAll);
@@ -80,9 +81,40 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
 
-	public RadarChart(Dimension chartDimension, boolean curved) {
+	/**
+	 * Constructs a new {@link RadarChart}
+	 * 
+	 * @param chartDimension
+	 */
+	public RadarChart(Dimension chartDimension) {
 		super(chartDimension);
-		this.curved = curved;
+
+	}
+	/**
+	 * Constructs a new {@link RadarChart}, with a list of lines.
+	 * 
+	 * @param chartDimension
+	 * 
+	 * @throws IllegalArgumentException if radarChartLines or member is {@code null}
+	 */
+	public RadarChart(Dimension chartDimension, List<RadarChartLine> radarChartLines) {
+		super(chartDimension);
+		
+		this.radarChartLineAppender.add(radarChartLines);
+
+	}
+	/**
+	 * Constructs a new {@link RadarChart}, with a single line.
+	 * 
+	 * @param chartDimension
+	 * 
+	 * @throws IllegalArgumentException if radarChartLine is {@code null}
+	 */
+	public RadarChart(Dimension chartDimension, RadarChartLine radarChartLine) {
+		super(chartDimension);
+		
+		this.radarChartLineAppender.add(radarChartLine);
+
 	}
 
 	@Override
@@ -92,22 +124,59 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 
 	@Override
 	protected String getUrlChartType() {
-		return curved ? ChartType.RadarChartStraightLines.getPrefix()
-				: ChartType.RadarChartSplines.getPrefix();
+		return isCurved ? ChartType.RadarChartSplines.getPrefix()
+				: ChartType.RadarChartStraightLines.getPrefix();
+	}
+	
+	/**
+	 * Enable curved.
+	 * 
+	 * @see {@link RadarChart#setDefault()}
+	 */
+	public void setCurved() {
+		this.isCurved = true;
+	}
+
+	/**
+	 * Set curved to false.
+	 * 
+	 * @see {@link RadarChart#setCurved()}
+	 */
+	public void setDefault() {
+		this.isCurved = false;
+	}
+
+	/**
+	 * Returns if the chart was set to curved or not. DEFAULT is {@code true}.
+	 * 
+	 * @return {@code null} if {@code true}
+	 */
+	public boolean isCurved() {
+		return this.isCurved;
 	}
 
 	/**
 	 * Adds a {@link RadarChartLine} to the {@link RadarChartLineAppender} of
 	 * this charts' instance.
 	 * 
-	 * @param line
+	 * @param radarChartLine
 	 *            line to add
-	 * @see RadarChartLineAppender#add(RadarChartLine)
+	 * 
+	 * @throws IllegalArgumentException if radarChartLine is {@code null}
 	 */
-	public void addRadarChartLine(RadarChartLine line) {
-		radarChartLineAppender.add(line);
+	public void addRadarChartLine(RadarChartLine radarChartLine) {
+		radarChartLineAppender.add(radarChartLine);
 	}
 
+	/**
+	 * Adds a list of {@link RadarChartLine} to the chart,
+	 * @param radarChartLines {@link RadarChartLine}
+	 * 
+	 * @throws IllegalArgumentException if radarChartLine or member is {@code null}
+	 */
+	public void addRadarChartLine(List<? extends RadarChartLine> radarChartLines){
+		this.radarChartLineAppender.add(radarChartLines);
+	}
 	/**
 	 * Removes a {@link RadarChartLine} of the {@link RadarChartLineAppender} of
 	 * this charts' instance.
@@ -222,27 +291,35 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 		return shapeMarker.remove(sm);
 	}
 
-	public void addAxisLabelSummary(AxisLabelContainer labelSummary) {
+	public void addAxisLabelContainer(AxisLabelContainer labelSummary) {
 		axisLabels.addAxis(labelSummary);
 	}
 
-	public List<AxisLabelContainer> getAxisLabelSummaries() {
+	public List<AxisLabelContainer> getAxisLabelContainer() {
 		return axisLabels.getList();
 	}
 
-	public void removeAllAxisLabelSummaries() {
+	public void removeAllAxisLabelContainer() {
 		axisLabels.removeAll();
 	}
 
-	public AxisLabelContainer removeAxisLabelSummary(int index) {
+	public AxisLabelContainer removeAxisLabelContainer(int index) {
 		return axisLabels.removeAxis(index);
 	}
 
-	public boolean removeAxisLabelSummary(AxisLabelContainer labelSummary) {
+	public boolean removeAxisLabelContainer(AxisLabelContainer labelSummary) {
 		return axisLabels.removeAxis(labelSummary);
 	}
 
+	/**
+	 * 
+	 * @throws IllegalArgumentException if DataSetKind is not Multi
+	 */
 	public void addFillArea(FillArea fa) {
+		
+		if(!fa.getDataSetKind().equals(FillArea.DataSetKind.Multi))
+			throw new IllegalArgumentException("only FillArea.DataSetKind.Multi allowed");
+		
 		fillAreas.add(fa);
 	}
 
@@ -303,12 +380,12 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 
 	}
 
-	public ChartColor removeChartColors(int index) {
+	public ChartColor removeChartColor(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColor cc) {
+	public boolean removeChartColor(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}
@@ -391,17 +468,13 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 			linearStripesAppender.removeAll();
 			return;
 		}
-		if (!ls.getFillDestination()
-				.equals(LinearStripesDestination.Background)) {
-			throw new IllegalArgumentException("only LinearStripesDestination"
-					+ ".Background supported");
-		}
+
 		this.linearStripesAppender.add(ls);
 	}
 
 	public void addLineStyle(LineStyle lineStyle) {
 		this.lineStyleAppender.add(lineStyle);
-		
+
 	}
 
 	public List<LineStyle> getLineStyles() {
@@ -410,19 +483,19 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 
 	public void removeAllLineStyles() {
 		this.lineStyleAppender.removeAll();
-		
+
 	}
 
 	public LineStyle removeLineStyle(int index) {
-		
+
 		return this.lineStyleAppender.remove(index);
 	}
 
 	public boolean removeLineStyle(LineStyle lineStyle) {
-		
+
 		return this.lineStyleAppender.remove(lineStyle);
 	}
-	
+
 	public void addDataPointLabel(DataPointLabel dpl) {
 		this.dataPointLabelAppender.add(dpl);
 
@@ -445,6 +518,7 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 		this.dataPointLabelAppender.removeAll();
 
 	}
+
 	public ChartLegend getChartLegend() {
 
 		if (this.chartLegendAppender.getList().size() > 0) {

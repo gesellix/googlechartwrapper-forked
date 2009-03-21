@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Specifies a CharColor <a
+ * Specifies a ChartColor <a
  * href="http://code.google.com/apis/chart/colors.html#line_bar_pie_colors"
  * >http://code.google.com/apis/chart/colors.html#line_bar_pie_colors</a>
  * 
@@ -37,7 +37,7 @@ public class ChartColor implements IFeatureAppender {
 	}
 
 	/**
-	 * Rreturns the color.
+	 * Returns the color.
 	 * 
 	 * @return the color
 	 */

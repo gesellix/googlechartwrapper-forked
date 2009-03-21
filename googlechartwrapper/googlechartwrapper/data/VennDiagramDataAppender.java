@@ -21,6 +21,12 @@ public class VennDiagramDataAppender implements IExtendedFeatureAppender, IEncod
 	private VennDiagramData data;
 	private IEncoder encoder = new AutoEncoder();
 	
+	/**
+	 * 
+	 * @param data
+	 * 
+	 * @throws IllegalArgumentException if data is {@code null}
+	 */
 	public void setVennDiagrammData(VennDiagramData data) {		
 		this.data = data;				
 	}
@@ -28,6 +34,9 @@ public class VennDiagramDataAppender implements IExtendedFeatureAppender, IEncod
 	public VennDiagramData getVennDiagrammData() {
 		
 		return this.data;
+	}
+	public void removeVennDiagrammData(){
+		this.data = null;
 	}
 
 	public List<AppendableFeature> getAppendableFeatures(
@@ -66,10 +75,10 @@ public class VennDiagramDataAppender implements IExtendedFeatureAppender, IEncod
 			this.encoder = new AutoEncoder();
 		}	
 	}
-
+	/*
 	public String getFeaturePrefix() {		
 		return ChartTypeFeature.ChartData.getPrefix();
-	}
+	}*/
 
 	public void removeEncoder() {
 		

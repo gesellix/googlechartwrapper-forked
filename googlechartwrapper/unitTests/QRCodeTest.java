@@ -49,9 +49,9 @@ public class QRCodeTest {
 	@Test
 	public void showCase(){
 		
+		@SuppressWarnings("unused")
 		QRCode qrCode = new QRCode(new Dimension(300,300),"made in germany");
-		
-		System.out.println(qrCode.getUrl());
+				
 	}
 
 }

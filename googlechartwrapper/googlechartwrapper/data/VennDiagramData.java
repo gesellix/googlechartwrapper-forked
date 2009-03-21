@@ -5,7 +5,6 @@ package googlechartwrapper.data;
  * @author steffan
  *
  */
-//TODO check size
 public class VennDiagramData {
 	
 	private int circleSizeA;

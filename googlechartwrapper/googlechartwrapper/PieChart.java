@@ -185,6 +185,7 @@ public class PieChart extends AbstractPieChart implements IColorable{
 	}
 	/**
 	 * Encode the values as percentages before, the api calculates the values. This can decrease the url length.
+	 * DEFAULT is true.
 	 */
 	public void setPercentageScaling(boolean b) {
 
@@ -218,12 +219,12 @@ public class PieChart extends AbstractPieChart implements IColorable{
 
 	}
 
-	public ChartColor removeChartColors(int index) {
+	public ChartColor removeChartColor(int index) {
 
 		return this.chartColorAppender.remove(index);
 	}
 
-	public boolean removeChartColors(ChartColor cc) {
+	public boolean removeChartColor(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
 	}

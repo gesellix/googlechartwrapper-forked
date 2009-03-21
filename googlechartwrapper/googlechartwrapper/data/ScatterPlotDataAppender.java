@@ -2,6 +2,8 @@ package googlechartwrapper.data;
 
 import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.AutoEncoder;
+import googlechartwrapper.coder.EncoderFactory;
+import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.util.AppendableFeature;
@@ -23,13 +25,19 @@ import java.util.List;
  */
 public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncodeable{
 	
-	private IEncoder encoder = new AutoEncoder();
+	//TODO wieso funktioniert das nicht?
+	private IEncoder encoder = EncoderFactory.getEncoder(EncodingType.TextEncoding); //new AutoEncoder();
 	private ScatterPlotData data;
 
+	/*
 	public String getFeaturePrefix() {
 		
 		return ChartTypeFeature.ChartData.getPrefix();
-	}
+	}*/
+	
+	/**
+	 * @throws IllegalArgumentException if data is {@code null}
+	 */
 	public void setScatterPlotData(ScatterPlotData data) {		
 		this.data = data;				
 	}
@@ -39,6 +47,10 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 		return this.data;
 	}
 
+	public void removeScatterPlotData(){
+		
+		this.data = null;
+	}
 	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		
@@ -78,8 +90,8 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 			if(isSizeGiven){
 				data.add(valuesSize);
 				
-				//in this case we return and encode with | because, if we have 3 blocks, we need the | separator
-				builder.append(this.encoder.encodeIntegerCollection(data,"|"));
+				// ???
+				builder.append(this.encoder.encodeIntegerCollection(data));
 				
 				List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
 				
@@ -88,8 +100,8 @@ public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncod
 		        
 				return feature;
 			}
-			//in the other case we separate with ,, because we have only 2 value blocks
-			builder.append(this.encoder.encodeIntegerCollection(data,","));
+			// ???
+			builder.append(this.encoder.encodeIntegerCollection(data));
 						
 			List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
 			

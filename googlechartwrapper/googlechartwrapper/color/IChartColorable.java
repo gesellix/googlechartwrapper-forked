@@ -35,7 +35,7 @@ public interface IChartColorable {
 	 * 
 	 * @throws IndexOutOfBoundsException if the index is out of range
 	 */
-	public ChartColor removeChartColors(int index);
+	public ChartColor removeChartColor(int index);
 	
 	/**
 	 * Removes an given ChartColors object. 
@@ -44,7 +44,7 @@ public interface IChartColorable {
 	 * 
 	 * @return true if the remove was successful
 	 */
-	public boolean removeChartColors(ChartColor cc);
+	public boolean removeChartColor(ChartColor cc);
 	
 	/**
 	 * Removes all ChartColors in the list.

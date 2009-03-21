@@ -60,7 +60,7 @@ public class PieChartSlice {
 	 * @return the color
 	 */
 	public Color getColor() {
-		return color;
+		return color == null ? null : new Color(color.getRGB());
 	}
 
 
