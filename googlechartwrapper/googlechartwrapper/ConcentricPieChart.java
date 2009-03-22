@@ -1,6 +1,7 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.AutoEncoder;
+import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.color.ChartColor;
@@ -8,8 +9,12 @@ import googlechartwrapper.color.IMultiDataSetChartColorable;
 import googlechartwrapper.color.MultiDataSetChartColorAppender;
 import googlechartwrapper.data.ConcentricPieChartAppender;
 import googlechartwrapper.data.ConcentricPieChartSlice;
+import googlechartwrapper.data.DataScalingSet;
+import googlechartwrapper.data.IMultiDataScaleable;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.data.ConcentricPieChartSlice.ConcentricPieChartSliceBuilder;
+import googlechartwrapper.interfaces.IEncodeable;
+import googlechartwrapper.util.GenericAppender;
 
 import java.awt.Dimension;
 import java.util.List;
@@ -48,10 +53,12 @@ import java.util.List;
  * 
  */
 public class ConcentricPieChart extends AbstractPieChart implements
-		IMultiDataSetChartColorable {
+		IMultiDataSetChartColorable, IEncodeable, IMultiDataScaleable {
 
 	protected ConcentricPieChartAppender concentricPieChartAppender = new ConcentricPieChartAppender();
 	protected MultiDataSetChartColorAppender multiDataSetChartColorAppender = new MultiDataSetChartColorAppender();
+	protected GenericAppender<DataScalingSet> dataScalingAppender = new GenericAppender<DataScalingSet>(
+			ChartTypeFeature.DataScaling);
 
 	/**
 	 * Constructs a new {@link ConcentricPieChart}.
@@ -211,5 +218,46 @@ public class ConcentricPieChart extends AbstractPieChart implements
 		this.multiDataSetChartColorAppender.addChartColorSet(ccl);
 
 	}
+	public void removeEncoder() {
+		this.concentricPieChartAppender.removeEncoder();
+	}
+
+	public void setEncoder(IEncoder encoder) {
+		this.concentricPieChartAppender.setEncoder(encoder);
+		
+	}
+	public void addDataScalingSet(DataScalingSet ds) {
+		this.dataScalingAppender.add(ds);
+		this.concentricPieChartAppender.setEncoder(new DataScalingTextEncoder());
+	}
+
+	public List<DataScalingSet> getDataScalings() {
+
+		return this.dataScalingAppender.getList().size() > 0 ? this.dataScalingAppender
+				.getList()
+				: null;
+	}
+
+	/**
+	 * Removes all datascalings and sets the default encoder.
+	 *  
+	 */
+	public void removeAllDataScalings() {
+
+		this.dataScalingAppender.removeAll();
+
+		this.concentricPieChartAppender.removeEncoder();
+		
+
+	}
+
+	public DataScalingSet removeDataScalingSet(int index) {
+		return this.dataScalingAppender.remove(index);
+	}
+
+	public boolean removeDataScalingSet(DataScalingSet set) {
+		return this.dataScalingAppender.remove(set);
+	}
+	
 
 }

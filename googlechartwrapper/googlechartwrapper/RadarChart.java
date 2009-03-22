@@ -1,5 +1,6 @@
 package googlechartwrapper;
 
+import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.FillArea;
@@ -7,9 +8,12 @@ import googlechartwrapper.color.IFillAreaable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.SolidFill;
+import googlechartwrapper.data.DataScalingSet;
+import googlechartwrapper.data.IMultiDataScaleable;
 import googlechartwrapper.data.RadarChartLine;
 import googlechartwrapper.data.RadarChartLineAppender;
 import googlechartwrapper.interfaces.IColorable;
+import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.label.AxisLabelAppender;
@@ -37,18 +41,33 @@ import java.util.List;
 
 /**
  * Specifies a radar chart<a
- * href="http://code.google.com/intl/de-DE/apis/chart/types.html#radar">
- * http://code.google.com/intl/de-DE/apis/chart/types.html#radar</a>
+ * href="http://code.google.com/apis/chart/types.html#radar">
+ * http://code.google.com/apis/chart/types.html#radar</a>
  * 
+ * <p>
+ * Here are some examples of how radar chart can be used:
+ * <p>
+ * <blockquote>
+ * 
+ * <pre>
+ * RadarChart chart = new RadarChart(new Dimension(400,400));
+ * 
+ * chart.addRadarChartLine(new RadarChartLine(Color.GREEN,Arrays.asList(30,50,50,80,20,30)));
+ * 
+ * chart.addLineStyle(new LineStyle(3.5f,0f,0f));
+ * </pre>
+ * 
+ * </blockquote>
+ * <p>
  * @author mart
  * @author steffan
- * @version 03/21/09
+ * @version 03/22/09
  * @see RadarChartLine
  * 
  */
 public class RadarChart extends AbstractChart implements IGridLineable,
 		IShapeMarkable, IAxisLabelable, IFillAreaable, IChartTitleable,
-		IMarkable, IColorable, ILinearable, ILineStyleable, IDataPointLabelable {
+		IMarkable, IColorable, ILinearable, ILineStyleable, IDataPointLabelable, IMultiDataScaleable, IEncodeable {
 
 	private boolean isCurved = true;
 
@@ -79,8 +98,9 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 	protected GenericAppender<DataPointLabel> dataPointLabelAppender = new GenericAppender<DataPointLabel>(
 			ChartTypeFeature.Marker);
 	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
-			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
-
+			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);	
+	protected GenericAppender<DataScalingSet> dataScalingAppender = new GenericAppender<DataScalingSet>(
+			ChartTypeFeature.DataScaling);
 	/**
 	 * Constructs a new {@link RadarChart}
 	 * 
@@ -536,6 +556,42 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 	public void setChartLegend(ChartLegend legend) {
 		this.chartLegendAppender.add(legend);
 
+	}
+	public void addDataScalingSet(DataScalingSet ds) {
+		this.dataScalingAppender.add(ds);
+		this.radarChartLineAppender.setEncoder(new DataScalingTextEncoder());
+	}
+
+	public List<DataScalingSet> getDataScalings() {
+
+		return this.dataScalingAppender.getList().size() > 0 ? this.dataScalingAppender
+				.getList()
+				: null;
+	}
+
+	/**
+	 * Removes all datascalings and sets the default encoder.
+	 * 
+	 * @see ScatterPlot#getEncoder()
+	 */
+	public void removeAllDataScalings() {
+
+		this.dataScalingAppender.removeAll();
+
+		this.radarChartLineAppender.removeEncoder();
+		
+
+	}
+
+	public DataScalingSet removeDataScalingSet(int index) {
+		return this.dataScalingAppender.remove(index);
+	}
+
+	public boolean removeDataScalingSet(DataScalingSet set) {
+		return this.dataScalingAppender.remove(set);
+	}
+	public void removeEncoder() {
+		this.radarChartLineAppender.removeEncoder();
 	}
 
 }

@@ -13,6 +13,7 @@ import googlechartwrapper.data.ISingleDataScaleable;
 import googlechartwrapper.data.VennDiagramData;
 import googlechartwrapper.data.VennDiagramDataAppender;
 import googlechartwrapper.interfaces.IColorable;
+import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IPercentageScaleable;
 import googlechartwrapper.label.ChartLegend;
@@ -62,7 +63,7 @@ import java.util.List;
  */
 public class VennDiagram extends AbstractChart implements ILinearable,
 		IChartLegendable, ISingleDataScaleable, IPercentageScaleable,
-		IColorable {
+		IColorable, IEncodeable {
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -338,6 +339,16 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 		} else {
 			this.chartMarginAppender.add(cm);
 		}
+	}
+
+	public void removeEncoder() {
+		this.vennDiagramAppender.removeEncoder();
+		
+	}
+
+	public void setEncoder(IEncoder encoder) {
+		this.vennDiagramAppender.setEncoder(encoder);
+		
 	}
 
 }

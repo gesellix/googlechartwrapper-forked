@@ -28,8 +28,6 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.sun.org.apache.xpath.internal.axes.AxesWalker;
-
 /**
  * 
  * @author steffan
@@ -85,7 +83,7 @@ public class ScatterPlotTest {
 		p.add(new ScatterPlotPoint(120, 50, 210));
 		p.add(new ScatterPlotPoint(110, 50, 200));
 
-		plot.addDataScalingSet(ds);
+		plot.setDataScaling(ds);
 
 		plot.setScatterPlotData(new ScatterPlotData(p));
 

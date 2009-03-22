@@ -1,11 +1,14 @@
 package googlechartwrapper.data;
 
 import googlechartwrapper.ChartTypeFeature;
+import googlechartwrapper.DefaultValues;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
+import googlechartwrapper.util.MiscUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +27,7 @@ import java.util.List;
  * @author steffan
  * 
  */
-public class RadarChartLineAppender implements IExtendedFeatureAppender {
+public class RadarChartLineAppender implements IExtendedFeatureAppender, IEncodeable {
 
 	protected List<RadarChartLine> radarChartLines = new LinkedList<RadarChartLine>();
 	protected IEncoder encoder = new AutoEncoder();
@@ -36,39 +39,7 @@ public class RadarChartLineAppender implements IExtendedFeatureAppender {
 
 	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
-		
-		/*
-		// chco fuer colors of slices
-		// chartdata vom encoder
-		boolean colorUsed = false;
-		String color = "chco=";
-		List<int[]> toEncVal = new ArrayList<int[]>();
-		for (RadarChartLine line : list) {
-			if (line.getColor() != null) {
-				color = MiscUtils.getSixCharacterHexValue(line.getColor())
-						+ ",";
-				colorUsed = true;
-			} else {
-				color = color + ",";
-			}
-			int[] valss = new int[line.getValues().size()];
-			for (int i = 0; i < valss.length; i++) {
-				valss[i] = line.getValues().get(i);
-			}
-			toEncVal.add(valss);
-		}
-
-		if (!colorUsed) {
-			color = "";
-		} else {
-			color = color.substring(0, color.length() - 1);
-		}
-		String val = encoder.encodeIntegerCollection(toEncVal);
-
-		// return val+"&"+color;
-		// return new ArrayList<AppendableFeature>();
-		// TODO
-*/
+			
 		// the raw data
 		List<int[]> data = new LinkedList<int[]>();
 
@@ -81,11 +52,43 @@ public class RadarChartLineAppender implements IExtendedFeatureAppender {
 			data.add(valss);
 		}
 		
-		List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
+		boolean isColorUsed = false;
 
-		feature.add(new AppendableFeature(this.encoder.encodeIntegerCollection(data), ChartTypeFeature.ChartData));
+		// the color string
+		StringBuilder color = new StringBuilder();
+		
+		for(RadarChartLine current : this.radarChartLines){
+			
+			//user set color
+			if(current.getColor() != null){
+				isColorUsed = true;
+				color.append(MiscUtils.getSixCharacterHexValue(current.getColor()));
+			}
+			//no color was set
+			else{
+				color.append(MiscUtils
+						.getSixCharacterHexValue(DefaultValues.DataColor));
+			}
+			
+				color.append(",");
+			
+		}
+		// otherwise we have a "," at the end
+		if (color.length() > 0) {
+			color.deleteCharAt(color.length()-1);
+		}
+				
+		List<AppendableFeature> features = new ArrayList<AppendableFeature>();
 
-		return feature;
+		features.add(new AppendableFeature(this.encoder.encodeIntegerCollection(data), ChartTypeFeature.ChartData));
+		
+		// if the user set the color we have to add the string
+		if (isColorUsed) {
+			features.add(new AppendableFeature(color.toString(),
+					ChartTypeFeature.ChartColor));
+		}
+
+		return features;
 	}
 
 	/**
@@ -154,6 +157,11 @@ public class RadarChartLineAppender implements IExtendedFeatureAppender {
 
 	public IEncoder getEncoder() {
 		return encoder;
+	}
+
+	public void removeEncoder() {
+		this.encoder = new AutoEncoder();
+
 	}
 
 }

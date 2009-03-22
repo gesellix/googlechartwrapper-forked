@@ -1,13 +1,19 @@
 package googlechartwrapper;
 
 import googlechartwrapper.coder.AutoEncoder;
+import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.color.ChartColor;
+import googlechartwrapper.data.DataScalingSet;
+import googlechartwrapper.data.ISingleDataScaleable;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.data.PieChartSliceAppender;
 import googlechartwrapper.interfaces.IColorable;
+import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.util.GenericAppender;
+import googlechartwrapper.util.UpperLimitGenericAppender;
+import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 import java.awt.Dimension;
 import java.util.List;
@@ -42,13 +48,15 @@ import java.util.List;
  * @see AbstractPieChart
  * 
  */
-public class PieChart extends AbstractPieChart implements IColorable{
+public class PieChart extends AbstractPieChart implements IColorable, IEncodeable, ISingleDataScaleable{
 
 	private ChartType type = ChartType.PieChart;
 
 	protected PieChartSliceAppender pieChartSliceAppender = new PieChartSliceAppender();
 	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
 			ChartTypeFeature.ChartColor, ",");
+	protected UpperLimitGenericAppender<DataScalingSet> dataScalingAppender = new UpperLimitGenericAppender<DataScalingSet>(
+			ChartTypeFeature.DataScaling, 1, UpperLimitReactions.RemoveFirst);
 
 	/**
 	 * Constructs a new pie chart.
@@ -227,6 +235,38 @@ public class PieChart extends AbstractPieChart implements IColorable{
 	public boolean removeChartColor(ChartColor cc) {
 
 		return this.chartColorAppender.remove(cc);
+	}
+
+	public void removeEncoder() {
+		this.pieChartSliceAppender.removeEncoder();
+		
+	}
+
+	public void setEncoder(IEncoder encoder) {
+		this.pieChartSliceAppender.setEncoder(encoder);
+		
+	}
+	public void removeDataScaling() {
+
+		this.dataScalingAppender.removeAll();
+
+		this.pieChartSliceAppender.setEncoder(new AutoEncoder());
+
+	}
+	public DataScalingSet getDataScaling() {
+
+		return this.dataScalingAppender.getList().size() > 0 ? this.dataScalingAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void setDataScaling(DataScalingSet ds) {
+
+		this.dataScalingAppender.add(ds);
+
+		if (ds != null)
+			this.pieChartSliceAppender.setEncoder(new DataScalingTextEncoder());
+
 	}
 
 }
