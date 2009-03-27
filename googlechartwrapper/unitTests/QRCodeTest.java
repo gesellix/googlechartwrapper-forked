@@ -47,11 +47,13 @@ public class QRCodeTest {
 		
 	}
 	@Test
-	public void showCase(){
+	public void showCase(){		
 		
-		@SuppressWarnings("unused")
 		QRCode qrCode = new QRCode(new Dimension(300,300),"made in germany");
-				
+						
+		String target ="http://chart.apis.google.com/chart?chs=300x300&cht=qr&chl=made%20in%20germany&choe=UTF-8";
+		
+		Assert.assertEquals(target, qrCode.getUrl());
 	}
 
 }

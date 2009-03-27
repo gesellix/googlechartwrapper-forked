@@ -89,9 +89,9 @@ public class ShapeMarker implements IFeatureAppender {
 			throw new IllegalArgumentException("markerTyp can not be null");
 		if (color == null)
 			throw new IllegalArgumentException("color can not be null");
-		if (dataSetIndex < 0)
+		if (priority == null)
 			throw new IllegalArgumentException(
-					"dataSetIndex must be 0 or higher");
+					"priority can not be null");
 		if (dataPoint == null)
 			throw new IllegalArgumentException("dataPoint can not be null");
 		if (size < 0)

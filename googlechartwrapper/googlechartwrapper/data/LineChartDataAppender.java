@@ -60,7 +60,7 @@ public class LineChartDataAppender implements IExtendedFeatureAppender,
 	 * @throws IllegalArgumentException
 	 *             if collection is {@code null} or value is {@code null}
 	 */
-	public void addLineChartData(List<LineChartData> data) {
+	public void addLineChartData(List<? extends LineChartData> data) {
 
 		if (data == null) {
 			throw new IllegalArgumentException("data can not be null");
@@ -72,16 +72,52 @@ public class LineChartDataAppender implements IExtendedFeatureAppender,
 			this.data.addAll(Collections.unmodifiableList(data));
 		}
 	}
+	/**
+	 * Returns a unmodifiable list, empty if nothing was set.
+	 * @return
+	 */
+	public List<? extends LineChartData> getList(){
+		return Collections.unmodifiableList(this.data);
+	}
+	
+	/**
+	 * 
+	 * @param index
+	 * @return
+	 * 
+	 * @throws IndexOutOfBoundsException if index is out of bound
+	 */
+	public LineChartData removeLineChartData(int index) {
+		return this.data.remove(index);
+	}
+	
+	/**
+	 * Removes a given {@link LineChartData} and returns the status.
+	 * 
+	 * @param lineChartData
+	 * @return {@code true} if success
+	 */
+	public boolean removeLineChartData(LineChartData lineChartData) {
 
+		return this.data.remove(lineChartData);
+	}
+	
+	/**
+	 * Removes all {@link LineChartData}
+	 */
+	public void removeAllLineChartData() {
+		this.data.clear();
+	}
+	
 	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 
 		// the raw data
-		List<int[]> data = new LinkedList<int[]>();
+		List<float[]> data = new LinkedList<float[]>();
 
 		for (int z = 0; z < this.data.size(); z++) {
 
-			int values[] = new int[this.data.get(z).getDataSet().size()];
+			float values[] = new float[this.data.get(z).getDataSet().size()];
 			// copy elements
 			for (int u = 0; u < this.data.get(z).getDataSet().size(); u++) {
 				values[u] = this.data.get(z).getDataSet().get(u);
@@ -139,12 +175,12 @@ public class LineChartDataAppender implements IExtendedFeatureAppender,
 		for (int u = 0; u < this.data.size(); u++) {
 
 			// the user set a legend
-			if (this.data.get(u).getlegend() != null) {
+			if (this.data.get(u).getLegend() != null) {
 				isLegendUsed = true;
-				legend.append(this.data.get(u).getlegend().getAppendableFeatures(null).get(0).getData());
+				legend.append(this.data.get(u).getLegend().getAppendableFeatures(null).get(0).getData());
 			}
 			// no style was set, we add the default legend
-			if (this.data.get(u).getlegend() == null) {
+			if (this.data.get(u).getLegend() == null) {
 				legend.append("");
 			}
 
@@ -156,7 +192,7 @@ public class LineChartDataAppender implements IExtendedFeatureAppender,
 
 		List<AppendableFeature> features = new ArrayList<AppendableFeature>();
 
-		features.add(new AppendableFeature(this.encoder.encodeIntegerCollection(
+		features.add(new AppendableFeature(this.encoder.encodeFloatCollection(
 				data, ","), ChartTypeFeature.ChartData));
 
 		// if the user set the color we have to add the string

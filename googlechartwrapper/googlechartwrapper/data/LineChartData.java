@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class LineChartData {
 
-	private List<Integer> dataSet = null;
+	private List<Float> dataSet = null;
 	private Color color = null;
 	private ChartLegend legend = null;
 	private LineStyle style = null;
@@ -34,7 +34,7 @@ public class LineChartData {
 		if (builder == null)
 			throw new IllegalArgumentException("builder can not be null");
 
-		this.dataSet = new ArrayList<Integer>(builder.dataSet);
+		this.dataSet = new ArrayList<Float>(builder.dataSet);
 		this.color = builder.color;
 		this.legend = builder.legend;
 		this.style = builder.style;
@@ -47,7 +47,7 @@ public class LineChartData {
 	 */
 	public static class LineChartDataBuilder {
 
-		private List<Integer> dataSet = null;
+		private List<Float> dataSet = null;
 		private Color color = null;
 		private ChartLegend legend = null;
 		private LineStyle style = null;
@@ -59,18 +59,18 @@ public class LineChartData {
 		 * @throws IllegalArgumentException
 		 *             if dataSet is {@code null } or value is {@code null}
 		 */
-		public LineChartDataBuilder(List<Integer> dataSet) {
+		public LineChartDataBuilder(List<Float> dataSet) {
 
 			if (dataSet == null) {
 				throw new IllegalArgumentException("dataSet can not be null");
 			} else {
-				for (Integer temp : new ArrayList<Integer>(dataSet)) {
+				for (Float temp : new ArrayList<Float>(dataSet)) {
 
 					if (temp == null)
 						throw new IllegalArgumentException(
 								"integer can not be null");
 				}
-				this.dataSet = new ArrayList<Integer>(dataSet);
+				this.dataSet = new ArrayList<Float>(dataSet);
 			}
 		}
 
@@ -133,8 +133,8 @@ public class LineChartData {
 	/**
 	 * @return the dataSet
 	 */
-	public List<Integer> getDataSet() {
-		return new ArrayList<Integer>(dataSet);
+	public List<Float> getDataSet() {
+		return new ArrayList<Float>(dataSet);
 	}
 
 	/**
@@ -142,18 +142,18 @@ public class LineChartData {
 	 * @throws IllegalArgumentException
 	 *             if dataSet is {@code null } or value is {@code null}
 	 */
-	public void setDataSet(List<Integer> dataSet) {
+	public void setDataSet(List<Float> dataSet) {
 		
 		if (dataSet == null) {
 			throw new IllegalArgumentException("dataSet can not be null");
 		} else {
-			for (Integer temp : new ArrayList<Integer>(dataSet)) {
+			for (Float temp : new ArrayList<Float>(dataSet)) {
 
 				if (temp == null)
 					throw new IllegalArgumentException(
 							"value can not be null");
 			}
-			this.dataSet = new ArrayList<Integer>(dataSet);
+			this.dataSet = new ArrayList<Float>(dataSet);
 		}		
 	}
 
@@ -183,7 +183,7 @@ public class LineChartData {
 	/**
 	 * @return the legend
 	 */
-	public ChartLegend getlegend() {
+	public ChartLegend getLegend() {
 		return legend;
 	}
 
