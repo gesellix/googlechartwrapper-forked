@@ -231,7 +231,7 @@ public class ShapeMarker implements IFeatureAppender {
 	 */
 	public void setPriority(Priority priority) {
 		if (markerTyp == null)
-			throw new IllegalArgumentException("markerTyp can not be null");
+			throw new IllegalArgumentException("priority can not be null");
 		this.priority = priority;
 	}
 

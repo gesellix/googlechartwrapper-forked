@@ -8,10 +8,12 @@ import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.SolidFill;
+import googlechartwrapper.data.BarChartDataSerie;
 import googlechartwrapper.data.BarChartDataSeriesAppender;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.IMultiDataScaleable;
 import googlechartwrapper.interfaces.IColorable;
+import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.interfaces.IStyleable;
@@ -30,6 +32,8 @@ import googlechartwrapper.style.IBarChartZeroLineable;
 import googlechartwrapper.style.IBarWidthAndSpacingable;
 import googlechartwrapper.style.IFinancialMarkable;
 import googlechartwrapper.style.IGridLineable;
+import googlechartwrapper.style.ILineAndBarChartLineStyleable;
+import googlechartwrapper.style.LineAndBarChartLineStyle;
 import googlechartwrapper.style.LineStyle;
 import googlechartwrapper.style.RangeMarker;
 import googlechartwrapper.style.ShapeMarker;
@@ -46,17 +50,39 @@ import java.util.List;
  * href="http://code.google.com/apis/chart/types.html#bar_charts">
  * http://code.google.com/apis/chart/types.html#bar_charts</a>
  * 
+ * <p>
+ * Here are some examples of how bar chart can be used:
+ * <p>
+ * <blockquote>
+ * 
+ * <pre>
+ * BarChart bc = new BarChart(new Dimension(300,300),BarChartOrientation.Horizontal,BarChartStyle.Grouped);
+ * 
+ * bc.addBarChartDataSerie(new BarChartDataSerie.BarChartDataSerieBuilder(Arrays.asList(34,23,56,34,12)).legend(new ChartLegend("legend")).build());
+ * 		
+ * bc.setBarWidthAndSpacing(BarWidthAndSpacing.newRelativeResize(0.5f,0.1f));
+ * 
+ * bc.addShapeMarker(new ShapeMarker(MarkerTyp.Diamond,Color.RED,0,ShapeMarker.DataPoint.newDrawEachPoint(),10));
+ * 
+ * </pre>
+ * 
+ * </blockquote>
+ * <p>
+ * 
  * @author steffan
+ * @version 03/31/09
+ * @see BarChartDataSerie
  * 
  */
 public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 		IStyleable, IGridLineable, ISolidFillable, IMultiDataScaleable,
 		IColorable, IFinancialMarkable, IBarChartZeroLineable,
-		IBarWidthAndSpacingable, IDataPointLabelable {
+		IBarWidthAndSpacingable, IDataPointLabelable,
+		ILineAndBarChartLineStyleable, IEncodeable {
 
 	private BarChartOrientation orientation;
 	private BarChartStyle style;
-	// private int barWidth;
+	private boolean isAutoResizing = false;
 
 	protected GenericAppender<RangeMarker> rangeMarkerAppender = new GenericAppender<RangeMarker>(
 			ChartTypeFeature.Marker);
@@ -96,6 +122,8 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 			ChartTypeFeature.Marker);
 	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
+	protected GenericAppender<LineAndBarChartLineStyle> lineAndBarChartLineStyleAppender = new GenericAppender<LineAndBarChartLineStyle>(
+			ChartTypeFeature.Marker);
 
 	/**
 	 * Constructs a bar chart
@@ -108,13 +136,14 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 	 *            the style
 	 * 
 	 * @throws IllegalArgumentException
+	 *             if orientation is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if style is {@code null}
 	 */
 	public BarChart(Dimension chartDimension, BarChartOrientation orientation,
 			BarChartStyle style) {
 		super(chartDimension);
 
-		if (chartDimension == null)
-			throw new IllegalArgumentException("chartDimension can not be null");
 		if (orientation == null)
 			throw new IllegalArgumentException("orientation can not be null");
 		if (style == null)
@@ -126,8 +155,14 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 
 	@Override
 	protected ChartType getChartType() {
-		return null; // TODO svo: fill!
-		// return ChartType.BarChart;
+
+		// lets find the right chart type
+		for (ChartType current : ChartType.values()) {
+			if (current.getPrefix().equals(getUrlChartType())) {
+				return current;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -140,13 +175,6 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 		return MessageFormat.format("b{0}{1}", orientationChar, styleChar);
 	}
 
-	/*
-	 * / Specify the bar size
-	 * 
-	 * @param width the size of every single bar
-	 * 
-	 * public void SetBarWidth(int width) { this.barWidth = width; }
-	 */
 	/**
 	 * 
 	 * 
@@ -170,6 +198,85 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 		Stacked,
 
 		Grouped
+	}
+
+	public void setAutoResizing(boolean b) {
+		this.isAutoResizing = b;
+	}
+
+	/**
+	 * Returns {@code true} if autoResizing is enabled
+	 * 
+	 * @return {@code true} if enabled
+	 * 
+	 */
+	public boolean isAutoResizing() {
+		return this.isAutoResizing;
+	}
+
+	/**
+	 * Adds a new {@link BarChartDataSerie} to the chart.
+	 * 
+	 * @param barCharDataSerie
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if barChartSerie is {@code null}
+	 */
+	public void addBarChartDataSerie(BarChartDataSerie barCharDataSerie) {
+		this.barChartDataSeriesAppender.add(barCharDataSerie);
+	}
+
+	/**
+	 * Adds a list of {@link BarChartDataSerie} to the chart.
+	 * 
+	 * @param barCharDataSeries
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if barChartDataSeries or member is {@code null}
+	 */
+	public void addBarChartDataSeries(
+			List<? extends BarChartDataSerie> barCharDataSeries) {
+		this.barChartDataSeriesAppender.add(barCharDataSeries);
+	}
+
+	/**
+	 * Removes all {@link BarChartDataSerie}.
+	 */
+	public void removeAllBarChartDataSeries() {
+		this.barChartDataSeriesAppender.removeAll();
+	}
+
+	/**
+	 * Returns a unmodifiable list of all {@link BarChartDataSerie}
+	 * 
+	 * @return unmodifiable list, empty if nothing was set
+	 */
+	public List<? extends BarChartDataSerie> getAllBarChartDataSeries() {
+		return this.barChartDataSeriesAppender.getAllBarChartDataSeries();
+	}
+
+	/**
+	 * Removes a given {@link BarChartDataSerie} and returns the status.
+	 * 
+	 * @param barCharDataSerie
+	 * @return {@code true} if success
+	 */
+	public boolean removeBarChartDataSerie(BarChartDataSerie barCharDataSerie) {
+		return this.barChartDataSeriesAppender.remove(barCharDataSerie);
+	}
+
+	/**
+	 * Removes a {@link BarChartDataSerie} at the given index.
+	 * 
+	 * @param index
+	 *            the list index
+	 * @return the removed {@link BarChartDataSerie}
+	 * 
+	 * @throws IndexOutOfBoundsException
+	 *             if index is out of bound
+	 */
+	public BarChartDataSerie removeBarChartDataSerie(int index) {
+		return this.barChartDataSeriesAppender.remove(index);
 	}
 
 	public void addRangeMarker(RangeMarker rm) {
@@ -563,6 +670,7 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 		this.dataPointLabelAppender.removeAll();
 
 	}
+
 	public ChartLegend getChartLegend() {
 
 		if (this.chartLegendAppender.getList().size() > 0) {
@@ -579,6 +687,44 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 
 	public void setChartLegend(ChartLegend legend) {
 		this.chartLegendAppender.add(legend);
+
+	}
+
+	public void addLineAndBarChartLineStyle(LineAndBarChartLineStyle lineStyle) {
+
+		this.lineAndBarChartLineStyleAppender.add(lineStyle);
+
+	}
+
+	public List<LineAndBarChartLineStyle> getAllLineAndBarChartLineStyles() {
+
+		return this.lineAndBarChartLineStyleAppender.getList();
+	}
+
+	public void removeAllLineAndBarChartLineStyles() {
+
+		this.lineAndBarChartLineStyleAppender.removeAll();
+
+	}
+
+	public LineAndBarChartLineStyle removeLineAndBarChartLineStyle(int index) {
+
+		return this.lineAndBarChartLineStyleAppender.remove(index);
+	}
+
+	public boolean removeLineAndBarChartLineStyle(
+			LineAndBarChartLineStyle lineStyle) {
+
+		return this.lineAndBarChartLineStyleAppender.remove(lineStyle);
+	}
+
+	public void removeEncoder() {
+		this.barChartDataSeriesAppender.removeEncoder();
+
+	}
+
+	public void setEncoder(IEncoder encoder) {
+		this.barChartDataSeriesAppender.setEncoder(encoder);
 
 	}
 

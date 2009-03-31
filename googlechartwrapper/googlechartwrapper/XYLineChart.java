@@ -21,14 +21,13 @@ import java.util.List;
  * <blockquote>
  * 
  * <pre>
- * LineChart lineChart = new LineChart(new Dimension(300, 300));
+ * XYLineChart chart = new XYLineChart(new Dimension(300,300));
  * 
- * lineChart.addLineChartData(new LineChartData.LineChartDataBuilder(Arrays
- * 		.asList(20f, 30f, 40f)).build());
+ * Pair<List<Float>, List<Float>> values1 = new Pair<List<Float>, List<Float>>(Arrays.asList(10f,20f,30f),Arrays.asList(34f,12f,89f));
+ * 		
+ * XYLineChartData data = new XYLineChartData.XYLineChartDataBuilder(values1).color(Color.BLACK).build();
  * 
- * lineChart.addShapeMarker(new ShapeMarker(MarkerTyp.Diamond, Color.BLUE, 0,
- * 		ShapeMarker.DataPoint.newDrawEachPoint(), 10));
- * 
+ * chart.addXYLineChartData(data);
  * </pre>
  * 
  * </blockquote>

@@ -9,11 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Specifies LineAndBarChartLineStyle <a href=
+ * "http://code.google.com/apis/chart/styles.html#line_styles"
+ * >http://code.google.com/apis/chart/styles.html#line_styles</a>
  * 
  * @author steffan
+ * @version 03/29/09
+ * @see ILineAndBarChartLineStyleable
  * 
  */
-public class LineAndBarChartLineStyles implements IFeatureAppender {
+public class LineAndBarChartLineStyle implements IFeatureAppender {
 
 	private Color color = null;
 	private int dataSetIndex;
@@ -21,7 +26,32 @@ public class LineAndBarChartLineStyles implements IFeatureAppender {
 	private IDataPoint dataPoint = null;
 	private Priority priority;
 
-	public LineAndBarChartLineStyles(Color color, int dataSetIndex,
+	/**
+	 * Constructs a new {@link LineAndBarChartLineStyle} with {@link Priority}.
+	 * 
+	 * @param color
+	 *            the color of the line
+	 * @param dataSetIndex
+	 *            the line
+	 * @param dataPoint
+	 *            {@link DataPoint}
+	 * @param size
+	 *            the line size
+	 * @param priority
+	 *            {@link Priority}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if color is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if dataSetIndex < 0
+	 * @throws IllegalArgumentException
+	 *             if dataPoint is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if size < 0
+	 * @throws IllegalArgumentException
+	 *             if priority is {@code null}
+	 */
+	public LineAndBarChartLineStyle(Color color, int dataSetIndex,
 			IDataPoint dataPoint, int size, Priority priority) {
 
 		if (color == null)
@@ -43,12 +73,55 @@ public class LineAndBarChartLineStyles implements IFeatureAppender {
 		this.priority = priority;
 	}
 
+	/**
+	 * Constructs a new {@link LineAndBarChartLineStyle}.
+	 * 
+	 * @param color
+	 *            the color of the line
+	 * @param dataSetIndex
+	 *            the line
+	 * @param dataPoint
+	 *            {@link DataPoint}
+	 * @param size
+	 *            the line size
+	 * 
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if color is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if dataSetIndex < 0
+	 * @throws IllegalArgumentException
+	 *             if dataPoint is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if size < 0
+	 * 
+	 */
+	public LineAndBarChartLineStyle(Color color, int dataSetIndex,
+			IDataPoint dataPoint, int size) {
+
+		if (color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if (dataSetIndex < 0)
+			throw new IllegalArgumentException(
+					"dataSetIndex must be 0 or higher");
+		if (dataPoint == null)
+			throw new IllegalArgumentException("dataPoint can not be null");
+		if (size < 0)
+			throw new IllegalArgumentException("size out of range");
+
+		this.color = new Color(color.getRGB());
+		this.dataSetIndex = dataSetIndex;
+		this.dataPoint = dataPoint;
+		this.size = size;
+
+	}
+
 	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 		StringBuilder builder = new StringBuilder();
 
-		
-		
+		builder.append('D');
+		builder.append(',');
 		builder
 				.append(Integer.toHexString(this.color.getRGB())
 						.substring(2, 8));
@@ -64,14 +137,21 @@ public class LineAndBarChartLineStyles implements IFeatureAppender {
 			builder.append(this.priority.getPriority());
 		}
 
-		List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
-		
-        feature.add(new AppendableFeature(builder.toString(), 
-                  ChartTypeFeature.ChartData)); 
-        
+		List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
+
+		feature.add(new AppendableFeature(builder.toString(),
+				ChartTypeFeature.ChartData));
+
 		return feature;
 	}
 
+	/**
+	 * 
+	 * @author steffan
+	 * 
+	 * @see DataPoint
+	 *
+	 */
 	public interface IDataPoint {
 
 		/**
@@ -86,7 +166,7 @@ public class LineAndBarChartLineStyles implements IFeatureAppender {
 	/**
 	 * Provides a DataPoint factory. <br />
 	 * This factory includes all methods to build an object for the
-	 * {@link ShapeMarker} constructor, which needs an {@link IDataPoint}
+	 * {@link LineAndBarChartLineStyle} constructor, which needs an {@link IDataPoint}
 	 * interface.
 	 * 
 	 * @author steffan
@@ -101,7 +181,7 @@ public class LineAndBarChartLineStyles implements IFeatureAppender {
 		};
 
 		/**
-		 * The shapemarker will be set on every datapoint.
+		 * The style will be set on every datapoint.
 		 * 
 		 * @return {@link IDataPoint}
 		 */
@@ -117,26 +197,29 @@ public class LineAndBarChartLineStyles implements IFeatureAppender {
 			};
 
 		};
+
 		/**
+		 * The style will be set between this range
 		 * 
-		 * @param low
-		 * @param high
-		 * @return
+		 * @param low lower border
+		 * @param high higher border
+		 * 
+		 * @return {@link IDataPoint}
 		 */
 		public static IDataPoint newDrawPoint(final int low, final int high) {
-			
-			return new IDataPoint(){
+
+			return new IDataPoint() {
 
 				public String getAppendableString() {
-					
+
 					StringBuilder builder = new StringBuilder();
 					builder.append(low);
 					builder.append(":");
-					builder.append(high);					
+					builder.append(high);
 
 					return builder.toString();
 				}
-				
+
 			};
 		}
 	}

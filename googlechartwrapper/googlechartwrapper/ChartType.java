@@ -14,8 +14,7 @@ public enum ChartType {
 	    BarChartStackedH("bhs"),
 	    BarChartStackedV("bvs"),
 	    BarChartGroupedH("bhg"),
-	    BarChartGroupedV("bvg"),
-	    /* BarChartddf("chbh"),*/
+	    BarChartGroupedV("bvg"),	    
 	    VennDiagram("v"),
 	    PieChart("p"),
 	    PieChart3d("p3"),
