@@ -9,6 +9,20 @@ import java.util.List;
 
 /**
  * 
+ * <p>
+ * Here are some examples of how BarChartDataSerie can be used:
+ * <p>
+ * <blockquote>
+ * 
+ * <pre>
+ * BarChartDataSerie series = new BarChartDataSerie.BarChartDataSerieBuilder(Arrays.asList(10,50,60,80,40)).color(Color.BLACK).legend(new ChartLegend("legend")).build();
+ * 
+ * 
+ * </pre>
+ * 
+ * </blockquote>
+ * <p>
+ * 
  * @author steffan
  * 
  */
@@ -18,6 +32,13 @@ public class BarChartDataSerie {
 	private Color color;
 	private ChartLegend legend;
 
+	/**
+	 * Constructs a new {@link BarChartDataSerie}
+	 * @param builder
+	 * @see BarChartDataSerieBuilder
+	 * 
+	 * @throws IllegalArgumentException if builder is {@code null}
+	 */
 	public BarChartDataSerie(BarChartDataSerieBuilder builder) {
 		
 		if (builder == null)
@@ -30,6 +51,8 @@ public class BarChartDataSerie {
 	}
 
 	/**
+	 * The builder for the {@link BarChartDataSerie#BarChartDataSerie(BarChartDataSerieBuilder)} constructor.
+	 * Use the {@link BarChartDataSerieBuilder#build()} method to build the object.
 	 * 
 	 * @author steffan
 	 * 
@@ -41,8 +64,9 @@ public class BarChartDataSerie {
 		private ChartLegend legend = null;
 
 		/**
+		 * Constructs a new {@link BarChartDataSerieBuilder}.
 		 * 
-		 * @param dataSet
+		 * @param dataSet the values 
 		 * 
 		 * @throws IllegalArgumentException
 		 *             if dataSet or member is {@code null}
@@ -60,6 +84,13 @@ public class BarChartDataSerie {
 			this.dataSet = temp;
 		}
 
+		/**
+		 * Adds color to the chart
+		 * @param color
+		 * @return {@link BarChartDataSerieBuilder}
+		 * 
+		 * @throws IllegalArgumentException if the color is {@code null}
+		 */
 		public BarChartDataSerieBuilder color(Color color) {
 
 			if (color == null)
@@ -69,7 +100,15 @@ public class BarChartDataSerie {
 			return this;
 
 		}
-
+		
+		/**
+		 * Adds a {@link ChartLegend} to the chart.
+		 * 
+		 * @param legend
+		 * @return {@link BarChartDataSerieBuilder}
+		 * 
+		 * @throws IllegalArgumentException if legend is {@code null}
+		 */
 		public BarChartDataSerieBuilder legend(ChartLegend legend) {
 
 			if (legend == null)
@@ -80,13 +119,17 @@ public class BarChartDataSerie {
 			return this;
 
 		}
-
+		/**
+		 * Constructs the {@link BarChartDataSerie} object for the {@link BarChartDataSerie#BarChartDataSerie(BarChartDataSerieBuilder)} constructor.
+		 * @return {@link BarChartDataSerie}
+		 */
 		public BarChartDataSerie build() {
 			return new BarChartDataSerie(this);
 		}
 	}
 
 	/**
+	 * Returns a unmodifiable view of the list.
 	 * @return the data
 	 */
 	public List<Integer> getData() {
@@ -96,6 +139,8 @@ public class BarChartDataSerie {
 	/**
 	 * @param data
 	 *            the data to set
+	 *            
+	 *@throws IllegalArgumentException if dataSet or member is {@code null}
 	 */
 	public void setData(List<Integer> dataSet) {
 		if (dataSet == null)
@@ -119,6 +164,8 @@ public class BarChartDataSerie {
 	/**
 	 * @param color
 	 *            the color to set
+	 *            
+	 * @throws IllegalArgumentException if color is {@code null}
 	 */
 	public void setColor(Color color) {
 		
@@ -137,6 +184,8 @@ public class BarChartDataSerie {
 	/**
 	 * @param label
 	 *            the label to set
+	 *            
+	 * @throws IllegalArgumentException if legend is {@code null}
 	 */
 	public void setLegend(ChartLegend legend) {
 		

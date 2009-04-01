@@ -26,7 +26,7 @@ public class GoogleOMeterTest {
 		GoogleOMeter meter = new GoogleOMeter(new Dimension(225, 125));
 		meter.addGoogleOMeterValue(new GoogleOMeterValue("Hello", 70));
 
-		System.out.println(meter.getUrl());
+		
 		String actual = meter.getUrl();
 		String expected = "http://chart.apis.google.com/chart?cht=gom&chs=225x125"
 				+ "&chd=t:70.0&chl=Hello";
@@ -88,22 +88,24 @@ public class GoogleOMeterTest {
 	}
 	@Test
 	public void example3(){
-		
-		//TODO check ChartLenendPosition
+				
 		GoogleOMeter meter = new GoogleOMeter(new Dimension(200,200));
 		
 		meter.addGoogleOMeterValue(new GoogleOMeterValue("first", 20));
 		meter.addGoogleOMeterValue(new GoogleOMeterValue("second", 80));
 		
-		meter.setChartLegend(new ChartLegend(Arrays.asList("first","second"),ChartLegendPosition.Left_Vertival));
+		meter.setChartLegend(new ChartLegend(Arrays.asList("first","second"),ChartLegendPosition.Top_Horizontal));
 		meter.addChartColor(new ChartColor(Color.GRAY));
 		meter.addChartColor(new ChartColor(Color.RED));
 		
 		meter.addGoogleOMeterValue(new GoogleOMeterValue("first",20));
 		meter.addGoogleOMeterValue(new GoogleOMeterValue("second",80));
 		
-		//System.out.println(meter.getUrl());
+		String actual = meter.getUrl();
+		String expected = "http://chart.apis.google.com/chart?cht=gom&chs=200x200&chco=808080,ff0000&chd=t:20.0,80.0,20.0,80.0&chdl=first|second&chdlp=t&chl=first|second|first|second";
 		
+		assertEquals(expected, actual);
+				
 	}
 
 }

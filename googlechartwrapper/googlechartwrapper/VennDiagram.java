@@ -19,6 +19,7 @@ import googlechartwrapper.interfaces.IPercentageScaleable;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
+import googlechartwrapper.miscFeatures.ChartLegendPositionContainer;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender;
@@ -82,6 +83,8 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 			ChartTypeFeature.SolidFill);
 	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
+			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
 
 	/**
 	 * Constructs a venn diagram
@@ -182,11 +185,16 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 
 	public void removeChartLegend() {
 		this.chartLegendAppender.removeAll();
-
+		this.chartLegendPositionAppender.removeAll();
 	}
 
 	public void setChartLegend(ChartLegend legend) {
+		
+		if(legend == null){
+			this.removeChartLegend();
+		}
 		this.chartLegendAppender.add(legend);
+		this.chartLegendPositionAppender.add(new ChartLegendPositionContainer(legend.getChartLegendPosition()));
 
 	}
 

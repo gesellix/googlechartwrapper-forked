@@ -117,13 +117,13 @@ public class BarChartDataSeriesAppender implements IExtendedFeatureAppender,
 			if (this.barChartDataSeries.get(i).getColor() != null) {
 				isColorUsed = true;
 				color.append(MiscUtils
-						.getSixCharacterHexValue(this.barChartDataSeries.get(i)
+						.getMatchingColorHexValue(this.barChartDataSeries.get(i)
 								.getColor()));
 			}
 			// no color was set, we add the default color
 			if (this.barChartDataSeries.get(i).getColor() == null) {
 				color.append(MiscUtils
-						.getSixCharacterHexValue(DefaultValues.DataColor));
+						.getMatchingColorHexValue(DefaultValues.DataColor));
 			}
 
 			// otherwise we have a "," at the end

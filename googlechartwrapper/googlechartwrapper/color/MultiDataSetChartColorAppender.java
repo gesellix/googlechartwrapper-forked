@@ -48,7 +48,7 @@ public class MultiDataSetChartColorAppender implements IExtendedFeatureAppender 
 		
 		for (ChartColor current : temp) {
 
-			color.append(MiscUtils.getSixCharacterHexValue(current.getColor()));
+			color.append(MiscUtils.getMatchingColorHexValue(current.getColor()));
 			color.append("|");
 
 		}
@@ -78,7 +78,7 @@ public class MultiDataSetChartColorAppender implements IExtendedFeatureAppender 
 		}
 		
 		
-		this.color.append(MiscUtils.getSixCharacterHexValue(chartColor
+		this.color.append(MiscUtils.getMatchingColorHexValue(chartColor
 				.getColor()));
 			
 		this.lastDelimiter = ",";

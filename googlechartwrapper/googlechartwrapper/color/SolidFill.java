@@ -101,7 +101,7 @@ public class SolidFill implements IFeatureAppender
     	 builder.append('s');
     	 builder.append(',');
     	 //color
-    	 builder.append(MiscUtils.getSixCharacterHexValue(this.color));
+    	 builder.append(MiscUtils.getMatchingColorHexValue(this.color));
 
     	 List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
  		

@@ -146,13 +146,13 @@ public class XYLineChartDataAppender implements IExtendedFeatureAppender,
 			if (this.xyLineChartData.get(i).getColor() != null) {
 				isColorUsed = true;
 				color.append(MiscUtils
-						.getSixCharacterHexValue(this.xyLineChartData.get(i)
+						.getMatchingColorHexValue(this.xyLineChartData.get(i)
 								.getColor()));
 			}
 			// no color was set, we add the default color
 			if (this.xyLineChartData.get(i).getColor() == null) {
 				color.append(MiscUtils
-						.getSixCharacterHexValue(DefaultValues.DataColor));
+						.getMatchingColorHexValue(DefaultValues.DataColor));
 			}
 
 			// otherwise we have a "," at the end

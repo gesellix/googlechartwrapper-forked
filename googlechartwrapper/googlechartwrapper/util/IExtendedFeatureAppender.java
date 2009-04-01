@@ -8,10 +8,11 @@ package googlechartwrapper.util;
  */
 public interface IExtendedFeatureAppender extends IFeatureAppender{
 	
+	// not necessary
 	/**
 	 * Returns the prefix for the feature parameters.
 	 * @return prefix
 	 */
 	//public String getFeaturePrefix ();
-	//TODO usyeless???
+	
 }

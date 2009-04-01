@@ -24,6 +24,7 @@ import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.DataPointLabel;
 import googlechartwrapper.label.IChartLegendable;
 import googlechartwrapper.label.IDataPointLabelable;
+import googlechartwrapper.miscFeatures.ChartLegendPositionContainer;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.RangeMarker;
@@ -88,6 +89,8 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
 	protected GenericAppender<DataPointLabel> dataPointLabelAppender = new GenericAppender<DataPointLabel>(
 			ChartTypeFeature.Marker);
+	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
+			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
 
 	/**
 	 * Constructs a new {@link ScatterPlot}.
@@ -189,12 +192,17 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 	public void removeChartLegend() {
 		this.chartLegendAppender.removeAll();
+		this.chartLegendPositionAppender.removeAll();
 
 	}
 
 	public void setChartLegend(ChartLegend legend) {
+		
+		if(legend == null){
+			this.removeChartLegend();
+		}
 		this.chartLegendAppender.add(legend);
-
+		this.chartLegendPositionAppender.add(new ChartLegendPositionContainer(legend.getChartLegendPosition()));
 	}
 
 	public void addChartColor(ChartColor cc) {

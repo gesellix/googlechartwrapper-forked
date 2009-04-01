@@ -91,7 +91,7 @@ public class ChartTitle implements IExtendedFeatureAppender{
 			ret.append("&");
 			ret.append(ChartTypeFeature.ChartTitleStyle.getPrefix());
 			ret.append("=");
-			ret.append(MiscUtils.getSixCharacterHexValue(color));
+			ret.append(MiscUtils.getMatchingColorHexValue(color));
 			//ret.append(color);
 			ret.append(",");
 			ret.append(fontsize);

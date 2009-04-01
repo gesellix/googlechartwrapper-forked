@@ -79,11 +79,11 @@ public class LinearStripe implements IFeatureAppender {
 		builder.append(',');
 		builder.append(this.angle);
 		builder.append(',');
-		builder.append(MiscUtils.getSixCharacterHexValue(this.firstColor));
+		builder.append(MiscUtils.getMatchingColorHexValue(this.firstColor));
 		builder.append(',');
 		builder.append(this.firstWidth);
 		builder.append(',');
-		builder.append(MiscUtils.getSixCharacterHexValue(this.secondColor));
+		builder.append(MiscUtils.getMatchingColorHexValue(this.secondColor));
 		builder.append(',');
 		builder.append(this.secondWith);
 

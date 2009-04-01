@@ -24,6 +24,7 @@ import googlechartwrapper.label.DataPointLabel;
 import googlechartwrapper.label.IAxisLabelable;
 import googlechartwrapper.label.IChartTitleable;
 import googlechartwrapper.label.IDataPointLabelable;
+import googlechartwrapper.miscFeatures.ChartLegendPositionContainer;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.IGridLineable;
@@ -101,6 +102,9 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);	
 	protected GenericAppender<DataScalingSet> dataScalingAppender = new GenericAppender<DataScalingSet>(
 			ChartTypeFeature.DataScaling);
+	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
+			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
+	
 	/**
 	 * Constructs a new {@link RadarChart}
 	 * 
@@ -550,13 +554,19 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 
 	public void removeChartLegend() {
 		this.chartLegendAppender.removeAll();
+		this.chartLegendPositionAppender.removeAll();
 
 	}
 
 	public void setChartLegend(ChartLegend legend) {
+		
+		if(legend == null){
+			this.removeChartLegend();
+		}
 		this.chartLegendAppender.add(legend);
-
+		this.chartLegendPositionAppender.add(new ChartLegendPositionContainer(legend.getChartLegendPosition()));
 	}
+	
 	public void addDataScalingSet(DataScalingSet ds) {
 		this.dataScalingAppender.add(ds);
 		this.radarChartLineAppender.setEncoder(new DataScalingTextEncoder());

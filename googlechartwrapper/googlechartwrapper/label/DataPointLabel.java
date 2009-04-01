@@ -159,7 +159,7 @@ public class DataPointLabel implements IFeatureAppender {
 		}
 
 		builder.append(",");
-		builder.append(MiscUtils.getSixCharacterHexValue(color));
+		builder.append(MiscUtils.getMatchingColorHexValue(color));
 		builder.append(",");
 		builder.append(dataSetIndex);
 		builder.append(",");

@@ -53,6 +53,8 @@ public class BarChartTest {
 		
 		bc.setEncoder(EncoderFactory.getEncoder(EncodingType.TextEncoding));
 		//bc.setAutoResizing(true);
+		bc.setBarWidthAndSpacing(BarWidthAndSpacing.newAutomaticallyResize());
+		
 		System.out.println(bc.getUrl());
 		
 	}

@@ -12,6 +12,7 @@ import googlechartwrapper.interfaces.IPercentageScaleable;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
+import googlechartwrapper.miscFeatures.ChartLegendPositionContainer;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.PrimitivesAppender;
@@ -48,13 +49,13 @@ public abstract class AbstractPieChart extends AbstractChart implements
 	protected UpperLimitGenericAppender<ChartTitle> chartTitleAppender = new UpperLimitGenericAppender<ChartTitle>(
 			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
-			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
-	
+			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);	
 	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
-
 	protected PrimitivesAppender<Float> pieChartOrientationAppender = new PrimitivesAppender<Float>(
 			ChartTypeFeature.PieChartOrientation);
+	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
+			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
 
 	/**
 	 * Constructs a new PieChart.
@@ -184,6 +185,7 @@ public abstract class AbstractPieChart extends AbstractChart implements
 
 	public void removeChartLegend() {
 		this.chartLegendAppender.removeAll();
+		this.chartLegendPositionAppender.removeAll();
 
 	}
 
@@ -193,6 +195,7 @@ public abstract class AbstractPieChart extends AbstractChart implements
 			this.removeChartLegend();
 		}
 		this.chartLegendAppender.add(legend);
+		this.chartLegendPositionAppender.add(new ChartLegendPositionContainer(legend.getChartLegendPosition()));
 
 	}
 

@@ -23,6 +23,7 @@ import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.DataPointLabel;
 import googlechartwrapper.label.IDataPointLabelable;
+import googlechartwrapper.miscFeatures.ChartLegendPositionContainer;
 import googlechartwrapper.style.BarChartZeroLine;
 import googlechartwrapper.style.BarWidthAndSpacing;
 import googlechartwrapper.style.ChartMargin;
@@ -124,6 +125,8 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
 	protected GenericAppender<LineAndBarChartLineStyle> lineAndBarChartLineStyleAppender = new GenericAppender<LineAndBarChartLineStyle>(
 			ChartTypeFeature.Marker);
+	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
+			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
 
 	/**
 	 * Constructs a bar chart
@@ -682,12 +685,17 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 
 	public void removeChartLegend() {
 		this.chartLegendAppender.removeAll();
+		this.chartLegendPositionAppender.removeAll();
 
 	}
 
 	public void setChartLegend(ChartLegend legend) {
+		
+		if(legend == null){
+			this.removeChartLegend();
+		}
 		this.chartLegendAppender.add(legend);
-
+		this.chartLegendPositionAppender.add(new ChartLegendPositionContainer(legend.getChartLegendPosition()));
 	}
 
 	public void addLineAndBarChartLineStyle(LineAndBarChartLineStyle lineStyle) {

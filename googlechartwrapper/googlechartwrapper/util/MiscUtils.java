@@ -56,19 +56,17 @@ public class MiscUtils {
 	 * 
 	 * @return bufferedImage 
 	 */
-	public static Image getBufferedImage(AbstractChart chart){				
+	public static Image getBufferedImage(AbstractChart chart) throws IOException{				
 		
 		BufferedImage bufferedImage = null;
 		
+		//we can ensure that the url is correct
 		try {
 			bufferedImage = ImageIO.read( new URL(chart.getUrl()) );
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 		return bufferedImage;
 		
 	}

@@ -123,7 +123,7 @@ public class ConcentricPieChartAppender implements IExtendedFeatureAppender,
 
 				isColorUsed = true;
 				color.append(MiscUtils
-						.getSixCharacterHexValue(this.concentricPieChartSlices
+						.getMatchingColorHexValue(this.concentricPieChartSlices
 								.get(i).getColor()));				
 			}
 
@@ -138,13 +138,13 @@ public class ConcentricPieChartAppender implements IExtendedFeatureAppender,
 							.getPieChartSlices().get(u).getColor() == null) {
 						color
 								.append(MiscUtils
-										.getSixCharacterHexValue(DefaultValues.DataColor));
+										.getMatchingColorHexValue(DefaultValues.DataColor));
 					}
 					// we add the set color
 					else {
 						color
 								.append(MiscUtils
-										.getSixCharacterHexValue(this.concentricPieChartSlices
+										.getMatchingColorHexValue(this.concentricPieChartSlices
 												.get(i).getPieChartSlices()
 												.get(u).getColor()));
 					}

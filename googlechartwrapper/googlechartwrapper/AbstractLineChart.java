@@ -19,6 +19,7 @@ import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.DataPointLabel;
 import googlechartwrapper.label.IDataPointLabelable;
+import googlechartwrapper.miscFeatures.ChartLegendPositionContainer;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.style.FinancialMarker;
 import googlechartwrapper.style.GridLine;
@@ -79,6 +80,8 @@ public abstract class AbstractLineChart extends AbstractChart implements
 			ChartTypeFeature.Marker);
 	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
+			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
 
 	protected AxisLabelAppender axisLabelAppender = new AxisLabelAppender();
 
@@ -453,12 +456,17 @@ public abstract class AbstractLineChart extends AbstractChart implements
 
 	public void removeChartLegend() {
 		this.chartLegendAppender.removeAll();
+		this.chartLegendPositionAppender.removeAll();
 
 	}
 
 	public void setChartLegend(ChartLegend legend) {
+		
+		if(legend == null){
+			this.removeChartLegend();
+		}
 		this.chartLegendAppender.add(legend);
-
+		this.chartLegendPositionAppender.add(new ChartLegendPositionContainer(legend.getChartLegendPosition()));
 	}
 
 }

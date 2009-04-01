@@ -18,6 +18,7 @@ import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
+import googlechartwrapper.miscFeatures.ChartLegendPositionContainer;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender;
@@ -65,6 +66,8 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 			ChartTypeFeature.ChartColor, ",");
 	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
+	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
+			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
 	
 	/**
 	 * Constructs a new GoogleOMeter.
@@ -277,6 +280,7 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 
 	public void removeChartLegend() {
 		this.chartLegendAppender.removeAll();
+		this.chartLegendPositionAppender.removeAll();
 
 	}
 
@@ -286,7 +290,7 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 			this.removeChartLegend();
 		}
 		this.chartLegendAppender.add(legend);
-
+		this.chartLegendPositionAppender.add(new ChartLegendPositionContainer(legend.getChartLegendPosition()));
 	}
 
 	/**

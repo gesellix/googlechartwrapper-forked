@@ -1,6 +1,5 @@
 package googlechartwrapper;
 
-import googlechartwrapper.interfaces.IChart;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.ArrayUtils;
 import googlechartwrapper.util.IExtendedFeatureAppender;
@@ -44,10 +43,7 @@ public abstract class AbstractChart implements IChart {
 	protected Queue<String> urlElements = new LinkedList<String>();
 	
 	protected Dimension chartDimension;
-	// private String newLine = System.getProperty("line.separator");
-	//	protected String values;
-	//protected Color[] dataColors;
-
+	
 	/**
 	 * Generates an AbstractChart with the given chartDimension.
 	 * @param chartDimension size of the chart in pixel
@@ -93,13 +89,7 @@ public abstract class AbstractChart implements IChart {
 	public String getUrl (String apiLocation){
 		collectUrlElements(getAllAppenders());
 		return generateUrlString(apiLocation);
-	}
-
-	/*
-	 * { collectUrlElements();
-	 * 
-	 * return generateUrlString(); }
-	 */
+	}	
 	
 	/**
 	 * Returns the chart type which is appended to the URL. 
@@ -164,26 +154,7 @@ public abstract class AbstractChart implements IChart {
 				.getUrlChartType()));
 		urlElements.offer(MessageFormat.format("chs={0}x{1}",
 				this.chartDimension.width, this.chartDimension.height));
-		/*if (values != null) {
-			urlElements.offer(this.values);
-		}
-		// converts the color objects into an hex equivalent for google
-		if (dataColors != null && dataColors.length > 0) {
-			StringBuffer bf = new StringBuffer(dataColors.length * 8 + 5);
-			bf.append("chco=");
-			for (Color c : dataColors) {
-				if (c.getAlpha()==255){
-					bf.append(MiscUtils.getSixCharacterHexValue(c));
-				}
-				else {
-					bf.append(MiscUtils.getEightCharacterHexValue(c));
-				}
 				
-				bf.append(",");
-			}
-			urlElements.offer(bf.toString().substring(0,
-					bf.toString().length() - 1));
-		}*/
 	}
 
 	protected void collectUrlElements(List<IExtendedFeatureAppender> appenders) {
@@ -207,16 +178,7 @@ public abstract class AbstractChart implements IChart {
 					fa.add(feature);
 					m.put(fa.getPrefix(),fa);
 				}
-			}
-			/*if (m.containsKey(ap.getFeaturePrefix())) { //wenn schon appender vorhanden
-				m.get(ap.getFeaturePrefix()).add(ap); //einfach hinzufügen
-			} else { 
-				//ansonsten muss neuer appender für diesen feature typ angelegt werden
-				FeatureAppender<IExtendedFeatureAppender> fa = new FeatureAppender<IExtendedFeatureAppender>(
-						ap.getFeaturePrefix());
-				fa.add(ap);
-				m.put(ap.getFeaturePrefix(), fa);
-			}*/
+			}			
 		}
 		
 		List<FeatureAppender> values = new ArrayList<FeatureAppender>(m.values());
@@ -226,12 +188,10 @@ public abstract class AbstractChart implements IChart {
 					FeatureAppender arg1) {
 				return arg0.prefix.compareTo(arg1.prefix);
 			}			
-		}); //for unittests, steffans idea; I thinks that is bad and even unnecessary
+		}); //for unittests
 		
 		for (FeatureAppender ap : values) {
-			//alle appender durchlaufen und der url hinzufügen
-			//urlElements.offer(ap.getAppendableString(values));
-			//TODO
+			
 			urlElements.offer(ap.getUrlString());
 		}
 	}
@@ -246,8 +206,7 @@ public abstract class AbstractChart implements IChart {
 			String urlElem = urlElements.poll();
 			if (urlElem.length()>0){
 				url.append(AMPERSAND_SEPARATOR + urlElem);
-			}
-			 //TODO mva: & konfigurierbar auslagern
+			}			 
 		}
 		return url.toString();
 	}
