@@ -2,7 +2,7 @@ package googlechartwrapper.util;
 
 import googlechartwrapper.ChartTypeFeature;
 
-public class AppendableFeature implements Comparable<AppendableFeature> {
+public class AppendableFeature /*implements Comparable<AppendableFeature>*/ {
 	
 	private String data;
 	private int order=  -1;
@@ -46,9 +46,9 @@ public class AppendableFeature implements Comparable<AppendableFeature> {
 		return prefix;
 	}
 
-	public int compareTo(AppendableFeature arg0) {
+	/*public int compareTo(AppendableFeature arg0) {
 		return order-arg0.getOrder();
-	}
+	}*/
 	
 
 }
