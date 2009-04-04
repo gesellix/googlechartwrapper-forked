@@ -35,8 +35,19 @@ public class MiscUtils {
 	 * @return 6 letter string 
 	 */
 	public static  String getSixCharacterHexValue (Color color){
-		//TODO mva: fix bug (when transparency in hex with leading 0)
-		return Integer.toHexString(color.getRGB()).substring(2, 8);
+		//TODO check if fixed mva: fix bug (when transparency in hex with leading 0)
+		String intHexString = Integer.toHexString(color.getRGB());
+		if (intHexString.length()==8){
+			return intHexString.substring(2,8);
+		}
+		if (intHexString.length()==7){
+			return intHexString.substring(1,7);
+		}
+		if (intHexString.length()==6){
+			return intHexString;
+		}
+		return null;
+		//return Integer.toHexString(color.getRGB()).substring(2, 8);
 	}
 	
 	public static String getMatchingColorHexValue (Color color){

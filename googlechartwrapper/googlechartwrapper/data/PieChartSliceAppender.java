@@ -157,7 +157,8 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender, IEncodea
 		
 		List<AppendableFeature> features = new ArrayList<AppendableFeature>(); 
 		
-		features.add(new AppendableFeature(this.encoder.encode(data),ChartTypeFeature.ChartDataAppender));
+		features.add(new AppendableFeature(this.encoder.encode(data),
+				ChartTypeFeature.ChartData));
 		
 		// if the user set the color we have to add the string
 		if (isColorUsed) {

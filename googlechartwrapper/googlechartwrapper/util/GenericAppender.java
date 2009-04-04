@@ -204,8 +204,13 @@ public class GenericAppender<T extends IFeatureAppender> implements
 	 * @return unmodifiable view of the values
 	 */
 	public List<? extends T> getList (Class<? extends T> c){
-		//TODO mva: filter!
-		return Collections.unmodifiableList(list);
+		List<T> retList = new ArrayList<T>();
+		for (T value: list){			
+			if (value.getClass().equals(c) ){
+				retList.add(value);
+			}
+		}
+		return Collections.unmodifiableList(retList);
 	}
 
 	/*

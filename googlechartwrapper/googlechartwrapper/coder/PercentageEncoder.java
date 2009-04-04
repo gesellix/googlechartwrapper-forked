@@ -11,6 +11,11 @@ import java.util.List;
  * @author martin
  *
  */
+
+//nice to have:
+//TODO starting point not default 0, but smallest value
+//TODO define sets to decode as percentage (so e.g. set 1 and 2 are scaled together, 
+//3 independent with his OWN max)
 public class PercentageEncoder implements IEncoder {
 
 	public String encodeIntegerCollection(List<int[]> values) {
@@ -45,8 +50,9 @@ public class PercentageEncoder implements IEncoder {
 		return newValues;
 	}
 
-	public String encode(int[] values) {
-		return null;
+	public String encode(int[] values) {		
+		ExtendedEncoder e = new ExtendedEncoder();
+		return e.encode(scaleValues(ArrayUtils.maxValue(values), values));
 	}
 
 	public String encode(float[] values) {
