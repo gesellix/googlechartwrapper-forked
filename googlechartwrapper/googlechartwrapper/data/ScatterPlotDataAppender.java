@@ -2,9 +2,8 @@ package googlechartwrapper.data;
 
 import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.AutoEncoder;
-import googlechartwrapper.coder.EncoderFactory;
-import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.coder.IEncoder;
+import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
@@ -24,9 +23,8 @@ import java.util.List;
  *
  */
 public class ScatterPlotDataAppender implements IExtendedFeatureAppender, IEncodeable{
-	
-	//TODO wieso funktioniert das nicht?
-	private IEncoder encoder = EncoderFactory.getEncoder(EncodingType.TextEncoding); //new AutoEncoder();
+		
+	private IEncoder encoder = new PercentageEncoder();
 	private ScatterPlotData data;
 
 	/*

@@ -33,7 +33,7 @@ public class MapTest {
 		Map newEnglandStates = new Map(new Dimension(400,200),Arrays.asList(new Map.State(Map.StateCode.CT,100),new Map.State(Map.StateCode.ME,100),new Map.State(Map.StateCode.MA,100),new Map.State(Map.StateCode.NH,100),new Map.State(Map.StateCode.RI,100),new Map.State(Map.StateCode.VT,100)));
 		newEnglandStates.addSolidFill(new SolidFill(ChartFillDestination.Background,Color.BLUE));
 				
-		System.out.println(newEnglandStates.getUrl());
+		
 		final String expected ="http://chart.apis.google.com/chart?cht=t&chs=400x200&chtm=usa&chld=CTMEMANHRIVT&chd=t:100,100,100,100,100,100&chf=bg,s,0000ff";
 
 		Assert.assertEquals(expected, newEnglandStates.getUrl());

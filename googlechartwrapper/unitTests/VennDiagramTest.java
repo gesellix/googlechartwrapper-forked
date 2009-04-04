@@ -48,7 +48,7 @@ public class VennDiagramTest {
 
 		diagram.setChartLegend(new ChartLegend(l));
 		
-		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chco=00ff00,0000ff,ff0000&chd=e:BkBQA8AeAeAeAK&chdl=A|C|V&chtt=VennDiagramm";
+		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chco=00ff00,0000ff,ff0000&chd=e:BkBQA8AeAeAeAK&chdl=A|C|V&chdlp=r&chtt=VennDiagramm";
 		
 		Assert.assertEquals(target, diagram.getUrl());
 	}
@@ -80,7 +80,7 @@ public class VennDiagramTest {
 		
 		diagram.setChartLegend(new ChartLegend(l));
 		
-		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chco=00ff00,0000ff,ff0000&chd=t:100,80,60,30,30,30,10&chdl=A|C|V&chds=10.0,50.0&chf=bg,lg,10,000000,0.5,ff0000,1.0&chtt=VennDiagramm";
+		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chco=00ff00,0000ff,ff0000&chd=t:100,80,60,30,30,30,10&chdl=A|C|V&chdlp=r&chds=10.0,50.0&chf=bg,lg,10,000000,0.5,ff0000,1.0&chtt=VennDiagramm";
 
 		Assert.assertEquals(target, diagram.getUrl());
 	
@@ -107,7 +107,7 @@ public class VennDiagramTest {
 				LinearStripesDestination.Background, 1, Color.CYAN, 0.5f,
 				Color.LIGHT_GRAY, 1f));
 		
-		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chd=e:BaBGAUAKAFAFAK&chdl=A|C|V&chf=bg,ls,1,00ffff,0.5,c0c0c0,1.0&chtt=VennDiagramm";
+		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chd=e:BaBGAUAKAFAFAK&chdl=A|C|V&chdlp=r&chf=bg,ls,1,00ffff,0.5,c0c0c0,1.0&chtt=VennDiagramm";
 		
 		Assert.assertEquals(target, diagram.getUrl());
 	}
@@ -142,10 +142,9 @@ public class VennDiagramTest {
 		diagram.setVennDiagramData(new VennDiagramData(100, 80, 60, 30, 30, 30,
 				10));
 				
-		diagram.setChartLegend(new ChartLegend(Arrays.asList("A","B","C")));
+		diagram.setChartLegend(new ChartLegend(Arrays.asList("A","B","C")));		
 		
-		//diagram.addSolidFill(new SolidFill(ChartFillDestination.Background,Color.CYAN));
-		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chd=e:BkBQA8AeAeAeAK&chdl=A|B|C&chtt=Venn+Diagramm";
+		String target = "http://chart.apis.google.com/chart?cht=v&chs=200x200&chd=e:BkBQA8AeAeAeAK&chdl=A|B|C&chdlp=r&chtt=Venn+Diagramm";
 		
 		Assert.assertEquals(target, diagram.getUrl());
 		

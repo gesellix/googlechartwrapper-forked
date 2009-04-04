@@ -90,14 +90,14 @@ public class PieChartTest {
 		
 	}
 	@Test
-	public void example4(){
+	public void showCase2(){
 		
 		ConcentricPieChart chart = new ConcentricPieChart(new Dimension(400,180));
 		
 		List<PieChartSlice> list = new ArrayList<PieChartSlice>();
 		
-		list.add(new PieChartSlice.PieChartSliceBuilder(80).label("USA").color(Color.BLUE).build());
-		list.add(new PieChartSlice.PieChartSliceBuilder(20).label("Canada").build());
+		list.add(new PieChartSlice.PieChartSliceBuilder(13840000).label("USA").color(Color.BLUE).build());
+		list.add(new PieChartSlice.PieChartSliceBuilder(1432000).label("Canada").build());
 		
 		ConcentricPieChartSlice cslice = new ConcentricPieChartSlice.ConcentricPieChartSliceBuilder(list).build();
 		
@@ -113,10 +113,12 @@ public class PieChartTest {
 		
 		cslice2.setPieChartSlices(list2);
 		
-		chart.addConcentricPieChartSlice(cslice2);
+		chart.addConcentricPieChartSlice(cslice2);		
+		
+		assertEquals("http://chart.apis.google.com/chart?cht=pc&chs=400x180&chco=0000ff|ff9d0a,ff0000&chd=e:..Go,GFUR&chl=USA|Canada|Brazil|Japan"
+				,chart.getUrl());
 		
 		
-		System.out.println(chart.getUrl());
 		
 		
 	}

@@ -20,10 +20,10 @@ import googlechartwrapper.interfaces.IStyleable;
 import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartLegend;
+import googlechartwrapper.label.ChartLegendPositionContainer;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.DataPointLabel;
 import googlechartwrapper.label.IDataPointLabelable;
-import googlechartwrapper.miscFeatures.ChartLegendPositionContainer;
 import googlechartwrapper.style.BarChartZeroLine;
 import googlechartwrapper.style.BarWidthAndSpacing;
 import googlechartwrapper.style.ChartMargin;
@@ -57,13 +57,16 @@ import java.util.List;
  * <blockquote>
  * 
  * <pre>
- * BarChart bc = new BarChart(new Dimension(300,300),BarChartOrientation.Horizontal,BarChartStyle.Grouped);
+ * BarChart bc = new BarChart(new Dimension(300, 300),
+ * 		BarChartOrientation.Horizontal, BarChartStyle.Grouped);
  * 
- * bc.addBarChartDataSerie(new BarChartDataSerie.BarChartDataSerieBuilder(Arrays.asList(34,23,56,34,12)).legend(new ChartLegend("legend")).build());
- * 		
- * bc.setBarWidthAndSpacing(BarWidthAndSpacing.newRelativeResize(0.5f,0.1f));
+ * bc.addBarChartDataSerie(new BarChartDataSerie.BarChartDataSerieBuilder(Arrays
+ * 		.asList(34, 23, 56, 34, 12)).legend(new ChartLegend(&quot;legend&quot;)).build());
  * 
- * bc.addShapeMarker(new ShapeMarker(MarkerTyp.Diamond,Color.RED,0,ShapeMarker.DataPoint.newDrawEachPoint(),10));
+ * bc.setBarWidthAndSpacing(BarWidthAndSpacing.newRelativeResize(0.5f, 0.1f));
+ * 
+ * bc.addShapeMarker(new ShapeMarker(MarkerTyp.Diamond, Color.RED, 0,
+ * 		ShapeMarker.DataPoint.newDrawEachPoint(), 10));
  * 
  * </pre>
  * 
@@ -126,7 +129,8 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 	protected GenericAppender<LineAndBarChartLineStyle> lineAndBarChartLineStyleAppender = new GenericAppender<LineAndBarChartLineStyle>(
 			ChartTypeFeature.Marker);
 	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
-			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
+			ChartTypeFeature.ChartLegendPosition, 1,
+			UpperLimitReactions.RemoveFirst);
 
 	/**
 	 * Constructs a bar chart
@@ -690,12 +694,18 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 	}
 
 	public void setChartLegend(ChartLegend legend) {
-		
-		if(legend == null){
+
+		if (legend == null) {
 			this.removeChartLegend();
+		} else {
+			this.chartLegendAppender.add(legend);
+			if (new ChartLegendPositionContainer(legend
+					.getChartLegendPosition()) != null) {
+				this.chartLegendPositionAppender
+						.add(new ChartLegendPositionContainer(legend
+								.getChartLegendPosition()));
+			}
 		}
-		this.chartLegendAppender.add(legend);
-		this.chartLegendPositionAppender.add(new ChartLegendPositionContainer(legend.getChartLegendPosition()));
 	}
 
 	public void addLineAndBarChartLineStyle(LineAndBarChartLineStyle lineStyle) {

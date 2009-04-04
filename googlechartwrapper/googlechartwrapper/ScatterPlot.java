@@ -20,11 +20,11 @@ import googlechartwrapper.interfaces.IPercentageScaleable;
 import googlechartwrapper.label.AxisLabelAppender;
 import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartLegend;
+import googlechartwrapper.label.ChartLegendPositionContainer;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.DataPointLabel;
 import googlechartwrapper.label.IChartLegendable;
 import googlechartwrapper.label.IDataPointLabelable;
-import googlechartwrapper.miscFeatures.ChartLegendPositionContainer;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.style.GridLine;
 import googlechartwrapper.style.RangeMarker;
@@ -197,12 +197,18 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 	}
 
 	public void setChartLegend(ChartLegend legend) {
-		
-		if(legend == null){
+
+		if (legend == null) {
 			this.removeChartLegend();
+		} else {
+			this.chartLegendAppender.add(legend);
+			if (new ChartLegendPositionContainer(legend
+					.getChartLegendPosition()) != null) {
+				this.chartLegendPositionAppender
+						.add(new ChartLegendPositionContainer(legend
+								.getChartLegendPosition()));
+			}
 		}
-		this.chartLegendAppender.add(legend);
-		this.chartLegendPositionAppender.add(new ChartLegendPositionContainer(legend.getChartLegendPosition()));
 	}
 
 	public void addChartColor(ChartColor cc) {

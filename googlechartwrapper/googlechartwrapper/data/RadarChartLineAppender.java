@@ -1,10 +1,10 @@
 package googlechartwrapper.data;
 
 import googlechartwrapper.ChartTypeFeature;
-import googlechartwrapper.DefaultValues;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
+import googlechartwrapper.style.DefaultValues;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;

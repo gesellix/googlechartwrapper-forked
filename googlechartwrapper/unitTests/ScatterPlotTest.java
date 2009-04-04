@@ -1,6 +1,8 @@
 package unitTests;
 
 import googlechartwrapper.ScatterPlot;
+import googlechartwrapper.coder.EncoderFactory;
+import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.LinearGradient.GradientFillDestination;
@@ -8,11 +10,6 @@ import googlechartwrapper.color.SolidFill.ChartFillDestination;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.ScatterPlotData;
 import googlechartwrapper.data.ScatterPlotPoint;
-import googlechartwrapper.label.AxisLabel;
-import googlechartwrapper.label.AxisLabelContainer;
-import googlechartwrapper.label.AxisRange;
-import googlechartwrapper.label.AxisStyle;
-import googlechartwrapper.label.AxisType;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.DataPointLabel;
@@ -44,7 +41,7 @@ public class ScatterPlotTest {
 
 		List<ScatterPlotPoint> p = new ArrayList<ScatterPlotPoint>();
 
-		p.add(new ScatterPlotPoint(500, 200));
+		p.add(new ScatterPlotPoint(450, 220));
 		p.add(new ScatterPlotPoint(950, 950));
 		p.add(new ScatterPlotPoint(530, 420));
 		p.add(new ScatterPlotPoint(700, 850));
@@ -57,7 +54,7 @@ public class ScatterPlotTest {
 				.offset(25, 25).build());
 		
 		
-		String target = "http://chart.apis.google.com/chart?cht=s&chs=300x300&chd=e:H0O2ISK8H0,DIO2GkNSH0&chg=30.0,15.0,12.0,12.0,25.0,25.0&chtt=Simple ScatterPlot&chts=808080,12";
+		String target = "http://chart.apis.google.com/chart?cht=s&chs=300x300&chd=e:eU..jtvJhr,O0..cS5Qhr&chg=30.0,15.0,12.0,12.0,25.0,25.0&chtt=Simple ScatterPlot&chts=808080,12";
 
 		Assert.assertEquals(target, s.getUrl());
 
@@ -76,7 +73,7 @@ public class ScatterPlotTest {
 
 		p.add(new ScatterPlotPoint(100, 100));
 		p.add(new ScatterPlotPoint(200, 200, 100));
-		p.add(new ScatterPlotPoint(100, 200, 3000));
+		p.add(new ScatterPlotPoint(100, 200, 300));
 		p.add(new ScatterPlotPoint(150, 50, 240));
 		p.add(new ScatterPlotPoint(140, 50, 230));
 		p.add(new ScatterPlotPoint(130, 50, 220));
@@ -99,7 +96,7 @@ public class ScatterPlotTest {
 				GradientFillDestination.ChartArea, 12, Color.BLUE, 0.1f,
 				Color.ORANGE, 0.7f));
 
-		String target = "http://chart.apis.google.com/chart?cht=s&chs=600x450&chd=t:100,200,100,150,140,130,120,110|100,200,200,50,50,50,50,50|200,100,3000,240,230,220,210,200&chdl=first|second&chds=0.0,200.0&chf=c,lg,12,0000ff,0.1,ffc800,0.7|bg,s,000000&chtt=ScatterPlot&chts=ffffff,12";
+		String target = "http://chart.apis.google.com/chart?cht=s&chs=600x450&chd=e:VVqqVVgAd3bvZmXe,VVqqqqKrKrKrKrKr,qqVV..zMxEu7szqq&chdl=first|second&chdlp=r&chds=0.0,200.0&chf=c,lg,12,0000ff,0.1,ffc800,0.7|bg,s,000000&chtt=ScatterPlot&chts=ffffff,12";
 
 		Assert.assertEquals(target, plot.getUrl());
 	}
@@ -121,26 +118,21 @@ public class ScatterPlotTest {
 		p.add(new ScatterPlotPoint(95, 95,35));
 		p.add(new ScatterPlotPoint(20, 80,80));
 		p.add(new ScatterPlotPoint(80, 20,100));
+		p.add(new ScatterPlotPoint(40, 20,10));
 
 		plot.setScatterPlotData(new ScatterPlotData(p));
-		
-		AxisLabelContainer container = new AxisLabelContainer(AxisType.XAxis);
-		container.addLabel(new AxisLabel("label1"));
-		container.addLabel(new AxisLabel("label2"));
-		container.setAxisRange(new AxisRange(0,200));
-		container.setAxisStyle(new AxisStyle(Color.BLUE));
-		container.setUseLabelPositions(true);
-		
-	        
-		plot.addAxisLabelContainer(container);
-
+			
 		plot.addDataPointLabel(new DataPointLabel(LabelType.Flag,"",Color.RED,1,DataPointLabel.DataPoint.newDrawEachPoint(),20,Priority.First));
 
 		// builder pattern in action
-		//plot.setGridLine(new GridLine.GridLineBuilder(30, 15).segment(12, 2)
-		//		.offset(25, 25).build());
+		plot.setGridLine(new GridLine.GridLineBuilder(30, 15).segment(12, 2).offset(25, 25).build());
 		
-		System.out.println(plot.getUrl());
+		//new encoding
+		plot.setEncoder(EncoderFactory.getEncoder(EncodingType.TextEncoding));
+		
+		
+		String target = "http://chart.apis.google.com/chart?cht=s&chs=600x450&chd=t:10,50,30,45,65,95,20,80,40|20,40,40,15,85,95,80,20,20|100,30,50,75,40,35,80,100,10&chg=30.0,15.0,12.0,12.0,25.0,25.0&chm=a,ff0000,1,-1,20,-1&chtt=Scatter Plot&chts=ffffff,12";
+		Assert.assertEquals(target, plot.getUrl());
 	}
 
 }

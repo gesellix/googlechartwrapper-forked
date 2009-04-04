@@ -1,8 +1,6 @@
-package googlechartwrapper.miscFeatures;
+package googlechartwrapper.label;
 
 import googlechartwrapper.ChartTypeFeature;
-import googlechartwrapper.label.ChartLegend;
-import googlechartwrapper.label.IChartLegendable;
 import googlechartwrapper.label.ChartLegend.ChartLegendPosition;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;

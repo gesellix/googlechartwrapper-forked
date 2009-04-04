@@ -16,9 +16,9 @@ import googlechartwrapper.data.ISingleDataScaleable;
 import googlechartwrapper.interfaces.IColorable;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.label.ChartLegend;
+import googlechartwrapper.label.ChartLegendPositionContainer;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
-import googlechartwrapper.miscFeatures.ChartLegendPositionContainer;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender;
@@ -28,16 +28,22 @@ import java.awt.Dimension;
 import java.util.List;
 
 /**
- * Specifies a GoogleOMeter <a href="http://code.google.com/apis/chart/types.html#gom">
+ * Specifies a GoogleOMeter <a
+ * href="http://code.google.com/apis/chart/types.html#gom">
  * http://code.google.com/apis/chart/types.html#gom</a>
  * 
  * <p>
  * Here are some examples of how GoogleOMeter can be used:
- * <p><blockquote><pre>
- *     GoogleOMeter meter = new GoogleOMeter(new Dimension(225, 125));
- *     
- *     meter.addGoogleOMeterValue(new GoogleOMeterValue("Hello", 50));
- * </pre></blockquote>
+ * <p>
+ * <blockquote>
+ * 
+ * <pre>
+ * GoogleOMeter meter = new GoogleOMeter(new Dimension(225, 125));
+ * 
+ * meter.addGoogleOMeterValue(new GoogleOMeterValue(&quot;Hello&quot;, 50));
+ * </pre>
+ * 
+ * </blockquote>
  * <p>
  * 
  * @author mart
@@ -47,7 +53,7 @@ import java.util.List;
  * 
  */
 public class GoogleOMeter extends AbstractChart implements ISolidFillable,
-		ISingleDataScaleable, ILinearable, IChartLegendable, IColorable{
+		ISingleDataScaleable, ILinearable, IChartLegendable, IColorable {
 
 	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
 			ChartTypeFeature.SolidFill);
@@ -67,8 +73,9 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
-			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
-	
+			ChartTypeFeature.ChartLegendPosition, 1,
+			UpperLimitReactions.RemoveFirst);
+
 	/**
 	 * Constructs a new GoogleOMeter.
 	 * 
@@ -77,17 +84,18 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	public GoogleOMeter(Dimension chartDimension) {
 		super(chartDimension);
 	}
-	
+
 	/**
 	 * Constructs a new GoogleOMeter.
 	 * 
 	 * @param chartDimension
 	 * 
-	 * @throws IllegalArgumentException if value is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if value is {@code null}
 	 */
 	public GoogleOMeter(Dimension chartDimension, GoogleOMeterValue value) {
 		super(chartDimension);
-		
+
 		this.valueAppender.add(value);
 	}
 
@@ -100,17 +108,19 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	protected String getUrlChartType() {
 		return ChartType.GoogleOMeter.getPrefix();
 	}
+
 	/**
-	 * {@inheritDoc}
-	 * The GoogleOMeter supports only Background as
+	 * {@inheritDoc} The GoogleOMeter supports only Background as
 	 * ChartFillDestination.
 	 * 
-	 * @throws IllegalArgumentException if ChartFillDestination is not background
+	 * @throws IllegalArgumentException
+	 *             if ChartFillDestination is not background
 	 */
 	public void addSolidFill(SolidFill sf) {
 		if (!sf.getChartFillDestination().equals(
 				ChartFillDestination.Background)) {
-			throw new IllegalArgumentException("only ChartFillDestination.Background allowed");
+			throw new IllegalArgumentException(
+					"only ChartFillDestination.Background allowed");
 		}
 		this.solidFillAppender.add(sf);
 	}
@@ -136,7 +146,8 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	 * 
 	 * @param value
 	 * 
-	 * @throws IllegalArgumentException if value is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if value is {@code null}
 	 */
 	public void addGoogleOMeterValue(GoogleOMeterValue value) {
 		valueAppender.add(value);
@@ -176,7 +187,7 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	}
 
 	public IEncoder getEncoder() {
-		
+
 		return this.valueAppender.getEncoder();
 	}
 
@@ -196,7 +207,8 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	 * {@inheritDoc} The GoogleOMeter supports only Background as
 	 * FillDestination.
 	 * 
-	 * @throws IllegalArgumentException if FillDestination is not background
+	 * @throws IllegalArgumentException
+	 *             if FillDestination is not background
 	 */
 	public void setLinearGradient(LinearGradient lg) {
 
@@ -205,7 +217,8 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 		} else {
 			if (!lg.getFillDestination().equals(
 					GradientFillDestination.Background))
-				throw new IllegalArgumentException("GradientFillDestination.Background allowed");
+				throw new IllegalArgumentException(
+						"GradientFillDestination.Background allowed");
 
 			this.linearGradientAppender.add(lg);
 		}
@@ -248,11 +261,11 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	}
 
 	/**
-	 * {@inheritDoc}
-	 * The GoogleOMeter supports only Background as
+	 * {@inheritDoc} The GoogleOMeter supports only Background as
 	 * LinearStripesDestination.
 	 * 
-	 * @throws IllegalArgumentException if LinearStripesDestination is not background
+	 * @throws IllegalArgumentException
+	 *             if LinearStripesDestination is not background
 	 * 
 	 */
 	public void setLinearStripes(LinearStripe ls) {
@@ -260,10 +273,11 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 		if (ls == null) {
 			this.removeLinearStripes();
 		} else {
-			
+
 			if (!ls.getFillDestination().equals(
 					LinearStripesDestination.Background))
-				throw new IllegalArgumentException("only LinearStripesDestination.Background allowed");
+				throw new IllegalArgumentException(
+						"only LinearStripesDestination.Background allowed");
 
 			this.linearStripesAppender.add(ls);
 		}
@@ -285,17 +299,23 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	}
 
 	public void setChartLegend(ChartLegend legend) {
-		
-		if(legend == null){
+
+		if (legend == null) {
 			this.removeChartLegend();
+		} else {
+			this.chartLegendAppender.add(legend);
+			if (new ChartLegendPositionContainer(legend
+					.getChartLegendPosition()) != null) {
+				this.chartLegendPositionAppender
+						.add(new ChartLegendPositionContainer(legend
+								.getChartLegendPosition()));
+			}
 		}
-		this.chartLegendAppender.add(legend);
-		this.chartLegendPositionAppender.add(new ChartLegendPositionContainer(legend.getChartLegendPosition()));
 	}
 
 	/**
-	 * {@inheritDoc}
-	 * You must add at least two colors, one for the left hand side and one for the right hand site.
+	 * {@inheritDoc} You must add at least two colors, one for the left hand
+	 * side and one for the right hand site.
 	 */
 	public void addChartColor(ChartColor cc) {
 
@@ -323,6 +343,7 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 
 		return this.chartColorAppender.remove(cc);
 	}
+
 	public ChartMargin getChartMargin() {
 		return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
 				.getList().get(0)

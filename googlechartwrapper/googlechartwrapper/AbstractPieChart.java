@@ -10,9 +10,9 @@ import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.interfaces.ILinearable;
 import googlechartwrapper.interfaces.IPercentageScaleable;
 import googlechartwrapper.label.ChartLegend;
+import googlechartwrapper.label.ChartLegendPositionContainer;
 import googlechartwrapper.label.ChartTitle;
 import googlechartwrapper.label.IChartLegendable;
-import googlechartwrapper.miscFeatures.ChartLegendPositionContainer;
 import googlechartwrapper.style.ChartMargin;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.PrimitivesAppender;
@@ -193,10 +193,15 @@ public abstract class AbstractPieChart extends AbstractChart implements
 
 		if (legend == null) {
 			this.removeChartLegend();
+		} else {
+			this.chartLegendAppender.add(legend);
+			if (new ChartLegendPositionContainer(legend
+					.getChartLegendPosition()) != null) {
+				this.chartLegendPositionAppender
+						.add(new ChartLegendPositionContainer(legend
+								.getChartLegendPosition()));
+			}
 		}
-		this.chartLegendAppender.add(legend);
-		this.chartLegendPositionAppender.add(new ChartLegendPositionContainer(legend.getChartLegendPosition()));
-
 	}
 
 	/**
