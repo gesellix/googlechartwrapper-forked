@@ -43,7 +43,11 @@ public class PieChartTest {
 		chart.addPieChartSlice(new PieChartSlice.PieChartSliceBuilder(54620000-13840000-4384000-3322000-
 				3251000-2773000-2560000-2105000-1439000-1432000-1314000).label("other").build());
 						
-		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chd=t:25,8,6,5,5,4,3,2,2,2,33&chco=0000ff,ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a&chl=USA|Japan|Germany|China (PRC)|United Kingdom|France|Italy|Spain|Canada|Brazil|other&chtt=GDP+of+the+world(nominal)", 
+		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chco=0000ff," +
+				"ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a,ff9d0a&" +
+				"chd=e:wqPaLrLbJwJAHaFEFCEo..&chl=USA|Japan|Germany|China (PRC)|" +
+				"United Kingdom|France|Italy|Spain|Canada|Brazil|other&chtt=GDP+of+the+" +
+				"world(nominal)", 
 				chart.getUrl());
 			
 		
@@ -62,7 +66,8 @@ public class PieChartTest {
 		chart.addPieChartSlice(new PieChartSlice.PieChartSliceBuilder(20).label("Canada").build());
 		chart.setPieChartOrientation(2.5f);
 	
-		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chd=t:80,20&chco=0000ff,ff9d0a&chl=USA|Canada&chp=2.5&chtt=GDP+of+the+world(nominal)"
+		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chco=0000ff," +
+				"ff9d0a&chd=e:..QA&chl=USA|Canada&chp=2.5&chtt=GDP+of+the+world(nominal)"
 				,chart.getUrl());
 				
 	}
@@ -77,7 +82,9 @@ public class PieChartTest {
 		chart.addPieChartSlice(new PieChartSlice.PieChartSliceBuilder(20).label("Canada").build());
 		chart.setChartMargin(new ChartMargin(40,40,40,40));
 					
-		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chd=t:80,20&chco=0000ff,ff9d0a&chl=USA|Canada&chma=40,40,40,40&chtt=GDP+of+the+world(nominal)"
+		assertEquals("http://chart.apis.google.com/chart?cht=p&chs=400x180&chco=0000ff," +
+				"ff9d0a&chd=e:..QA&chl=USA|Canada&chma=40,40,40,40&chtt=GDP+of+the+" +
+				"world(nominal)"
 				,chart.getUrl());
 		
 		
@@ -129,7 +136,8 @@ public class PieChartTest {
 		chart.addPieChartSlice(new PieChartSlice.PieChartSliceBuilder(54620000-16620000-13840000
 				-4384000-3251000).label("rest").build());		
 		
-		assertEquals("http://chart.apis.google.com/chart?cht=p3&chs=400x180&chd=t:30,25,8,5,30&chl=EU|USA|Japan|China|rest&chtt=GDP+(nominal)", 
+		assertEquals("http://chart.apis.google.com/chart?cht=p3&chs=400x180&" +
+				"chd=e:..1SQ4Mh.o&chl=EU|USA|Japan|China|rest&chtt=GDP+(nominal)", 
 				chart.getUrl());
 				
 		
