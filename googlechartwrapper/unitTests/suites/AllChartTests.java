@@ -3,6 +3,7 @@ package unitTests.suites;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import unitTests.BarChartTest;
 import unitTests.GoogleOMeterTest;
 import unitTests.LineChartTest;
 import unitTests.MapTest;
@@ -21,7 +22,8 @@ import unitTests.VennDiagramTest;
   VennDiagramTest.class,
   RadarChartTest.class,
   LineChartTest.class,
-  MapTest.class
+  MapTest.class,
+  BarChartTest.class
 })
 
 /**
