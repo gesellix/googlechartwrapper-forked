@@ -82,6 +82,10 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 				axisRange.append(sum.getAxisRange().getLower());
 				axisRange.append(",");
 				axisRange.append(sum.getAxisRange().getUpper());
+				if (sum.getAxisRange().getInterval()!=null){
+					axisRange.append(",");
+					axisRange.append(sum.getAxisRange().getInterval().intValue());
+				}
 				axisRange.append("|");
 			}
 		}
@@ -143,7 +147,7 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 			//ret = ret +"&"+axisRangeS;
 		}
 		
-		String axisStyleS=""; //chxs= <axis index>,<color>,<font size>,<alignment>|
+		//String axisStyleS=""; //chxs= <axis index>,<color>,<font size>,<alignment>|
 		if (axisStyle.length()>1){
 			features.add(new AppendableFeature(axisStyle.substring(0, 
 					axisStyle.length()-1),"chxs"));

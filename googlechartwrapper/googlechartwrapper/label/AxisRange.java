@@ -10,6 +10,7 @@ public class AxisRange {
 	
 	private int lower; 
 	private int upper;
+	private Integer interval;
 
 	/**
 	 * Constructs an axis range.
@@ -20,6 +21,13 @@ public class AxisRange {
 		super();
 		this.lower = lower;
 		this.upper = upper;
+	}
+	
+	public AxisRange(int lower, int upper, int interval) {
+		super();
+		this.lower = lower;
+		this.upper = upper;
+		this.interval = interval;
 	}
 
 	/**
@@ -52,6 +60,14 @@ public class AxisRange {
 	 */
 	public void setUpper(int upper) {
 		this.upper = upper;
+	}
+
+	public Integer getInterval() {
+		return interval;
+	}
+
+	public void setInterval(Integer interval) {
+		this.interval = interval;
 	}
 
 }
