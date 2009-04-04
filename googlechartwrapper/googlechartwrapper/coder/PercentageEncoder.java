@@ -1,52 +1,67 @@
 package googlechartwrapper.coder;
 
+import googlechartwrapper.util.ArrayUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * 
- * @author steffan
+ * option 1: greatest value equals 100
+ * starting point is 0, everything between scaled
+ * @author martin
  *
  */
-public class PercentageEncoder extends AbstractEncoder implements IEncoder {
+public class PercentageEncoder implements IEncoder {
 
-	public PercentageEncoder() {
-		super("");
+	public String encodeIntegerCollection(List<int[]> values) {
+		return encodeIntegerCollection(values,",");		
+	}
+
+	public String encodeIntegerCollection(List<int[]> values, String sep) {
+		int max = Integer.MIN_VALUE;
+		for (int i = 0; i < values.size(); i++){
+			int temp = ArrayUtils.maxValue(values.get(i));
+			if (temp > max){
+				max = temp;
+			}
+		}
 		
+		List<int[]> newValues = new ArrayList<int[]>(values.size());
+		for (int i = 0; i < values.size(); i++){			
+			newValues.add(scaleValues(max, values.get(i)));
+		}
+		ExtendedEncoder e = new ExtendedEncoder();
+		return e.encodeIntegerCollection(newValues,sep);
 	}
-
-	@Override
-	protected String collectionEncode(float[] values) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String collectionEncode(int[] values) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	private int[] scaleValues (int max, int[] values){
+		int newValues[] = new int[values.length];
+		
+		for (int i = 0; i < newValues.length; i++){
+			float multp = (float)values[i]/(float)max;
+			int realValue = Math.round( (4095*multp));
+			newValues[i] = realValue;
+		}
+		return newValues;
 	}
 
 	public String encode(int[] values) {
-		int sum = 0;
-		for (int i = 0; i < values.length; i++){
-			sum = sum+values[i];
-		}
-		StringBuffer bf = new StringBuffer(values.length*3+5);
-		bf.append("chd=t:");
-		for (int i = 0; i < values.length; i++){
-			bf.append(Integer.toString((values[i]*100/sum)));
-			bf.append(",");
-		}
-		return bf.substring(0, bf.length()-1);
+		return null;
 	}
 
 	public String encode(float[] values) {
-		StringBuffer bf = new StringBuffer(values.length*3+5);
-		bf.append("chd=t:");
-		for (int i = 0; i < values.length; i++){
-			bf.append((int)values[i]%100);
-			bf.append(",");
-		}
-		return bf.substring(0, bf.length()-1);
+		return null;
 		
+	}
+
+	public String encodeFloatCollection(List<float[]> values) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String encodeFloatCollection(List<float[]> values, String sep) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
