@@ -1,26 +1,27 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.color.ISolidFillable;
-import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.LinearStripe;
-import googlechartwrapper.color.SolidFill;
-import googlechartwrapper.color.LinearGradient.GradientFillDestination;
-import googlechartwrapper.color.LinearStripe.LinearStripesDestination;
-import googlechartwrapper.data.PieChartSlice;
-import googlechartwrapper.interfaces.ILinearable;
-import googlechartwrapper.interfaces.IPercentageScaleable;
-import googlechartwrapper.label.ChartLegend;
-import googlechartwrapper.label.ChartLegendPositionContainer;
-import googlechartwrapper.label.ChartTitle;
-import googlechartwrapper.label.IChartLegendable;
-import googlechartwrapper.style.ChartMargin;
-import googlechartwrapper.util.GenericAppender;
-import googlechartwrapper.util.PrimitivesAppender;
-import googlechartwrapper.util.UpperLimitGenericAppender;
-import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 import java.awt.Dimension;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.color.ISolidFillable;
+import de.toolforge.googlechartwrapper.color.LinearGradient;
+import de.toolforge.googlechartwrapper.color.LinearStripe;
+import de.toolforge.googlechartwrapper.color.SolidFill;
+import de.toolforge.googlechartwrapper.color.LinearGradient.GradientFillDestination;
+import de.toolforge.googlechartwrapper.color.LinearStripe.LinearStripesDestination;
+import de.toolforge.googlechartwrapper.data.PieChartSlice;
+import de.toolforge.googlechartwrapper.interfaces.ILinearable;
+import de.toolforge.googlechartwrapper.interfaces.IPercentageScaleable;
+import de.toolforge.googlechartwrapper.label.ChartLegend;
+import de.toolforge.googlechartwrapper.label.ChartLegendPositionContainer;
+import de.toolforge.googlechartwrapper.label.ChartTitle;
+import de.toolforge.googlechartwrapper.label.IChartLegendable;
+import de.toolforge.googlechartwrapper.style.ChartMargin;
+import de.toolforge.googlechartwrapper.util.GenericAppender;
+import de.toolforge.googlechartwrapper.util.PrimitivesAppender;
+import de.toolforge.googlechartwrapper.util.UpperLimitGenericAppender;
+import de.toolforge.googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 /**
  * Specifies a abstract class for the PieChart <a

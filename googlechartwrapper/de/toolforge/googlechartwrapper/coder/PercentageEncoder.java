@@ -1,9 +1,10 @@
 package de.toolforge.googlechartwrapper.coder;
 
-import googlechartwrapper.util.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.util.ArrayUtils;
 
 /**
  * option 1: greatest value equals 100

@@ -1,6 +1,6 @@
 package de.toolforge.googlechartwrapper.coder;
 
-import googlechartwrapper.util.ArrayUtils;
+import de.toolforge.googlechartwrapper.util.ArrayUtils;
 
 /**
  * A factory for default-encoders, also providing convenient method to determine 

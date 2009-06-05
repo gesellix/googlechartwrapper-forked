@@ -1,25 +1,5 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.color.ChartColor;
-import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.LinearStripe;
-import googlechartwrapper.color.SolidFill;
-import googlechartwrapper.data.DataScalingSet;
-import googlechartwrapper.data.ISingleDataScaleable;
-import googlechartwrapper.data.VennDiagramData;
-import googlechartwrapper.data.VennDiagramDataAppender;
-import googlechartwrapper.interfaces.IColorable;
-import googlechartwrapper.interfaces.IEncodeable;
-import googlechartwrapper.interfaces.ILinearable;
-import googlechartwrapper.interfaces.IPercentageScaleable;
-import googlechartwrapper.label.ChartLegend;
-import googlechartwrapper.label.ChartLegendPositionContainer;
-import googlechartwrapper.label.ChartTitle;
-import googlechartwrapper.label.IChartLegendable;
-import googlechartwrapper.style.ChartMargin;
-import googlechartwrapper.util.GenericAppender;
-import googlechartwrapper.util.UpperLimitGenericAppender;
-import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 import java.awt.Dimension;
 import java.util.List;
@@ -28,6 +8,26 @@ import de.toolforge.googlechartwrapper.coder.AutoEncoder;
 import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
 import de.toolforge.googlechartwrapper.coder.IEncoder;
 import de.toolforge.googlechartwrapper.coder.PercentageEncoder;
+import de.toolforge.googlechartwrapper.color.ChartColor;
+import de.toolforge.googlechartwrapper.color.LinearGradient;
+import de.toolforge.googlechartwrapper.color.LinearStripe;
+import de.toolforge.googlechartwrapper.color.SolidFill;
+import de.toolforge.googlechartwrapper.data.DataScalingSet;
+import de.toolforge.googlechartwrapper.data.ISingleDataScaleable;
+import de.toolforge.googlechartwrapper.data.VennDiagramData;
+import de.toolforge.googlechartwrapper.data.VennDiagramDataAppender;
+import de.toolforge.googlechartwrapper.interfaces.IColorable;
+import de.toolforge.googlechartwrapper.interfaces.IEncodeable;
+import de.toolforge.googlechartwrapper.interfaces.ILinearable;
+import de.toolforge.googlechartwrapper.interfaces.IPercentageScaleable;
+import de.toolforge.googlechartwrapper.label.ChartLegend;
+import de.toolforge.googlechartwrapper.label.ChartLegendPositionContainer;
+import de.toolforge.googlechartwrapper.label.ChartTitle;
+import de.toolforge.googlechartwrapper.label.IChartLegendable;
+import de.toolforge.googlechartwrapper.style.ChartMargin;
+import de.toolforge.googlechartwrapper.util.GenericAppender;
+import de.toolforge.googlechartwrapper.util.UpperLimitGenericAppender;
+import de.toolforge.googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 /**
  * Specifies a venn diagram <a

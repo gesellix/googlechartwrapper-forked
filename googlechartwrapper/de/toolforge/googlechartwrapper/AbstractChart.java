@@ -1,8 +1,5 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.util.AppendableFeature;
-import googlechartwrapper.util.ArrayUtils;
-import googlechartwrapper.util.IExtendedFeatureAppender;
 
 import java.awt.Dimension;
 import java.lang.reflect.Field;
@@ -16,6 +13,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+
+import de.toolforge.googlechartwrapper.util.AppendableFeature;
+import de.toolforge.googlechartwrapper.util.ArrayUtils;
+import de.toolforge.googlechartwrapper.util.IExtendedFeatureAppender;
 
 /**
  * The AbstractChart is the basechart for most charts and supports some basic

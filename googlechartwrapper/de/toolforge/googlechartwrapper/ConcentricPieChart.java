@@ -1,16 +1,5 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.color.ChartColor;
-import googlechartwrapper.color.IMultiDataSetChartColorable;
-import googlechartwrapper.color.MultiDataSetChartColorAppender;
-import googlechartwrapper.data.ConcentricPieChartAppender;
-import googlechartwrapper.data.ConcentricPieChartSlice;
-import googlechartwrapper.data.DataScalingSet;
-import googlechartwrapper.data.IMultiDataScaleable;
-import googlechartwrapper.data.PieChartSlice;
-import googlechartwrapper.data.ConcentricPieChartSlice.ConcentricPieChartSliceBuilder;
-import googlechartwrapper.interfaces.IEncodeable;
-import googlechartwrapper.util.GenericAppender;
 
 import java.awt.Dimension;
 import java.util.List;
@@ -19,6 +8,17 @@ import de.toolforge.googlechartwrapper.coder.AutoEncoder;
 import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
 import de.toolforge.googlechartwrapper.coder.IEncoder;
 import de.toolforge.googlechartwrapper.coder.PercentageEncoder;
+import de.toolforge.googlechartwrapper.color.ChartColor;
+import de.toolforge.googlechartwrapper.color.IMultiDataSetChartColorable;
+import de.toolforge.googlechartwrapper.color.MultiDataSetChartColorAppender;
+import de.toolforge.googlechartwrapper.data.ConcentricPieChartAppender;
+import de.toolforge.googlechartwrapper.data.ConcentricPieChartSlice;
+import de.toolforge.googlechartwrapper.data.DataScalingSet;
+import de.toolforge.googlechartwrapper.data.IMultiDataScaleable;
+import de.toolforge.googlechartwrapper.data.PieChartSlice;
+import de.toolforge.googlechartwrapper.data.ConcentricPieChartSlice.ConcentricPieChartSliceBuilder;
+import de.toolforge.googlechartwrapper.interfaces.IEncodeable;
+import de.toolforge.googlechartwrapper.util.GenericAppender;
 
 /**
  * Specifies a ConcentricPieChart <a

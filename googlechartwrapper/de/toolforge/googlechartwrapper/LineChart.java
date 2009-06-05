@@ -1,15 +1,15 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.data.DataScalingSet;
-import googlechartwrapper.data.LineChartData;
-import googlechartwrapper.data.LineChartDataAppender;
-import googlechartwrapper.interfaces.IEncodeable;
 
 import java.awt.Dimension;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
 import de.toolforge.googlechartwrapper.coder.IEncoder;
+import de.toolforge.googlechartwrapper.data.DataScalingSet;
+import de.toolforge.googlechartwrapper.data.LineChartData;
+import de.toolforge.googlechartwrapper.data.LineChartDataAppender;
+import de.toolforge.googlechartwrapper.interfaces.IEncodeable;
 
 /**
  * Specifies a line chart <a href="http://code.google.com/apis/chart/types.html#line_charts">
