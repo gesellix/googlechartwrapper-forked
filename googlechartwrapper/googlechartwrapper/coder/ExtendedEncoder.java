@@ -50,7 +50,7 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 	 * 4,096 different values.
 	 */
 	public ExtendedEncoder() {
-		super(TYPE,",");
+		super(TYPE,"|");
 	}
 
 	/**
