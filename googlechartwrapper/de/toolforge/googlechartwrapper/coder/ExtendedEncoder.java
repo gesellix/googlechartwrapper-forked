@@ -1,4 +1,4 @@
-package googlechartwrapper.coder;
+package de.toolforge.googlechartwrapper.coder;
 
 /**
  * Class implementing the encoding of data which provide a 

@@ -1,7 +1,5 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.coder.DataScalingTextEncoder;
-import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.ISolidFillable;
@@ -45,6 +43,9 @@ import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 import java.awt.Dimension;
 import java.text.MessageFormat;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
+import de.toolforge.googlechartwrapper.coder.IEncoder;
 
 /**
  * Specifies a bar chart <a

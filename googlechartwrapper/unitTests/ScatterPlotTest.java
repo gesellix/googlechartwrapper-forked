@@ -1,7 +1,5 @@
 package unitTests;
 
-import googlechartwrapper.coder.EncoderFactory;
-import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.LinearGradient.GradientFillDestination;
@@ -25,6 +23,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import de.toolforge.googlechartwrapper.ScatterPlot;
+import de.toolforge.googlechartwrapper.coder.EncoderFactory;
+import de.toolforge.googlechartwrapper.coder.EncodingType;
 
 /**
  * 

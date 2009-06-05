@@ -4,10 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
-import googlechartwrapper.coder.AutoEncoder;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import de.toolforge.googlechartwrapper.coder.AutoEncoder;
 
 public class AutoEncoderTest {
 	

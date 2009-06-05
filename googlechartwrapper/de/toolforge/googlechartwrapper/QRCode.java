@@ -1,11 +1,12 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.coder.EncoderFactory;
-import googlechartwrapper.coder.EncodingType;
-import googlechartwrapper.coder.ExtendedEncoder;
-import googlechartwrapper.coder.IEncoder;
 
 import java.awt.Dimension;
+
+import de.toolforge.googlechartwrapper.coder.EncoderFactory;
+import de.toolforge.googlechartwrapper.coder.EncodingType;
+import de.toolforge.googlechartwrapper.coder.ExtendedEncoder;
+import de.toolforge.googlechartwrapper.coder.IEncoder;
 
 /**
  * 

@@ -1,6 +1,5 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.ISolidFillable;
@@ -34,6 +33,8 @@ import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 import java.awt.Dimension;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.coder.IEncoder;
 
 /**
  * Specifies a abstract line chart <a

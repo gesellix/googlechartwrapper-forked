@@ -1,7 +1,5 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.coder.DataScalingTextEncoder;
-import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.LineChartData;
 import googlechartwrapper.data.LineChartDataAppender;
@@ -9,6 +7,9 @@ import googlechartwrapper.interfaces.IEncodeable;
 
 import java.awt.Dimension;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
+import de.toolforge.googlechartwrapper.coder.IEncoder;
 
 /**
  * Specifies a line chart <a href="http://code.google.com/apis/chart/types.html#line_charts">

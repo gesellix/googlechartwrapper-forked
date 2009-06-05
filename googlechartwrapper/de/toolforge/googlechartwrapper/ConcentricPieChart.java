@@ -1,9 +1,5 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.coder.AutoEncoder;
-import googlechartwrapper.coder.DataScalingTextEncoder;
-import googlechartwrapper.coder.IEncoder;
-import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.IMultiDataSetChartColorable;
 import googlechartwrapper.color.MultiDataSetChartColorAppender;
@@ -18,6 +14,11 @@ import googlechartwrapper.util.GenericAppender;
 
 import java.awt.Dimension;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.coder.AutoEncoder;
+import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
+import de.toolforge.googlechartwrapper.coder.IEncoder;
+import de.toolforge.googlechartwrapper.coder.PercentageEncoder;
 
 /**
  * Specifies a ConcentricPieChart <a

@@ -1,8 +1,5 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.coder.EncoderFactory;
-import googlechartwrapper.coder.EncodingType;
-import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.IChartColorable;
 import googlechartwrapper.color.ISolidFillable;
@@ -13,6 +10,10 @@ import googlechartwrapper.util.GenericAppender;
 import java.awt.Dimension;
 import java.util.Collections;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.coder.EncoderFactory;
+import de.toolforge.googlechartwrapper.coder.EncodingType;
+import de.toolforge.googlechartwrapper.coder.IEncoder;
 
 /*
  * enums from <a href="http://code.google.com/p/charts4j/source/browse/trunk/src/com/googlecode/charts4j/USAState.java"

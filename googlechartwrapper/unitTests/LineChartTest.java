@@ -1,7 +1,5 @@
 package unitTests;
 
-import googlechartwrapper.coder.EncoderFactory;
-import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.color.FillArea;
 import googlechartwrapper.color.FillArea.DataSetKind;
 import googlechartwrapper.data.LineChartData;
@@ -30,6 +28,8 @@ import org.junit.Test;
 
 import de.toolforge.googlechartwrapper.LineChart;
 import de.toolforge.googlechartwrapper.XYLineChart;
+import de.toolforge.googlechartwrapper.coder.EncoderFactory;
+import de.toolforge.googlechartwrapper.coder.EncodingType;
 
 /**
  * 

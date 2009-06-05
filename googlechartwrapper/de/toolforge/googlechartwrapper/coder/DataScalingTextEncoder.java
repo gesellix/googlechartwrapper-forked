@@ -1,4 +1,4 @@
-package googlechartwrapper.coder;
+package de.toolforge.googlechartwrapper.coder;
 
 
 public class DataScalingTextEncoder extends AbstractEncoder implements IEncoder{

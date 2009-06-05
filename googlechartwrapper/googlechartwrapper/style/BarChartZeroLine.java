@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
 
-import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;

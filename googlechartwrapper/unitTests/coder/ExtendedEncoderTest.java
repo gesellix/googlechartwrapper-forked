@@ -1,12 +1,13 @@
 package unitTests.coder;
 
 import static org.junit.Assert.assertEquals;
-import googlechartwrapper.coder.ExtendedEncoder;
 
 import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import de.toolforge.googlechartwrapper.coder.ExtendedEncoder;
 
 /**
  * Test for the {@link ExtendedEncoder}

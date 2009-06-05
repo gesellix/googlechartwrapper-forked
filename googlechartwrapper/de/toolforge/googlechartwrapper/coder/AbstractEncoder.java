@@ -1,4 +1,4 @@
-package googlechartwrapper.coder;
+package de.toolforge.googlechartwrapper.coder;
 
 import java.util.List;
 

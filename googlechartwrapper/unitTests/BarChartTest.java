@@ -3,8 +3,6 @@
  */
 package unitTests;
 
-import googlechartwrapper.coder.EncoderFactory;
-import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.data.BarChartDataSerie;
 import googlechartwrapper.label.AxisLabel;
 import googlechartwrapper.label.AxisLabelContainer;
@@ -24,6 +22,8 @@ import org.junit.Test;
 import de.toolforge.googlechartwrapper.BarChart;
 import de.toolforge.googlechartwrapper.BarChart.BarChartOrientation;
 import de.toolforge.googlechartwrapper.BarChart.BarChartStyle;
+import de.toolforge.googlechartwrapper.coder.EncoderFactory;
+import de.toolforge.googlechartwrapper.coder.EncodingType;
 
 /**
  * @author steffan

@@ -1,6 +1,6 @@
 package googlechartwrapper.interfaces;
 
-import googlechartwrapper.coder.IEncoder;
+import de.toolforge.googlechartwrapper.coder.IEncoder;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package googlechartwrapper.coder;
+package de.toolforge.googlechartwrapper.coder;
 
 /**
  * Simple encoding uses the alphanumeric characters (A to Z, a to z, and 0 to 9) 

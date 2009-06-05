@@ -1,7 +1,5 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.coder.DataScalingTextEncoder;
-import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.XYLineChartData;
 import googlechartwrapper.data.XYLineChartDataAppender;
@@ -9,6 +7,9 @@ import googlechartwrapper.interfaces.IEncodeable;
 
 import java.awt.Dimension;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
+import de.toolforge.googlechartwrapper.coder.IEncoder;
 
 /**
  * Specifies a line chart, especially with pairs of datasets <a

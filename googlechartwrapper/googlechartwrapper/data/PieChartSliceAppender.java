@@ -1,8 +1,5 @@
 package googlechartwrapper.data;
 
-import googlechartwrapper.coder.AutoEncoder;
-import googlechartwrapper.coder.IEncoder;
-import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.data.PieChartSlice.PieChartSliceBuilder;
 import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.style.DefaultValues;
@@ -18,6 +15,9 @@ import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
 import de.toolforge.googlechartwrapper.PieChart;
+import de.toolforge.googlechartwrapper.coder.AutoEncoder;
+import de.toolforge.googlechartwrapper.coder.IEncoder;
+import de.toolforge.googlechartwrapper.coder.PercentageEncoder;
 
 /**
  *   

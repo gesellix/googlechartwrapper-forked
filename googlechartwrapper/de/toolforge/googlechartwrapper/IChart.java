@@ -1,6 +1,6 @@
 package de.toolforge.googlechartwrapper;
 
-import googlechartwrapper.coder.IEncoder;
+import de.toolforge.googlechartwrapper.coder.IEncoder;
 
 public interface IChart {
 	
