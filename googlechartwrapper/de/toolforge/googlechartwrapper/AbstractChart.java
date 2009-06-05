@@ -41,7 +41,11 @@ public abstract class AbstractChart implements IChart {
 	 * default separator for parameters.
 	 */
 	public static final String AMPERSAND_SEPARATOR = "&";
-	protected Queue<String> urlElements = new LinkedList<String>();
+	/**
+	 * queue with url elements which are added to the url string later on
+	 */
+	protected Queue<String> urlElements = new LinkedList<String>(); 
+	//TODO martin: remove this instance variable and move into the methods
 	
 	protected Dimension chartDimension;
 	
@@ -128,11 +132,14 @@ public abstract class AbstractChart implements IChart {
 		//Field[] fields = this.getClass().getDeclaredFields(); //alle Felder
 		
 		for (Field f: fields){
-			if (ArrayUtils.linearSearch(f.getType().getInterfaces(), IExtendedFeatureAppender.class)>=0){
-				//if field implements the IExtendedFeatureAppender - so e.g. a genericAppender
+			if (ArrayUtils.linearSearch(f.getType().getInterfaces(), 
+					IExtendedFeatureAppender.class)>=0){
+				//if field implements the IExtendedFeatureAppender - so e.g. a 
+				//genericAppender
 				try { 
 					
-					allExtendedFeatureAppenders.add((IExtendedFeatureAppender)f.get(this));
+					allExtendedFeatureAppenders.add((
+							IExtendedFeatureAppender)f.get(this));
 					//der Liste hinzufügen, und zwar das feld aus der aktuellen instanz					
 				} 
 				catch (IllegalArgumentException e) {
@@ -158,8 +165,33 @@ public abstract class AbstractChart implements IChart {
 				
 	}
 
+	/**
+	 * <p>The method collects all {@link AppendableFeature}s of the implementing classes. 
+	 * These features are grouped according to their feature prefix returned by 
+	 * {@link AppendableFeature#getPrefix()}. </p>
+	 * 
+	 * <p>After sorting the grouped features (prefix based) all features are appended to 
+	 * the  final url string. </p>
+	 * 
+	 * <p>Example: if 2 {@link FeatureAppender} return a feature with the same prefix 
+	 * each these two feature strings are appended together to the string. Format will 
+	 * be &ltprefix&gt=&ltstring1&gt&ltstring2&gt...&ltstringn&gt</p>
+	 * @param appenders List of all {@link IExtendedFeatureAppender} in the implementing 
+	 * class which features should be appended to the chart url
+	 */
 	protected void collectUrlElements(List<IExtendedFeatureAppender> appenders) {
+		/*
+		 * Die Methode sammelt alle appendable Features der einzelnen FeatureAppender der
+		 * implementierenden Subklassen. Diese werden dann nach dem jeweiligen feature 
+		 * prefix groupiert und letztendlich nach einer Sortierung nach prefix der 
+		 * URL angehangen.
+		 * 
+		 * Wenn also 2 FeatureAppender ein Feature mit dem selben Prefix enthalten, 
+		 * werden diese beiden Werte in der URL zusammen appended.
+		 */
 		collectUrlElements(); //alle Grundelemente laden
+		//TODO martin: move base elements collecting this to another method
+		
 		Map<String, FeatureAppender> m = 
 			new HashMap<String, FeatureAppender>();
 			//new HashMap<String, FeatureAppender<IExtendedFeatureAppender>>();
@@ -169,11 +201,15 @@ public abstract class AbstractChart implements IChart {
 		for (IExtendedFeatureAppender ap : appenders) {
 			List<AppendableFeature> ft = ap.getAppendableFeatures(appenders);
 			for (AppendableFeature feature : ft){
-				if (m.containsKey(feature.getPrefix())){
+				if (m.containsKey(feature.getPrefix())){ 
+					//if a feature with the same prefix existed before, add the
+					//new feature to this container for Features with the same prefix
 					m.get(feature.getPrefix()).add(feature);
 				}
 				else { 
 					//ansonsten muss neuer appender für diesen feature typ angelegt werden
+					//if none existed, create a new container for Features 
+					//with the same prefix
 					FeatureAppender fa = new FeatureAppender(
 							feature.getPrefix());
 					fa.add(feature);
@@ -189,14 +225,24 @@ public abstract class AbstractChart implements IChart {
 					FeatureAppender arg1) {
 				return arg0.prefix.compareTo(arg1.prefix);
 			}			
-		}); //for unittests
+		}); 
+		/*sorting the features to guarantee a url string which is equal on each system
+		 (and not based on the implementation of reflection mechanisms)
+		  e.g. for unittests */
 		
-		for (FeatureAppender ap : values) {
-			
+		for (FeatureAppender ap : values) {			
 			urlElements.offer(ap.getUrlString());
 		}
 	}
 
+	/**
+	 * Generates the final url string based on the elements in the {@link #urlElements}
+	 * queue. In front of the url string a base url is appended. Each unique url element
+	 * of the queue is separated by the default {@link #AMPERSAND_SEPARATOR}.
+	 * 
+	 * @param baseUrl string which is in front of the url elements
+	 * @return final url containing the base url and each feature string
+	 */
 	protected String generateUrlString(String baseUrl) {
 		StringBuilder url = new StringBuilder();
 		url.append(baseUrl); //Standardpfad zur API
@@ -212,6 +258,13 @@ public abstract class AbstractChart implements IChart {
 		return url.toString();
 	}
 
+	/**
+	 * Container for {@link AppendableFeature}s with the same prefix. 
+	 * The AppendableFeature url strings are appendded to the final
+	 * url string (separator between each pair).
+	 * @author martin
+	 *
+	 */
 	private static class FeatureAppender{
 
 		/**
@@ -245,6 +298,21 @@ public abstract class AbstractChart implements IChart {
 			return prefix;
 		}
 		
+		/**
+		 * <p>Returns a string containing each data string of a feature appender. The
+		 * individual data strings are separated by the {@link #separator} of the
+		 * container class.</p>
+		 * <p>If the features did not contain any data an empty string is returned. If
+		 * the prefix was not a string with length 0 the returned string contains 
+		 * the prefix with an = in front of the collected data strings. 
+		 * If the prefix equals "" (empty string with length 0) the = is ommited.</p>
+		 * @return <code>if</code> all data strings were empty: 
+		 * 		empty string with length 0 ("");
+		 * <br><code>if</code> prefix equals "": 
+		 * 		string containing all data strings sep. by the separator;
+		 * <br><code>otherwise</code> string with prefix and = in front of all data strings 
+		 * 		separated by the separator
+		 */
 		public String getUrlString (){
 			 List<AppendableFeature> features = list;
 			 StringBuilder bf = new StringBuilder();
