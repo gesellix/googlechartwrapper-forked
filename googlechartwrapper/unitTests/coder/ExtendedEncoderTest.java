@@ -76,7 +76,7 @@ public class ExtendedEncoderTest {
 		values.add(valTwo);
 		String actual = encoder.encodeIntegerCollection(values);
 		String expected = "e:AAAZAaAzA9|AAAZAaAzA9";		
-		assertEquals(expected, actual);
+		assertEquals(expected, actual);	
 	}
 
 	@Test
