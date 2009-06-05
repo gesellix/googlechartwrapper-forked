@@ -1,4 +1,4 @@
-package googlechartwrapper;
+package de.toolforge.googlechartwrapper;
 
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.DataScalingTextEncoder;

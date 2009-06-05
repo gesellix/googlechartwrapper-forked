@@ -1,8 +1,9 @@
 package googlechartwrapper.data;
 
-import googlechartwrapper.AbstractPieChart;
 
 import java.awt.Color;
+
+import de.toolforge.googlechartwrapper.AbstractPieChart;
 
 /**
  * Slice for the {@link AbstractPieChart}.

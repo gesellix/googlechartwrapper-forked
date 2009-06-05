@@ -1,8 +1,6 @@
 package unitTests;
 
 import static org.junit.Assert.assertEquals;
-import googlechartwrapper.ConcentricPieChart;
-import googlechartwrapper.PieChart;
 import googlechartwrapper.data.ConcentricPieChartSlice;
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.label.ChartTitle;
@@ -14,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import de.toolforge.googlechartwrapper.ConcentricPieChart;
+import de.toolforge.googlechartwrapper.PieChart;
 
 /**
  * 

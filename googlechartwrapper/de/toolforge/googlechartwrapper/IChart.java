@@ -1,4 +1,4 @@
-package googlechartwrapper;
+package de.toolforge.googlechartwrapper;
 
 import googlechartwrapper.coder.IEncoder;
 

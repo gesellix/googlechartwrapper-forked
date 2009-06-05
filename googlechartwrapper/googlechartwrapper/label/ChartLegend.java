@@ -1,11 +1,12 @@
 package googlechartwrapper.label;
 
-import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
 
 /**
  * Specifies a chart legend. <a

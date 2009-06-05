@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
+
 
 /**
  * Appender which collects single features and concatenates it to a full url

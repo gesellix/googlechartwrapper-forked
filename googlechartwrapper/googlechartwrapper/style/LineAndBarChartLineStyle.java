@@ -1,12 +1,13 @@
 package googlechartwrapper.style;
 
-import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
 
 /**
  * Specifies LineAndBarChartLineStyle <a href=

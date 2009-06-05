@@ -1,26 +1,34 @@
-package googlechartwrapper;
+package de.toolforge.googlechartwrapper;
 
 import googlechartwrapper.coder.AutoEncoder;
-import googlechartwrapper.coder.DataScalingTextEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
 import googlechartwrapper.color.ChartColor;
+import googlechartwrapper.color.ISolidFillable;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripe;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.data.DataScalingSet;
 import googlechartwrapper.data.ISingleDataScaleable;
-import googlechartwrapper.data.VennDiagramData;
-import googlechartwrapper.data.VennDiagramDataAppender;
+import googlechartwrapper.data.ScatterPlotData;
+import googlechartwrapper.data.ScatterPlotDataAppender;
 import googlechartwrapper.interfaces.IColorable;
 import googlechartwrapper.interfaces.IEncodeable;
 import googlechartwrapper.interfaces.ILinearable;
+import googlechartwrapper.interfaces.IMarkable;
 import googlechartwrapper.interfaces.IPercentageScaleable;
+import googlechartwrapper.label.AxisLabelAppender;
+import googlechartwrapper.label.AxisLabelContainer;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.label.ChartLegendPositionContainer;
 import googlechartwrapper.label.ChartTitle;
+import googlechartwrapper.label.DataPointLabel;
 import googlechartwrapper.label.IChartLegendable;
+import googlechartwrapper.label.IDataPointLabelable;
 import googlechartwrapper.style.ChartMargin;
+import googlechartwrapper.style.GridLine;
+import googlechartwrapper.style.RangeMarker;
+import googlechartwrapper.style.ShapeMarker;
 import googlechartwrapper.util.GenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender;
 import googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
@@ -29,29 +37,17 @@ import java.awt.Dimension;
 import java.util.List;
 
 /**
- * Specifies a venn diagram <a
- * href="http://code.google.com/apis/chart/types.html#venn">
- * http://code.google.com/apis/chart/types.html#venn</a>
+ * Specifies a scatter plot <a
+ * href="http://code.google.com/apis/chart/types.html#scatter_plot">
+ * http://code.google.com/apis/chart/types.html#scatter_plot</a>
  * 
  * <p>
- * Here are some examples of how pie chart can be used:
+ * Here are some examples of how scatter plot can be used:
  * <p>
  * <blockquote>
  * 
  * <pre>
- * VennDiagram diagram = new VennDiagram(new Dimension(200, 200));
  * 
- * diagram.setChartTitle(new ChartTitle(&quot;VennDiagramm&quot;));
- * 
- * diagram.setVennDiagramData(new VennDiagramData(90, 70, 20, 10, 5, 5, 10));
- * 
- * List&lt;String&gt; l = new ArrayList&lt;String&gt;();
- * 
- * l.add(&quot;A&quot;);
- * l.add(&quot;C&quot;);
- * l.add(&quot;V&quot;);
- * 
- * diagram.setChartLegend(new ChartLegend(l));
  * </pre>
  * 
  * </blockquote>
@@ -59,12 +55,13 @@ import java.util.List;
  * 
  * @author steffan
  * @version 03/21/09
- * @see VennDiagramData
+ * @see ScatterPlotData
  * 
  */
-public class VennDiagram extends AbstractChart implements ILinearable,
-		IChartLegendable, ISingleDataScaleable, IPercentageScaleable,
-		IColorable, IEncodeable {
+public class ScatterPlot extends AbstractChart implements ILinearable,
+		IMarkable, IChartLegendable, IPercentageScaleable,
+		IEncodeable, ISolidFillable, IColorable, IDataPointLabelable,
+		ISingleDataScaleable {
 
 	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
 			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
@@ -74,53 +71,61 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
 	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
 			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
-	protected VennDiagramDataAppender vennDiagramAppender = new VennDiagramDataAppender();
 	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
 			ChartTypeFeature.ChartColor, ",");
 	protected UpperLimitGenericAppender<DataScalingSet> dataScalingAppender = new UpperLimitGenericAppender<DataScalingSet>(
 			ChartTypeFeature.DataScaling, 1, UpperLimitReactions.RemoveFirst);
+	protected GenericAppender<RangeMarker> rangeMarkerAppender = new GenericAppender<RangeMarker>(
+			ChartTypeFeature.Marker);
+	protected GenericAppender<ShapeMarker> shapeMarkerAppender = new GenericAppender<ShapeMarker>(
+			ChartTypeFeature.Marker);
+	protected UpperLimitGenericAppender<GridLine> gridLineAppender = new UpperLimitGenericAppender<GridLine>(
+			ChartTypeFeature.GridLine, 1, UpperLimitReactions.RemoveFirst);
+	protected AxisLabelAppender axisLabelAppender = new AxisLabelAppender();
+	protected ScatterPlotDataAppender scatterPlotDataAppender = new ScatterPlotDataAppender();
 	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
 			ChartTypeFeature.SolidFill);
 	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
 			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
+	protected GenericAppender<DataPointLabel> dataPointLabelAppender = new GenericAppender<DataPointLabel>(
+			ChartTypeFeature.Marker);
 	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
 			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
 
 	/**
-	 * Constructs a venn diagram
+	 * Constructs a new {@link ScatterPlot}.
 	 * 
 	 * @param chartDimension
-	 *            the size of the diagram
 	 */
-	public VennDiagram(Dimension chartDimension) {
+	public ScatterPlot(Dimension chartDimension) {
 		super(chartDimension);
 
 	}
 
 	/**
-	 * Constructs a venn diagram, with given {@link VennDiagramData}.
+	 * Constructs a new {@link ScatterPlot}.
 	 * 
 	 * @param chartDimension
-	 *            the size of the diagram
 	 * 
 	 * @throws IllegalArgumentException
 	 *             if data is {@code null}
 	 */
-	public VennDiagram(Dimension chartDimension, VennDiagramData data) {
+	public ScatterPlot(Dimension chartDimension, ScatterPlotData data) {
 		super(chartDimension);
 
+		this.scatterPlotDataAppender.setScatterPlotData(data);
 	}
 
 	@Override
 	protected ChartType getChartType() {
 
-		return ChartType.VennDiagram;
+		return ChartType.ScatterPlot;
 	}
 
 	@Override
 	protected String getUrlChartType() {
 
-		return ChartType.VennDiagram.getPrefix();
+		return ChartType.ScatterPlot.getPrefix();
 	}
 
 	public void removeLinearGradient() {
@@ -129,6 +134,7 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 	}
 
 	public void setLinearGradient(LinearGradient lg) {
+
 		if (lg == null) {
 			this.removeLinearGradient();
 		} else {
@@ -162,7 +168,8 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 	}
 
 	public IEncoder getEncoder() {
-		return this.vennDiagramAppender.getEncoder();
+
+		return this.scatterPlotDataAppender.getEncoder();
 	}
 
 	public ChartTitle getChartTitle() {
@@ -186,6 +193,7 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 	public void removeChartLegend() {
 		this.chartLegendAppender.removeAll();
 		this.chartLegendPositionAppender.removeAll();
+
 	}
 
 	public void setChartLegend(ChartLegend legend) {
@@ -201,38 +209,6 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 								.getChartLegendPosition()));
 			}
 		}
-	}
-
-	/**
-	 * Returns the data, can be {@code null} if nothing was set.
-	 * 
-	 * @return {@link VennDiagramData} or {@code null}
-	 */
-	public VennDiagramData getVennDiagramData() {
-
-		return this.vennDiagramAppender.getVennDiagrammData();
-	}
-
-	/**
-	 * Removes the {@link VennDiagramData}.
-	 */
-	public void removeVennDiagrammData() {
-
-		this.vennDiagramAppender.removeVennDiagrammData();
-	}
-
-	/**
-	 * Set the data, the old one will be overwritten.
-	 * 
-	 * @param data
-	 *            {@link VennDiagramData}
-	 * 
-	 * @throws IllegalArgumentException
-	 *             if data is {@code null}
-	 */
-	public void setVennDiagramData(VennDiagramData data) {
-
-		this.vennDiagramAppender.setVennDiagrammData(data);
 	}
 
 	public void addChartColor(ChartColor cc) {
@@ -262,22 +238,6 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 		return this.chartColorAppender.remove(cc);
 	}
 
-	public DataScalingSet getDataScaling() {
-
-		return this.dataScalingAppender.getList().size() > 0 ? this.dataScalingAppender
-				.getList().get(0)
-				: null;
-	}
-
-	public void setDataScaling(DataScalingSet ds) {
-
-		this.dataScalingAppender.add(ds);
-
-		if (ds != null)
-			this.vennDiagramAppender.setEncoder(new DataScalingTextEncoder());
-
-	}
-
 	public LinearStripe getLinearStripes() {
 
 		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
@@ -292,24 +252,151 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 				: null;
 	}
 
-	public void removeDataScaling() {
+	public void addRangeMarker(RangeMarker rm) {
 
-		this.dataScalingAppender.removeAll();
+		this.rangeMarkerAppender.add(rm);
+	}
 
-		this.vennDiagramAppender.setEncoder(new AutoEncoder());
+	public List<RangeMarker> getRangeMarkers() {
+
+		return this.rangeMarkerAppender.getList();
+	}
+
+	public void removeAllRangeMarkers() {
+
+		this.rangeMarkerAppender.removeAll();
+	}
+
+	public RangeMarker removeRangeMarker(int index) {
+
+		return this.rangeMarkerAppender.remove(index);
+	}
+
+	public boolean removeRangeMarker(RangeMarker rm) {
+
+		return this.rangeMarkerAppender.remove(rm);
+	}
+
+	public void addShapeMarker(ShapeMarker shapeMarker) {
+
+		this.shapeMarkerAppender.add(shapeMarker);
+	}
+
+	public List<ShapeMarker> getShapeMarkers() {
+
+		return this.shapeMarkerAppender.getList();
+	}
+
+	public void removeAllShapeMarkers() {
+
+		this.shapeMarkerAppender.removeAll();
 
 	}
 
-	public void setPercentageScaling(boolean b) {
+	public ShapeMarker removeShapeMarker(int index) {
 
+		return this.shapeMarkerAppender.remove(index);
+	}
+
+	public boolean removeShapeMarker(ShapeMarker sm) {
+
+		return this.shapeMarkerAppender.remove(sm);
+	}
+
+	public GridLine getGridLine() {
+
+		return this.gridLineAppender.getList().size() > 0 ? this.gridLineAppender
+				.getList().get(0)
+				: null;
+	}
+
+	public void removeGridLine() {
+
+		this.gridLineAppender.removeAll();
+
+	}
+
+	public void setGridLine(GridLine gl) {
+
+		if (gl == null) {
+			this.gridLineAppender.removeAll();
+			return;
+		}
+		this.gridLineAppender.add(gl);
+
+	}
+
+	public void addAxisLabelContainer(AxisLabelContainer labelSummary) {
+
+		this.axisLabelAppender.addAxis(labelSummary);
+	}
+
+	public List<AxisLabelContainer> getAxisLabelContainer() {
+
+		return this.axisLabelAppender.getList();
+	}
+
+	public void removeAllAxisLabelContainer() {
+		this.axisLabelAppender.removeAll();
+
+	}
+
+	public AxisLabelContainer removeAxisLabelContainer(int index) {
+
+		return this.axisLabelAppender.removeAxis(index);
+	}
+
+	public boolean removeAxisLabelContainer(AxisLabelContainer labelSummary) {
+
+		return this.axisLabelAppender.removeAxis(labelSummary);
+	}
+
+	/**
+	 * Sets the {@link ScatterPlotData} the old one iwll be overwritten.
+	 * 
+	 * @param data
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if data is {@code null}
+	 */
+	public void setScatterPlotData(ScatterPlotData data) {
+		this.scatterPlotDataAppender.setScatterPlotData(data);
+	}
+
+	/**
+	 * Returns the {@link ScatterPlotData} or {@code null} if nothing was set.
+	 * 
+	 * @return {@link ScatterPlot} or {@code null}
+	 */
+	public ScatterPlotData getScatterPlotData() {
+
+		return this.scatterPlotDataAppender.getScatterPlotData();
+	}
+
+	/**
+	 * Removes the {@link ScatterPlotData}.
+	 */
+	public void removeScatterPlotData() {
+		this.scatterPlotDataAppender.removeScatterPlotData();
+	}	
+	
+	public void setPercentageScaling(boolean b) {
 		if (b) {
-			this.vennDiagramAppender.setEncoder(new PercentageEncoder());
+			this.scatterPlotDataAppender.setEncoder(new PercentageEncoder());
 		} else {
-			this.vennDiagramAppender.setEncoder(new AutoEncoder());
+			this.scatterPlotDataAppender.setEncoder(new AutoEncoder());
 		}
 
 		this.dataScalingAppender.removeAll();
 
+	}
+
+	public void removeEncoder() {
+		this.scatterPlotDataAppender.removeEncoder();
+	}
+
+	public void setEncoder(IEncoder encoder) {
+		this.scatterPlotDataAppender.setEncoder(encoder);
 	}
 
 	public void addSolidFill(SolidFill sf) {
@@ -354,14 +441,43 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 		}
 	}
 
-	public void removeEncoder() {
-		this.vennDiagramAppender.removeEncoder();
-		
+	public void addDataPointLabel(DataPointLabel dpl) {
+		this.dataPointLabelAppender.add(dpl);
+
 	}
 
-	public void setEncoder(IEncoder encoder) {
-		this.vennDiagramAppender.setEncoder(encoder);
-		
+	public List<DataPointLabel> getDataPointLabels() {
+
+		return this.dataPointLabelAppender.getList();
 	}
 
+	public DataPointLabel removeDataPointLabel(int index) {
+		return this.dataPointLabelAppender.remove(index);
+	}
+
+	public boolean removeDataPointLabel(DataPointLabel dpl) {
+		return this.dataPointLabelAppender.remove(dpl);
+	}
+
+	public void removeDataPointLabels() {
+		this.dataPointLabelAppender.removeAll();
+
+	}
+
+	public DataScalingSet getDataScaling() {
+		return this.dataScalingAppender.getList().size() > 0 ? this.dataScalingAppender
+				.getList().get(0)
+				: null;
+
+	}
+
+	public void removeDataScaling() {
+		this.dataScalingAppender.removeAll();
+
+	}
+
+	public void setDataScaling(DataScalingSet ds) {
+		this.dataScalingAppender.add(ds);
+
+	}
 }

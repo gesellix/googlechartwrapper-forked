@@ -1,11 +1,12 @@
 package googlechartwrapper.data;
 
-import googlechartwrapper.RadarChart;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.RadarChart;
 
 /**
  * Data for the {@link RadarChart} which consists of datapoints 

@@ -3,7 +3,6 @@
  */
 package googlechartwrapper.label;
 
-import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
 import googlechartwrapper.util.MiscUtils;
@@ -11,6 +10,8 @@ import googlechartwrapper.util.MiscUtils;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
 
 /**
  * 

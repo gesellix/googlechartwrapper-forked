@@ -1,6 +1,5 @@
 package unitTests;
 
-import googlechartwrapper.VennDiagram;
 import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripe;
@@ -19,6 +18,8 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import de.toolforge.googlechartwrapper.VennDiagram;
 
 /**
  * 

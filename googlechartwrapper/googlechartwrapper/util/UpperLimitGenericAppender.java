@@ -1,6 +1,6 @@
 package googlechartwrapper.util;
 
-import googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
 
 /**
  * Appender which collects single features and concatenates it to a full url

@@ -1,6 +1,5 @@
 package unitTests;
 
-import googlechartwrapper.ScatterPlot;
 import googlechartwrapper.coder.EncoderFactory;
 import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.color.LinearGradient;
@@ -24,6 +23,8 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import de.toolforge.googlechartwrapper.ScatterPlot;
 
 /**
  * 

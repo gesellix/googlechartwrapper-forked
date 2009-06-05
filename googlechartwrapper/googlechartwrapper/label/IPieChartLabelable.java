@@ -1,8 +1,9 @@
 package googlechartwrapper.label;
 
-import googlechartwrapper.AbstractPieChart;
 
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.AbstractPieChart;
 
 /**
  * The interface for chart types which supports <a href="http://code.google.com/apis/chart/labels.html#pie_labels">

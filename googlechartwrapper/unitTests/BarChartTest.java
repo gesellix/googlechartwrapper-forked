@@ -3,9 +3,6 @@
  */
 package unitTests;
 
-import googlechartwrapper.BarChart;
-import googlechartwrapper.BarChart.BarChartOrientation;
-import googlechartwrapper.BarChart.BarChartStyle;
 import googlechartwrapper.coder.EncoderFactory;
 import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.data.BarChartDataSerie;
@@ -23,6 +20,10 @@ import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import de.toolforge.googlechartwrapper.BarChart;
+import de.toolforge.googlechartwrapper.BarChart.BarChartOrientation;
+import de.toolforge.googlechartwrapper.BarChart.BarChartStyle;
 
 /**
  * @author steffan

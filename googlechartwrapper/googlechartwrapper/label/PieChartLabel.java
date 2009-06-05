@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import googlechartwrapper.ChartTypeFeature;
-import googlechartwrapper.AbstractPieChart;
-import googlechartwrapper.ConcentricPieChart;
-import googlechartwrapper.PieChart;
+import de.toolforge.googlechartwrapper.AbstractPieChart;
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.ConcentricPieChart;
+import de.toolforge.googlechartwrapper.PieChart;
+
 import googlechartwrapper.data.PieChartSlice;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;

@@ -1,7 +1,6 @@
 package unitTests;
 
 import static org.junit.Assert.assertEquals;
-import googlechartwrapper.GoogleOMeter;
 import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.LinearGradient;
 import googlechartwrapper.color.LinearStripe;
@@ -18,6 +17,8 @@ import java.awt.Dimension;
 import java.util.Arrays;
 
 import org.junit.Test;
+
+import de.toolforge.googlechartwrapper.GoogleOMeter;
 
 public class GoogleOMeterTest {
 

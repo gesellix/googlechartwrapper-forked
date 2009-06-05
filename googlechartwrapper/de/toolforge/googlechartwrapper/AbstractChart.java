@@ -1,4 +1,4 @@
-package googlechartwrapper;
+package de.toolforge.googlechartwrapper;
 
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.ArrayUtils;

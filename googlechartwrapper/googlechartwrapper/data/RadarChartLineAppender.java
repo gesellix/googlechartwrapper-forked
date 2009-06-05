@@ -1,6 +1,5 @@
 package googlechartwrapper.data;
 
-import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;
@@ -14,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
 
 /**
  * FeatureAppender for RadarChartLines which makes an feature string of color

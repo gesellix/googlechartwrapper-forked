@@ -1,6 +1,5 @@
 package googlechartwrapper.label;
 
-import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.label.ChartLegend.ChartLegendPosition;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IFeatureAppender;
@@ -8,6 +7,8 @@ import googlechartwrapper.util.IFeatureAppender;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
 
 /**
  * This container is used for the {@link ChartLegend}, to add the {@link ChartLegendPosition}.

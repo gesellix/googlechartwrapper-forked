@@ -1,7 +1,6 @@
 package unitTests;
 
 import static org.junit.Assert.assertEquals;
-import googlechartwrapper.RadarChart;
 import googlechartwrapper.coder.EncoderFactory;
 import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.color.FillArea;
@@ -24,6 +23,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+
+import de.toolforge.googlechartwrapper.RadarChart;
 
 public class RadarChartTest {
 

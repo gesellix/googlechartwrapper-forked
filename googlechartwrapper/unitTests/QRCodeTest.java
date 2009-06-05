@@ -2,11 +2,12 @@ package unitTests;
 
 import java.awt.Dimension;
 
-import googlechartwrapper.QRCode;
-import googlechartwrapper.QRCode.ECLevel;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import de.toolforge.googlechartwrapper.QRCode;
+import de.toolforge.googlechartwrapper.QRCode.ECLevel;
 
 /**
  * 

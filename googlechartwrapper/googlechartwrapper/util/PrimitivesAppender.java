@@ -3,7 +3,8 @@ package googlechartwrapper.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
+
 
 /**
  * Appender for primitives. <br />

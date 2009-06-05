@@ -3,10 +3,6 @@
  */
 package unitTests;
 
-import googlechartwrapper.Map;
-import googlechartwrapper.Map.Country;
-import googlechartwrapper.Map.CountryName;
-import googlechartwrapper.Map.GeographicalArea;
 import googlechartwrapper.color.ChartColor;
 import googlechartwrapper.color.SolidFill;
 import googlechartwrapper.color.SolidFill.ChartFillDestination;
@@ -19,6 +15,11 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import de.toolforge.googlechartwrapper.Map;
+import de.toolforge.googlechartwrapper.Map.Country;
+import de.toolforge.googlechartwrapper.Map.CountryName;
+import de.toolforge.googlechartwrapper.Map.GeographicalArea;
 
 /**
  * @author steffan

@@ -1,7 +1,5 @@
 package unitTests;
 
-import googlechartwrapper.LineChart;
-import googlechartwrapper.XYLineChart;
 import googlechartwrapper.coder.EncoderFactory;
 import googlechartwrapper.coder.EncodingType;
 import googlechartwrapper.color.FillArea;
@@ -29,6 +27,9 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import de.toolforge.googlechartwrapper.LineChart;
+import de.toolforge.googlechartwrapper.XYLineChart;
 
 /**
  * 

@@ -3,7 +3,8 @@ package googlechartwrapper.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
+
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.interfaces.IEncodeable;

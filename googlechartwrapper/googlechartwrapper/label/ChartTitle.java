@@ -1,6 +1,5 @@
 package googlechartwrapper.label;
 
-import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.util.AppendableFeature;
 import googlechartwrapper.util.IExtendedFeatureAppender;
 import googlechartwrapper.util.IFeatureAppender;
@@ -9,6 +8,8 @@ import googlechartwrapper.util.MiscUtils;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
 
 /**
  * Specifies a chart title and optionally title style (fontsize and color of title)

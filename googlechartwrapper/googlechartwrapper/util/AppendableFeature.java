@@ -1,6 +1,6 @@
 package googlechartwrapper.util;
 
-import googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
 
 public class AppendableFeature /*implements Comparable<AppendableFeature>*/ {
 	

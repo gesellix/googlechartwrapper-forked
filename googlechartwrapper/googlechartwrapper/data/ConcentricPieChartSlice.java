@@ -1,12 +1,13 @@
 package googlechartwrapper.data;
 
-import googlechartwrapper.ConcentricPieChart;
 import googlechartwrapper.data.PieChartSlice.PieChartSliceBuilder;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.ConcentricPieChart;
 
 /**
  *  <p>

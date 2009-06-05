@@ -1,6 +1,5 @@
 package googlechartwrapper.data;
 
-import googlechartwrapper.ChartTypeFeature;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.EncoderFactory;
 import googlechartwrapper.coder.EncodingType;
@@ -14,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
 
 /**
  * 

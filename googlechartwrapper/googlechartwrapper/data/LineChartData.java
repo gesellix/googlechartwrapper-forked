@@ -1,12 +1,13 @@
 package googlechartwrapper.data;
 
-import googlechartwrapper.LineChart;
 import googlechartwrapper.label.ChartLegend;
 import googlechartwrapper.style.LineStyle;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.LineChart;
 
 /**
  * 

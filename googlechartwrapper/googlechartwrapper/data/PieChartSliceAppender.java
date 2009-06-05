@@ -1,7 +1,5 @@
 package googlechartwrapper.data;
 
-import googlechartwrapper.ChartTypeFeature;
-import googlechartwrapper.PieChart;
 import googlechartwrapper.coder.AutoEncoder;
 import googlechartwrapper.coder.IEncoder;
 import googlechartwrapper.coder.PercentageEncoder;
@@ -17,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
+import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.PieChart;
 
 /**
  *   

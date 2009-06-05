@@ -1,6 +1,5 @@
 package googlechartwrapper.util;
 
-import googlechartwrapper.AbstractChart;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -10,6 +9,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+
+import de.toolforge.googlechartwrapper.AbstractChart;
 
 /**
  * Miscellaneous utility methods for the api.
