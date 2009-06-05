@@ -3,9 +3,6 @@
  */
 package unitTests;
 
-import googlechartwrapper.color.ChartColor;
-import googlechartwrapper.color.SolidFill;
-import googlechartwrapper.color.SolidFill.ChartFillDestination;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,6 +17,9 @@ import de.toolforge.googlechartwrapper.Map;
 import de.toolforge.googlechartwrapper.Map.Country;
 import de.toolforge.googlechartwrapper.Map.CountryName;
 import de.toolforge.googlechartwrapper.Map.GeographicalArea;
+import de.toolforge.googlechartwrapper.color.ChartColor;
+import de.toolforge.googlechartwrapper.color.SolidFill;
+import de.toolforge.googlechartwrapper.color.SolidFill.ChartFillDestination;
 
 /**
  * @author steffan

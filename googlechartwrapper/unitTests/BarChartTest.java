@@ -3,14 +3,6 @@
  */
 package unitTests;
 
-import googlechartwrapper.data.BarChartDataSerie;
-import googlechartwrapper.label.AxisLabel;
-import googlechartwrapper.label.AxisLabelContainer;
-import googlechartwrapper.label.AxisRange;
-import googlechartwrapper.label.AxisType;
-import googlechartwrapper.label.ChartTitle;
-import googlechartwrapper.style.BarWidthAndSpacing;
-import googlechartwrapper.style.LineAndBarChartLineStyle;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,6 +16,14 @@ import de.toolforge.googlechartwrapper.BarChart.BarChartOrientation;
 import de.toolforge.googlechartwrapper.BarChart.BarChartStyle;
 import de.toolforge.googlechartwrapper.coder.EncoderFactory;
 import de.toolforge.googlechartwrapper.coder.EncodingType;
+import de.toolforge.googlechartwrapper.data.BarChartDataSerie;
+import de.toolforge.googlechartwrapper.label.AxisLabel;
+import de.toolforge.googlechartwrapper.label.AxisLabelContainer;
+import de.toolforge.googlechartwrapper.label.AxisRange;
+import de.toolforge.googlechartwrapper.label.AxisType;
+import de.toolforge.googlechartwrapper.label.ChartTitle;
+import de.toolforge.googlechartwrapper.style.BarWidthAndSpacing;
+import de.toolforge.googlechartwrapper.style.LineAndBarChartLineStyle;
 
 /**
  * @author steffan

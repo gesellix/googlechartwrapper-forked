@@ -1,10 +1,6 @@
 package unitTests;
 
 import static org.junit.Assert.assertEquals;
-import googlechartwrapper.data.ConcentricPieChartSlice;
-import googlechartwrapper.data.PieChartSlice;
-import googlechartwrapper.label.ChartTitle;
-import googlechartwrapper.style.ChartMargin;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,6 +11,10 @@ import org.junit.Test;
 
 import de.toolforge.googlechartwrapper.ConcentricPieChart;
 import de.toolforge.googlechartwrapper.PieChart;
+import de.toolforge.googlechartwrapper.data.ConcentricPieChartSlice;
+import de.toolforge.googlechartwrapper.data.PieChartSlice;
+import de.toolforge.googlechartwrapper.label.ChartTitle;
+import de.toolforge.googlechartwrapper.style.ChartMargin;
 
 /**
  * 

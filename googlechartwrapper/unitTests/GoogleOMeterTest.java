@@ -1,16 +1,6 @@
 package unitTests;
 
 import static org.junit.Assert.assertEquals;
-import googlechartwrapper.color.ChartColor;
-import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.LinearStripe;
-import googlechartwrapper.color.LinearGradient.GradientFillDestination;
-import googlechartwrapper.color.LinearStripe.LinearStripesDestination;
-import googlechartwrapper.data.DataScalingSet;
-import googlechartwrapper.data.GoogleOMeterValue;
-import googlechartwrapper.label.ChartLegend;
-import googlechartwrapper.label.ChartTitle;
-import googlechartwrapper.label.ChartLegend.ChartLegendPosition;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,6 +9,16 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import de.toolforge.googlechartwrapper.GoogleOMeter;
+import de.toolforge.googlechartwrapper.color.ChartColor;
+import de.toolforge.googlechartwrapper.color.LinearGradient;
+import de.toolforge.googlechartwrapper.color.LinearStripe;
+import de.toolforge.googlechartwrapper.color.LinearGradient.GradientFillDestination;
+import de.toolforge.googlechartwrapper.color.LinearStripe.LinearStripesDestination;
+import de.toolforge.googlechartwrapper.data.DataScalingSet;
+import de.toolforge.googlechartwrapper.data.GoogleOMeterValue;
+import de.toolforge.googlechartwrapper.label.ChartLegend;
+import de.toolforge.googlechartwrapper.label.ChartTitle;
+import de.toolforge.googlechartwrapper.label.ChartLegend.ChartLegendPosition;
 
 public class GoogleOMeterTest {
 

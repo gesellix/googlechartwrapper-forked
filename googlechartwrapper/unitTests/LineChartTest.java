@@ -1,21 +1,5 @@
 package unitTests;
 
-import googlechartwrapper.color.FillArea;
-import googlechartwrapper.color.FillArea.DataSetKind;
-import googlechartwrapper.data.LineChartData;
-import googlechartwrapper.data.XYLineChartData;
-import googlechartwrapper.label.AxisLabelContainer;
-import googlechartwrapper.label.AxisRange;
-import googlechartwrapper.label.AxisType;
-import googlechartwrapper.label.ChartLegend;
-import googlechartwrapper.label.ChartTitle;
-import googlechartwrapper.label.DataPointLabel;
-import googlechartwrapper.style.FinancialMarker;
-import googlechartwrapper.style.LineStyle;
-import googlechartwrapper.style.ShapeMarker;
-import googlechartwrapper.style.FinancialMarker.Priority;
-import googlechartwrapper.style.ShapeMarker.MarkerTyp;
-import googlechartwrapper.util.Pair;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -30,6 +14,22 @@ import de.toolforge.googlechartwrapper.LineChart;
 import de.toolforge.googlechartwrapper.XYLineChart;
 import de.toolforge.googlechartwrapper.coder.EncoderFactory;
 import de.toolforge.googlechartwrapper.coder.EncodingType;
+import de.toolforge.googlechartwrapper.color.FillArea;
+import de.toolforge.googlechartwrapper.color.FillArea.DataSetKind;
+import de.toolforge.googlechartwrapper.data.LineChartData;
+import de.toolforge.googlechartwrapper.data.XYLineChartData;
+import de.toolforge.googlechartwrapper.label.AxisLabelContainer;
+import de.toolforge.googlechartwrapper.label.AxisRange;
+import de.toolforge.googlechartwrapper.label.AxisType;
+import de.toolforge.googlechartwrapper.label.ChartLegend;
+import de.toolforge.googlechartwrapper.label.ChartTitle;
+import de.toolforge.googlechartwrapper.label.DataPointLabel;
+import de.toolforge.googlechartwrapper.style.FinancialMarker;
+import de.toolforge.googlechartwrapper.style.LineStyle;
+import de.toolforge.googlechartwrapper.style.ShapeMarker;
+import de.toolforge.googlechartwrapper.style.FinancialMarker.Priority;
+import de.toolforge.googlechartwrapper.style.ShapeMarker.MarkerTyp;
+import de.toolforge.googlechartwrapper.util.Pair;
 
 /**
  * 
@@ -98,7 +98,7 @@ public class LineChartTest {
         c.setAxisRange(new AxisRange(1989,2009,2)); 
         l.addAxisLabelContainer(c);
         
-		l.addDataPointLabel(new DataPointLabel(new DataPointLabel.PercentageValueNumberBuilder(1).build(),Color.BLACK,0,DataPointLabel.DataPoint.newDrawNPoint(5),10,googlechartwrapper.label.DataPointLabel.Priority.First));
+		l.addDataPointLabel(new DataPointLabel(new DataPointLabel.PercentageValueNumberBuilder(1).build(),Color.BLACK,0,DataPointLabel.DataPoint.newDrawNPoint(5),10,de.toolforge.googlechartwrapper.label.DataPointLabel.Priority.First));
 				
 		
 		String target = "http://chart.apis.google.com/chart?cht=lc&chs=600x350&chd=s:CDDDDEEFGIJLLKIKLLMNJ&chdl=Dow Jones&chls=5.0,0.0,0.0&chm=d,0000ff,0,-1,10|B,ff0000,0,0,0|N*p1*,000000,0,-5,10,-1&chtt=Dow+Jones+89-09&chxr=0,1989,2009,2&chxt=x";

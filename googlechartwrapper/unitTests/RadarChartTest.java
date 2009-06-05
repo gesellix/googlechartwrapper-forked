@@ -1,19 +1,6 @@
 package unitTests;
 
 import static org.junit.Assert.assertEquals;
-import googlechartwrapper.color.FillArea;
-import googlechartwrapper.color.FillArea.DataSetKind;
-import googlechartwrapper.data.RadarChartLine;
-import googlechartwrapper.label.AxisLabel;
-import googlechartwrapper.label.AxisLabelContainer;
-import googlechartwrapper.label.AxisRange;
-import googlechartwrapper.label.AxisType;
-import googlechartwrapper.label.ChartTitle;
-import googlechartwrapper.style.GridLine;
-import googlechartwrapper.style.LineStyle;
-import googlechartwrapper.style.ShapeMarker;
-import googlechartwrapper.style.ShapeMarker.DataPoint;
-import googlechartwrapper.style.ShapeMarker.MarkerTyp;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,6 +12,19 @@ import org.junit.Test;
 import de.toolforge.googlechartwrapper.RadarChart;
 import de.toolforge.googlechartwrapper.coder.EncoderFactory;
 import de.toolforge.googlechartwrapper.coder.EncodingType;
+import de.toolforge.googlechartwrapper.color.FillArea;
+import de.toolforge.googlechartwrapper.color.FillArea.DataSetKind;
+import de.toolforge.googlechartwrapper.data.RadarChartLine;
+import de.toolforge.googlechartwrapper.label.AxisLabel;
+import de.toolforge.googlechartwrapper.label.AxisLabelContainer;
+import de.toolforge.googlechartwrapper.label.AxisRange;
+import de.toolforge.googlechartwrapper.label.AxisType;
+import de.toolforge.googlechartwrapper.label.ChartTitle;
+import de.toolforge.googlechartwrapper.style.GridLine;
+import de.toolforge.googlechartwrapper.style.LineStyle;
+import de.toolforge.googlechartwrapper.style.ShapeMarker;
+import de.toolforge.googlechartwrapper.style.ShapeMarker.DataPoint;
+import de.toolforge.googlechartwrapper.style.ShapeMarker.MarkerTyp;
 
 public class RadarChartTest {
 

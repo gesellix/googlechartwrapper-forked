@@ -1,18 +1,5 @@
 package unitTests;
 
-import googlechartwrapper.color.LinearGradient;
-import googlechartwrapper.color.SolidFill;
-import googlechartwrapper.color.LinearGradient.GradientFillDestination;
-import googlechartwrapper.color.SolidFill.ChartFillDestination;
-import googlechartwrapper.data.DataScalingSet;
-import googlechartwrapper.data.ScatterPlotData;
-import googlechartwrapper.data.ScatterPlotPoint;
-import googlechartwrapper.label.ChartLegend;
-import googlechartwrapper.label.ChartTitle;
-import googlechartwrapper.label.DataPointLabel;
-import googlechartwrapper.label.DataPointLabel.LabelType;
-import googlechartwrapper.label.DataPointLabel.Priority;
-import googlechartwrapper.style.GridLine;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,6 +12,19 @@ import org.junit.Test;
 import de.toolforge.googlechartwrapper.ScatterPlot;
 import de.toolforge.googlechartwrapper.coder.EncoderFactory;
 import de.toolforge.googlechartwrapper.coder.EncodingType;
+import de.toolforge.googlechartwrapper.color.LinearGradient;
+import de.toolforge.googlechartwrapper.color.SolidFill;
+import de.toolforge.googlechartwrapper.color.LinearGradient.GradientFillDestination;
+import de.toolforge.googlechartwrapper.color.SolidFill.ChartFillDestination;
+import de.toolforge.googlechartwrapper.data.DataScalingSet;
+import de.toolforge.googlechartwrapper.data.ScatterPlotData;
+import de.toolforge.googlechartwrapper.data.ScatterPlotPoint;
+import de.toolforge.googlechartwrapper.label.ChartLegend;
+import de.toolforge.googlechartwrapper.label.ChartTitle;
+import de.toolforge.googlechartwrapper.label.DataPointLabel;
+import de.toolforge.googlechartwrapper.label.DataPointLabel.LabelType;
+import de.toolforge.googlechartwrapper.label.DataPointLabel.Priority;
+import de.toolforge.googlechartwrapper.style.GridLine;
 
 /**
  * 
