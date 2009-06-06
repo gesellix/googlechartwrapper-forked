@@ -239,6 +239,12 @@ public class UsaMap extends AbstractMap{
 	/**
 	 * Provides an object for the {@link AbstractMap#Map(Dimension, List)} contructor.
 	 * 
+	 * Container class for a state to display on the map with a color level. 
+	 * The state is identified with a valid USA state code. 
+	 * These codes are the upper-case, two-letter codes. 
+	 * A full list of these codes can be found at a number of sites: <br />
+	 * <a href="http://code.google.com/intl/de-DE/apis/chart/statecodes.html">
+	 * http://code.google.com/intl/de-DE/apis/chart/statecodes.html</a>
 	 * @author steffan
 	 * 
 	 * 
@@ -409,7 +415,7 @@ public class UsaMap extends AbstractMap{
 		}
 
 		/**
-		 * Constructs new state fpr the {@link AbstractMap}.
+		 * Constructs new state for the {@link AbstractMap}.
 		 * 
 		 * @param name
 		 *            {@link StateName} the to show
@@ -436,8 +442,15 @@ public class UsaMap extends AbstractMap{
 		}
 
 		/**
-		 * The construtor accepts a string for the state code, better use the
-		 * enum, it its safer.
+		 * The construtor accepts a string for the state code.
+		 * The state is identified with a valid USA state code. 
+		 * These codes are the upper-case, two-letter codes. 
+		 * A full list of these codes can be found at a number of sites: <br />
+		 * <a href="http://code.google.com/intl/de-DE/apis/chart/statecodes.html">
+		 * http://code.google.com/intl/de-DE/apis/chart/statecodes.html</a>.<br>
+		 * 
+		 * If you are not sure about correct codes, refer to the links in the class 
+		 * documentation or use the enum {@link StateName}.
 		 * 
 		 * @param code
 		 *            e.g. CA for california
@@ -491,7 +504,7 @@ public class UsaMap extends AbstractMap{
 		}
 
 		/**
-		 * @return the code the state code convertet to string
+		 * @return the code the state code converted to string
 		 */
 		public String getCode() {
 			return code;

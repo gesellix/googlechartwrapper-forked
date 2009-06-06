@@ -12,10 +12,11 @@ import de.toolforge.googlechartwrapper.color.ChartColor;
  * http://code.google.com/apis/chart/types.html#maps</a>.
  * 
  * <p>
- * Here are some examples of how worldMap can be used:
+ * Examples how WorldMap can be used:
  * <p><blockquote><pre>
  *     List<Country> member = new LinkedList<Country>();
  *     member.add(new WorldMap.Country(CountryName.GERMANY,100));
+ *     member.add(new WorldMap.Country(CountryName.FRANCE,50));
  *     
  *     WorldMap eu = new WorldMap(new Dimension(400,200),GeographicalArea.EUROPE,member);
  * </pre></blockquote>
@@ -37,9 +38,18 @@ public class WorldMap extends AbstractMap{
 	private GeographicalArea area = null;
 
 	/**
-	 * Constructs a new map, all areas are possible. If only the us is wanted choose {@link UsaMap}.
+	 * Constructs a new map with all areas are possible. If only the USA are wanted 
+	 * choose {@link UsaMap}.
+	 * <p>
+	 * The country argument is a valid ISO Country Code. These codes are the upper-case, 
+	 * two-letter codes as defined by ISO-3166. 
+	 * A full list of these codes can be found at a number of sites: 
+	 * <a href="http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">
+	 * http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html</a><br />
+	 * <a href="http://code.google.com/apis/chart/isocodes.html">
+	 * http://code.google.com/apis/chart/isocodes.html</a>
 	 * 
-	 * @param chartDimension
+	 * @param chartDimension (max height 220, max width 440)
 	 * @param area
 	 *            the area to show {@link GeographicalArea}
 	 * @param countryList
@@ -47,7 +57,7 @@ public class WorldMap extends AbstractMap{
 	 *            
 	 * @throws IllegalArgumentException if countryList or member is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if chartDimension is out of range
+	 *             if chartDimension is out of range (height &gt; 220 or width &gt; 440)
 	 * @throws IllegalArgumentException
 	 *             if area is {@code null}
 	 */
@@ -88,7 +98,7 @@ public class WorldMap extends AbstractMap{
 	/**
 	 * sets the {@link GeographicalArea}.
 	 * 
-	 * @param area
+	 * @param area area to display
 	 * 
 	 * @throws IllegalArgumentException
 	 *             if area is {@code null}
@@ -104,7 +114,7 @@ public class WorldMap extends AbstractMap{
 	/**
 	 * Sets a list of {@link Country}.
 	 * 
-	 * @param countryList
+	 * @param countryList countrys do display (with color)
 	 * 
 	 * @throws IllegalArgumentException if countryList or member is {@code null}
 	 */
@@ -130,6 +140,12 @@ public class WorldMap extends AbstractMap{
 	}
 	
 	@Override
+	/**
+	 * overriden. Uses {@link AbstractChart#collectUrlElements()}
+	 * 
+	 * {@inheritDoc}
+	 * 
+	 */
 	protected void collectUrlElements() {
 		super.collectUrlElements();
 
@@ -175,7 +191,7 @@ public class WorldMap extends AbstractMap{
 		}
 	}
 	/**
-	 * Country names.
+	 * Country names with ISO 3166 country codes.
 	 */
 	public enum CountryName {
 		/** Afghanistan. **/
@@ -684,7 +700,7 @@ public class WorldMap extends AbstractMap{
 			this.name = name;
 		}
 		/**
-		 * Returns the country code as string, e.g. ZW for Zimbabwe.
+		 * Returns the ISO 3166 country code as string, e.g. ZW for Zimbabwe.
 		 * 
 		 * @return the country code
 		 */
@@ -694,7 +710,7 @@ public class WorldMap extends AbstractMap{
 	}
 
 	/**
-	 * Country code.
+	 * ISO 3166 Country code.
 	 * 
 	 */
 	public enum CountryCode {
@@ -1193,7 +1209,14 @@ public class WorldMap extends AbstractMap{
 	}
 	
 	/**
-	 * 
+	 * Container class for a country to display on the map with a color level. 
+	 * The country is identified with a valid ISO Country Code. 
+	 * These codes are the upper-case, two-letter codes as defined by ISO-3166. 
+	 * A full list of these codes can be found at a number of sites: <br />
+	 * <a href="http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">
+	 * http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html</a><br />
+	 * <a href="http://code.google.com/apis/chart/isocodes.html">
+	 * http://code.google.com/apis/chart/isocodes.html</a>
 	 * @author steffan
 	 * 
 	 */
@@ -1206,7 +1229,8 @@ public class WorldMap extends AbstractMap{
 		 * Constructs a country for the {@link AbstractMap}.
 		 * 
 		 * @param name
-		 *            {@link CountryCode} the country to show
+		 *            {@link CountryCode} the country to show 
+		 *            
 		 * 
 		 * @param colorLevel
 		 *            colorLevel a value between 0 and 100, the integer you
@@ -1216,7 +1240,7 @@ public class WorldMap extends AbstractMap{
 		 * @throws IllegalArgumentException
 		 *             if name is {@code null}
 		 * @throws IllegalArgumentException
-		 *             colorLevel can not be < 0 or > 100
+		 *             colorLevel can not be &lt; 0 or &gt; 100
 		 */
 		public Country(CountryName name, int colorLevel) {
 
@@ -1242,7 +1266,7 @@ public class WorldMap extends AbstractMap{
 		 * @throws IllegalArgumentException
 		 *             if code is {@code null}
 		 * @throws IllegalArgumentException
-		 *             colorLevel can not be < 0 or > 100
+		 *             colorLevel can not be &lt; 0 or &gt; 100
 		 */
 		public Country(CountryCode code, int colorLevel) {
 
@@ -1257,10 +1281,12 @@ public class WorldMap extends AbstractMap{
 		}
 
 		/**
-		 * Offers you the possibility to use a string for the country code, use
-		 * the enum, it is safer.
+		 * Offers you the possibility to use a string for the country code.
+		 * It requires a valid ISO 3166-1-alpha-2 code recognized by the Google api.
+		 * If you are not sure about correct codes, refer to the links in the class 
+		 * documentation or use the enums {@link Country} or {@link CountryCode}.
 		 * 
-		 * @param code
+		 * @param code valid ISO 3166-1-alpha-2 code, 
 		 *            e.g. DE for Germany
 		 * @param colorLevel
 		 *            colorLevel colorLevel a value between 0 and 100, the
@@ -1272,7 +1298,7 @@ public class WorldMap extends AbstractMap{
 		 * @throws IllegalArgumentException
 		 *             if code is {@code null}
 		 * @throws IllegalArgumentException
-		 *             colorLevel can not be < 0 or > 100
+		 *             colorLevel can not be &lt; 0 or &gt; 100
 		 */
 		public Country(String code, int colorLevel) {
 
@@ -1301,7 +1327,7 @@ public class WorldMap extends AbstractMap{
 		 *            the colorLevel to set
 		 * 
 		 * @throws IllegalArgumentException
-		 *             colorLevel can not be < 0 or > 100
+		 *             colorLevel can not be &lt; 0 or &gt; 100
 		 */
 		public void setColorLevel(int colorLevel) {
 
