@@ -21,9 +21,17 @@
 <body bgcolor="white">
 
 Defines the supported charts.
-Every chart is a collection of features, the implement a list of interfaces.
-Each interface solves the dependencies given by the chart.
-This package also includes the AbstractChart and the two basic enums ChartType and ChartTypeFeature. 
+<p>Every chart basically is a collection of features which are collected using the 
+FeatureAppender mechansim. Each chart implements a number of interfaces containing the 
+methods to add, get and remove features from the chart. </p>
+
+<p>This package also includes the AbstractChart and the two basic enums 
+ChartType and ChartTypeFeature. The class AbstractChart implements the basic functionality
+of each chart - especially offering the FeatureAppender collection mechanism. 
+When generating the final google chart API URL it collects every FeatureAppender
+of the (implementing) subclass (its type) and organizes/sorts the content of these 
+appenders. These AppendableFeatures are then asked for their detail string which is 
+appended to the final API URL.  </p>
 
 <h2>Google API Specification</h2>
 
