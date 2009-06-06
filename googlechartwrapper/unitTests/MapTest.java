@@ -13,10 +13,11 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.toolforge.googlechartwrapper.Map;
-import de.toolforge.googlechartwrapper.Map.Country;
-import de.toolforge.googlechartwrapper.Map.CountryName;
-import de.toolforge.googlechartwrapper.Map.GeographicalArea;
+import de.toolforge.googlechartwrapper.UsaMap;
+import de.toolforge.googlechartwrapper.WorldMap;
+import de.toolforge.googlechartwrapper.WorldMap.Country;
+import de.toolforge.googlechartwrapper.WorldMap.CountryName;
+import de.toolforge.googlechartwrapper.WorldMap.GeographicalArea;
 import de.toolforge.googlechartwrapper.color.ChartColor;
 import de.toolforge.googlechartwrapper.color.SolidFill;
 import de.toolforge.googlechartwrapper.color.SolidFill.ChartFillDestination;
@@ -31,7 +32,7 @@ public class MapTest {
 	public void example(){
 		
 		//new england states
-		Map newEnglandStates = new Map(new Dimension(400,200),Arrays.asList(new Map.State(Map.StateCode.CT,100),new Map.State(Map.StateCode.ME,100),new Map.State(Map.StateCode.MA,100),new Map.State(Map.StateCode.NH,100),new Map.State(Map.StateCode.RI,100),new Map.State(Map.StateCode.VT,100)));
+		UsaMap newEnglandStates = new UsaMap(new Dimension(400,200),Arrays.asList(new UsaMap.State(UsaMap.StateCode.CT,100),new UsaMap.State(UsaMap.StateCode.ME,100),new UsaMap.State(UsaMap.StateCode.MA,100),new UsaMap.State(UsaMap.StateCode.NH,100),new UsaMap.State(UsaMap.StateCode.RI,100),new UsaMap.State(UsaMap.StateCode.VT,100)));
 		newEnglandStates.addSolidFill(new SolidFill(ChartFillDestination.Background,Color.BLUE));
 				
 		
@@ -45,35 +46,35 @@ public class MapTest {
 		
 		//all 27 eu member
 		List<Country> member = new LinkedList<Country>();
-		member.add(new Map.Country(CountryName.GERMANY,100));
-		member.add(new Map.Country(CountryName.FRANCE,100));
-		member.add(new Map.Country(CountryName.BELGIUM,100));
-		member.add(new Map.Country(CountryName.ITALY,100));
-		member.add(new Map.Country(CountryName.ROMANIA,0));
-		member.add(new Map.Country(CountryName.BULGARIA,0));
-		member.add(new Map.Country(CountryName.LITHUANIA,0));
-		member.add(new Map.Country(CountryName.SWEDEN,0));
-		member.add(new Map.Country(CountryName.DENMARK,0));
-		member.add(new Map.Country(CountryName.LATVIA,0));
-		member.add(new Map.Country(CountryName.SLOVAKIA,0));
-		member.add(new Map.Country(CountryName.LUXEMBOURG,100));
-		member.add(new Map.Country(CountryName.SLOVENIA,0));
-		member.add(new Map.Country(CountryName.ESTONIA,0));
-		member.add(new Map.Country(CountryName.MALTA,0));
-		member.add(new Map.Country(CountryName.SPAIN,0));
-		member.add(new Map.Country(CountryName.FINLAND,0));
-		member.add(new Map.Country(CountryName.NETHERLANDS,100));
-		member.add(new Map.Country(CountryName.CZECH_REPUBLIC,0));
-		member.add(new Map.Country(CountryName.AUSTRIA,0));
-		member.add(new Map.Country(CountryName.HUNGARY,0));
-		member.add(new Map.Country(CountryName.GREECE,0));
-		member.add(new Map.Country(CountryName.POLAND,0));
-		member.add(new Map.Country(CountryName.UNITED_KINGDOM,0));
-		member.add(new Map.Country(CountryName.IRELAND,0));
-		member.add(new Map.Country(CountryName.PORTUGAL,0));
-		member.add(new Map.Country(CountryName.CYPRUS,0));
+		member.add(new WorldMap.Country(CountryName.GERMANY,100));
+		member.add(new WorldMap.Country(CountryName.FRANCE,100));
+		member.add(new WorldMap.Country(CountryName.BELGIUM,100));
+		member.add(new WorldMap.Country(CountryName.ITALY,100));
+		member.add(new WorldMap.Country(CountryName.ROMANIA,0));
+		member.add(new WorldMap.Country(CountryName.BULGARIA,0));
+		member.add(new WorldMap.Country(CountryName.LITHUANIA,0));
+		member.add(new WorldMap.Country(CountryName.SWEDEN,0));
+		member.add(new WorldMap.Country(CountryName.DENMARK,0));
+		member.add(new WorldMap.Country(CountryName.LATVIA,0));
+		member.add(new WorldMap.Country(CountryName.SLOVAKIA,0));
+		member.add(new WorldMap.Country(CountryName.LUXEMBOURG,100));
+		member.add(new WorldMap.Country(CountryName.SLOVENIA,0));
+		member.add(new WorldMap.Country(CountryName.ESTONIA,0));
+		member.add(new WorldMap.Country(CountryName.MALTA,0));
+		member.add(new WorldMap.Country(CountryName.SPAIN,0));
+		member.add(new WorldMap.Country(CountryName.FINLAND,0));
+		member.add(new WorldMap.Country(CountryName.NETHERLANDS,100));
+		member.add(new WorldMap.Country(CountryName.CZECH_REPUBLIC,0));
+		member.add(new WorldMap.Country(CountryName.AUSTRIA,0));
+		member.add(new WorldMap.Country(CountryName.HUNGARY,0));
+		member.add(new WorldMap.Country(CountryName.GREECE,0));
+		member.add(new WorldMap.Country(CountryName.POLAND,0));
+		member.add(new WorldMap.Country(CountryName.UNITED_KINGDOM,0));
+		member.add(new WorldMap.Country(CountryName.IRELAND,0));
+		member.add(new WorldMap.Country(CountryName.PORTUGAL,0));
+		member.add(new WorldMap.Country(CountryName.CYPRUS,0));
 		
-		Map eu = new Map(new Dimension(400,200),GeographicalArea.EUROPE,member);
+		WorldMap eu = new WorldMap(new Dimension(400,200),GeographicalArea.EUROPE,member);
 		
 		eu.addSolidFill(new SolidFill(ChartFillDestination.Background,Color.BLUE));
 		eu.addChartColor(new ChartColor(Color.LIGHT_GRAY));
