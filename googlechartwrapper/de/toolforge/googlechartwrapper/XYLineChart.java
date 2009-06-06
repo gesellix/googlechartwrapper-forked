@@ -84,7 +84,7 @@ public class XYLineChart extends AbstractLineChart implements IEncodeable {
 	 * Removes a {@link XYLineChartData} at the given position.
 	 * 
 	 * @param index
-	 * @return
+	 * @return removed line chart data object at the given index
 	 * 
 	 * @throws IndexOutOfBoundsException
 	 *             if index is out of bound
@@ -96,7 +96,7 @@ public class XYLineChart extends AbstractLineChart implements IEncodeable {
 	/**
 	 * Removes a given {@link XYLineChartData} and returns the status.
 	 * 
-	 * @param XYLineChartData
+	 * @param xyLineChartData line chart data to remove
 	 * @return {@code true} if success
 	 */
 	public boolean removeXYLineChartData(XYLineChartData xyLineChartData) {

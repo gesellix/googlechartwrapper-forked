@@ -41,7 +41,7 @@ public class PrimitivesAppender <T extends Number> implements IExtendedFeatureAp
 	/**
 	 * Sets the primitive.
 	 * 
-	 * @param primitiv
+	 * @param primitive primitive (e.g. Integer)
 	 * 
 	 * @throws IllegalArgumentException if primitive is {@code null}
 	 */

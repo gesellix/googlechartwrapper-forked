@@ -133,7 +133,7 @@ public class UsaMap extends AbstractMap{
 	 * USA state name code.
 	 * 
 	 */
-	public enum StateCode {
+	public static enum StateCode {
 		/** Alabama. **/
 		AL,
 		/** Alaska. **/
@@ -237,7 +237,7 @@ public class UsaMap extends AbstractMap{
 	}
 	
 	/**
-	 * Provides an object for the {@link AbstractMap#Map(Dimension, List)} contructor.
+	 * Provides an object for the {@link UsaMap#UsaMap(Dimension, List)} contructor.
 	 * 
 	 * Container class for a state to display on the map with a color level. 
 	 * The state is identified with a valid USA state code. 
@@ -417,8 +417,8 @@ public class UsaMap extends AbstractMap{
 		/**
 		 * Constructs new state for the {@link AbstractMap}.
 		 * 
-		 * @param name
-		 *            {@link StateName} the to show
+		 * @param code
+		 *            {@link StateCode} to show
 		 * @param colorLevel
 		 *            a value between 0 and 100, the integer you provide here
 		 *            will be interpolated with the color gradient that you

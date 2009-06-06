@@ -178,7 +178,7 @@ public class WorldMap extends AbstractMap{
 	 * @author steffan
 	 *
 	 */
-	public enum GeographicalArea {
+	public static enum GeographicalArea {
 		AFRICA, ASIA, EUROPE, MIDDLE_EAST, SOUTH_AMERICA, USA, WORLD;
 
 		/**
@@ -193,7 +193,7 @@ public class WorldMap extends AbstractMap{
 	/**
 	 * Country names with ISO 3166 country codes.
 	 */
-	public enum CountryName {
+	public static enum CountryName {
 		/** Afghanistan. **/
 		AFGHANISTAN("AF"),
 		/** Aland_islands. **/
@@ -713,7 +713,7 @@ public class WorldMap extends AbstractMap{
 	 * ISO 3166 Country code.
 	 * 
 	 */
-	public enum CountryCode {
+	public static enum CountryCode {
 		/** Afghanistan. **/
 		AF,
 		/** Aland_islands. **/

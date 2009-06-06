@@ -31,16 +31,16 @@ public enum EncodingType{
 		/**
 		 * The api needs s: ... or e: ..., so we deliver the full prefix
 		 * 
-		 * @return
+		 * @return complete prefix
 		 */
 		public String getCompletePrefix(){
 			return this.prefix + ":";
 		}
 		
 		/**
-		 * Every EncodingType has a rank in addiction of the possibly values.
+		 * Every EncodingType has a rank in addition of the possibly values.
 		 * 
-		 * @return
+		 * @return rank
 		 */
 		public int getRank(){
 			return this.rank;

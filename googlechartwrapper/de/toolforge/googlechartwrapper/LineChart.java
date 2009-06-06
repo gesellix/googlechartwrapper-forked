@@ -91,7 +91,7 @@ public class LineChart extends AbstractLineChart implements IEncodeable {
 
 	/**
 	 * Adds a list of {@link LineChartData} to the list.
-	 * @param linechartData
+	 * @param lineChartData line chart data to add
 	 * 
 	 * @throws IllegalArgumentException if lineChartData or member is {@code null}
 	 */

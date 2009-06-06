@@ -156,7 +156,7 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 	/**
 	 * Enable curved.
 	 * 
-	 * @see {@link RadarChart#setDefault()}
+	 * @see {@link #setDefault()}
 	 */
 	public void setCurved() {
 		this.isCurved = true;
@@ -165,7 +165,7 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 	/**
 	 * Set curved to false.
 	 * 
-	 * @see {@link RadarChart#setCurved()}
+	 * @see {@link #setCurved()}
 	 */
 	public void setDefault() {
 		this.isCurved = false;
@@ -210,8 +210,8 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 	 *            line to remove
 	 * @see RadarChartLineAppender#remove(RadarChartLine)
 	 */
-	public boolean removeRadarChartLine(RadarChartLine m) {
-		return radarChartLineAppender.remove(m);
+	public boolean removeRadarChartLine(RadarChartLine line) {
+		return radarChartLineAppender.remove(line);
 	}
 
 	/**

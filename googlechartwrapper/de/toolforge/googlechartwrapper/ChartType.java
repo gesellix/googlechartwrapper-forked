@@ -34,7 +34,7 @@ public enum ChartType {
 	  	/**
 	  	 * Prefix for every chart, scatterplot means 's'
 	  	 * 
-	  	 * @return
+	  	 * @return prefix for the chart
 	  	 */
 	  	public String getPrefix(){
 	  		return this.prefix;

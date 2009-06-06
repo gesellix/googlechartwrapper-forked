@@ -54,7 +54,7 @@ public class AppendableFeature /*implements Comparable<AppendableFeature>*/ {
 	 * required. For details if and how sorting is done refer to the documentation of 
 	 * the individual chart or base class.
 	 * @param data detail string appendable to the URL
-	 * @param ChartTypeFeature feature type 
+	 * @param feature feature type 
 	 * @param order order number
 	 */
 	public AppendableFeature(String data, ChartTypeFeature feature, int order) {
@@ -83,7 +83,7 @@ public class AppendableFeature /*implements Comparable<AppendableFeature>*/ {
 
 	/**
 	 * Returns the detail string of the feature.
-	 * @return
+	 * @return detail string
 	 */
 	public String getData() {
 		return data;
