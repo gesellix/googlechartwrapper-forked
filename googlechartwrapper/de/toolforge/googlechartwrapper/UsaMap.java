@@ -133,7 +133,7 @@ public class UsaMap extends AbstractMap{
 	 * USA state name code.
 	 * 
 	 */
-	public static enum StateCode {
+	public enum StateCode {
 		/** Alabama. **/
 		AL,
 		/** Alaska. **/
@@ -237,14 +237,135 @@ public class UsaMap extends AbstractMap{
 	}
 	
 	/**
-	 * Provides an object for the {@link UsaMap#UsaMap(Dimension, List)} contructor.
+	 * USA State name.
+	 */
+	public enum StateName {
+		/** Alabama. **/
+		ALABAMA("AL"),
+		/** Alaska. **/
+		ALASKA("AK"),
+		/** Arizona. **/
+		ARIZONA("AZ"),
+		/** Arkansas. **/
+		ARKANSAS("AR"),
+		/** California. **/
+		CALIFORNIA("CA"),
+		/** Colorado. **/
+		COLORADO("CO"),
+		/** Connecticut. **/
+		CONNECTICUT("CT"),
+		/** Delaware. **/
+		DELAWARE("DE"),
+		/** Florida. **/
+		FLORIDA("FL"),
+		/** Georgia. **/
+		GEORGIA("GA"),
+		/** Hawaii. **/
+		HAWAII("HI"),
+		/** Idaho. **/
+		IDAHO("ID"),
+		/** Illinois. **/
+		ILLINOIS("IL"),
+		/** Indiana. **/
+		INDIANA("IN"),
+		/** Iowa. **/
+		IOWA("IA"),
+		/** Kansas. **/
+		KANSAS("KS"),
+		/** Kentucky. **/
+		KENTUCKY("KY"),
+		/** Louisiana. **/
+		LOUISIANA("LA"),
+		/** Maine. **/
+		MAINE("ME"),
+		/** Maryland. **/
+		MARYLAND("MD"),
+		/** Massachusetts. **/
+		MASSACHUSETTS("MA"),
+		/** Michigan. **/
+		MICHIGAN("MI"),
+		/** Minnesota. **/
+		MINNESOTA("MN"),
+		/** Mississippi. **/
+		MISSISSIPPI("MS"),
+		/** Missouri. **/
+		MISSOURI("MO"),
+		/** Montana. **/
+		MONTANA("MT"),
+		/** Nebraska. **/
+		NEBRASKA("NE"),
+		/** Nevada. **/
+		NEVADA("NV"),
+		/** New_hampshire. **/
+		NEW_HAMPSHIRE("NH"),
+		/** New_jersey. **/
+		NEW_JERSEY("NJ"),
+		/** New_mexico. **/
+		NEW_MEXICO("NM"),
+		/** New_york. **/
+		NEW_YORK("NY"),
+		/** North_carolina. **/
+		NORTH_CAROLINA("NC"),
+		/** North_dakota. **/
+		NORTH_DAKOTA("ND"),
+		/** Ohio. **/
+		OHIO("OH"),
+		/** Oklahoma. **/
+		OKLAHOMA("OK"),
+		/** Oregon. **/
+		OREGON("OR"),
+		/** Pennsylvania. **/
+		PENNSYLVANIA("PA"),
+		/** Rhode_island. **/
+		RHODE_ISLAND("RI"),
+		/** South_carolina. **/
+		SOUTH_CAROLINA("SC"),
+		/** South_dakota. **/
+		SOUTH_DAKOTA("SD"),
+		/** Tennessee. **/
+		TENNESSEE("TN"),
+		/** Texas. **/
+		TEXAS("TX"),
+		/** Utah. **/
+		UTAH("UT"),
+		/** Vermont. **/
+		VERMONT("VT"),
+		/** Virginia. **/
+		VIRGINIA("VA"),
+		/** Washington. **/
+		WASHINGTON("WA"),
+		/** West_virginia. **/
+		WEST_VIRGINIA("WV"),
+		/** Wisconsin. **/
+		WISCONSIN("WI"),
+		/** Wyoming. **/
+		WYOMING("WY");
+		
+		/** String for the Google Chart API parameter. */
+		private final String name;
+
+		/**
+		 * Instantiating enum.
+		 * 
+		 * @param name
+		 *            the string for the Google Chart API parameter
+		 */
+		private StateName(final String name) {
+			this.name = name;
+		}
+
+		/**
+		 * Returns the state code, e.g. WY for Wyoming.
+		 * 
+		 * @return the country code
+		 */
+		public String getStateCode() {
+			return this.name;
+		}
+	}
+	/**
+	 * Provides an object for the {@link UsaMap} contructor.
 	 * 
-	 * Container class for a state to display on the map with a color level. 
-	 * The state is identified with a valid USA state code. 
-	 * These codes are the upper-case, two-letter codes. 
-	 * A full list of these codes can be found at a number of sites: <br />
-	 * <a href="http://code.google.com/intl/de-DE/apis/chart/statecodes.html">
-	 * http://code.google.com/intl/de-DE/apis/chart/statecodes.html</a>
 	 * @author steffan
 	 * 
 	 * 
@@ -253,148 +374,16 @@ public class UsaMap extends AbstractMap{
 
 		private int colorLevel;
 		private String code;
-		
-		/**
-		 * USA State name.
-		 */
-		public enum StateName {
-			/** Alabama. **/
-			ALABAMA("AL"),
-			/** Alaska. **/
-			ALASKA("AK"),
-			/** Arizona. **/
-			ARIZONA("AZ"),
-			/** Arkansas. **/
-			ARKANSAS("AR"),
-			/** California. **/
-			CALIFORNIA("CA"),
-			/** Colorado. **/
-			COLORADO("CO"),
-			/** Connecticut. **/
-			CONNECTICUT("CT"),
-			/** Delaware. **/
-			DELAWARE("DE"),
-			/** Florida. **/
-			FLORIDA("FL"),
-			/** Georgia. **/
-			GEORGIA("GA"),
-			/** Hawaii. **/
-			HAWAII("HI"),
-			/** Idaho. **/
-			IDAHO("ID"),
-			/** Illinois. **/
-			ILLINOIS("IL"),
-			/** Indiana. **/
-			INDIANA("IN"),
-			/** Iowa. **/
-			IOWA("IA"),
-			/** Kansas. **/
-			KANSAS("KS"),
-			/** Kentucky. **/
-			KENTUCKY("KY"),
-			/** Louisiana. **/
-			LOUISIANA("LA"),
-			/** Maine. **/
-			MAINE("ME"),
-			/** Maryland. **/
-			MARYLAND("MD"),
-			/** Massachusetts. **/
-			MASSACHUSETTS("MA"),
-			/** Michigan. **/
-			MICHIGAN("MI"),
-			/** Minnesota. **/
-			MINNESOTA("MN"),
-			/** Mississippi. **/
-			MISSISSIPPI("MS"),
-			/** Missouri. **/
-			MISSOURI("MO"),
-			/** Montana. **/
-			MONTANA("MT"),
-			/** Nebraska. **/
-			NEBRASKA("NE"),
-			/** Nevada. **/
-			NEVADA("NV"),
-			/** New_hampshire. **/
-			NEW_HAMPSHIRE("NH"),
-			/** New_jersey. **/
-			NEW_JERSEY("NJ"),
-			/** New_mexico. **/
-			NEW_MEXICO("NM"),
-			/** New_york. **/
-			NEW_YORK("NY"),
-			/** North_carolina. **/
-			NORTH_CAROLINA("NC"),
-			/** North_dakota. **/
-			NORTH_DAKOTA("ND"),
-			/** Ohio. **/
-			OHIO("OH"),
-			/** Oklahoma. **/
-			OKLAHOMA("OK"),
-			/** Oregon. **/
-			OREGON("OR"),
-			/** Pennsylvania. **/
-			PENNSYLVANIA("PA"),
-			/** Rhode_island. **/
-			RHODE_ISLAND("RI"),
-			/** South_carolina. **/
-			SOUTH_CAROLINA("SC"),
-			/** South_dakota. **/
-			SOUTH_DAKOTA("SD"),
-			/** Tennessee. **/
-			TENNESSEE("TN"),
-			/** Texas. **/
-			TEXAS("TX"),
-			/** Utah. **/
-			UTAH("UT"),
-			/** Vermont. **/
-			VERMONT("VT"),
-			/** Virginia. **/
-			VIRGINIA("VA"),
-			/** Washington. **/
-			WASHINGTON("WA"),
-			/** West_virginia. **/
-			WEST_VIRGINIA("WV"),
-			/** Wisconsin. **/
-			WISCONSIN("WI"),
-			/** Wyoming. **/
-			WYOMING("WY");
-
-			/** String for the Google Chart API parameter. */
-			private final String name;
-
-			/**
-			 * Instantiating enum.
-			 * 
-			 * @param name
-			 *            the string for the Google Chart API parameter
-			 */
-			private StateName(final String name) {
-				this.name = name;
-			}
-
-			/**
-			 * Returns the state code, e.g. WY for Wyoming.
-			 * 
-			 * @return the country code
-			 */
-			public String getStateCode() {
-				return this.name;
-			}
-		
-	}
-		
-		
-
 
 		/**
-		 * Constructs a new state for the {@link AbstractMap}.
+		 * Constructs a new state for the {@link Map}.
 		 * 
 		 * @param name
 		 *            {@link StateName} the to show
 		 * @param colorLevel
 		 *            a value between 0 and 100, the integer you provide here
 		 *            will be interpolated with the color gradient that you
-		 *            defined in {@link AbstractMap#addChartColor(ChartColor)}
+		 *            defined in {@link Map#addChartColor(ChartColor)}
 		 * 
 		 * @throws IllegalArgumentException
 		 *             if name is {@code null}
@@ -415,14 +404,14 @@ public class UsaMap extends AbstractMap{
 		}
 
 		/**
-		 * Constructs new state for the {@link AbstractMap}.
+		 * Constructs new state fpr the {@link Map}.
 		 * 
-		 * @param code
-		 *            {@link StateCode} to show
+		 * @param name
+		 *            {@link StateName} the to show
 		 * @param colorLevel
 		 *            a value between 0 and 100, the integer you provide here
 		 *            will be interpolated with the color gradient that you
-		 *            defined in {@link AbstractMap#addChartColor(ChartColor)}
+		 *            defined in {@link Map#addChartColor(ChartColor)}
 		 * 
 		 * @throws IllegalArgumentException
 		 *             if code is {@code null}
@@ -442,22 +431,15 @@ public class UsaMap extends AbstractMap{
 		}
 
 		/**
-		 * The construtor accepts a string for the state code.
-		 * The state is identified with a valid USA state code. 
-		 * These codes are the upper-case, two-letter codes. 
-		 * A full list of these codes can be found at a number of sites: <br />
-		 * <a href="http://code.google.com/intl/de-DE/apis/chart/statecodes.html">
-		 * http://code.google.com/intl/de-DE/apis/chart/statecodes.html</a>.<br>
-		 * 
-		 * If you are not sure about correct codes, refer to the links in the class 
-		 * documentation or use the enum {@link StateName}.
+		 * The construtor accepts a string for the state code, better use the
+		 * enum, it its safer.
 		 * 
 		 * @param code
 		 *            e.g. CA for california
 		 * @param colorLevel
 		 *            colorLevel a value between 0 and 100, the integer you
 		 *            provide here will be interpolated with the color gradient
-		 *            that you defined in {@link AbstractMap#addChartColor(ChartColor)}
+		 *            that you defined in {@link Map#addChartColor(ChartColor)}
 		 * 
 		 * @throws IllegalArgumentException
 		 *             if code is {@code null}
@@ -476,6 +458,7 @@ public class UsaMap extends AbstractMap{
 			this.code = code;
 
 		}
+
 		/**
 		 * Returns the color level, a value between 0 and 100 to interpolate the color.
 		 * 
@@ -504,10 +487,10 @@ public class UsaMap extends AbstractMap{
 		}
 
 		/**
-		 * @return the code the state code converted to string
+		 * @return the code the state code convertet to string
 		 */
 		public String getCode() {
 			return code;
 		}
-}
+	}
 }
