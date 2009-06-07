@@ -340,7 +340,7 @@ public class UsaMap extends AbstractMap{
 		WISCONSIN("WI"),
 		/** Wyoming. **/
 		WYOMING("WY");
-		
+
 		/** String for the Google Chart API parameter. */
 		private final String name;
 
@@ -364,8 +364,14 @@ public class UsaMap extends AbstractMap{
 		}
 	}
 	/**
-	 * Provides an object for the {@link UsaMap} contructor.
+	 * Provides an object for the {@link UsaMap#UsaMap(Dimension, List)} contructor.
 	 * 
+	 * Container class for a state to display on the map with a color level. 
+	 * The state is identified with a valid USA state code. 
+	 * These codes are the upper-case, two-letter codes. 
+	 * A full list of these codes can be found at a number of sites: <br />
+	 * <a href="http://code.google.com/intl/de-DE/apis/chart/statecodes.html">
+	 * http://code.google.com/intl/de-DE/apis/chart/statecodes.html</a>
 	 * @author steffan
 	 * 
 	 * 
@@ -374,16 +380,18 @@ public class UsaMap extends AbstractMap{
 
 		private int colorLevel;
 		private String code;
+		
+
 
 		/**
-		 * Constructs a new state for the {@link Map}.
+		 * Constructs a new state for the {@link AbstractMap}.
 		 * 
 		 * @param name
 		 *            {@link StateName} the to show
 		 * @param colorLevel
 		 *            a value between 0 and 100, the integer you provide here
 		 *            will be interpolated with the color gradient that you
-		 *            defined in {@link Map#addChartColor(ChartColor)}
+		 *            defined in {@link AbstractMap#addChartColor(ChartColor)}
 		 * 
 		 * @throws IllegalArgumentException
 		 *             if name is {@code null}
@@ -404,14 +412,14 @@ public class UsaMap extends AbstractMap{
 		}
 
 		/**
-		 * Constructs new state fpr the {@link Map}.
+		 * Constructs new state for the {@link AbstractMap}.
 		 * 
-		 * @param name
-		 *            {@link StateName} the to show
+		 * @param code
+		 *            {@link StateCode} to show
 		 * @param colorLevel
 		 *            a value between 0 and 100, the integer you provide here
 		 *            will be interpolated with the color gradient that you
-		 *            defined in {@link Map#addChartColor(ChartColor)}
+		 *            defined in {@link AbstractMap#addChartColor(ChartColor)}
 		 * 
 		 * @throws IllegalArgumentException
 		 *             if code is {@code null}
@@ -431,15 +439,22 @@ public class UsaMap extends AbstractMap{
 		}
 
 		/**
-		 * The construtor accepts a string for the state code, better use the
-		 * enum, it its safer.
+		 * The construtor accepts a string for the state code.
+		 * The state is identified with a valid USA state code. 
+		 * These codes are the upper-case, two-letter codes. 
+		 * A full list of these codes can be found at a number of sites: <br />
+		 * <a href="http://code.google.com/intl/de-DE/apis/chart/statecodes.html">
+		 * http://code.google.com/intl/de-DE/apis/chart/statecodes.html</a>.<br>
+		 * 
+		 * If you are not sure about correct codes, refer to the links in the class 
+		 * documentation or use the enum {@link StateName}.
 		 * 
 		 * @param code
 		 *            e.g. CA for california
 		 * @param colorLevel
 		 *            colorLevel a value between 0 and 100, the integer you
 		 *            provide here will be interpolated with the color gradient
-		 *            that you defined in {@link Map#addChartColor(ChartColor)}
+		 *            that you defined in {@link AbstractMap#addChartColor(ChartColor)}
 		 * 
 		 * @throws IllegalArgumentException
 		 *             if code is {@code null}
@@ -458,7 +473,6 @@ public class UsaMap extends AbstractMap{
 			this.code = code;
 
 		}
-
 		/**
 		 * Returns the color level, a value between 0 and 100 to interpolate the color.
 		 * 
@@ -487,10 +501,10 @@ public class UsaMap extends AbstractMap{
 		}
 
 		/**
-		 * @return the code the state code convertet to string
+		 * @return the code the state code converted to string
 		 */
 		public String getCode() {
 			return code;
 		}
-	}
+}
 }

@@ -11,6 +11,7 @@ import de.toolforge.googlechartwrapper.color.ChartColor;
  * Specifies a map <a href="http://code.google.com/apis/chart/types.html#maps">
  * http://code.google.com/apis/chart/types.html#maps</a>.
  * 
+ * 
  * <p>
  * Examples how WorldMap can be used:
  * <p><blockquote><pre>

@@ -54,8 +54,8 @@ public abstract class AbstractChart implements IChart {
 	 * @param chartDimension size of the chart in pixel
 	 * 
 	 * @throws IllegalArgumentException if chartDimension is {@code null}
-	 * @throws IllegalArgumentException if height > 1000 and/or weight > 1000
-	 * @throws IllegalArgumentException if area is > 300000
+	 * @throws IllegalArgumentException if height &gt; 1000 and/or width &gt; 1000
+	 * @throws IllegalArgumentException if area (height*width) is &gt; 300000
 	 */
 	public AbstractChart(Dimension chartDimension) {
 		
