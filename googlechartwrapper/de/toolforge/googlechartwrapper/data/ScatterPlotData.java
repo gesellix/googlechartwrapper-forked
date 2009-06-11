@@ -27,7 +27,7 @@ public class ScatterPlotData {
 	}	
 
 	/**
-	 * @return the dataSetX
+	 * @return the dataSet
 	 */
 	public List<ScatterPlotPoint> getDataSet() {
 		
@@ -36,7 +36,7 @@ public class ScatterPlotData {
 	}
 
 	/**
-	 * @param dataSetX the dataSetX to set
+	 * @param dataSet the dataSet to set
 	 * 
 	 * @throws IllegalArgumentException
 	 */

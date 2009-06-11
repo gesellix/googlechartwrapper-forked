@@ -29,7 +29,7 @@ public class BarChartDataSeriesAppender implements IExtendedFeatureAppender,
 
 	/**
 	 * 
-	 * @param ds
+	 * @param barChartDataSerie
 	 * 
 	 * @throws IllegalArgumentException
 	 *             if barChartDataSerie is {@code null}

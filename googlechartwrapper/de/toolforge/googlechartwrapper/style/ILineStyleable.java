@@ -21,21 +21,21 @@ public interface ILineStyleable {
 	
 	/**
 	 * 
-	 * @return
+	 * @return list of {@link LineStyle}
 	 */
 	public List<LineStyle> getLineStyles();
 	
 	/**
 	 * 
 	 * @param index
-	 * @return
+	 * @return the removed {@link LineStyle}
 	 */
 	public LineStyle removeLineStyle(int index);
 	
 	/**
 	 * 
 	 * @param lineStyle
-	 * @return
+	 * @return {@code true} if success
 	 */
 	public boolean removeLineStyle(LineStyle lineStyle);
 	

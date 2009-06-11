@@ -90,8 +90,7 @@ public abstract class AbstractLineChart extends AbstractChart implements
 	 * Constructs a lineChart
 	 * 
 	 * @param chartDimension
-	 *            the size of the diagram
-	 * @param lineChartType
+	 *            the size of the diagram	 
 	 * 
 	 * @throws IllegalArgumentException
 	 */

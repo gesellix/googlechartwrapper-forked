@@ -12,27 +12,27 @@ public interface IFinancialMarkable {
 	/**
 	 * 
 	 * 
-	 * @param lineStyle
+	 * @param fm
 	 */
 	public void addFinancialMarker(FinancialMarker fm);
 	
 	/**
 	 * 
-	 * @return
+	 * @return list of {@link FinancialMarker}
 	 */
 	public List<FinancialMarker> getFinancialMarkers();
 	
 	/**
 	 * 
 	 * @param index
-	 * @return
+	 * @return the removed {@link FinancialMarker}
 	 */
 	public FinancialMarker removeFinancialMarker(int index);
 	
 	/**
 	 * 
-	 * @param lineStyle
-	 * @return
+	 * @param fm
+	 * @return {@code true} if success
 	 */
 	public boolean removeFinancialMarker(FinancialMarker fm);
 	

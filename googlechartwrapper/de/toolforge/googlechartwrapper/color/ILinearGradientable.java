@@ -12,7 +12,7 @@ public interface ILinearGradientable {
 	/**If you set a new LinearGradient the old one will be overwritten. <br />
 	 * If you set <code> null </null> the LinearGradient will be removed.
 	 * 
-	 * @param flg the new LinearGradient
+	 * @param lg the new LinearGradient
 	 */
 	public void setLinearGradient(LinearGradient lg);
 

@@ -95,8 +95,7 @@ public abstract class AbstractMap extends AbstractChart implements ISolidFillabl
 	 * </br />
 	 * <b>Note</b>
 	 * <br />
-	 * The first color in list is the default color, the rest will be used to interpolate, remember the color level in the
-	 * {@link UsaMap#State} and {@link WorldMap#Country} constructors.
+	 * The first color in list is the default color, the rest will be used to interpolate.
 	 */
 	public void addChartColor(ChartColor cc) {
 

@@ -19,7 +19,7 @@ public interface IChartDataable {
 	
 	/**
 	 * 
-	 * @return
+	 * @return the {@link ChartData}
 	 */
 	public ChartData getChartData();
 

@@ -12,7 +12,7 @@ public interface IGridLineable {
 	/**If you set a new GridLine the old one will be overwritten. <br />
 	 * If you set <code> null </null> the GridLine will be removed.
 	 * 
-	 * @param fl the new GridLine
+	 * @param gl the new GridLine
 	 */
 	public void setGridLine(GridLine gl);
 	

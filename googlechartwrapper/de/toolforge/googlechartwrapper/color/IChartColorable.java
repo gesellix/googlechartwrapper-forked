@@ -40,7 +40,7 @@ public interface IChartColorable {
 	/**
 	 * Removes an given ChartColors object. 
 	 * 
-	 * @param rm the ChartColors object in the list
+	 * @param cc the ChartColors object in the list
 	 * 
 	 * @return true if the remove was successful
 	 */

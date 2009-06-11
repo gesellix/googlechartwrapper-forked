@@ -112,7 +112,7 @@ public class XYLineChartData {
 		/**
 		 * Adds a {@link ChartLegend} for the line.
 		 * 
-		 * @param label
+		 * @param legend
 		 * @return {@link XYLineChartData}
 		 * 
 		 * @throws IllegalArgumentException

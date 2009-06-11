@@ -20,7 +20,7 @@ public interface IChartTitleable {
 	
 	/**
 	 * 
-	 * @return
+	 * @return the {@link ChartTitle}
 	 */
 	public ChartTitle getChartTitle();
 	

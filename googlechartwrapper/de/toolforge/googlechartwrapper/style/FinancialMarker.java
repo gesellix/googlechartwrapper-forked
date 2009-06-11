@@ -157,8 +157,8 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 
 	/**
 	 * Provides a factory for the
-	 * {@link FinancialMarker #FinancialMarker(int, IDataPoint, Priority) and {
-	 * @link FinancialMarker #FinancialMarker(Color, int, IDataPoint, Priority)}
+	 * {@link FinancialMarker #FinancialMarker(int, IDataPoint, Priority)} and 
+	 * {@link FinancialMarker #FinancialMarker(Color, int, IDataPoint, Priority)}
 	 * constructor.
 	 * 
 	 * 

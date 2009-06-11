@@ -138,7 +138,7 @@ public class BarChartDataSerie {
 	}
 
 	/**
-	 * @param data
+	 * @param dataSet
 	 *            the data to set
 	 *            
 	 *@throws IllegalArgumentException if dataSet or member is {@code null}
@@ -183,8 +183,8 @@ public class BarChartDataSerie {
 	}
 
 	/**
-	 * @param label
-	 *            the label to set
+	 * @param legend
+	 *            the legend to set
 	 *            
 	 * @throws IllegalArgumentException if legend is {@code null}
 	 */

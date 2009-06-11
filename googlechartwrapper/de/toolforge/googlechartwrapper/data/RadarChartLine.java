@@ -32,9 +32,7 @@ public class RadarChartLine {
 	 * Constructs a radar chart line with no line color (default by google api)
 	 * and no values. Points of value zero (0, A or AA depending on the type 
 	 * of encoding) are drawn at the center while those with the maximum value for 
-	 * the encoding used are drawn at the perimeter.
-	 * @param color line color
-	 * @param values values
+	 * the encoding used are drawn at the perimeter.	
 	 * @see RadarChartLineAppender
 	 */
 	public RadarChartLine(){
@@ -63,8 +61,7 @@ public class RadarChartLine {
 	 * Constructs a radar chart line with no line color (default by google api)
 	 * and list as values. Points of value zero (0, A or AA depending on the type 
 	 * of encoding) are drawn at the center while those with the maximum value for 
-	 * the encoding used are drawn at the perimeter.
-	 * @param color line color
+	 * the encoding used are drawn at the perimeter.	
 	 * @param values values
 	 * @see RadarChartLineAppender
 	 */

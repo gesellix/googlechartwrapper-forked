@@ -72,7 +72,7 @@ public class XYLineChartDataAppender implements IExtendedFeatureAppender,
 	/**
 	 * 
 	 * @param index
-	 * @return
+	 * @return the removed {@link XYLineChartData}
 	 * 
 	 * @throws IndexOutOfBoundsException
 	 *             if index is out of bound
@@ -84,7 +84,7 @@ public class XYLineChartDataAppender implements IExtendedFeatureAppender,
 	/**
 	 * Removes a given {@link XYLineChartData} and returns the status.
 	 * 
-	 * @param XYLineChartData
+	 * @param xyLineChartData
 	 * @return {@code true} if success
 	 */
 	public boolean removeXYLineChartData(XYLineChartData xyLineChartData) {

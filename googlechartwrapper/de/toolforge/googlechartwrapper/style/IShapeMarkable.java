@@ -38,7 +38,7 @@ public interface IShapeMarkable {
 	/**
 	 * Removes a given ShapeMaker object.
 	 * 
-	 * @param rm the object to remove
+	 * @param sm the object to remove
 	 * 
 	 * @return true if success
 	 */

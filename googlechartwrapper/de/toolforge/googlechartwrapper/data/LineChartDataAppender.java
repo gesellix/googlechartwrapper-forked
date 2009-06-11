@@ -75,7 +75,7 @@ public class LineChartDataAppender implements IExtendedFeatureAppender,
 	}
 	/**
 	 * Returns a unmodifiable list, empty if nothing was set.
-	 * @return
+	 * @return a unmodifiable view of the {@link LineChartData}
 	 */
 	public List<? extends LineChartData> getList(){
 		return Collections.unmodifiableList(this.data);
@@ -84,7 +84,7 @@ public class LineChartDataAppender implements IExtendedFeatureAppender,
 	/**
 	 * 
 	 * @param index
-	 * @return
+	 * @return the removed {@link LineChartData}
 	 * 
 	 * @throws IndexOutOfBoundsException if index is out of bound
 	 */

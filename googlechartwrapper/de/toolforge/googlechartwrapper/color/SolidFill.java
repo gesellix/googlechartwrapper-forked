@@ -61,7 +61,7 @@ public class SolidFill implements IFeatureAppender
     /**
      * Sets the ChartFillDestination.
      * 
-     * @param destination 
+     * @param fillDestination 
      * 
      * @throws IllegalArgumentException if fillDestination is <code>null</code>
      */

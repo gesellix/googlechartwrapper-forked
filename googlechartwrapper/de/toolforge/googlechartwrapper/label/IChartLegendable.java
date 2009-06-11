@@ -22,7 +22,7 @@ public interface IChartLegendable {
 	
 	/**
 	 * 
-	 * @return
+	 * @return the {@link ChartLegend}
 	 */
 	public ChartLegend getChartLegend();
 

@@ -90,7 +90,7 @@ public class ConcentricPieChartAppender implements IExtendedFeatureAppender,
 	/**
 	 * Returns a unmodifiable list. Empty if nothing was added.
 	 * 
-	 * @return
+	 * @return unmodifiable view of the {@link PieChartSlice}
 	 */
 	public List<? extends ConcentricPieChartSlice> getList() {
 		return Collections.unmodifiableList(this.concentricPieChartSlices);

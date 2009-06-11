@@ -83,8 +83,8 @@ public class BarChartZeroLine implements IFeatureAppender {
 	/**
 	 * Sets the list of zeroLine parameters.
 	 * 
-	 * @param dataSets
-	 *            the dataSets to set
+	 * @param zeroLine
+	 *            the zeroLine to set
 	 * 
 	 * @throws IllegalArgumentException
 	 *             if zeroLine is {@code null} or empty or member is out of

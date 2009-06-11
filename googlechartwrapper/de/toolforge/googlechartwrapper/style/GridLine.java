@@ -128,7 +128,7 @@ public class GridLine implements IFeatureAppender {
 	}
 
 	/**
-	 * <b>Important</b> You must also call {@link GridLineBuilder}{@link #segment(float, float)}.
+	 * <b>Important</b> You must also call {@link GridLineBuilder#segment(float, float)}.
 	 * 
 	 * @param xOffset
 	 * @param yOffset

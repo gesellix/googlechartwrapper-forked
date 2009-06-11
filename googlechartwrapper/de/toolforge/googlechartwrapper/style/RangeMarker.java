@@ -85,14 +85,14 @@ public class RangeMarker implements IFeatureAppender {
 	}
 	/**
 	 * 
-	 * @return
+	 * @return the StartPoint
 	 */
 	public float getStartPoint(){
 		return this.startPoint;
 	}
 	/**
 	 * 
-	 * @return
+	 * @return the stopPoint
 	 */
 	public float getStopPoint(){
 		return this.endPoint;

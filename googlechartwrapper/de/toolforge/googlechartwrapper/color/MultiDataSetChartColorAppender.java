@@ -63,7 +63,7 @@ public class MultiDataSetChartColorAppender implements IExtendedFeatureAppender 
 
 	/**
 	 * 
-	 * @param cc
+	 * @param chartColor
 	 * 
 	 * @throws IllegalArgumentException
 	 *             if chartColor is {@code null}

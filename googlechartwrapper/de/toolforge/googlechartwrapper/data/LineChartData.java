@@ -78,7 +78,7 @@ public class LineChartData {
 		/**
 		 * 
 		 * @param color
-		 * @return
+		 * @return {@link LineChartDataBuilder}
 		 * 
 		 * @throws IllegalArgumentException if color is {@code null}
 		 */
@@ -94,8 +94,8 @@ public class LineChartData {
 
 		/**
 		 * 
-		 * @param label
-		 * @return
+		 * @param legend
+		 * @return {@link LineChartDataBuilder}
 		 * 
 		 * @throws IllegalArgumentException if legend is {@code null}
 		 */
@@ -111,7 +111,7 @@ public class LineChartData {
 		/**
 		 * 
 		 * @param style
-		 * @return
+		 * @return {@link LineChartDataBuilder}
 		 * 
 		 * @throws IllegalArgumentException if style is {@code null}
 		 */
@@ -124,7 +124,7 @@ public class LineChartData {
 		}
 		/**
 		 * 
-		 * @return
+		 * @return the new {@link LineChartData} instance.
 		 */
 		public LineChartData build() {
 			return new LineChartData(this);

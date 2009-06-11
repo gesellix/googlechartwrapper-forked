@@ -25,7 +25,7 @@ public interface IMultiDataSetChartColorable{
 	/**
 	 * Adds a single ChartColor.
 	 * 
-	 * @param cc
+	 * @param chartColor
 	 * 
 	 * @throws IllegalArgumentException if chartColor is {@code null}
 	 */

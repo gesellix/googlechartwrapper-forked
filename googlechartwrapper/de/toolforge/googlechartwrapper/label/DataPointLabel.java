@@ -37,26 +37,25 @@ public class DataPointLabel implements IFeatureAppender {
 	/**
 	 * Constructs a new {@link DataPointLabel}. Use this constructor for plain text and flags.
 	 * 
-	 * @param labelType {@link LabelType} choose flag or plain text, if you want to use a number see {@link DataPointLabel}{@link #DataPointLabel(Number, Color, int, IDataPoint, int, Priority)}
+	 * @param labelType {@link LabelType} choose flag or plain text, if you want to use a number see {@link #DataPointLabel(Number, Color, int, IDataPoint, int, Priority)}
 	 * @param labelContent the string to show
 	 * @param color color of the text
-	 * @param dataSetIndex value >= 0 
-	 * @param dataPoint see {@link DataPoint}, e.g. {@link DataPoint#newDrawEachPoint()} 
+	 * @param dataSetIndex value &lt;= 0 
+	 * @param dataPoint see {@link DataPoint}
 	 * @param size the size in pixel
 	 * 
-	 * @see DataPoint
-	 * @see {@link #DataPointLabel(Number, Color, int, IDataPoint, int, Priority)} for numbers
+	 * @see DataPoint 
 	 * 
 	 * @throws IllegalArgumentException
 	 *             if labelContent is {@code null}
 	 * @throws IllegalArgumentException
 	 *             if color is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if dataSetindex is < 0
+	 *             if dataSetindex is &gt; 0
 	 * @throws IllegalArgumentException
 	 *             if dataPoint is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if size is < 0
+	 *             if size is &gt; 0
 	 * @throws IllegalArgumentException
 	 *             if labelType is {@code null}
 	 * @throws IllegalArgumentException
@@ -96,8 +95,8 @@ public class DataPointLabel implements IFeatureAppender {
 	 * 
 	 * @param number to build a number use the number builder, e.g. {@link CurrencyValueNumberBuilder} or {@link FloatingPointNumberBuilder}
 	 * @param color the color
-	 * @param dataSetIndex value >= 0
-	 * @param dataPoint see {@link DataPoint}, e.g. {@link DataPoint#newDrawEachPoint()} 
+	 * @param dataSetIndex value &lt;= 0
+	 * @param dataPoint see {@link DataPoint}
 	 * @param size the size in pixel
 	 * @param priority {@link Priority}
 	 * 
@@ -112,11 +111,11 @@ public class DataPointLabel implements IFeatureAppender {
 	 * @throws IllegalArgumentException
 	 *             if color is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if dataSetindex is < 0
+	 *             if dataSetindex is &gt; 0
 	 * @throws IllegalArgumentException
 	 *             if dataPoint is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if size is < 0
+	 *             if size is &gt; 0
 	 * @throws IllegalArgumentException
 	 *             if priority is {@code null}
 	 */
@@ -313,7 +312,7 @@ public class DataPointLabel implements IFeatureAppender {
 		 * Set the text which stands before the number.
 		 * 
 		 * @param before text before the number
-		 * @return
+		 * @return {@link AbstractNumberBuilder}
 		 */
 		public AbstractNumberBuilder textBefore(String before) {
 
@@ -325,7 +324,7 @@ public class DataPointLabel implements IFeatureAppender {
 		 * Set the text which stands after the number-
 		 * 
 		 * @param after the text after the number
-		 * @return
+		 * @return {@link AbstractNumberBuilder}
 		 */
 		public AbstractNumberBuilder textAfter(String after) {
 
@@ -336,7 +335,7 @@ public class DataPointLabel implements IFeatureAppender {
 		/**
 		 * Call this method to displays trailing zeros.
 		 * 
-		 * @return
+		 * @return {@link AbstractNumberBuilder}
 		 */
 		public AbstractNumberBuilder displayTrailingZeros() {
 			this.displayTrailingZeros = true;
@@ -344,7 +343,7 @@ public class DataPointLabel implements IFeatureAppender {
 		}
 		/**
 		 * Call this method to displays group separators.
-		 * @return
+		 * @return {@link AbstractNumberBuilder}
 		 */
 		public AbstractNumberBuilder displayGroupSeparator() {
 			this.displayGroupSeparator = true;
@@ -353,7 +352,7 @@ public class DataPointLabel implements IFeatureAppender {
 		/**
 		 * Call this method to display the value of the x-coordinate at the chosen data point.
 		 * 
-		 * @return
+		 * @return {@link AbstractNumberBuilder}
 		 */
 		public AbstractNumberBuilder displayXCoordinateValue() {
 			this.displayXCoordinate = true;
@@ -363,7 +362,7 @@ public class DataPointLabel implements IFeatureAppender {
 		/**
 		 * Call this method to display the value of the y-coordinate at the chosen data point.
 		 * 
-		 * @return
+		 * @return {@link AbstractNumberBuilder}
 		 */
 		public AbstractNumberBuilder displayYCoordinateValue() {
 			this.displayXCoordinate = false;
@@ -376,7 +375,7 @@ public class DataPointLabel implements IFeatureAppender {
 		/**
 		 * The last method to call. This call build the object.
 		 * 
-		 * @return
+		 * @return the new {@link Number} instance
 		 */
 		public abstract Number build();
 

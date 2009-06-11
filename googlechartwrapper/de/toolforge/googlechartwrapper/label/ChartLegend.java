@@ -82,7 +82,7 @@ public class ChartLegend implements IFeatureAppender{
 
 	/**
 	 * 
-	 * @param labels
+	 * @param label
 	 * @param chartLegendPosition
 	 * 
 	 * @throws IllegalArgumentException

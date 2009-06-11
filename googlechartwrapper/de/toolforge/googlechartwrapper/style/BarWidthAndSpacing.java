@@ -13,9 +13,8 @@ import de.toolforge.googlechartwrapper.util.IFeatureAppender;
  * "http://code.google.com/intl/de-DE/apis/chart/styles.html#bar_width"
  * >http://code.google.com/intl/de-DE/apis/chart/styles.html#bar_width</a>
  * <br />
- * To construct a new object see {@link BarWidthAndSpacing#relativeResize(float, float)}, {@link BarWidthAndSpacing#automaticallyResize()} and
- * {@link BarWidthAndSpacing#automaticallyResize()}.
- * 
+ * To construct a new object see {@link BarWidthAndSpacing#newRelativeResize(float, float)}, {@link BarWidthAndSpacing#newAutomaticallyResize()} and
+ * {@link BarWidthAndSpacing#newAutomaticallyResize(int, int)}.
  * @author steffan
  * 
  */

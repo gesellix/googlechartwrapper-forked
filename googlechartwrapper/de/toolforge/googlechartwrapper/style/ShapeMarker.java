@@ -123,10 +123,11 @@ public class ShapeMarker implements IFeatureAppender {
 
 	/**
 	 * 
-	 * @return
+	 * @return the {@link Color}
 	 */
 	public Color getColor() {
-		return new Color(this.color.getRGB());
+		
+		return this.color == null ? null : new Color(this.color.getRGB());		
 	}
 
 	/**
@@ -144,7 +145,7 @@ public class ShapeMarker implements IFeatureAppender {
 
 	/**
 	 * 
-	 * @return
+	 * @return the {@link MarkerTyp}
 	 */
 	public MarkerTyp getMarkerTyp() {
 		return this.markerTyp;
@@ -152,7 +153,7 @@ public class ShapeMarker implements IFeatureAppender {
 
 	/**
 	 * 
-	 * @return
+	 * @return the size
 	 * 
 	 * 
 	 */
@@ -193,7 +194,7 @@ public class ShapeMarker implements IFeatureAppender {
 
 	/**
 	 * 
-	 * @return
+	 * @return the dataSetIndex
 	 */
 	public int getDataSetIndex() {
 		return dataSetIndex;
@@ -217,7 +218,7 @@ public class ShapeMarker implements IFeatureAppender {
 
 	/**
 	 * 
-	 * @return
+	 * @return the {@link Priority}
 	 */
 	public Priority getPriority() {
 		return priority;
