@@ -40,7 +40,7 @@ public class DataPointLabel implements IFeatureAppender {
 	 * @param labelType {@link LabelType} choose flag or plain text, if you want to use a number see {@link #DataPointLabel(Number, Color, int, IDataPoint, int, Priority)}
 	 * @param labelContent the string to show
 	 * @param color color of the text
-	 * @param dataSetIndex value &lt;= 0 
+	 * @param dataSetIndex value &gt;= 0 
 	 * @param dataPoint see {@link DataPoint}
 	 * @param size the size in pixel
 	 * 
@@ -51,11 +51,11 @@ public class DataPointLabel implements IFeatureAppender {
 	 * @throws IllegalArgumentException
 	 *             if color is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if dataSetindex is &gt; 0
+	 *             if dataSetindex is &lt; 0
 	 * @throws IllegalArgumentException
 	 *             if dataPoint is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if size is &gt; 0
+	 *             if size is &lt; 0
 	 * @throws IllegalArgumentException
 	 *             if labelType is {@code null}
 	 * @throws IllegalArgumentException
@@ -95,7 +95,7 @@ public class DataPointLabel implements IFeatureAppender {
 	 * 
 	 * @param number to build a number use the number builder, e.g. {@link CurrencyValueNumberBuilder} or {@link FloatingPointNumberBuilder}
 	 * @param color the color
-	 * @param dataSetIndex value &lt;= 0
+	 * @param dataSetIndex value &gt;= 0
 	 * @param dataPoint see {@link DataPoint}
 	 * @param size the size in pixel
 	 * @param priority {@link Priority}
@@ -111,11 +111,11 @@ public class DataPointLabel implements IFeatureAppender {
 	 * @throws IllegalArgumentException
 	 *             if color is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if dataSetindex is &gt; 0
+	 *             if dataSetindex is &lt; 0
 	 * @throws IllegalArgumentException
 	 *             if dataPoint is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if size is &gt; 0
+	 *             if size is &lt; 0
 	 * @throws IllegalArgumentException
 	 *             if priority is {@code null}
 	 */
