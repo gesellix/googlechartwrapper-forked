@@ -23,7 +23,8 @@ public enum ChartType {
 	    Map("t"),
 	    RadarChartStraightLines("r"),
 	    RadarChartSplines("rs"),
-	    QRCode("qr");
+	    QRCode("qr"),
+	    Formula("tx");
 	  	
 	  	private final String prefix;
 	  	

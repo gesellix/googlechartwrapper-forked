@@ -27,6 +27,8 @@ public enum ChartTypeFeature {
 	LineStyle("chls"),
 	BarWidthAndSpacing("chbh"),
 	BarChartZeroLine("chp"),
+	FormulaData("chl"),
+	//also used for tex - wtf
 	PieChartLabel("chl"),
 	LineAndBarChartLineStyle("chm=D");
 	
