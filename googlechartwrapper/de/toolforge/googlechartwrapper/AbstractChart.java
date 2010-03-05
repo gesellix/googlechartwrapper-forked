@@ -47,7 +47,17 @@ public abstract class AbstractChart implements IChart {
 	protected Queue<String> urlElements = new LinkedList<String>(); 
 	//TODO martin: remove this instance variable and move into the methods
 	
-	protected Dimension chartDimension;
+	/**
+	 * height of the chart. If no height is specified the
+	 * value must equal {@link Integer#MIN_VALUE}
+	 */
+	protected int height = Integer.MIN_VALUE;
+	
+	/**
+	 * width of the chart. If no width is specified the
+	 * value must equal {@link Integer#MIN_VALUE}
+	 */
+	protected int width = Integer.MIN_VALUE;
 	
 	/**
 	 * Generates an AbstractChart with the given chartDimension.
@@ -65,7 +75,32 @@ public abstract class AbstractChart implements IChart {
 			throw new IllegalArgumentException("height and/or width can not be > 1000");
 		if((chartDimension.getHeight()*chartDimension.getWidth()) > 300000)
 			throw new IllegalArgumentException("the largest possible area can not be > 300000");
-		this.chartDimension = chartDimension;
+		this.height = chartDimension.height;
+		this.width = chartDimension.width;
+	}
+	
+	/**
+	 * Generates an AbstractChart with the given height.
+	 * @param height height of the chart in pixels
+	 * @throws IllegalArgumentException if height &gt; 1000 or height &lt;= 0
+	 */
+	public AbstractChart(int height){
+		if(height > 1000){
+			throw new IllegalArgumentException("height can not be > 1000");
+		}
+		if (height <= 0){
+			throw new IllegalArgumentException("height can not be <= 0");
+		}
+		this.height = height;
+	}
+	
+	/**
+	 * Generates an AbstractChart with an chart size
+	 * determined by the google api. Some charts may not
+	 * work without an explicit height. Thus the developer
+	 * may use this constructor with caution.
+	 */
+	public AbstractChart(){
 	}
 
 	/*
@@ -94,7 +129,27 @@ public abstract class AbstractChart implements IChart {
 	public String getUrl (String apiLocation){
 		collectUrlElements(getAllAppenders());
 		return generateUrlString(apiLocation);
-	}	
+	}
+	
+	/**
+	 * Returns the height of the chart. If no height is specified,
+	 * the returned value equals {@link Integer#MIN_VALUE}. If no
+	 * height is specified the chart api of google may calculate the height.
+	 * @return height of the chart
+	 */
+	protected int getHeight() {
+		return height;
+	}
+
+	/**
+	 * Returns the width of the chart. If no width is specified,
+	 * the returned value equals {@link Integer#MIN_VALUE}. If that is the case
+	 * the chart api of google may calculate the width.
+	 * @return width of the chart
+	 */
+	protected int getWidth() {
+		return width;
+	}
 	
 	/**
 	 * Returns the chart type which is appended to the URL. 
@@ -140,7 +195,7 @@ public abstract class AbstractChart implements IChart {
 					
 					allExtendedFeatureAppenders.add((
 							IExtendedFeatureAppender)f.get(this));
-					//der Liste hinzufÃ¼gen, und zwar das feld aus der aktuellen instanz					
+					//der Liste hinzufügen, und zwar das feld aus der aktuellen instanz					
 				} 
 				catch (IllegalArgumentException e) {
 					throw new RuntimeException(e); //todo mva: think about this!
@@ -160,8 +215,18 @@ public abstract class AbstractChart implements IChart {
 		urlElements.clear();
 		urlElements.offer(MessageFormat.format("cht={0}", this
 				.getUrlChartType()));
-		urlElements.offer(MessageFormat.format("chs={0}x{1}",
-				this.chartDimension.width, this.chartDimension.height));
+		if (height != Integer.MIN_VALUE && width == Integer.MIN_VALUE){
+			//only height specified
+			urlElements.offer(MessageFormat.format("chs={0}",
+					height));
+		}
+		else if (height != Integer.MIN_VALUE && width != Integer.MIN_VALUE){
+			//height and width specified
+			urlElements.offer(MessageFormat.format("chs={0}x{1}",
+					width, height));
+		}
+		//implicit else: no dimension specified (chart size calculated by api)
+		
 				
 	}
 
@@ -196,7 +261,7 @@ public abstract class AbstractChart implements IChart {
 			new HashMap<String, FeatureAppender>();
 			//new HashMap<String, FeatureAppender<IExtendedFeatureAppender>>();
 		//map fuer key=featureprefixstring (z.b. chm) 
-		//value=Appender fÃ¼r alle von diesem Typen
+		//value=Appender für alle von diesem Typen
 		
 		for (IExtendedFeatureAppender ap : appenders) {
 			List<AppendableFeature> ft = ap.getAppendableFeatures(appenders);
@@ -207,7 +272,7 @@ public abstract class AbstractChart implements IChart {
 					m.get(feature.getPrefix()).add(feature);
 				}
 				else { 
-					//ansonsten muss neuer appender fÃ¼r diesen feature typ angelegt werden
+					//ansonsten muss neuer appender für diesen feature typ angelegt werden
 					//if none existed, create a new container for Features 
 					//with the same prefix
 					FeatureAppender fa = new FeatureAppender(
@@ -246,10 +311,10 @@ public abstract class AbstractChart implements IChart {
 	protected String generateUrlString(String baseUrl) {
 		StringBuilder url = new StringBuilder();
 		url.append(baseUrl); //Standardpfad zur API
-		url.append(urlElements.poll());//charttype anhÃ¤ngen
+		url.append(urlElements.poll());//charttype anhängen
 
 		while (urlElements.size() > 0) {
-			//solange noch etwas drin, an die url mit dem Trennzeichen & anhÃ¤ngen
+			//solange noch etwas drin, an die url mit dem Trennzeichen & anhängen
 			String urlElem = urlElements.poll();
 			if (urlElem.length()>0){
 				url.append(AMPERSAND_SEPARATOR + urlElem);
@@ -335,4 +400,5 @@ public abstract class AbstractChart implements IChart {
 			list.add(m);
 		}
 	}
+
 }

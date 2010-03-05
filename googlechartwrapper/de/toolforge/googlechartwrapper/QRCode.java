@@ -200,9 +200,9 @@ public class QRCode extends AbstractChart {
 		
 		//size		
 		builder.append("chs=");
-		builder.append((int)super.chartDimension.getWidth());
+		builder.append((int)super.getWidth());
 		builder.append('x');
-		builder.append((int)super.chartDimension.getHeight());
+		builder.append((int)super.getHeight());
 
 		//charttype
 		builder.append(AbstractChart.AMPERSAND_SEPARATOR);
