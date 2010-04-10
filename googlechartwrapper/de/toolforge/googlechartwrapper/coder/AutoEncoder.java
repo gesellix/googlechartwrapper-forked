@@ -72,8 +72,8 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		encodingType = highest;
 		isCollection = true;
 		
-		String s = encodingType.getCompletePrefix()+
-			super.encodeFloatCollection(values, sep);
+		final IEncoder encoder = EncoderFactory.getEncoder(encodingType);
+		final String s = encoder.encodeFloatCollection(values);
 		
 		encodingType = null;
 		isCollection = false;
@@ -92,8 +92,8 @@ public class AutoEncoder extends AbstractEncoder implements IEncoder {
 		encodingType = highest;
 		isCollection = true;
 		
-		String s = encodingType.getCompletePrefix()+
-			super.encodeIntegerCollection(values, sep);
+		final IEncoder encoder = EncoderFactory.getEncoder(encodingType);
+		final String s = encoder.encodeIntegerCollection(values);
 		
 		encodingType = null;
 		isCollection = false;

@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.toolforge.googlechartwrapper.coder.EncoderFactory;
+import de.toolforge.googlechartwrapper.coder.EncodingType;
 import de.toolforge.googlechartwrapper.coder.ExtendedEncoder;
+import de.toolforge.googlechartwrapper.coder.IEncoder;
 
 /**
  * Test for the {@link ExtendedEncoder}
@@ -76,7 +79,7 @@ public class ExtendedEncoderTest {
 		values.add(valOne);
 		values.add(valTwo);
 		String actual = encoder.encodeIntegerCollection(values);
-		String expected = "e:AAAZAaAzA9|AAAZAaAzA9";		
+		String expected = "e:AAAZAaAzA9,AAAZAaAzA9";		
 		assertEquals(expected, actual);	
 	}
 
@@ -87,8 +90,8 @@ public class ExtendedEncoderTest {
 		ArrayList<int[]> values = new ArrayList<int[]>(2);
 		values.add(valOne);
 		values.add(valTwo);
-		String actual = encoder.encodeIntegerCollection(values,",");
-		String expected = "e:AAAZAaAzA9,AAAZAaAzA9";		
+		String actual = encoder.encodeIntegerCollection(values,"|");
+		String expected = "e:AAAZAaAzA9|AAAZAaAzA9";		
 		assertEquals(expected, actual);
 	}
 	
@@ -100,7 +103,7 @@ public class ExtendedEncoderTest {
 		values.add(valOne);
 		values.add(valTwo);
 		String actual = encoder.encodeFloatCollection(values);
-		String expected = "e:AAAZAaAzA9|AAAZAaAzA9";		
+		String expected = "e:AAAZAaAzA9,AAAZAaAzA9";		
 		assertEquals(expected, actual);
 	}
 
@@ -111,8 +114,8 @@ public class ExtendedEncoderTest {
 		ArrayList<float[]> values = new ArrayList<float[]>(2);
 		values.add(valOne);
 		values.add(valTwo);
-		String actual = encoder.encodeFloatCollection(values,",");
-		String expected = "e:AAAZAaAzA9,AAAZAaAzA9";		
+		String actual = encoder.encodeFloatCollection(values,"|");
+		String expected = "e:AAAZAaAzA9|AAAZAaAzA9";		
 		assertEquals(expected, actual);
 	}
 	
@@ -133,7 +136,8 @@ public class ExtendedEncoderTest {
 				"AK"; //10
 		assertEquals(expected, actual);
 	}
-	
+
+	@Test
 	public void testGoogleExampeChars(){
 		int val[] = {0,25,26,51,52,61,62,63,64,89,90, 115, 116, 125, 126, 127, 
 				4032, 4057, 4058, 4083, 4084, 4093, 4094, 4095};
@@ -147,4 +151,14 @@ public class ExtendedEncoderTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void testMissingValue() {
+		final int[] series = new int[] { 19, -1, 20 };
+
+		final IEncoder encoder = EncoderFactory.getEncoder(EncodingType.ExtendedEncoding);
+
+		final String encoded = encoder.encode(series);
+
+		assertEquals("e:AT__AU", encoded);
+	}
 }

@@ -23,7 +23,33 @@ import de.toolforge.googlechartwrapper.util.UpperLimitGenericAppender;
 import de.toolforge.googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
 
 /**
+ * Specifies a formula <a
+ * href="http://code.google.com/apis/chart/docs/gallery/formulas.html"> 
+ * http://code.google.com/apis/chart/docs/gallery/formulas.html</a>
+ * 
+ * <p>
+ * Here are some examples of how formulas can be used:
+ * <p>
+ * <blockquote>
+ * 
+ * <pre>
+ * Formula formula = new Formula(new FormulaData("e^{\\mathrm{i}\\,\\pi}%2B1=0\\"));
+ * 
+ * Formula formula = new Formula(new FormulaData("x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}"), 200);
+ * 
+ * </pre>
+ * 
+ * </blockquote>
+ * <p>
+ * 
+ * <b>Note:</b> <br>
+ * URL-Encoding 
+ * Remember that you must URL-encode any non-URL-safe characters used in your formula.
+ * The most common mistake is using + in a formula instead of %2B:
+ * 
  * @author steffan
+ * @version 02/20/10
+ * @see FormulaData
  *
  */
 public class Formula extends AbstractChart implements ISolidFillable, ILinearGradientable, ILinearStripeable{
@@ -36,20 +62,50 @@ public class Formula extends AbstractChart implements ISolidFillable, ILinearGra
 			ChartTypeFeature.SolidFill);
 	protected FormulaDataAppender formulaDataAppender = new FormulaDataAppender();
 	
+	/**
+	 * Constructs a new formula.
+	 * 
+	 * @param data the formula data {@link FormulaData}
+	 * @param chartDimension
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if data is {@code null}
+	 */
 	public Formula(FormulaData data, Dimension chartDimension) {
 		super(new Dimension(chartDimension));
 		
 		this.formulaDataAppender.setFormulaData(data);
 		
 	}
+	
+	/**
+	 * Constructs a new formula. The width will be calculated based on the height.
+	 * 
+	 * @param data the formula data {@link FormulaData}
+	 * @param height height of the chart in pixels
+	 * 
+	 * @throws IllegalArgumentException if height &gt; 1000 or height &lt;= 0
+	 * @throws IllegalArgumentException
+	 *             if data is {@code null}
+	 */
 	public Formula(FormulaData data, int height) {
-		super(new Dimension());
+		super(height);
 		
 		this.formulaDataAppender.setFormulaData(data);
 		
 	}
+	
+	/**
+	 * Constructs a new formula.
+	 * The size will be calculated.
+	 * 
+	 * @param data the formula data {@link FormulaData}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if data is {@code null}
+	 */
 	public Formula(FormulaData data) {
-		super(new Dimension());
+		super();
 		
 		this.formulaDataAppender.setFormulaData(data);
 		

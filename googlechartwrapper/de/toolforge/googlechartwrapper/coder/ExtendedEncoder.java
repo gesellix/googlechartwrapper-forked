@@ -14,6 +14,8 @@ package de.toolforge.googlechartwrapper.coder;
  *
  */
 public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
+
+	private static String MISSING_VALUE = "__";
 	
 	/**
 	 * all possible chars for the extended encoding
@@ -50,7 +52,7 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 	 * 4,096 different values.
 	 */
 	public ExtendedEncoder() {
-		super(TYPE,"|");
+		super(TYPE,",");
 	}
 
 	/**
@@ -77,7 +79,7 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 		final StringBuilder encodedData = new StringBuilder();
 		for (int current : values) {
 			encodedData.append((current < 0 || current > 
-				(extendedEncoding.length - 1)) ? "_"
+				(extendedEncoding.length - 1)) ? MISSING_VALUE
 							: extendedEncoding[current]);
 		}
 		return encodedData.toString();
@@ -111,7 +113,7 @@ public class ExtendedEncoder extends AbstractEncoder implements IEncoder {
 		for (float cur : values) {
 			int current = Math.round(cur);
 			encodedData.append((current < 0 || current > 
-				(extendedEncoding.length - 1)) ? "_"
+				(extendedEncoding.length - 1)) ? MISSING_VALUE
 							: extendedEncoding[current]);
 		}
 		return encodedData.toString();

@@ -55,7 +55,7 @@ public class ScatterPlotTest {
 				.offset(25, 25).build());
 		
 		
-		String target = "http://chart.apis.google.com/chart?cht=s&chs=300x300&chd=e:eU..jtvJhr,O0..cS5Qhr&chg=30.0,15.0,12.0,12.0,25.0,25.0&chtt=Simple ScatterPlot&chts=808080,12";
+		String target = "http://chart.apis.google.com/chart?cht=s&chs=300x300&chd=e:eU..jtvJhr,O0..cS5Qhr&chg=30,15,12,2,25,25&chtt=Simple ScatterPlot&chts=808080,12";
 
 		Assert.assertEquals(target, s.getUrl());
 
@@ -132,7 +132,7 @@ public class ScatterPlotTest {
 		plot.setEncoder(EncoderFactory.getEncoder(EncodingType.TextEncoding));
 		
 		
-		String target = "http://chart.apis.google.com/chart?cht=s&chs=600x450&chd=t:10,50,30,45,65,95,20,80,40|20,40,40,15,85,95,80,20,20|100,30,50,75,40,35,80,100,10&chg=30.0,15.0,12.0,12.0,25.0,25.0&chm=a,ff0000,1,-1,20,-1&chtt=Scatter Plot&chts=ffffff,12";
+		String target = "http://chart.apis.google.com/chart?cht=s&chs=600x450&chd=t:10,50,30,45,65,95,20,80,40|20,40,40,15,85,95,80,20,20|100,30,50,75,40,35,80,100,10&chg=30,15,12,2,25,25&chm=a,ff0000,1,-1,20,-1&chtt=Scatter Plot&chts=ffffff,12";
 		Assert.assertEquals(target, plot.getUrl());
 	}
 

@@ -182,7 +182,7 @@ public class GridLine implements IFeatureAppender {
 			builder.append(',');
 			builder.append(this.CutNumber(lengthLineSegment));
 			builder.append(',');
-			builder.append(this.CutNumber(lengthLineSegment));
+			builder.append(this.CutNumber(lengthBlankSegment));
 
 		}
 		if (isOffsetDefined) {
@@ -214,8 +214,15 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 
 		// cut decimal place
 		if (s.length() > i) {
-			return s.substring(0, i + 2);
+			// Optimisation - remove decimal point altogether if digit after the point is zero
+			if (s.charAt(i+1) == '0') {
+				return s.substring(0, i);
+			}
+			else {
+				return s.substring(0, i + 2);
+			}
 		}
+
 		return s;
 	}
 

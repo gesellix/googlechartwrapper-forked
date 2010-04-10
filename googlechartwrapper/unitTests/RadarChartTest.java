@@ -56,7 +56,7 @@ public class RadarChartTest {
 		chart.setChartTitle(new ChartTitle("Java Google Chart Wrapper"));
 
 		
-		String expected = "http://chart.apis.google.com/chart?cht=rs&chs=200x200&chco=ff0000&chd=t:10,20,30,50,70,90,100,120&chg=25.0,25.0&chm=B,ffc800,0,1,0&chtt=Java+Google+Chart+Wrapper&chxl=0:|0|45|90|135|180|225|270|315&chxr=0,0,360&chxt=x";
+		String expected = "http://chart.apis.google.com/chart?cht=rs&chs=200x200&chco=ff0000&chd=t:10,20,30,50,70,90,100,120&chg=25,25&chm=B,ffc800,0,1,0&chtt=Java+Google+Chart+Wrapper&chxl=0:|0|45|90|135|180|225|270|315&chxr=0,0,360&chxt=x";
 		assertEquals(expected, chart.getUrl());
 	}
 

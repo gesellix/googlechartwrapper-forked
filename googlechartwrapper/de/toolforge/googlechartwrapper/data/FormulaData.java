@@ -3,8 +3,13 @@
  */
 package de.toolforge.googlechartwrapper.data;
 
+import de.toolforge.googlechartwrapper.Formula;
+
 /**
  * @author steffan
+ * 
+ * @see FormulaDataAppender
+ * @see Formula
  *
  */
 public class FormulaData {
@@ -12,6 +17,10 @@ public class FormulaData {
 	private String tex;
 	
 	/**
+	 * <b>Note:</b> <br>
+	 * URL-Encoding 
+	 * Remember that you must URL-encode any non-URL-safe characters used in your formula.
+	 * The most common mistake is using + in a formula instead of %2B:
 	 * 
 	 * @param tex
 	 * 

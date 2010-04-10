@@ -32,7 +32,7 @@ public class SimpleEncoder extends AbstractEncoder implements IEncoder{
 	 * Constructs a new SimpleEncoder which provides a resolution of 62 values.
 	 */
 	public SimpleEncoder() {
-		super(TYPE);
+		super(TYPE, ",");
 	}
 	
 	/**

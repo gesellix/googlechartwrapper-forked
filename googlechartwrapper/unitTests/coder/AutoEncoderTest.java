@@ -71,7 +71,7 @@ public class AutoEncoderTest {
 		values.add(valOne);
 		values.add(valTwo);
 		String actual = encoder.encodeIntegerCollection(values);
-		String expected = "e:AAAZAaAzA9A.|AAAZAaAzA9A.";		
+		String expected = "e:AAAZAaAzA9A.,AAAZAaAzA9A.";		
 		assertEquals(expected, actual);
 	}
 	
@@ -83,7 +83,7 @@ public class AutoEncoderTest {
 		values.add(valOne);
 		values.add(valTwo);
 		String actual = encoder.encodeIntegerCollection(values);
-		String expected = "e:AAAZAaAzA9|AAAZAaAzA9A."; //max(Simple,Extended) -> Extended
+		String expected = "e:AAAZAaAzA9,AAAZAaAzA9A."; //max(Simple,Extended) -> Extended
 		assertEquals(expected, actual);
 	}
 	
@@ -95,7 +95,7 @@ public class AutoEncoderTest {
 		values.add(valOne);
 		values.add(valTwo);
 		String actual = encoder.encodeIntegerCollection(values);
-		String expected = "e:AAAZAaAzA9A.|AAAZAaAzA9"; //max(Simple,Extended) -> Extended
+		String expected = "e:AAAZAaAzA9A.,AAAZAaAzA9"; //max(Simple,Extended) -> Extended
 		assertEquals(expected, actual);
 	}
 
