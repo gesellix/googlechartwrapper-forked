@@ -43,8 +43,6 @@ public abstract class AbstractChart implements IChart {
 	/**
 	 * queue with url elements which are added to the url string later on
 	 */
-	//protected Queue<String> urlElements = new LinkedList<String>(); 
-	//TODO martin: remove this instance variable and move into the methods
 	
 	/**
 	 * height of the chart. If no height is specified the
@@ -129,7 +127,7 @@ public abstract class AbstractChart implements IChart {
 	 * 
 	 * @see googlechartwrapper.Chart#getUrl()
 	 */
-	public String getUrl(){
+	public final String getUrl(){
 		return generateUrlString(GOOGLE_API, collectUrlElements(getAllAppenders()));
 	}
 	
@@ -385,7 +383,7 @@ public abstract class AbstractChart implements IChart {
 		return result;
 	}
 
-	private static interface FeatureAppender{
+	protected static interface FeatureAppender{
 		public String getPrefix();		
 		public String getContent();
 		public String getUrlGetString();
@@ -398,7 +396,7 @@ public abstract class AbstractChart implements IChart {
 	 * @author martin
 	 *
 	 */
-	private static class AppendableFeatureAppender implements FeatureAppender{
+	protected static class AppendableFeatureAppender implements FeatureAppender{
 
 		/**
 		 * list of elements/features
@@ -478,10 +476,10 @@ public abstract class AbstractChart implements IChart {
 		}
 	}
 	
-	private static class BasicStringAppender implements FeatureAppender{
+	protected static class BasicStringAppender implements FeatureAppender{
 		private String prefix, content;
 
-		private BasicStringAppender(String prefix, String content) {
+		BasicStringAppender(String prefix, String content) {
 			super();
 			this.prefix = prefix;
 			this.content = content;
