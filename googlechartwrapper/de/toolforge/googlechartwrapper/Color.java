@@ -12,7 +12,7 @@ package de.toolforge.googlechartwrapper;
  */
 public class Color {
 
-	private int red, green, blue, transparency;
+	private int red, green, blue, alpha;
 	private int value;
 
 	public Color(int r, int g, int b, int a) {
@@ -23,7 +23,7 @@ public class Color {
 		red = r;
 		green = g;
 		blue = b;
-		transparency = a;
+		alpha = a;
 	}
 
 	public Color(int r, int g, int b) {
@@ -37,7 +37,7 @@ public class Color {
 		int r = c.getRed();
 		int g = c.getGreen();
 		int b = c.getBlue();
-		int a = c.getTransparency();
+		int a = c.getAlpha();
 
 		value = ((a & 0xFF) << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8)
 				| ((b & 0xFF) << 0);
@@ -46,11 +46,11 @@ public class Color {
 		red = r;
 		green = g;
 		blue = b;
-		transparency = a;
+		alpha = a;
 	}
 
 	public java.awt.Color toAwtColor() {
-		return new java.awt.Color(red, green, blue, transparency);
+		return new java.awt.Color(red, green, blue, alpha);
 	}
 
 	/**
@@ -100,6 +100,7 @@ public class Color {
 	 * @return 8 letter string
 	 */
 	public String getEightCharacterHexValue() {
+		System.out.println(Integer.toHexString(getRGB())+ " "+alpha);
 		return Integer.toHexString(getRGB()).substring(2, 8)
 				+ Integer.toHexString(getRGB()).substring(0, 2);
 	}
@@ -120,8 +121,8 @@ public class Color {
 		return blue;
 	}
 
-	protected int getTransparency() {
-		return transparency;
+	protected int getAlpha() {
+		return alpha;
 	}
 
 	/**
@@ -148,7 +149,7 @@ public class Color {
 	}
 
 	public String getMatchingColorHexValue() {
-		if (transparency == 255) {
+		if (alpha == 255) {
 			return (getSixCharacterHexValue());
 		} else {
 			return (getEightCharacterHexValue());

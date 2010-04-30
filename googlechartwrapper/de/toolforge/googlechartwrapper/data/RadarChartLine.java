@@ -57,6 +57,29 @@ public class RadarChartLine {
 	}
 	
 	/**
+	 * Constructs a radar chart line with the given line color and list as values.
+	 * Points of value zero (0, A or AA depending on the type of encoding) are 
+	 * drawn at the center while those with the maximum value for the encoding 
+	 * used are drawn at the perimeter.
+	 * @param awtColor line color
+	 * @param values values
+	 * @see RadarChartLineAppender
+	 * @deprecated use {@link #RadarChartLine(Color, List)}
+	 */
+	@Deprecated
+	public RadarChartLine(java.awt.Color awtColor, List<Integer> values) {
+		super();
+		if (values == null){
+			throw new IllegalArgumentException("ila");
+		}
+		if (awtColor != null){
+			this.color = new Color(awtColor);
+		}
+		
+		this.values = values;
+	}
+	
+	/**
 	 * Constructs a radar chart line with no line color (default by google api)
 	 * and list as values. Points of value zero (0, A or AA depending on the type 
 	 * of encoding) are drawn at the center while those with the maximum value for 
@@ -93,7 +116,7 @@ public class RadarChartLine {
 	/**
 	 * Sets the color of the chart line. 
 	 * @param awtColor color or null; if none
-	 * @deprecated
+	 * @deprecated use {@link #setColor(Color)}
 	 */
 	public void setColor(java.awt.Color awtColor) {
 		if (awtColor == null){
