@@ -15,6 +15,14 @@ public class Color {
 	private int red, green, blue, alpha;
 	private int value;
 
+	/**
+	 * Creates an sRGB color with the specified red, green, blue, 
+	 * and alpha values in the range (0 - 255). 
+	 * @param r  the Red component
+	 * @param g  the Green component
+	 * @param b  the Blue component
+	 * @param a  the alpha component
+	 */
 	public Color(int r, int g, int b, int a) {
 		value = ((a & 0xFF) << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8)
 				| ((b & 0xFF) << 0);
@@ -26,10 +34,25 @@ public class Color {
 		alpha = a;
 	}
 
+	/**
+	 * Creates an opaque sRGB color with the specified red, green, and blue values 
+	 * in the range (0 - 255). Alpha is defaulted to 255. 
+	 * @param r  the Red component
+	 * @param g  the Green component
+	 * @param b  the Blue component
+	 */
 	public Color(int r, int g, int b) {
 		this(r, g, b, 255);
 	}
 
+	/**
+	 * Creates an sRGB color with the specified red, green, blue, 
+	 * and alpha values by the awt color object. 
+	 * Legacy parsing for old implementations based on awt color object
+	 * before the introduction of own object.
+	 * @param c base color
+	 * @throws IllegalArgumentException if color == null
+	 */
 	public Color(java.awt.Color c) {
 		if (c == null) {
 			throw new IllegalArgumentException("color can not be null");
@@ -49,6 +72,11 @@ public class Color {
 		alpha = a;
 	}
 
+	/**
+	 * Transforms the color object into an awt color object.
+	 * All 4 components (r,g,b,a) are retained.
+	 * @return awt color object
+	 */
 	public java.awt.Color toAwtColor() {
 		return new java.awt.Color(red, green, blue, alpha);
 	}
@@ -109,19 +137,19 @@ public class Color {
 		return value;
 	}
 
-	protected int getRed() {
+	public int getRed() {
 		return red;
 	}
 
-	protected int getGreen() {
+	public int getGreen() {
 		return green;
 	}
 
-	protected int getBlue() {
+	public int getBlue() {
 		return blue;
 	}
 
-	protected int getAlpha() {
+	public int getAlpha() {
 		return alpha;
 	}
 
@@ -148,6 +176,13 @@ public class Color {
 		// return Integer.toHexString(color.getRGB()).substring(2, 8);
 	}
 
+	/**
+	 * Returns a 6 letter hex value if the alpha value is 255 or an 8 letter
+	 * string otherwise.
+	 * @return hex string based on alpha value
+	 * @see #getSixCharacterHexValue()
+	 * @see #getEightCharacterHexValue()
+	 */
 	public String getMatchingColorHexValue() {
 		if (alpha == 255) {
 			return (getSixCharacterHexValue());
