@@ -3,6 +3,8 @@ package de.toolforge.googlechartwrapper;
 
 
 
+import java.util.Queue;
+
 import de.toolforge.googlechartwrapper.coder.EncoderFactory;
 import de.toolforge.googlechartwrapper.coder.EncodingType;
 import de.toolforge.googlechartwrapper.coder.ExtendedEncoder;
@@ -240,42 +242,20 @@ public class QRCode extends AbstractChart {
 	}
 
 	@Override
-	public String getUrl() {
+	protected void collectUrlElements(Queue<FeatureAppender> urlElements) {
+		super.collectUrlElements(urlElements);
 
-		StringBuilder builder = new StringBuilder();
+		urlElements.add(new BasicStringAppender("chl",
+				this.textToEncode.replaceAll(" ", "%20")));
 		
-		//first of all, the api
-		builder.append(AbstractChart.GOOGLE_API);
-		
-		//size		
-		builder.append("chs=");
-		builder.append((int)super.getWidth());
-		builder.append('x');
-		builder.append((int)super.getHeight());
-
-		//charttype
-		builder.append(AbstractChart.AMPERSAND_SEPARATOR);
-		builder.append("cht=qr");
-
-		builder.append(AbstractChart.AMPERSAND_SEPARATOR);
-		builder.append("chl=");
-		builder.append(this.textToEncode.replaceAll(" ", "%20"));
-
-		builder.append(AbstractChart.AMPERSAND_SEPARATOR);
-		builder.append("choe=");
-		builder.append(this.outputEncoding.getEncoding());
+		urlElements.add(new BasicStringAppender("choe",
+				this.outputEncoding.getEncoding()));
 
 		// only if ecLevel is set
 		if (this.ecLevel != null) {
-
-			builder.append(AbstractChart.AMPERSAND_SEPARATOR);
-			builder.append("chld=");
-			builder.append(this.ecLevel.getLevel());
-			builder.append('|');
-			builder.append(this.margin);
+			urlElements.add(new BasicStringAppender("chld",
+					this.ecLevel.getLevel()+"|"+this.margin));
 		}
-
-		return builder.toString();
 
 	}
 
