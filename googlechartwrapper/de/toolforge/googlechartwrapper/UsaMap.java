@@ -1,6 +1,6 @@
 package de.toolforge.googlechartwrapper;
 
-import java.awt.Dimension;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -48,6 +48,45 @@ public class UsaMap extends AbstractMap{
 	 *             if stateList is {@code null} or member is {@code null}
 	 * @throws IllegalArgumentException
 	 *             if chartDimension is out of range
+	 *             
+	 * @deprecated use {@link #UsaMap(Dimension, List)}
+	 */
+	@Deprecated
+	public UsaMap(java.awt.Dimension awtChartDimension, List<State> stateList) {
+		super(awtChartDimension);
+
+		if (stateList == null)
+			throw new IllegalArgumentException("stateList can not be null");
+
+		List<State> copy = Collections.unmodifiableList(stateList);
+		for (State current : copy) {
+			if (current == null)
+				throw new IllegalArgumentException("listMember can not be null");
+		}
+		if (awtChartDimension.height > 220) {
+			throw new IllegalArgumentException("height must be <= 220");
+		}
+		if (awtChartDimension.width > 440) {
+			throw new IllegalArgumentException("width must be <= 440");
+		}
+
+		this.stateList = copy;
+		this.area = GeographicalArea.USA;
+	}
+	
+	
+	/**
+	 * Constructs a new map, with usa as {@link Country}, the list contains all states.
+	 * 
+	 * @param chartDimension
+	 * @param stateList
+	 *            list of states {@link State}, can be empty to show only the
+	 *            us.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if stateList is {@code null} or member is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if chartDimension is out of range
 	 */
 	public UsaMap(Dimension chartDimension, List<State> stateList) {
 		super(chartDimension);
@@ -60,10 +99,10 @@ public class UsaMap extends AbstractMap{
 			if (current == null)
 				throw new IllegalArgumentException("listMember can not be null");
 		}
-		if (chartDimension.height > 220) {
+		if (chartDimension.getHeight() > 220) {
 			throw new IllegalArgumentException("height must be <= 220");
 		}
-		if (chartDimension.width > 440) {
+		if (chartDimension.getWidth() > 440) {
 			throw new IllegalArgumentException("width must be <= 440");
 		}
 

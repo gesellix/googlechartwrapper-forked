@@ -1,7 +1,6 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.IEncoder;
@@ -86,6 +85,23 @@ public abstract class AbstractLineChart extends AbstractChart implements
 
 	protected AxisLabelAppender axisLabelAppender = new AxisLabelAppender();
 
+	
+	/**
+	 * Constructs a lineChart
+	 * 
+	 * @param chartDimension
+	 *            the size of the diagram	 
+	 * 
+	 * @throws IllegalArgumentException
+	 * 
+	 * @Deprecated use {@link #AbstractLineChart(Dimension)}
+	 */
+	@Deprecated
+	public AbstractLineChart(java.awt.Dimension awtChartDimension) {
+		super(awtChartDimension);
+
+	}
+	
 	/**
 	 * Constructs a lineChart
 	 * 
@@ -98,6 +114,7 @@ public abstract class AbstractLineChart extends AbstractChart implements
 		super(chartDimension);
 
 	}
+	
 
 	protected abstract ChartType getChartType();
 

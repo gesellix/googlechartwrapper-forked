@@ -1,7 +1,7 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
+
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.color.ISolidFillable;
@@ -58,6 +58,19 @@ public abstract class AbstractPieChart extends AbstractChart implements
 	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
 			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
 
+	/**
+	 * Constructs a new PieChart.
+	 * 
+	 * @param chartDimension
+	 * 
+	 * @deprecated use {@link #AbstractPieChart(Dimension)rt}
+	 */
+	@Deprecated
+	public AbstractPieChart(java.awt.Dimension awtChartDimension) {
+		super(awtChartDimension);
+
+	}
+	
 	/**
 	 * Constructs a new PieChart.
 	 * 

@@ -1,7 +1,7 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
+
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.AutoEncoder;
@@ -63,11 +63,43 @@ public class PieChart extends AbstractPieChart implements IColorable, IEncodeabl
 	 * Constructs a new pie chart.
 	 * 
 	 * @param chartDimension
+	 * 
+	 * @deprecated use {@link #PieChart(Dimension)}
+	 */
+	@Deprecated
+	public PieChart(java.awt.Dimension awtChartDimension) {
+		super(awtChartDimension);
+	}
+	
+	/**
+	 * Constructs a new pie chart.
+	 * 
+	 * @param chartDimension
 	 */
 	public PieChart(Dimension chartDimension) {
 		super(chartDimension);
 	}
 
+	/**
+	 * Constructs a new pie chart.
+	 * 
+	 * @param chartDimension
+	 * @param pieChartSlices
+	 *            a list of {@link PieChartSlice}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if pieChatSlices is {@code null} or member
+	 *             
+	 * @deprecated use {@link #PieChart(Dimension, List)}
+	 */
+	@Deprecated
+	public PieChart(java.awt.Dimension awtChartDimension,
+			List<? extends PieChartSlice> pieChartSlices) {
+		super(awtChartDimension);
+
+		this.pieChartSliceAppender.add(pieChartSlices);
+	}
+	
 	/**
 	 * Constructs a new pie chart.
 	 * 
@@ -83,6 +115,24 @@ public class PieChart extends AbstractPieChart implements IColorable, IEncodeabl
 		super(chartDimension);
 
 		this.pieChartSliceAppender.add(pieChartSlices);
+	}
+	
+	/**
+	 * Constructs a new pie chart with single slice.
+	 * 
+	 * @param pieChartSlice
+	 *            a single slice {@link PieChartSlice}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if pieChartSlice is {@code null}
+	 *             
+	 * @deprecated use {@link #PieChart(Dimension, PieChartSlice)}
+	 */
+	@Deprecated
+	public PieChart(java.awt.Dimension awtChartDimension, PieChartSlice pieChartSlice) {
+		super(awtChartDimension);
+
+		this.pieChartSliceAppender.add(pieChartSlice);
 	}
 
 	/**

@@ -1,7 +1,7 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
+
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.IEncoder;
@@ -81,11 +81,40 @@ public class GoogleOMeter extends AbstractChart implements ISolidFillable,
 	 * Constructs a new GoogleOMeter.
 	 * 
 	 * @param chartDimension
+	 * 
+	 * @deprecated use {@link #GoogleOMeter(Dimension)}
+	 */
+	@Deprecated
+	public GoogleOMeter(java.awt.Dimension awtChartDimension) {
+		super(awtChartDimension);
+	}
+	
+	/**
+	 * Constructs a new GoogleOMeter.
+	 * 
+	 * @param chartDimension
 	 */
 	public GoogleOMeter(Dimension chartDimension) {
 		super(chartDimension);
 	}
 
+	/**
+	 * Constructs a new GoogleOMeter.
+	 * 
+	 * @param chartDimension
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if value is {@code null}
+	 *             
+	 * @deprecated use {@link #GoogleOMeter(Dimension, GoogleOMeterValue)}
+	 */
+	@Deprecated
+	public GoogleOMeter(java.awt.Dimension awtChartDimension, GoogleOMeterValue value) {
+		super(awtChartDimension);
+
+		this.valueAppender.add(value);
+	}
+	
 	/**
 	 * Constructs a new GoogleOMeter.
 	 * 

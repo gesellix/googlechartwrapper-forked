@@ -50,6 +50,32 @@ public final class Dimension {
 		height = d.getHeight();
 
 	}
+	
+	/**
+	 * Constructs a {@link Dimension} with the values provided by the given
+	 * {@link java.awt.Dimension} d.
+	 * 
+	 * @param d
+	 *            the given not <code>null</code> {@link java.awt.Dimension}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             - if d is <code>null</code>
+	 * @throws IllegalArgumentException
+	 *             -if width and/or height is <code>null</code>
+	 */
+	public Dimension(java.awt.Dimension d){
+		
+		if (d == null)
+			throw new IllegalArgumentException("dimension can not be null");
+
+		if (d.getWidth() < 0)
+			throw new IllegalArgumentException("width can not be < 0");
+		if (d.getHeight() < 0)
+			throw new IllegalArgumentException("height can not be < 0");
+
+		width = (int) d.getWidth();
+		height = (int) d.getHeight();
+	}
 
 	/**
 	 * Constructs a {@link Dimension} with given height and width.

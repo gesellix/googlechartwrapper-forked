@@ -1,7 +1,7 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
+
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -133,6 +133,37 @@ public class BarChart extends AbstractChart implements IMarkable, ILinearable,
 			ChartTypeFeature.ChartLegendPosition, 1,
 			UpperLimitReactions.RemoveFirst);
 
+	/**
+	 * Constructs a bar chart
+	 * 
+	 * @param chartDimension
+	 *            the size of the diagram
+	 * @param orientation
+	 *            the orientation
+	 * @param style
+	 *            the style
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if orientation is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if style is {@code null}
+	 *             
+	 * @deprecated use {@link #BarCharthart(Dimension, BarChartOrientation, BarChartStyle)}
+	 */
+	@Deprecated
+	public BarChart(java.awt.Dimension awtChartDimension, BarChartOrientation orientation,
+			BarChartStyle style) {
+		super(awtChartDimension);
+
+		if (orientation == null)
+			throw new IllegalArgumentException("orientation can not be null");
+		if (style == null)
+			throw new IllegalArgumentException("style can not be null");
+
+		this.orientation = orientation;
+		this.style = style;
+	}
+	
 	/**
 	 * Constructs a bar chart
 	 * 

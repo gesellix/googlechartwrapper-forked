@@ -1,7 +1,7 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
+
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.EncoderFactory;
@@ -34,7 +34,22 @@ public abstract class AbstractMap extends AbstractChart implements ISolidFillabl
 	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
 			ChartTypeFeature.ChartColor, ",");
 
+	/**
+	 * 
+	 * @param chartDimension
+	 * 
+	 * @deprecated use {@link #AbstractMap(Dimension)actMap}
+	 */
+	@Deprecated
+	public AbstractMap(java.awt.Dimension awtChartDimension) {
+		super(awtChartDimension);
+		
+	}
 	
+	/**
+	 * 
+	 * @param chartDimension
+	 */
 	public AbstractMap(Dimension chartDimension) {
 		super(chartDimension);
 		

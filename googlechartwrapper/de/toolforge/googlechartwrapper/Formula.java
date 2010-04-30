@@ -3,7 +3,7 @@
  */
 package de.toolforge.googlechartwrapper;
 
-import java.awt.Dimension;
+
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.EncoderFactory;
@@ -61,6 +61,25 @@ public class Formula extends AbstractChart implements ISolidFillable, ILinearGra
 	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
 			ChartTypeFeature.SolidFill);
 	protected FormulaDataAppender formulaDataAppender = new FormulaDataAppender();
+	
+	/**
+	 * Constructs a new formula.
+	 * 
+	 * @param data the formula data {@link FormulaData}
+	 * @param chartDimension
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if data is {@code null}
+	 *             
+	 * @deprecated use {@link #Formula(FormulaData, Dimension)}
+	 */
+	@Deprecated
+	public Formula(FormulaData data, java.awt.Dimension awtChartDimension) {
+		super(new Dimension(awtChartDimension));
+		
+		this.formulaDataAppender.setFormulaData(data);
+		
+	}
 	
 	/**
 	 * Constructs a new formula.

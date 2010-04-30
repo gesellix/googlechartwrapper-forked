@@ -24,7 +24,8 @@ public enum ChartType {
 	    RadarChartStraightLines("r"),
 	    RadarChartSplines("rs"),
 	    QRCode("qr"),
-	    Formula("tx");
+	    Formula("tx"),
+	    FreestandingDynamicIcon("chst");
 	  	
 	  	private final String prefix;
 	  	

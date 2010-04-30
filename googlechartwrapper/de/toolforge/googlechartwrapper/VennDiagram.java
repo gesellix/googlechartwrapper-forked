@@ -1,7 +1,7 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
+
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.AutoEncoder;
@@ -87,6 +87,21 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
 			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
 
+	
+	/**
+	 * Constructs a venn diagram
+	 * 
+	 * @param chartDimension
+	 *            the size of the diagram
+	 *            
+	 * @deprecated use {@link #VennDiagram(Dimension)}
+	 */
+	@Deprecated
+	public VennDiagram(java.awt.Dimension awtChartDimension) {
+		super(awtChartDimension);
+
+	}
+	
 	/**
 	 * Constructs a venn diagram
 	 * 
@@ -98,6 +113,23 @@ public class VennDiagram extends AbstractChart implements ILinearable,
 
 	}
 
+	/**
+	 * Constructs a venn diagram, with given {@link VennDiagramData}.
+	 * 
+	 * @param chartDimension
+	 *            the size of the diagram
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if data is {@code null}
+	 *             
+	 * @deprecated use {@link #VennDiagram(Dimension, VennDiagramData)}
+	 */
+	@Deprecated
+	public VennDiagram(java.awt.Dimension awtChartDimension, VennDiagramData data) {
+		super(awtChartDimension);
+
+	}
+	
 	/**
 	 * Constructs a venn diagram, with given {@link VennDiagramData}.
 	 * 

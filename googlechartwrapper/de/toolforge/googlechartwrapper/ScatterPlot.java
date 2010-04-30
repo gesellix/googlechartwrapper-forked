@@ -1,7 +1,7 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
+
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.AutoEncoder;
@@ -93,6 +93,20 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
 			ChartTypeFeature.ChartLegendPosition, 1, UpperLimitReactions.RemoveFirst);
 
+	
+	/**
+	 * Constructs a new {@link ScatterPlot}.
+	 * 
+	 * @param chartDimension
+	 * 
+	 * @deprecated use {@link #ScatterPlot(Dimension)}
+	 */
+	@Deprecated
+	public ScatterPlot(java.awt.Dimension awtChartDimension) {
+		super(awtChartDimension);
+
+	}
+	
 	/**
 	 * Constructs a new {@link ScatterPlot}.
 	 * 
@@ -103,6 +117,23 @@ public class ScatterPlot extends AbstractChart implements ILinearable,
 
 	}
 
+	/**
+	 * Constructs a new {@link ScatterPlot}.
+	 * 
+	 * @param chartDimension
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if data is {@code null}
+	 *             
+	 * @deprecated use {@link #ScatterPlot(Dimension, ScatterPlotData)}
+	 */
+	@Deprecated
+	public ScatterPlot(java.awt.Dimension awtChartDimension, ScatterPlotData data) {
+		super(awtChartDimension);
+
+		this.scatterPlotDataAppender.setScatterPlotData(data);
+	}
+	
 	/**
 	 * Constructs a new {@link ScatterPlot}.
 	 * 

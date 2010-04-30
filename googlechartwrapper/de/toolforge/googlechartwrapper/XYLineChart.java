@@ -1,7 +1,7 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
+
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
@@ -45,6 +45,19 @@ public class XYLineChart extends AbstractLineChart implements IEncodeable {
 
 	protected XYLineChartDataAppender xyLineChartDataAppender = new XYLineChartDataAppender();
 
+	/**
+	 * Constructs a new XYLineChart.
+	 * 
+	 * @param chartDimension
+	 * 
+	 * @deprecated use {@link #XYLineChart(Dimension)}
+	 */
+	@Deprecated
+	public XYLineChart(java.awt.Dimension awtChartDimension) {
+		super(awtChartDimension);
+
+	}
+	
 	/**
 	 * Constructs a new XYLineChart.
 	 * 

@@ -1,7 +1,7 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
+
 
 import de.toolforge.googlechartwrapper.coder.EncoderFactory;
 import de.toolforge.googlechartwrapper.coder.EncodingType;
@@ -43,6 +43,24 @@ public class QRCode extends AbstractChart {
 	 * 
 	 * @throws IllegalArgumentException if textToEncode is {@code null}
 	 */
+	@Deprecated
+	public QRCode(java.awt.Dimension awtChartDimension, String textToEncode) {
+		super(awtChartDimension);
+
+		if (textToEncode == null)
+			throw new IllegalArgumentException("textToEncode can not be null");
+
+		this.textToEncode = textToEncode;
+	}
+	
+	/**
+	 * Constructs a QRCode.
+	 * 
+	 * @param chartDimension
+	 * @param textToEncode  the text for the QR code
+	 * 
+	 * @throws IllegalArgumentException if textToEncode is {@code null}
+	 */
 	public QRCode(Dimension chartDimension, String textToEncode) {
 		super(new Dimension(chartDimension));
 
@@ -52,6 +70,37 @@ public class QRCode extends AbstractChart {
 		this.textToEncode = textToEncode;
 	}
 
+	/**
+	 * Constructs a QRCode with {@link ECLevel}.
+	 * 
+	 * @param chartDimension
+	 * @param textToEncode  the text for the QR code
+	 * @param ecLevel
+	 * @param margin defines the margin (or blank space) around the QR code
+	 * 
+	 * @throws IllegalArgumentException if textToEncode is {@code null}
+	 * @throws IllegalArgumentException if ecLevel is {@code null}
+	 * 
+	 * @see ECLevel
+	 * 
+	 * @deprecated use {@link #QRCode(Dimension, String, ECLevel, int)}
+	 */
+	@Deprecated
+	public QRCode(java.awt.Dimension awtChartDimension, String textToEncode,
+			ECLevel ecLevel, int margin) {
+		
+		super(awtChartDimension);
+
+		if (textToEncode == null)
+			throw new IllegalArgumentException("textToEncode can not be null");
+		if (ecLevel == null)
+			throw new IllegalArgumentException("ecLevel can not be null");
+
+		this.ecLevel = ecLevel;
+		this.margin = margin;
+		this.textToEncode = textToEncode;
+	}
+	
 	/**
 	 * Constructs a QRCode with {@link ECLevel}.
 	 * 

@@ -1,7 +1,7 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
+
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.AutoEncoder;
@@ -65,12 +65,48 @@ public class ConcentricPieChart extends AbstractPieChart implements
 	 * Constructs a new {@link ConcentricPieChart}.
 	 * 
 	 * @param chartDimension
+	 * 
+	 * @deprecated use {@link #ConcentricPieChart(Dimension)}
+	 */
+	@Deprecated
+	public ConcentricPieChart(java.awt.Dimension awtChartDimension) {
+		super(awtChartDimension);
+
+	}
+	
+	
+	/**
+	 * Constructs a new {@link ConcentricPieChart}.
+	 * 
+	 * @param chartDimension
 	 */
 	public ConcentricPieChart(Dimension chartDimension) {
 		super(chartDimension);
 
 	}
 
+	/**
+	 * Constructs a new {@link ConcentricPieChart} with a list of
+	 * {@link ConcentricPieChartSlice}
+	 * 
+	 * @param chartDimension
+	 * @param concentricPieChartSlices
+	 *            list of {@link ConcentricPieChartSlice}.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if concentricPieChartSlice or member is {@code null}
+	 *             
+	 * @deprecated use {@link #ConcentricPieChart(Dimension, ConcentricPieChartSlice)}
+	 */
+	@Deprecated
+	public ConcentricPieChart(java.awt.Dimension awtChartDimension,
+			List<? extends ConcentricPieChartSlice> concentricPieChartSlices) {
+		super(awtChartDimension);
+
+		this.concentricPieChartAppender.add(concentricPieChartSlices);
+
+	}
+	
 	/**
 	 * Constructs a new {@link ConcentricPieChart} with a list of
 	 * {@link ConcentricPieChartSlice}
@@ -90,6 +126,27 @@ public class ConcentricPieChart extends AbstractPieChart implements
 
 	}
 
+	/**
+	 * Constructs a new {@link ConcentricPieChart} with a single
+	 * {@link ConcentricPieChartSlice}
+	 * 
+	 * @param chartDimension
+	 * @param concentricPieChartSlice
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if concentricPieChartSlice is {@code null}
+	 *             
+	 * @deprecated use {@link #ConcentricPieChart(Dimension, ConcentricPieChartSlice)}
+	 */
+	public ConcentricPieChart(java.awt.Dimension awtChartDimension,
+			ConcentricPieChartSlice concentricPieChartSlice) {
+		super(awtChartDimension);
+
+		this.concentricPieChartAppender.add(concentricPieChartSlice);
+
+	}
+
+	
 	/**
 	 * Constructs a new {@link ConcentricPieChart} with a single
 	 * {@link ConcentricPieChartSlice}

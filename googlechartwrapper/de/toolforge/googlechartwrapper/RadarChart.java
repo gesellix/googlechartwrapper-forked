@@ -1,7 +1,7 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
+
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
@@ -110,9 +110,38 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 	 * Constructs a new {@link RadarChart}
 	 * 
 	 * @param chartDimension
+	 * 
+	 * @deprecated use {@link #RadarChart(Dimension)}
+	 */
+	@Deprecated
+	public RadarChart(java.awt.Dimension awtChartDimension) {
+		super(awtChartDimension);
+
+	}
+	
+	/**
+	 * Constructs a new {@link RadarChart}
+	 * 
+	 * @param chartDimension
 	 */
 	public RadarChart(Dimension chartDimension) {
 		super(chartDimension);
+
+	}
+	/**
+	 * Constructs a new {@link RadarChart}, with a list of lines.
+	 * 
+	 * @param chartDimension
+	 * 
+	 * @throws IllegalArgumentException if radarChartLines or member is {@code null}
+	 * 
+	 * @deprecated use {@link #RadarChart(Dimension, List)}
+	 */
+	@Deprecated
+	public RadarChart(java.awt.Dimension awtChartDimension, List<RadarChartLine> radarChartLines) {
+		super(awtChartDimension);
+		
+		this.radarChartLineAppender.add(radarChartLines);
 
 	}
 	/**
@@ -128,6 +157,23 @@ public class RadarChart extends AbstractChart implements IGridLineable,
 		this.radarChartLineAppender.add(radarChartLines);
 
 	}
+	/**
+	 * Constructs a new {@link RadarChart}, with a single line.
+	 * 
+	 * @param chartDimension
+	 * 
+	 * @throws IllegalArgumentException if radarChartLine is {@code null}
+	 * 
+	 * @deprecated use {@link #RadarChart(Dimension, RadarChartLine)}
+	 */
+	@Deprecated
+	public RadarChart(java.awt.Dimension awtChartDimension, RadarChartLine radarChartLine) {
+		super(awtChartDimension);
+		
+		this.radarChartLineAppender.add(radarChartLine);
+
+	}
+	
 	/**
 	 * Constructs a new {@link RadarChart}, with a single line.
 	 * 

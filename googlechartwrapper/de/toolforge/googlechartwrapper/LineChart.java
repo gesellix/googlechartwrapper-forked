@@ -1,7 +1,6 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
@@ -48,10 +47,40 @@ public class LineChart extends AbstractLineChart implements IEncodeable {
 	 * Constructs a new {@link LineChart}
 	 * 
 	 * @param chartDimension
+	 * 
+	 * @deprecated use {@link #LineChart(Dimension)}
+	 */
+	@Deprecated
+	public LineChart(java.awt.Dimension awtChartDimension) {
+		super(awtChartDimension);
+	}
+	
+	/**
+	 * Constructs a new {@link LineChart}
+	 * 
+	 * @param chartDimension
 	 */
 	public LineChart(Dimension chartDimension) {
 		super(chartDimension);
 	}
+	
+	/**
+	 * Constructs a new {@link LineChart} with a single line.
+	 * 
+	 * @param chartDimension
+	 * @param lineChartData {@link LineChartData}
+	 * 
+	 * @throws IllegalArgumentException if lineChartData is {@code null}
+	 * 
+	 * @deprecated use {@link #LineChart(Dimension, LineChartData)}
+	 */
+	@Deprecated
+	public LineChart(java.awt.Dimension awtChartDimension, LineChartData lineChartData) {
+		super(awtChartDimension);
+		
+		this.lineChartDataAppender.addLineChartData(lineChartData);
+	}
+	
 	/**
 	 * Constructs a new {@link LineChart} with a single line.
 	 * 
@@ -73,9 +102,28 @@ public class LineChart extends AbstractLineChart implements IEncodeable {
 	 * @param lineChartData
 	 * 
 	 * @throws IllegalArgumentException if lineChartData or member is {@code null}
+	 * 
+	 * @deprecated use {@link #LineChart(Dimension, List)}
+	 */
+	@Deprecated
+	public LineChart(java.awt.Dimension awtChartDimension, List<? extends LineChartData> lineChartData) {
+		super(awtChartDimension);
+		
+		this.lineChartDataAppender.addLineChartData(lineChartData);
+	}
+	
+	/**
+	 * Constructs a new {@link LineChart} with a list of {@link LineChartData}
+	 * 
+	 * @param chartDimension
+	 * @param lineChartData
+	 * 
+	 * @throws IllegalArgumentException if lineChartData or member is {@code null}
 	 */
 	public LineChart(Dimension chartDimension, List<? extends LineChartData> lineChartData) {
 		super(chartDimension);
+		
+		this.lineChartDataAppender.addLineChartData(lineChartData);
 	}
 
 	/**

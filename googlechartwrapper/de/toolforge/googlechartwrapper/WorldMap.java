@@ -1,6 +1,6 @@
 package de.toolforge.googlechartwrapper;
 
-import java.awt.Dimension;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -61,6 +61,57 @@ public class WorldMap extends AbstractMap{
 	 *             if chartDimension is out of range (height &gt; 220 or width &gt; 440)
 	 * @throws IllegalArgumentException
 	 *             if area is {@code null}
+	 *             
+	 * @deprecated use {@link #WorldMap(Dimension, GeographicalArea, List)}
+	 */
+	@Deprecated
+	public WorldMap(java.awt.Dimension awtChartDimension, GeographicalArea area,
+			List<Country> countryList) {
+		super(awtChartDimension);
+
+		if (area == null)
+			throw new IllegalArgumentException("area can not be null");
+		if (countryList == null)
+			throw new IllegalArgumentException("countryList can not be null");
+		List<Country> copy = Collections.unmodifiableList(countryList);
+		for (Country current : copy) {
+			if (current == null)
+				throw new IllegalArgumentException("listMember can not be null");
+		}
+		if (awtChartDimension.height > 220) {
+			throw new IllegalArgumentException("height must be <= 220");
+		}
+		if (awtChartDimension.width > 440) {
+			throw new IllegalArgumentException("width must be <= 440");
+		}
+
+		this.countryList = copy;
+		this.area = area;
+	}
+	
+	/**
+	 * Constructs a new map with all areas are possible. If only the USA are wanted 
+	 * choose {@link UsaMap}.
+	 * <p>
+	 * The country argument is a valid ISO Country Code. These codes are the upper-case, 
+	 * two-letter codes as defined by ISO-3166. 
+	 * A full list of these codes can be found at a number of sites: 
+	 * <a href="http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">
+	 * http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html</a><br />
+	 * <a href="http://code.google.com/apis/chart/isocodes.html">
+	 * http://code.google.com/apis/chart/isocodes.html</a>
+	 * 
+	 * @param chartDimension (max height 220, max width 440)
+	 * @param area
+	 *            the area to show {@link GeographicalArea}
+	 * @param countryList
+	 *            a list of {@link Country}, can be empty.
+	 *            
+	 * @throws IllegalArgumentException if countryList or member is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if chartDimension is out of range (height &gt; 220 or width &gt; 440)
+	 * @throws IllegalArgumentException
+	 *             if area is {@code null}
 	 */
 	public WorldMap(Dimension chartDimension, GeographicalArea area,
 			List<Country> countryList) {
@@ -75,10 +126,10 @@ public class WorldMap extends AbstractMap{
 			if (current == null)
 				throw new IllegalArgumentException("listMember can not be null");
 		}
-		if (chartDimension.height > 220) {
+		if (chartDimension.getHeight() > 220) {
 			throw new IllegalArgumentException("height must be <= 220");
 		}
-		if (chartDimension.width > 440) {
+		if (chartDimension.getWidth() > 440) {
 			throw new IllegalArgumentException("width must be <= 440");
 		}
 
