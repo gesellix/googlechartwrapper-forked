@@ -16,7 +16,6 @@ import de.toolforge.googlechartwrapper.style.DefaultValues;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IExtendedFeatureAppender;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
-import de.toolforge.googlechartwrapper.util.MiscUtils;
 
 /**
  * 
@@ -138,8 +137,7 @@ public class ConcentricPieChartAppender implements IExtendedFeatureAppender,
 					if (this.concentricPieChartSlices.get(i)
 							.getPieChartSlices().get(u).getColor() == null) {
 						color
-								.append(MiscUtils
-										.getMatchingColorHexValue(DefaultValues.DataColor));
+								.append(DefaultValues.DataColor.getMatchingColorHexValue());
 					}
 					// we add the set color
 					else {

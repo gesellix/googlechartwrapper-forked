@@ -14,7 +14,6 @@ import de.toolforge.googlechartwrapper.style.DefaultValues;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IExtendedFeatureAppender;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
-import de.toolforge.googlechartwrapper.util.MiscUtils;
 
 /**
  * FeatureAppender for RadarChartLines which makes an feature string of color
@@ -67,8 +66,7 @@ public class RadarChartLineAppender implements IExtendedFeatureAppender, IEncode
 			}
 			//no color was set
 			else{
-				color.append(MiscUtils
-						.getMatchingColorHexValue(DefaultValues.DataColor));
+				color.append(DefaultValues.DataColor.getMatchingColorHexValue());
 			}
 			
 				color.append(",");

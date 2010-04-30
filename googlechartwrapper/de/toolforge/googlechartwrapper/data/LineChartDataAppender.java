@@ -15,7 +15,6 @@ import de.toolforge.googlechartwrapper.style.DefaultValues;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IExtendedFeatureAppender;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
-import de.toolforge.googlechartwrapper.util.MiscUtils;
 
 /**
  * 
@@ -139,8 +138,7 @@ public class LineChartDataAppender implements IExtendedFeatureAppender,
 			}
 			// no color was set, we add the default color
 			if (this.data.get(i).getColor() == null) {
-				color.append(MiscUtils
-						.getMatchingColorHexValue(DefaultValues.DataColor));
+				color.append(DefaultValues.DataColor.getMatchingColorHexValue());
 			}
 
 			// otherwise we have a "," at the end
