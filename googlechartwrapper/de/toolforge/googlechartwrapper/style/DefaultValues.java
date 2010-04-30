@@ -3,8 +3,10 @@
  */
 package de.toolforge.googlechartwrapper.style;
 
+import de.toolforge.googlechartwrapper.Color;
 
-import java.awt.Color;
+
+
 
 /**
  * @author steffan

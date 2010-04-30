@@ -3,7 +3,9 @@
  */
 package de.toolforge.googlechartwrapper.style.icon;
 
-import java.awt.Color;
+import de.toolforge.googlechartwrapper.Color;
+
+
 
 /**
  * @author steffan
