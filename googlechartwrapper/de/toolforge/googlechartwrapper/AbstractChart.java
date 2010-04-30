@@ -132,7 +132,8 @@ public abstract class AbstractChart implements IChart {
 	}
 	
 	/**
-	 * Experimental.
+	 * Experimental. This method is for test purposes only and may be
+	 * renamed or removed in upcomming releases.
 	 * @return post request form with submit button
 	 */
 	public String getPostRequest(){
@@ -143,6 +144,7 @@ public abstract class AbstractChart implements IChart {
 	/**
 	 * Returns the chart url with the specified
 	 * output format chof parameter.
+	 * This method may be renamed or removed in upcomming releases.
 	 * @param format format the chart should be exported with
 	 * @return chart url with chof parameter
 	 */

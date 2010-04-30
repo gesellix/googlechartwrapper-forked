@@ -247,7 +247,7 @@ public class QRCode extends AbstractChart {
 
 		urlElements.add(new BasicStringAppender("chl",
 				this.textToEncode.replaceAll(" ", "%20")));
-		
+
 		urlElements.add(new BasicStringAppender("choe",
 				this.outputEncoding.getEncoding()));
 
