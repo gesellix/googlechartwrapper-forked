@@ -1,10 +1,9 @@
 package de.toolforge.googlechartwrapper.data;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.LineChart;
 import de.toolforge.googlechartwrapper.label.ChartLegend;
 import de.toolforge.googlechartwrapper.style.LineStyle;
@@ -87,7 +86,25 @@ public class LineChartData {
 			if(color == null)
 				throw new IllegalArgumentException("color can not be null");
 			
-			this.color = new Color(color.getRGB());
+			this.color = color;
+			return this;
+
+		}
+		
+		/**
+		 * 
+		 * @param color
+		 * @return {@link LineChartDataBuilder}
+		 * 
+		 * @throws IllegalArgumentException if color is {@code null}
+		 * @deprecated use {@link #color(Color)}
+		 */
+		public LineChartDataBuilder color(java.awt.Color color) {
+
+			if(color == null)
+				throw new IllegalArgumentException("color can not be null");
+			
+			this.color = new Color(color);
 			return this;
 
 		}
@@ -164,7 +181,7 @@ public class LineChartData {
 	public Color getColor() {
 		
 		if(color != null){
-		return new Color(color.getRGB());
+		return color;
 		}
 		return null;
 	}
@@ -179,6 +196,18 @@ public class LineChartData {
 		if(color == null)
 			throw new IllegalArgumentException("color can not be null");
 		this.color = color;
+	}
+	
+	/**
+	 * @param color the color to set
+	 * 
+	 * @throws IllegalArgumentException if color is {@code null}
+	 * @deprecated use {@link #setColor(Color)}
+	 */
+	public void setColor(java.awt.Color color) {
+		if(color == null)
+			throw new IllegalArgumentException("color can not be null");
+		this.setColor(new Color(color));
 	}
 
 	/**

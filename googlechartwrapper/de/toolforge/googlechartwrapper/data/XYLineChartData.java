@@ -3,11 +3,10 @@
  */
 package de.toolforge.googlechartwrapper.data;
 
-
-import java.awt.Color;
 import java.util.Collections;
 import java.util.List;
 
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.label.ChartLegend;
 import de.toolforge.googlechartwrapper.style.LineStyle;
 import de.toolforge.googlechartwrapper.util.Pair;
@@ -104,7 +103,27 @@ public class XYLineChartData {
 			if (color == null)
 				throw new IllegalArgumentException("color can not be null");
 
-			this.color = new Color(color.getRGB());
+			this.color = color;
+			return this;
+
+		}
+		
+		/**
+		 * Adds a color for the line.
+		 * 
+		 * @param color
+		 * @return {@link XYLineChartData}
+		 * 
+		 * @throws IllegalArgumentException
+		 *             if color is {@code null}
+		 * @deprecated use {@link #color(Color)}
+		 */
+		public XYLineChartDataBuilder color(java.awt.Color awtColor) {
+
+			if (awtColor == null)
+				throw new IllegalArgumentException("color can not be null");
+
+			this.color = new Color (awtColor);
 			return this;
 
 		}
@@ -203,7 +222,7 @@ public class XYLineChartData {
 	 */
 	public Color getColor() {
 		
-		return this.color == null ? null : new Color(color.getRGB());
+		return this.color;
 	}
 
 	/**
@@ -218,7 +237,7 @@ public class XYLineChartData {
 
 		if (color == null)
 			throw new IllegalArgumentException("color can not be null");
-		this.color = new Color(color.getRGB());
+		this.color = color;
 	}
 
 	/**

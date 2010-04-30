@@ -146,9 +146,8 @@ public class XYLineChartDataAppender implements IExtendedFeatureAppender,
 			// the user set a color
 			if (this.xyLineChartData.get(i).getColor() != null) {
 				isColorUsed = true;
-				color.append(MiscUtils
-						.getMatchingColorHexValue(this.xyLineChartData.get(i)
-								.getColor()));
+				color.append(this.xyLineChartData.get(i)
+								.getColor().getMatchingColorHexValue());
 			}
 			// no color was set, we add the default color
 			if (this.xyLineChartData.get(i).getColor() == null) {

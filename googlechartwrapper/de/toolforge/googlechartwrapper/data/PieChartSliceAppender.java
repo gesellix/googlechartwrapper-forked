@@ -119,8 +119,8 @@ public class PieChartSliceAppender implements IExtendedFeatureAppender, IEncodea
 			// the user set a color
 			if (this.pieChartSlices.get(i).getColor() != null) {
 				isColorUsed = true;
-				color.append(MiscUtils.getMatchingColorHexValue(this.pieChartSlices.get(i)
-						.getColor()));
+				color.append((this.pieChartSlices.get(i)
+						.getColor().getMatchingColorHexValue()));
 			}
 			// no color was set, we add the default color
 			if (this.pieChartSlices.get(i).getColor() == null) {

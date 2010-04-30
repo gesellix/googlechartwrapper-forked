@@ -99,8 +99,8 @@ public class AxisLabelAppender implements IExtendedFeatureAppender{
 			if (sum.getAxisStyle()!= null){
 				axisStyle.append(i);
 				axisStyle.append(",");
-				axisStyle.append(MiscUtils.getMatchingColorHexValue(
-						sum.getAxisStyle().getColor()));
+				axisStyle.append((
+						sum.getAxisStyle().getColor().getMatchingColorHexValue()));
 				
 				if (sum.getAxisStyle().getFontSize()>0){
 					axisStyle.append(",");

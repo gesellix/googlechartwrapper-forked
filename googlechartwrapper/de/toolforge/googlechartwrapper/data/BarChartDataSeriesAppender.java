@@ -117,9 +117,8 @@ public class BarChartDataSeriesAppender implements IExtendedFeatureAppender,
 			// the user set a color
 			if (this.barChartDataSeries.get(i).getColor() != null) {
 				isColorUsed = true;
-				color.append(MiscUtils
-						.getMatchingColorHexValue(this.barChartDataSeries.get(i)
-								.getColor()));
+				color.append((this.barChartDataSeries.get(i)
+								.getColor().getMatchingColorHexValue()));
 			}
 			// no color was set, we add the default color
 			if (this.barChartDataSeries.get(i).getColor() == null) {

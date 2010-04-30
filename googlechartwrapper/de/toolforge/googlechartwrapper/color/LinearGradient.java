@@ -84,9 +84,9 @@ public class LinearGradient implements IFeatureAppender{
 				throw new IllegalArgumentException("fillDestination can not be null");
 		if(angle > 90 || angle < 0)
 				throw new IllegalArgumentException("angle out of range");
-		if(startColor == null)
+		if(awtStartColor == null)
 				throw new IllegalArgumentException("startColor can not be null");
-		if(endColor == null)
+		if(awtEndColor == null)
 			throw new IllegalArgumentException("endColor can not be null");
 		if(startOffset > 1.0f || startOffset < 0.0f)
 				throw new IllegalArgumentException("startOffset out of range");

@@ -95,9 +95,9 @@ public class LinearStripe implements IFeatureAppender {
 					"fillDestination can not be null");
 		if (angle > 90 || angle < 0)
 			throw new IllegalArgumentException("angle out of range");
-		if (firstColor == null)
+		if (awtFirstColor == null)
 			throw new IllegalArgumentException("firstColor can not be null");
-		if (secondColor == null)
+		if (awtSecondColor == null)
 			throw new IllegalArgumentException("secondColor can not be null");
 		if (firstWidth > 1.0f || firstWidth < 0.0f)
 			throw new IllegalArgumentException("firstWidth out of range");

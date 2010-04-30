@@ -1,11 +1,10 @@
 package de.toolforge.googlechartwrapper.data;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.label.ChartLegend;
 
 /**
@@ -97,7 +96,26 @@ public class BarChartDataSerie {
 			if (color == null)
 				throw new IllegalArgumentException("color can not be null");
 
-			this.color = new Color(color.getRGB());
+			this.color = color;
+			return this;
+
+		}
+		
+		/**
+		 * Adds color to the chart
+		 * @param color
+		 * @return {@link BarChartDataSerieBuilder}
+		 * 
+		 * @throws IllegalArgumentException if the color is {@code null}
+		 * @deprecated use {@link #color(Color)}
+		 */
+		@Deprecated
+		public BarChartDataSerieBuilder color(java.awt.Color color) {
+
+			if (color == null)
+				throw new IllegalArgumentException("color can not be null");
+
+			this.color = new Color(color);
 			return this;
 
 		}
@@ -159,7 +177,7 @@ public class BarChartDataSerie {
 	 * @return the color
 	 */
 	public Color getColor() {
-		return this.color == null ? null : new Color(this.color.getRGB());
+		return this.color;
 	}
 
 	/**

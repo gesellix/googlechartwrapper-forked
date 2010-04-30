@@ -57,15 +57,9 @@ public class SolidFill implements IFeatureAppender
      * @throws IllegalArgumentException if color and/or fillDestination <code>null</code>
      * @deprecated use {@link #SolidFill(ChartFillDestination, Color)}
      */
+    @Deprecated
     public SolidFill(ChartFillDestination fillDestination, java.awt.Color awtColor){
-    	
-    	if(color == null)
-    		throw new IllegalArgumentException("color can not be null");
-    	if(fillDestination == null)
-    		throw new IllegalArgumentException("fillDestination can not be null");
-    	
-    	this.fillDestination = fillDestination;
-    	this.color = new Color(awtColor);
+    	this(fillDestination, new Color(awtColor));
     	
     }
    

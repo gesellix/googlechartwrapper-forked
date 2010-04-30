@@ -134,8 +134,8 @@ public class LineChartDataAppender implements IExtendedFeatureAppender,
 			// the user set a color
 			if (this.data.get(i).getColor() != null) {
 				isColorUsed = true;
-				color.append(MiscUtils.getMatchingColorHexValue(this.data.get(i)
-						.getColor()));
+				color.append((this.data.get(i)
+						.getColor().getMatchingColorHexValue()));
 			}
 			// no color was set, we add the default color
 			if (this.data.get(i).getColor() == null) {

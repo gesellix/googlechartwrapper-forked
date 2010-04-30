@@ -1,11 +1,10 @@
 package de.toolforge.googlechartwrapper.style;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
 
@@ -56,12 +55,50 @@ public class ShapeMarker implements IFeatureAppender {
 		if (size < 0)
 			throw new IllegalArgumentException("size out of range");
 
-		this.color = new Color(color.getRGB());
+		this.color = color;
 		this.markerTyp = markerTyp;
 		this.dataPoint = dataPoint;
 		this.size = size;
 
 	}
+	
+	/**
+	 * Constructs a shapemaker.
+	 * 
+	 * @param markerTyp
+	 *            {@link MarkerTyp}
+	 * @param color
+	 * @param dataSetIndex
+	 *            value >=0
+	 * @param dataPoint
+	 *            {@link DataPoint} can build all dataPoints.
+	 * @param size
+	 *            the size of the marker in pixels, value >=0
+	 * @deprecated use {@link #ShapeMarker(MarkerTyp, Color, int, IDataPoint, int)}
+	 * @throws IllegalArgumentException
+	 */
+	public ShapeMarker(MarkerTyp markerTyp, java.awt.Color color, int dataSetIndex,
+			IDataPoint dataPoint, int size) {
+
+		if (markerTyp == null)
+			throw new IllegalArgumentException("markerTyp can not be null");
+		if (color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if (dataSetIndex < 0)
+			throw new IllegalArgumentException(
+					"dataSetIndex must be 0 or higher");
+		if (dataPoint == null)
+			throw new IllegalArgumentException("dataPoint can not be null");
+		if (size < 0)
+			throw new IllegalArgumentException("size out of range");
+
+		this.color = new Color(color);
+		this.markerTyp = markerTyp;
+		this.dataPoint = dataPoint;
+		this.size = size;
+
+	}
+
 
 	/**
 	 * Constructs a shapemarker.
@@ -98,7 +135,52 @@ public class ShapeMarker implements IFeatureAppender {
 		if (size < 0)
 			throw new IllegalArgumentException("size out of range");
 
-		this.color = new Color(color.getRGB());
+		this.color = color;
+		this.markerTyp = markerTyp;
+		this.dataPoint = dataPoint;
+		this.size = size;
+		this.priority = priority;
+
+	}
+	
+	/**
+	 * Constructs a shapemarker.
+	 * 
+	 * @param markerTyp
+	 *            {@link MarkerTyp}
+	 * @param color
+	 * @param dataSetIndex
+	 *            value >=0
+	 * @param dataPoint
+	 *            {@link DataPoint} can build all dataPoints.
+	 * @param size
+	 *            the size of the marker in pixels, value >=0
+	 * @param priority
+	 *            {@link Priority}
+	 * 
+	 * @throws IllegalArgumentException
+	 * @deprecated use {@link #ShapeMarker(MarkerTyp, Color, int, IDataPoint, int, Priority))}
+	 */
+	@Deprecated
+	public ShapeMarker(MarkerTyp markerTyp, java.awt.Color color, int dataSetIndex,
+			IDataPoint dataPoint, int size, Priority priority) {
+
+		if (dataSetIndex < 0)
+			throw new IllegalArgumentException(
+					"dataSetIndex must be 0 or higher");
+		if (markerTyp == null)
+			throw new IllegalArgumentException("markerTyp can not be null");
+		if (color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if (priority == null)
+			throw new IllegalArgumentException(
+					"priority can not be null");
+		if (dataPoint == null)
+			throw new IllegalArgumentException("dataPoint can not be null");
+		if (size < 0)
+			throw new IllegalArgumentException("size out of range");
+
+		this.color = new Color(color);
 		this.markerTyp = markerTyp;
 		this.dataPoint = dataPoint;
 		this.size = size;
@@ -117,7 +199,7 @@ public class ShapeMarker implements IFeatureAppender {
 		if (color == null)
 			throw new IllegalArgumentException("color can not be null");
 
-		this.color = new Color(color.getRGB());
+		this.color = color;
 
 	}
 
@@ -127,7 +209,7 @@ public class ShapeMarker implements IFeatureAppender {
 	 */
 	public Color getColor() {
 		
-		return this.color == null ? null : new Color(this.color.getRGB());		
+		return color;		
 	}
 
 	/**

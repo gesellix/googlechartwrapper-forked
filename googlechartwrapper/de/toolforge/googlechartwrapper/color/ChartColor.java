@@ -42,7 +42,9 @@ public class ChartColor implements IFeatureAppender {
 	 */
 	@Deprecated
 	public ChartColor(java.awt.Color awtColor) {
-		this (new Color(awtColor));
+		if (awtColor == null)
+			throw new IllegalArgumentException("color can not be null");
+		this.color = new Color(awtColor);
 	}
 
 	/**

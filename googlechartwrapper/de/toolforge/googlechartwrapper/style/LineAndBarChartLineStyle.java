@@ -1,11 +1,10 @@
 package de.toolforge.googlechartwrapper.style;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
 
@@ -67,7 +66,56 @@ public class LineAndBarChartLineStyle implements IFeatureAppender {
 		if (priority == null)
 			throw new IllegalArgumentException("priority can not be null");
 
-		this.color = new Color(color.getRGB());
+		this.color = color;
+		this.dataSetIndex = dataSetIndex;
+		this.dataPoint = dataPoint;
+		this.size = size;
+		this.priority = priority;
+	}
+	
+	/**
+	 * Constructs a new {@link LineAndBarChartLineStyle} with {@link Priority}.
+	 * 
+	 * @param color
+	 *            the color of the line
+	 * @param dataSetIndex
+	 *            the line
+	 * @param dataPoint
+	 *            {@link DataPoint}
+	 * @param size
+	 *            the line size
+	 * @param priority
+	 *            {@link Priority}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if color is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if dataSetIndex < 0
+	 * @throws IllegalArgumentException
+	 *             if dataPoint is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if size < 0
+	 * @throws IllegalArgumentException
+	 *             if priority is {@code null}
+	 * @deprecated use {@link #LineAndBarChartLineStyle(Color, int, IDataPoint, int)}
+	 */
+	@Deprecated
+	public LineAndBarChartLineStyle(java.awt.Color color, int dataSetIndex,
+			IDataPoint dataPoint, int size, Priority priority) {
+
+		if (color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if (dataSetIndex < 0)
+			throw new IllegalArgumentException(
+					"dataSetIndex must be 0 or higher");
+		if (dataPoint == null)
+			throw new IllegalArgumentException("dataPoint can not be null");
+		if (size < 0)
+			throw new IllegalArgumentException("size out of range");
+		if (priority == null)
+			throw new IllegalArgumentException("priority can not be null");
+
+		this.color = new Color(color);
 		this.dataSetIndex = dataSetIndex;
 		this.dataPoint = dataPoint;
 		this.size = size;
@@ -110,11 +158,52 @@ public class LineAndBarChartLineStyle implements IFeatureAppender {
 		if (size < 0)
 			throw new IllegalArgumentException("size out of range");
 
-		this.color = new Color(color.getRGB());
+		this.color = color;
 		this.dataSetIndex = dataSetIndex;
 		this.dataPoint = dataPoint;
 		this.size = size;
+	}
+	
+	/**
+	 * Constructs a new {@link LineAndBarChartLineStyle}.
+	 * 
+	 * @param color
+	 *            the color of the line
+	 * @param dataSetIndex
+	 *            the line
+	 * @param dataPoint
+	 *            {@link DataPoint}
+	 * @param size
+	 *            the line size
+	 * 
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if color is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if dataSetIndex < 0
+	 * @throws IllegalArgumentException
+	 *             if dataPoint is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if size < 0
+	 * @deprecated use {@link #LineAndBarChartLineStyle(Color, int, IDataPoint, int)}
+	 */
+	public LineAndBarChartLineStyle(java.awt.Color color, int dataSetIndex,
+			IDataPoint dataPoint, int size) {
 
+		if (color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if (dataSetIndex < 0)
+			throw new IllegalArgumentException(
+					"dataSetIndex must be 0 or higher");
+		if (dataPoint == null)
+			throw new IllegalArgumentException("dataPoint can not be null");
+		if (size < 0)
+			throw new IllegalArgumentException("size out of range");
+
+		this.color = new Color(color);
+		this.dataSetIndex = dataSetIndex;
+		this.dataPoint = dataPoint;
+		this.size = size;
 	}
 
 	public List<AppendableFeature> getAppendableFeatures(

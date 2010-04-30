@@ -1,11 +1,10 @@
 package de.toolforge.googlechartwrapper.style;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
 
@@ -41,7 +40,34 @@ public class RangeMarker implements IFeatureAppender {
 		if(endPoint < 0.0f || endPoint > 1.0f)
 			throw new IllegalArgumentException("endPoint out of range");		
 		
-		this.color = new Color(color.getRGB());
+		this.color = color;
+		this.startPoint = startPoint;
+		this.endPoint = endPoint;
+		this.align = align;
+		
+	}
+	
+	/**
+	 * Constructs the range marker
+	 * 
+	 * @param align 
+	 * @param color color of range
+	 * @param startPoint value between 0.0 and 1.0
+	 * @param endPoint value between 0.0 and 1.0
+	 * @throws IllegalArgumentException if startPoint or endPoint out of range
+	 * @deprecated use {@link #RangeMarker(Alignment, Color, float, float)}
+	 */
+	public RangeMarker(Alignment align, java.awt.Color color, float startPoint,float endPoint){
+		
+		
+		if(color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if(startPoint < 0.0f || startPoint > 1.0f)
+			throw new IllegalArgumentException("startPoint out of range");
+		if(endPoint < 0.0f || endPoint > 1.0f)
+			throw new IllegalArgumentException("endPoint out of range");		
+		
+		this.color = new Color(color);
 		this.startPoint = startPoint;
 		this.endPoint = endPoint;
 		this.align = align;
@@ -56,7 +82,7 @@ public class RangeMarker implements IFeatureAppender {
 	public void setColor(Color color){
 		if(color == null)
 			throw new IllegalArgumentException("color can not be null");
-		this.color = new Color(color.getRGB());
+		this.color = color;
 	}
 	/**
 	 * 
@@ -81,7 +107,7 @@ public class RangeMarker implements IFeatureAppender {
 	 */
 	public Color getColor(){
 		
-		return new Color(this.color.getRGB());
+		return color;
 	}
 	/**
 	 * 

@@ -63,7 +63,7 @@ public class RadarChartLineAppender implements IExtendedFeatureAppender, IEncode
 			//user set color
 			if(current.getColor() != null){
 				isColorUsed = true;
-				color.append(MiscUtils.getMatchingColorHexValue(current.getColor()));
+				color.append((current.getColor().getMatchingColorHexValue()));
 			}
 			//no color was set
 			else{

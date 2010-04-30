@@ -1,11 +1,10 @@
 package de.toolforge.googlechartwrapper.data;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.RadarChart;
 
 /**
@@ -89,6 +88,21 @@ public class RadarChartLine {
 	 */
 	public void setColor(Color color) {
 		this.color = color;
+	}
+	
+	/**
+	 * Sets the color of the chart line. 
+	 * @param awtColor color or null; if none
+	 * @deprecated
+	 */
+	public void setColor(java.awt.Color awtColor) {
+		if (awtColor == null){
+			this.color = null;
+		}
+		else {
+			this.color = new Color(awtColor);
+		}
+		
 	}
 
 	/**

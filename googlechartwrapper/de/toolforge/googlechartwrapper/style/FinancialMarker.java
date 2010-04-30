@@ -1,10 +1,10 @@
 package de.toolforge.googlechartwrapper.style;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
 
@@ -89,6 +89,37 @@ public class FinancialMarker implements IFeatureAppender {
 		this.priority = priority;
 		this.size = size;
 	}
+	
+	/**
+	 * Constructs a financialMarker with color.
+	 * 
+	 * @param color
+	 * @param dataSetIndex value >=0
+	 * @param dataPoint {@link DataPoint} can build all dataPoints
+	 * @param priority {@link Priority}
+	 * @param size size
+	 *            the size of the marker in pixels, value >=0
+	 * 
+	 * @throws IllegalArgumentException
+	 */
+	public FinancialMarker(java.awt.Color color, int dataSetIndex, IDataPoint dataPoint,
+			int size, Priority priority) {
+
+		if (color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if (dataPoint == null)
+			throw new IllegalArgumentException("dataPoint can not be null");
+		if (priority == null)
+			throw new IllegalArgumentException("priority can not be null");
+		if (size < 0)
+			throw new IllegalArgumentException("size can not be < 0");
+
+		this.color = new Color(color);
+		this.dataSetIndex = dataSetIndex;
+		this.dataPoint = dataPoint;
+		this.priority = priority;
+		this.size = size;
+	}
 
 	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
@@ -98,8 +129,7 @@ public class FinancialMarker implements IFeatureAppender {
 		builder.append("F,");
 		// optional
 		if (color != null) {
-			builder.append(Integer.toHexString(this.color.getRGB()).substring(
-					2, 8));
+			builder.append((this.color.getSixCharacterHexValue()));
 		}
 		builder.append(',');
 		builder.append(this.dataSetIndex);

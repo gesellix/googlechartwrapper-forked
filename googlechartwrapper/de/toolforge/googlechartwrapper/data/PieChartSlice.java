@@ -1,9 +1,8 @@
 package de.toolforge.googlechartwrapper.data;
 
 
-import java.awt.Color;
-
 import de.toolforge.googlechartwrapper.AbstractPieChart;
+import de.toolforge.googlechartwrapper.Color;
 
 /**
  * Slice for the {@link AbstractPieChart}.
@@ -61,7 +60,7 @@ public class PieChartSlice {
 	 * @return the color
 	 */
 	public Color getColor() {
-		return color == null ? null : new Color(color.getRGB());
+		return color;
 	}
 
 
@@ -73,9 +72,8 @@ public class PieChartSlice {
 	public void setColor(Color color) {
 		
 		if(color == null)
-			throw new IllegalArgumentException("color can not be null");
-		
-		this.color = new Color(color.getRGB());
+			throw new IllegalArgumentException("color can not be null");		
+		this.color = color;
 	}
 
 
@@ -127,9 +125,23 @@ public class PieChartSlice {
 			if (color == null)
 				throw new IllegalArgumentException("color can not be null");
 
-			this.color = new Color(color.getRGB());
-
+			this.color = color;
 			return this;
+		}
+		
+		/**
+		 * Adds a color to the {@link PieChartSlice} object.
+		 * 
+		 * @param awtColor
+		 * @return {@link PieChartSliceBuilder}
+		 * 
+		 * @throws IllegalArgumentException if color is {@code null}
+		 * @deprecated use {@link #color(Color)}
+		 */
+		public PieChartSliceBuilder color(java.awt.Color awtColor) {
+			if (awtColor == null)
+				throw new IllegalArgumentException("color can not be null");
+			return color(new Color(awtColor));
 		}
 		
 		/**

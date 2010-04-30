@@ -1,11 +1,10 @@
 package de.toolforge.googlechartwrapper.data;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.ConcentricPieChart;
 import de.toolforge.googlechartwrapper.data.PieChartSlice.PieChartSliceBuilder;
 
@@ -87,7 +86,7 @@ public class ConcentricPieChartSlice {
 	 */
 	public Color getColor() {
 		
-		return color == null ? null : new Color(color.getRGB());		
+		return color;		
 	}
 
 	/**
@@ -100,7 +99,7 @@ public class ConcentricPieChartSlice {
 		if(color == null)
 			throw new IllegalArgumentException("color can not be null");
 		
-		this.color = new Color(color.getRGB());
+		this.color = color;
 	}
 	/**
 	 * The builder for {@link ConcentricPieChartSlice#ConcentricPieChartSlice(ConcentricPieChartSliceBuilder)}.
@@ -150,7 +149,27 @@ public class ConcentricPieChartSlice {
 			if(color == null)
 				throw new IllegalArgumentException("color can not be null");
 			
-			this.color = new Color(color.getRGB());
+			this.color = color;
+			
+			return this;
+			
+		}
+		
+		/**
+		 * Ads a color for the hole ring, all the colors from the {@link PieChartSlice} will be overwritten.
+		 * 
+		 * @param color
+		 * @return {@link ConcentricPieChartSlice}
+		 * 
+		 * @throws IllegalArgumentException if color is {@code null}
+		 * @deprecated use {@link #color(Color)}
+		 */
+		public ConcentricPieChartSliceBuilder color(final java.awt.Color color){
+			
+			if(color == null)
+				throw new IllegalArgumentException("color can not be null");
+			
+			this.color = new Color(color);
 			
 			return this;
 			

@@ -1,11 +1,10 @@
 package de.toolforge.googlechartwrapper.label;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IExtendedFeatureAppender;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
@@ -47,6 +46,13 @@ public class ChartTitle implements IExtendedFeatureAppender{
 		super();
 		this.title = title;
 		setStyle(color, fontsize);
+	}
+	
+	@Deprecated
+	public ChartTitle(String title, java.awt.Color color, int fontsize) {
+		super();
+		this.title = title;
+		setStyle(new Color(color), fontsize);
 	}
 
 	/**
@@ -92,7 +98,7 @@ public class ChartTitle implements IExtendedFeatureAppender{
 			ret.append("&");
 			ret.append(ChartTypeFeature.ChartTitleStyle.getPrefix());
 			ret.append("=");
-			ret.append(MiscUtils.getMatchingColorHexValue(color));
+			ret.append((color.getMatchingColorHexValue()));
 			//ret.append(color);
 			ret.append(",");
 			ret.append(fontsize);

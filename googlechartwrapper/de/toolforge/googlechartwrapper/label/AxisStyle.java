@@ -1,6 +1,6 @@
 package de.toolforge.googlechartwrapper.label;
 
-import java.awt.Color;
+import de.toolforge.googlechartwrapper.Color;
 
 /**
  * Specify font size, color, and alignment for axis labels. The color is mandatory, 
@@ -25,6 +25,14 @@ public class AxisStyle {
 					"if a custom axis style is set.");
 		}
 		this.color = color;
+	}
+	
+	public AxisStyle(java.awt.Color awtColor) {
+		if (awtColor == null){
+			throw new IllegalArgumentException("a color is required, " +
+					"if a custom axis style is set.");
+		}
+		this.color = new Color(awtColor);
 	}
 	
 	/**

@@ -1,13 +1,12 @@
 package de.toolforge.googlechartwrapper;
 
-
 /**
  * Own implementation of a chart color to support environments where the
  * java.awt.Color class is not available. If a java.awt.color object exists it
  * may be wrapped using the public constructor with a color object parameter.
- * The implementation is partially based on the original java.awt.Color
- * class by Sun.
- * (see issue 20)
+ * The implementation is partially based on the original java.awt.Color class by
+ * Sun. (see issue 20)
+ * 
  * @author martin
  * 
  */
@@ -26,16 +25,31 @@ public class Color {
 		blue = b;
 		transparency = a;
 	}
-	
-	public Color (int r, int g, int b){
-		this (r,g,b,255);
+
+	public Color(int r, int g, int b) {
+		this(r, g, b, 255);
 	}
-	
-	public Color (java.awt.Color c){
-		this(c.getRed(), c.getGreen(), c.getBlue(), c.getTransparency());
+
+	public Color(java.awt.Color c) {
+		if (c == null) {
+			throw new IllegalArgumentException("color can not be null");
+		}
+		int r = c.getRed();
+		int g = c.getGreen();
+		int b = c.getBlue();
+		int a = c.getTransparency();
+
+		value = ((a & 0xFF) << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8)
+				| ((b & 0xFF) << 0);
+
+		testColorValueRange(r, g, b, a);
+		red = r;
+		green = g;
+		blue = b;
+		transparency = a;
 	}
-	
-	public java.awt.Color toAwtColor (){
+
+	public java.awt.Color toAwtColor() {
 		return new java.awt.Color(red, green, blue, transparency);
 	}
 
@@ -43,10 +57,14 @@ public class Color {
 	 * Checks the color integer components supplied for validity. Throws an
 	 * {@link IllegalArgumentException} if the value is out of range. From:
 	 * 
-	 * @param r  the Red component
-	 * @param g  the Green component
-	 * @param b  the Blue component
-	 * @param a  the alpha/transparency component
+	 * @param r
+	 *            the Red component
+	 * @param g
+	 *            the Green component
+	 * @param b
+	 *            the Blue component
+	 * @param a
+	 *            the alpha/transparency component
 	 **/
 	private static void testColorValueRange(int r, int g, int b, int a) {
 		boolean rangeError = false;

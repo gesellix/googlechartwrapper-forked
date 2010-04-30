@@ -3,12 +3,11 @@
  */
 package de.toolforge.googlechartwrapper.label;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
 import de.toolforge.googlechartwrapper.util.MiscUtils;
@@ -82,12 +81,68 @@ public class DataPointLabel implements IFeatureAppender {
 		
 		this.labelType = labelType;
 		this.labelContent = labelContent;
-		this.color = new Color(color.getRGB());
+		this.color = color;
 		this.dataSetIndex = dataSetIndex;
 		this.dataPoint = dataPoint;
 		this.size = size;
 		this.priority = priority;
 	}
+	
+	/**
+	 * Constructs a new {@link DataPointLabel}. Use this constructor for plain text and flags.
+	 * 
+	 * @param labelType {@link LabelType} choose flag or plain text, if you want to use a number see {@link #DataPointLabel(Number, Color, int, IDataPoint, int, Priority)}
+	 * @param labelContent the string to show
+	 * @param color color of the text
+	 * @param dataSetIndex value &gt;= 0 
+	 * @param dataPoint see {@link DataPoint}
+	 * @param size the size in pixel
+	 * 
+	 * @see DataPoint 
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if labelContent is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if color is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if dataSetindex is &lt; 0
+	 * @throws IllegalArgumentException
+	 *             if dataPoint is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if size is &lt; 0
+	 * @throws IllegalArgumentException
+	 *             if labelType is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if priority is {@code null}
+	 */
+	public DataPointLabel(LabelType labelType, String labelContent,
+			java.awt.Color color, int dataSetIndex, IDataPoint dataPoint, int size, Priority priority) {
+		
+		if (labelContent == null)
+			throw new IllegalArgumentException("labelContent can not be null");
+		if (labelType == null)
+			throw new IllegalArgumentException("labelType can not be null");
+		if (color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if (dataSetIndex < 0)
+			throw new IllegalArgumentException("dataSetIndex can not be < 0");
+		if (dataPoint == null)
+			throw new IllegalArgumentException("dataPoint can not be null");
+		if (size < 0)
+			throw new IllegalArgumentException("size can not be < 0");
+		if (priority == null)
+			throw new IllegalArgumentException("priority can not be null");
+		
+		
+		this.labelType = labelType;
+		this.labelContent = labelContent;
+		this.color = new Color(color);
+		this.dataSetIndex = dataSetIndex;
+		this.dataPoint = dataPoint;
+		this.size = size;
+		this.priority = priority;
+	}
+
 
 	/**
 	 * Constructs a new {@link DataPointLabel}. This constructor creates new
@@ -136,7 +191,62 @@ public class DataPointLabel implements IFeatureAppender {
 			throw new IllegalArgumentException("priority can not be null");
 
 		this.number = number;
-		this.color = new Color(color.getRGB());
+		this.color = color;
+		this.dataSetIndex = dataSetIndex;
+		this.dataPoint = dataPoint;
+		this.size = size;
+		this.priority = priority;
+		this.isContentNumber = true;
+	}
+	
+	/**
+	 * Constructs a new {@link DataPointLabel}. This constructor creates new
+	 * {@link DataPointLabel} with a {@link Number} as label content.
+	 * 
+	 * @param number to build a number use the number builder, e.g. {@link CurrencyValueNumberBuilder} or {@link FloatingPointNumberBuilder}
+	 * @param color the color
+	 * @param dataSetIndex value &gt;= 0
+	 * @param dataPoint see {@link DataPoint}
+	 * @param size the size in pixel
+	 * @param priority {@link Priority}
+	 * 
+	 * @see DataPoint
+	 * @see CurrencyValueNumberBuilder
+	 * @see FloatingPointNumberBuilder
+	 * @see PercentageValueNumberBuilder
+	 * @see ScientificNotationNumberBuilder
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if number is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if color is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if dataSetindex is &lt; 0
+	 * @throws IllegalArgumentException
+	 *             if dataPoint is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if size is &lt; 0
+	 * @throws IllegalArgumentException
+	 *             if priority is {@code null}
+	 */
+	public DataPointLabel(Number number, java.awt.Color color, int dataSetIndex,
+			IDataPoint dataPoint, int size, Priority priority) {
+
+		if (number == null)
+			throw new IllegalArgumentException("number can not be null");
+		if (color == null)
+			throw new IllegalArgumentException("color can not be null");
+		if (dataSetIndex < 0)
+			throw new IllegalArgumentException("dataSetIndex can not be < 0");
+		if (dataPoint == null)
+			throw new IllegalArgumentException("dataPoint can not be null");
+		if (size < 0)
+			throw new IllegalArgumentException("size can not be < 0");
+		if (priority == null)
+			throw new IllegalArgumentException("priority can not be null");
+
+		this.number = number;
+		this.color = new Color(color);
 		this.dataSetIndex = dataSetIndex;
 		this.dataPoint = dataPoint;
 		this.size = size;
@@ -159,7 +269,7 @@ public class DataPointLabel implements IFeatureAppender {
 		}
 
 		builder.append(",");
-		builder.append(MiscUtils.getMatchingColorHexValue(color));
+		builder.append((color.getMatchingColorHexValue()));
 		builder.append(",");
 		builder.append(dataSetIndex);
 		builder.append(",");
