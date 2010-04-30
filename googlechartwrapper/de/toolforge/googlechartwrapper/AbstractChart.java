@@ -1,7 +1,6 @@
 package de.toolforge.googlechartwrapper;
 
 
-import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -66,6 +65,28 @@ public abstract class AbstractChart implements IChart {
 	 * @throws IllegalArgumentException if chartDimension is {@code null}
 	 * @throws IllegalArgumentException if height &gt; 1000 and/or width &gt; 1000
 	 * @throws IllegalArgumentException if area (height*width) is &gt; 300000
+	 * 
+	 * @deprecated use {@link #AbstractChart(Dimension)}
+	 */
+	@Deprecated
+	public AbstractChart(java.awt.Dimension awtChartDimension) {
+		
+		if(awtChartDimension == null)
+			throw new IllegalArgumentException("chartDimension can not be null");
+		if(awtChartDimension.getHeight() > 1000 || awtChartDimension.getWidth() > 1000)
+			throw new IllegalArgumentException("height and/or width can not be > 1000");
+		if((awtChartDimension.getHeight()*awtChartDimension.getWidth()) > 300000)
+			throw new IllegalArgumentException("the largest possible area can not be > 300000");
+		this.height = awtChartDimension.height;
+		this.width = awtChartDimension.width;
+	}
+	/**
+	 * Generates an AbstractChart with the given chartDimension.
+	 * @param chartDimension size of the chart in pixel
+	 * 
+	 * @throws IllegalArgumentException if chartDimension is {@code null}
+	 * @throws IllegalArgumentException if height &gt; 1000 and/or width &gt; 1000
+	 * @throws IllegalArgumentException if area (height*width) is &gt; 300000
 	 */
 	public AbstractChart(Dimension chartDimension) {
 		
@@ -75,8 +96,8 @@ public abstract class AbstractChart implements IChart {
 			throw new IllegalArgumentException("height and/or width can not be > 1000");
 		if((chartDimension.getHeight()*chartDimension.getWidth()) > 300000)
 			throw new IllegalArgumentException("the largest possible area can not be > 300000");
-		this.height = chartDimension.height;
-		this.width = chartDimension.width;
+		this.height = chartDimension.getHeight();
+		this.width = chartDimension.getWidth();
 	}
 	
 	/**
