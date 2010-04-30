@@ -38,7 +38,7 @@ public abstract class AbstractMap extends AbstractChart implements ISolidFillabl
 	 * 
 	 * @param chartDimension
 	 * 
-	 * @deprecated use {@link #AbstractMap(Dimension)actMap}
+	 * @deprecated use {@link #AbstractMap(Dimension)}
 	 */
 	@Deprecated
 	public AbstractMap(java.awt.Dimension awtChartDimension) {

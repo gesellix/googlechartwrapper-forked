@@ -1,7 +1,5 @@
 package de.toolforge.googlechartwrapper.util;
 
-
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -28,7 +26,7 @@ public class MiscUtils {
 	 * {@link de.toolforge.googlechartwrapper.Color#getEightCharacterHexValue()} class
 	 */
 	@Deprecated
-	public static String getEightCharacterHexValue (Color color){
+	public static String getEightCharacterHexValue (java.awt.Color color){
 		return Integer.toHexString(color.getRGB()).substring(2, 8)+
 			Integer.toHexString(color.getRGB()).substring(0, 2);
 	}
@@ -41,7 +39,7 @@ public class MiscUtils {
 	 * {@link de.toolforge.googlechartwrapper.Color#getSixCharacterHexValue()} class
 	 */
 	@Deprecated
-	public static  String getSixCharacterHexValue (Color color){
+	public static  String getSixCharacterHexValue (java.awt.Color color){
 		//TODO check if fixed mva: fix bug (when transparency in hex with leading 0)
 		String intHexString = Integer.toHexString(color.getRGB());
 		if (intHexString.length()==8){
@@ -58,7 +56,7 @@ public class MiscUtils {
 	}
 	
 	@Deprecated
-	public static String getMatchingColorHexValue (Color color){
+	public static String getMatchingColorHexValue (java.awt.Color color){
 		if (color.getAlpha()==255){
 			return (MiscUtils.getSixCharacterHexValue(color));
 		}

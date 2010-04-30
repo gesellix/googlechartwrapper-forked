@@ -43,7 +43,7 @@ public abstract class AbstractChart implements IChart {
 	/**
 	 * queue with url elements which are added to the url string later on
 	 */
-	protected Queue<String> urlElements = new LinkedList<String>(); 
+	//protected Queue<String> urlElements = new LinkedList<String>(); 
 	//TODO martin: remove this instance variable and move into the methods
 	
 	/**
@@ -130,8 +130,26 @@ public abstract class AbstractChart implements IChart {
 	 * @see googlechartwrapper.Chart#getUrl()
 	 */
 	public String getUrl(){
-		collectUrlElements(getAllAppenders());
-		return generateUrlString(GOOGLE_API);
+		return generateUrlString(GOOGLE_API, collectUrlElements(getAllAppenders()));
+	}
+	
+	/**
+	 * Experimental.
+	 * @return post request form with submit button
+	 */
+	public String getPostRequest(){
+		return generatePostRequestString("http://chart.apis.google.com/chart",
+				collectUrlElements(getAllAppenders()));
+	}
+	
+	/**
+	 * Returns the chart url with the specified
+	 * output format chof parameter.
+	 * @param format format the chart should be exported with
+	 * @return chart url with chof parameter
+	 */
+	public String getUrl(OutputFormat format){
+		return getUrl()+AMPERSAND_SEPARATOR+format.getParameter();
 	}
 	
 	/**
@@ -148,8 +166,7 @@ public abstract class AbstractChart implements IChart {
 	 * @see #GOOGLE_API
 	 */
 	public String getUrl (String apiLocation){
-		collectUrlElements(getAllAppenders());
-		return generateUrlString(apiLocation);
+		return generateUrlString(apiLocation, collectUrlElements(getAllAppenders()));
 	}
 	
 	/**
@@ -232,22 +249,26 @@ public abstract class AbstractChart implements IChart {
 	/**
 	 * Collects all base url elements: chart type and chart dimension.
 	 */
-	protected void collectUrlElements() {
-		urlElements.clear();
-		urlElements.offer(MessageFormat.format("cht={0}", this
+	protected void collectUrlElements(Queue<FeatureAppender> urlElements) {
+		//urlElements.clear();
+		urlElements.add(new BasicStringAppender("cht", this
 				.getUrlChartType()));
+		//urlElements.offer(MessageFormat.format("cht={0}", this
+			//	.getUrlChartType()));
+		
 		if (height != Integer.MIN_VALUE && width == Integer.MIN_VALUE){
 			//only height specified
-			urlElements.offer(MessageFormat.format("chs={0}",
-					height));
+			urlElements.add(new BasicStringAppender("chs", Integer.toString(height)));
+			//urlElements.offer(MessageFormat.format("chs={0}", height));
 		}
 		else if (height != Integer.MIN_VALUE && width != Integer.MIN_VALUE){
 			//height and width specified
-			urlElements.offer(MessageFormat.format("chs={0}x{1}",
-					width, height));
+			urlElements.add(new BasicStringAppender("chs",
+					Integer.toString(width)+"x"+Integer.toString(height)));
+			//urlElements.offer(MessageFormat.format("chs={0}x{1}",
+				//	width, height));
 		}
 		//implicit else: no dimension specified (chart size calculated by api)
-		
 				
 	}
 
@@ -265,7 +286,8 @@ public abstract class AbstractChart implements IChart {
 	 * @param appenders List of all {@link IExtendedFeatureAppender} in the implementing 
 	 * class which features should be appended to the chart url
 	 */
-	protected void collectUrlElements(List<IExtendedFeatureAppender> appenders) {
+	protected Queue<FeatureAppender> 
+		collectUrlElements(List<IExtendedFeatureAppender> appenders) {
 		/*
 		 * Die Methode sammelt alle appendable Features der einzelnen FeatureAppender der
 		 * implementierenden Subklassen. Diese werden dann nach dem jeweiligen feature 
@@ -275,12 +297,12 @@ public abstract class AbstractChart implements IChart {
 		 * Wenn also 2 FeatureAppender ein Feature mit dem selben Prefix enthalten, 
 		 * werden diese beiden Werte in der URL zusammen appended.
 		 */
-		collectUrlElements(); //alle Grundelemente laden
+		Queue<FeatureAppender> urlElements = new LinkedList<FeatureAppender>();
+		collectUrlElements(urlElements); //alle Grundelemente laden
 		//TODO martin: move base elements collecting this to another method
 		
-		Map<String, FeatureAppender> m = 
-			new HashMap<String, FeatureAppender>();
-			//new HashMap<String, FeatureAppender<IExtendedFeatureAppender>>();
+		Map<String, AppendableFeatureAppender> m = 
+			new HashMap<String, AppendableFeatureAppender>();
 		//map fuer key=featureprefixstring (z.b. chm) 
 		//value=Appender für alle von diesem Typen
 		
@@ -296,7 +318,7 @@ public abstract class AbstractChart implements IChart {
 					//ansonsten muss neuer appender für diesen feature typ angelegt werden
 					//if none existed, create a new container for Features 
 					//with the same prefix
-					FeatureAppender fa = new FeatureAppender(
+					AppendableFeatureAppender fa = new AppendableFeatureAppender(
 							feature.getPrefix());
 					fa.add(feature);
 					m.put(fa.getPrefix(),fa);
@@ -304,21 +326,23 @@ public abstract class AbstractChart implements IChart {
 			}			
 		}
 		
-		List<FeatureAppender> values = new ArrayList<FeatureAppender>(m.values());
+		List<AppendableFeatureAppender> values =
+			new ArrayList<AppendableFeatureAppender>(m.values());
 		
 		Collections.sort(values, new Comparator<FeatureAppender>(){
 			public int compare(FeatureAppender arg0, 
 					FeatureAppender arg1) {
-				return arg0.prefix.compareTo(arg1.prefix);
-			}			
+				return arg0.getPrefix().compareTo(arg1.getPrefix());
+			}
 		}); 
 		/*sorting the features to guarantee a url string which is equal on each system
 		 (and not based on the implementation of reflection mechanisms)
 		  e.g. for unittests */
 		
-		for (FeatureAppender ap : values) {			
-			urlElements.offer(ap.getUrlString());
+		for (AppendableFeatureAppender ap : values) {			
+			urlElements.offer(ap);
 		}
+		return urlElements;
 	}
 
 	/**
@@ -329,21 +353,44 @@ public abstract class AbstractChart implements IChart {
 	 * @param baseUrl string which is in front of the url elements
 	 * @return final url containing the base url and each feature string
 	 */
-	protected String generateUrlString(String baseUrl) {
+	protected String generateUrlString(String baseUrl, Queue<FeatureAppender> urlElements) {
+		//TODO mva: get and post with strategy pattern.
 		StringBuilder url = new StringBuilder();
 		url.append(baseUrl); //Standardpfad zur API
-		url.append(urlElements.poll());//charttype anhängen
+		url.append(urlElements.poll().getUrlGetString());//charttype anhängen
 
 		while (urlElements.size() > 0) {
 			//solange noch etwas drin, an die url mit dem Trennzeichen & anhängen
-			String urlElem = urlElements.poll();
+			String urlElem = urlElements.poll().getUrlGetString();
 			if (urlElem.length()>0){
 				url.append(AMPERSAND_SEPARATOR + urlElem);
 			}			 
 		}
 		return url.toString();
 	}
+	
+	protected String generatePostRequestString(String postUrl,
+			Queue<FeatureAppender> urlElements) {		
+		//TODO mva: get and post with strategy pattern.
+		String result = "<form action='"+postUrl+"' method='POST' id='chartForm'>";
+		while (urlElements.size() > 0) {
+			FeatureAppender f = urlElements.poll();
+			String urlElem = "<input type=\"hidden\" name=\""+f.getPrefix()+"\" value=\""+
+				f.getContent()+"\" />";
+			if (urlElem.length()>0){
+				result = result + ("\n"+urlElem);
+			}
+		}
+		result = result + " <input type=\"submit\"  /></form>";
+		return result;
+	}
 
+	private static interface FeatureAppender{
+		public String getPrefix();		
+		public String getContent();
+		public String getUrlGetString();
+	}
+	
 	/**
 	 * Container for {@link AppendableFeature}s with the same prefix. 
 	 * The AppendableFeature url strings are appendded to the final
@@ -351,7 +398,7 @@ public abstract class AbstractChart implements IChart {
 	 * @author martin
 	 *
 	 */
-	private static class FeatureAppender{
+	private static class AppendableFeatureAppender implements FeatureAppender{
 
 		/**
 		 * list of elements/features
@@ -367,11 +414,11 @@ public abstract class AbstractChart implements IChart {
 		 */
 		protected String separator;
 		
-		public FeatureAppender(String stm) {
+		public AppendableFeatureAppender(String stm) {
 			this(stm,"|");
 		}
 		
-		public FeatureAppender (String m, String separator){
+		public AppendableFeatureAppender (String m, String separator){
 			if (separator == null){
 				throw new IllegalArgumentException("sep cannot be null");
 			}
@@ -399,19 +446,14 @@ public abstract class AbstractChart implements IChart {
 		 * <br><code>otherwise</code> string with prefix and = in front of all data strings 
 		 * 		separated by the separator
 		 */
-		public String getUrlString (){
-			 List<AppendableFeature> features = list;
-			 StringBuilder bf = new StringBuilder();
-			 for (AppendableFeature f:features){
-				 bf.append(f.getData());
-				 bf.append(separator);
-			 }
-			 if (bf.length() > 0){
+		public String getUrlGetString (){
+			 String content = getContent();
+			 if (content.length() > 0){
 				 if (prefix.equals("")){
-					 return  bf.substring(0,bf.length()-1);
+					 return content;
 				 }
 				 else {
-					 return prefix +"="+ bf.substring(0,bf.length()-1);
+					 return prefix +"="+ content;
 				 }
 			 }
 			return "";
@@ -419,6 +461,43 @@ public abstract class AbstractChart implements IChart {
 		
 		public void add (AppendableFeature m){
 			list.add(m);
+		}
+
+		@Override
+		public String getContent() {
+			List<AppendableFeature> features = list;
+			 StringBuilder bf = new StringBuilder();
+			 for (AppendableFeature f:features){
+				 bf.append(f.getData());
+				 bf.append(separator);
+			 }
+			 if (bf.length() > 0){
+				 return  bf.substring(0,bf.length()-1);
+			 }
+			 return "";
+		}
+	}
+	
+	private static class BasicStringAppender implements FeatureAppender{
+		private String prefix, content;
+
+		private BasicStringAppender(String prefix, String content) {
+			super();
+			this.prefix = prefix;
+			this.content = content;
+		}
+
+		public String getPrefix() {
+			return prefix;
+		}
+
+		public String getContent() {
+			return content;
+		}
+
+		@Override
+		public String getUrlGetString() {
+			return prefix+"="+content;
 		}
 	}
 

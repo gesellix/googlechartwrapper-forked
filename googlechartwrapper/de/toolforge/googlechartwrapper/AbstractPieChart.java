@@ -63,7 +63,7 @@ public abstract class AbstractPieChart extends AbstractChart implements
 	 * 
 	 * @param chartDimension
 	 * 
-	 * @deprecated use {@link #AbstractPieChart(Dimension)rt}
+	 * @deprecated use {@link #AbstractPieChart(Dimension)}
 	 */
 	@Deprecated
 	public AbstractPieChart(java.awt.Dimension awtChartDimension) {
