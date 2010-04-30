@@ -1,13 +1,12 @@
 package de.toolforge.googlechartwrapper.color;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
-import de.toolforge.googlechartwrapper.util.MiscUtils;
 
 
 /**
@@ -63,8 +62,52 @@ public class LinearStripe implements IFeatureAppender {
 
 		this.fillDestination = fillDestination;
 		this.angle = angle;
-		this.firstColor = new Color(firstColor.getRGB());
-		this.secondColor = new Color(secondColor.getRGB());
+		this.firstColor = firstColor;
+		this.secondColor = secondColor;
+		this.firstWidth = firstWidth;
+		this.secondWith = secondWith;
+	}
+	
+	/**
+	 * Constructs a LinearStripe
+	 * 
+	 * @param fillDestination
+	 * @param angle
+	 *            between 0 and 90
+	 * @param awtFirstColor
+	 * @param firstWidth
+	 *            between 0.0f and 1.0f
+	 * @param awtSecondColor
+	 * @param secondWith
+	 *            between 0.0f and 1.0f
+	 * 
+	 * @throws IllegalArgumentException
+	 * @deprecated use
+	 * {@link #LinearStripe(LinearStripesDestination, int, Color, float, Color, float)}
+	 */
+	@Deprecated
+	public LinearStripe(LinearStripesDestination fillDestination, int angle,
+			java.awt.Color awtFirstColor, float firstWidth, java.awt.Color awtSecondColor,
+			float secondWith) {
+
+		if (fillDestination == null)
+			throw new IllegalArgumentException(
+					"fillDestination can not be null");
+		if (angle > 90 || angle < 0)
+			throw new IllegalArgumentException("angle out of range");
+		if (firstColor == null)
+			throw new IllegalArgumentException("firstColor can not be null");
+		if (secondColor == null)
+			throw new IllegalArgumentException("secondColor can not be null");
+		if (firstWidth > 1.0f || firstWidth < 0.0f)
+			throw new IllegalArgumentException("firstWidth out of range");
+		if (secondWith > 1.0f || secondWith < 0.0f)
+			throw new IllegalArgumentException("secondWith out of range");
+
+		this.fillDestination = fillDestination;
+		this.angle = angle;
+		this.firstColor = new Color(awtFirstColor);
+		this.secondColor = new Color(awtSecondColor);
 		this.firstWidth = firstWidth;
 		this.secondWith = secondWith;
 	}
@@ -80,11 +123,11 @@ public class LinearStripe implements IFeatureAppender {
 		builder.append(',');
 		builder.append(this.angle);
 		builder.append(',');
-		builder.append(MiscUtils.getMatchingColorHexValue(this.firstColor));
+		builder.append(firstColor.getMatchingColorHexValue());
 		builder.append(',');
 		builder.append(this.firstWidth);
 		builder.append(',');
-		builder.append(MiscUtils.getMatchingColorHexValue(this.secondColor));
+		builder.append(secondColor.getMatchingColorHexValue());
 		builder.append(',');
 		builder.append(this.secondWith);
 
@@ -151,7 +194,7 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 	 * @return the firstColor
 	 */
 	public Color getFirstColor() {
-		return new Color(firstColor.getRGB());
+		return firstColor;
 	}
 
 	/**
@@ -167,7 +210,7 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 		if (firstColor == null)
 			throw new IllegalArgumentException("firstColor can not be null");
 
-		this.firstColor = new Color(firstColor.getRGB());
+		this.firstColor = firstColor;
 	}
 
 	/**
@@ -176,7 +219,7 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 	 * @return the secondColor
 	 */
 	public Color getSecondColor() {
-		return new Color(secondColor.getRGB());
+		return secondColor;
 	}
 
 	/**
@@ -191,7 +234,7 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 	public void setSecondColor(Color secondColor) {
 		if (secondColor == null)
 			throw new IllegalArgumentException("secondColor can not be null");
-		this.secondColor = new Color(secondColor.getRGB());
+		this.secondColor = secondColor;
 	}
 
 	/**

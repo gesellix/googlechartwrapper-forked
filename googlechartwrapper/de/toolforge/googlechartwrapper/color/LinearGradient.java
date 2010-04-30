@@ -1,14 +1,12 @@
 package de.toolforge.googlechartwrapper.color;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
-import de.toolforge.googlechartwrapper.util.MiscUtils;
 
 /**
  * Specifies a LinearGradient <a href="http://code.google.com/apis/chart/colors.html#linear_gradient">http://code.google.com/apis/chart/colors.html#linear_gradient</a>
@@ -55,8 +53,50 @@ public class LinearGradient implements IFeatureAppender{
 		
 		this.fillDestination = fillDestination;
 		this.angle = angle;
-		this.startColor = new Color(startColor.getRGB());
-		this.endColor = new Color(endColor.getRGB());
+		this.startColor = startColor;
+		this.endColor = endColor;
+		this.startOffset = startOffset;
+		this.endOffset = endOffset;
+		
+		this.fillDestination = fillDestination;
+	}
+	
+	/**
+	 * Constructs a lineargradient
+	 * 
+	 * @param fillDestination
+	 * @param angle integer between 0 and 90
+	 * @param startColor
+	 * @param startOffset float between 0 and 1
+	 * @param endColor
+	 * @param endOffset float between 0 and 1
+	 * 
+	 * @throws IllegalArgumentException
+	 * @deprecated use
+	 * {@link #LinearGradient(GradientFillDestination, int, Color, float, Color, float)}
+	 */
+	@Deprecated
+	public LinearGradient(GradientFillDestination fillDestination, int angle,
+			java.awt.Color awtStartColor, float startOffset,
+			java.awt.Color awtEndColor, float endOffset) {
+		
+		if(fillDestination == null)
+				throw new IllegalArgumentException("fillDestination can not be null");
+		if(angle > 90 || angle < 0)
+				throw new IllegalArgumentException("angle out of range");
+		if(startColor == null)
+				throw new IllegalArgumentException("startColor can not be null");
+		if(endColor == null)
+			throw new IllegalArgumentException("endColor can not be null");
+		if(startOffset > 1.0f || startOffset < 0.0f)
+				throw new IllegalArgumentException("startOffset out of range");
+		if(endOffset > 1.0f || endOffset < 0.0f)
+			throw new IllegalArgumentException("endOffset out of range");
+		
+		this.fillDestination = fillDestination;
+		this.angle = angle;
+		this.startColor = new Color(awtStartColor);
+		this.endColor = new Color(awtEndColor);
 		this.startOffset = startOffset;
 		this.endOffset = endOffset;
 		
@@ -155,7 +195,7 @@ public class LinearGradient implements IFeatureAppender{
 	 * @return the startColor
 	 */
 	public Color getStartColor() {
-		return new Color(startColor.getRGB());
+		return startColor;
 	}
 
 	/**
@@ -168,7 +208,7 @@ public class LinearGradient implements IFeatureAppender{
 	public void setStartColor(Color startColor) {
 		if(startColor == null)
 			throw new IllegalArgumentException("startColor can not be null");
-		this.startColor = new Color(startColor.getRGB());
+		this.startColor = startColor;
 	}
 
 	/**
@@ -177,7 +217,7 @@ public class LinearGradient implements IFeatureAppender{
 	 * @return the endColor
 	 */
 	public Color getEndColor() {
-		return new Color(endColor.getRGB());
+		return endColor;
 	}
 
 	/**
@@ -203,11 +243,11 @@ public class LinearGradient implements IFeatureAppender{
 		builder.append(',');
 		builder.append(this.angle);
 		builder.append(',');
-		builder.append(MiscUtils.getMatchingColorHexValue(this.startColor));
+		builder.append(startColor.getMatchingColorHexValue());
 		builder.append(',');
 		builder.append(this.startOffset);
 		builder.append(',');
-		builder.append(MiscUtils.getMatchingColorHexValue(this.endColor));
+		builder.append(endColor.getMatchingColorHexValue());
 		builder.append(',');
 		builder.append(this.endOffset);
 		

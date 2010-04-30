@@ -1,14 +1,12 @@
 package de.toolforge.googlechartwrapper.color;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
-import de.toolforge.googlechartwrapper.util.MiscUtils;
 
 /**
  * Specifies a SolidFill <a
@@ -46,7 +44,28 @@ public class SolidFill implements IFeatureAppender
     		throw new IllegalArgumentException("fillDestination can not be null");
     	
     	this.fillDestination = fillDestination;
-    	this.color = new Color(color.getRGB());
+    	this.color = color;
+    	
+    }
+    
+    /**
+     * Constructs an solidfill
+     * 
+     * @param fillDestination define the destination layer
+     * @param awtColor the layers color
+     * 
+     * @throws IllegalArgumentException if color and/or fillDestination <code>null</code>
+     * @deprecated use {@link #SolidFill(ChartFillDestination, Color)}
+     */
+    public SolidFill(ChartFillDestination fillDestination, java.awt.Color awtColor){
+    	
+    	if(color == null)
+    		throw new IllegalArgumentException("color can not be null");
+    	if(fillDestination == null)
+    		throw new IllegalArgumentException("fillDestination can not be null");
+    	
+    	this.fillDestination = fillDestination;
+    	this.color = new Color(awtColor);
     	
     }
    
@@ -80,7 +99,7 @@ public class SolidFill implements IFeatureAppender
     public void setColor(Color color){
     	if(color == null)
     		throw new IllegalArgumentException("color can not be null");
-    	this.color = new Color(color.getRGB());
+    	this.color = color;
     }
     /**
      * Returns the Color.
@@ -89,7 +108,7 @@ public class SolidFill implements IFeatureAppender
      */
     public Color getColor(){
     	
-    	return new Color(this.color.getRGB());
+    	return color;
     } 
    
      public List<AppendableFeature> getAppendableFeatures(List<? extends IFeatureAppender> otherAppenders) {
@@ -102,7 +121,7 @@ public class SolidFill implements IFeatureAppender
     	 builder.append('s');
     	 builder.append(',');
     	 //color
-    	 builder.append(MiscUtils.getMatchingColorHexValue(this.color));
+    	 builder.append(this.color.getMatchingColorHexValue());
 
     	 List<AppendableFeature> feature = new ArrayList<AppendableFeature>(); 
  		

@@ -24,7 +24,10 @@ public class MiscUtils {
 	 * RRGGBBTT
 	 * @param color color to transform
 	 * @return 8 letter string
+	 * @deprecated replaced with
+	 * {@link de.toolforge.googlechartwrapper.Color#getEightCharacterHexValue()} class
 	 */
+	@Deprecated
 	public static String getEightCharacterHexValue (Color color){
 		return Integer.toHexString(color.getRGB()).substring(2, 8)+
 			Integer.toHexString(color.getRGB()).substring(0, 2);
@@ -33,8 +36,11 @@ public class MiscUtils {
 	/**
 	 * Transform a color object into an 6 letter hex value string without transparency.
 	 * @param color color to transform
-	 * @return 6 letter string 
+	 * @return 6 letter string
+	 * @deprecated replaced with
+	 * {@link de.toolforge.googlechartwrapper.Color#getSixCharacterHexValue()} class
 	 */
+	@Deprecated
 	public static  String getSixCharacterHexValue (Color color){
 		//TODO check if fixed mva: fix bug (when transparency in hex with leading 0)
 		String intHexString = Integer.toHexString(color.getRGB());
@@ -51,6 +57,7 @@ public class MiscUtils {
 		//return Integer.toHexString(color.getRGB()).substring(2, 8);
 	}
 	
+	@Deprecated
 	public static String getMatchingColorHexValue (Color color){
 		if (color.getAlpha()==255){
 			return (MiscUtils.getSixCharacterHexValue(color));

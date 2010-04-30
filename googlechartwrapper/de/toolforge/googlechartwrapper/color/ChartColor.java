@@ -1,11 +1,10 @@
 package de.toolforge.googlechartwrapper.color;
 
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
 
@@ -14,7 +13,7 @@ import de.toolforge.googlechartwrapper.util.IFeatureAppender;
  * href="http://code.google.com/apis/chart/colors.html#line_bar_pie_colors"
  * >http://code.google.com/apis/chart/colors.html#line_bar_pie_colors</a>
  * 
- * @author steffan
+ * @author steffan, martin
  * 
  */
 public class ChartColor implements IFeatureAppender {
@@ -22,10 +21,8 @@ public class ChartColor implements IFeatureAppender {
 	private Color color;
 
 	/**
-	 * Constructs an ChartColors object.
-	 * 
-	 * @param color
-	 * 
+	 * Constructs an ChartColors object. 
+	 * @param color color 
 	 * @throws IllegalArgumentException
 	 *             if color is null
 	 */
@@ -34,7 +31,18 @@ public class ChartColor implements IFeatureAppender {
 		if (color == null)
 			throw new IllegalArgumentException("color can not be null");
 
-		this.color = new Color(color.getRGB());
+		this.color = color;
+	}
+	
+	/**
+	 * Constructing a ChartColor based on an AWT Color object.
+	 * @param awtColor color
+	 * @throws IllegalArgumentException
+	 *             if color is null
+	 */
+	@Deprecated
+	public ChartColor(java.awt.Color awtColor) {
+		this (new Color(awtColor));
 	}
 
 	/**
@@ -44,7 +52,7 @@ public class ChartColor implements IFeatureAppender {
 	 */
 	public Color getColor() {
 
-		return new Color(color.getRGB());
+		return color;
 	}
 
 	/**
@@ -58,20 +66,16 @@ public class ChartColor implements IFeatureAppender {
 		if (color == null)
 			throw new IllegalArgumentException("color can not be null");
 
-		this.color = new Color(color.getRGB());
+		this.color = color;
 	}
 
 	public List<AppendableFeature> getAppendableFeatures(
 			List<? extends IFeatureAppender> otherAppenders) {
 
-		StringBuilder builder = new StringBuilder();
-
-		builder.append(Integer.toHexString(color.getRGB()).substring(2, 8));
+		String c = color.getSixCharacterHexValue();
 
 		List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
-
-		feature.add(new AppendableFeature(builder.toString(),
-				ChartTypeFeature.ChartColor));
+		feature.add(new AppendableFeature(c,ChartTypeFeature.ChartColor));
 
 		return feature;
 	}

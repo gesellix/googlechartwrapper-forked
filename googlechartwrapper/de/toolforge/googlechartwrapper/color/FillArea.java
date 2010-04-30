@@ -1,13 +1,12 @@
 package de.toolforge.googlechartwrapper.color;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
+import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
-import de.toolforge.googlechartwrapper.util.MiscUtils;
 
 
 /**
@@ -49,10 +48,31 @@ public class FillArea implements IFeatureAppender {
 		if (color == null)
 			throw new IllegalArgumentException("color can not be null");
 
-		this.color = new Color(color.getRGB());
+		this.color = color;
 		this.startLineIndex = startLineIndex;
 		this.endLineIndex = endLineIndex;
 		this.dataSetKind = kind;
+	}
+	
+	/**
+	 * Constructs a fillarea
+	 * 
+	 * @param kind For a single fillarea it is easier to use single, in this case everything under the is 
+	 * filled. <br />Multi does not work with an radar chart, but you can use single.
+	 * @param awtColor awt Color
+	 * @param startLineIndex is the index of the line at which the fill starts <br />
+	 * first data set specified has an index of zero (0), the second 1, and so on
+	 * @param endLineIndex the index of the line at which the fill ends <br />
+	 * first data set specified has an index of zero (0), the second 1, and so on
+	 * 
+	 * @throws IllegalArgumentException if color is <code>null</code>
+	 * or start/end index are out of range
+	 * @deprecated use {@link #FillArea(DataSetKind, Color, int, int)}
+	 */
+	@Deprecated
+	public FillArea(DataSetKind kind, java.awt.Color awtColor,
+			int startLineIndex, int endLineIndex) {
+		this(kind, new Color(awtColor), startLineIndex, endLineIndex);
 	}
 
 	public List<AppendableFeature> getAppendableFeatures(
@@ -62,12 +82,7 @@ public class FillArea implements IFeatureAppender {
 		
 		builder.append(this.dataSetKind.getDataSetKind());
 		builder.append(',');
-		if (color.getAlpha()==255){
-			builder.append(MiscUtils.getMatchingColorHexValue(this.color));
-		}
-		else {
-			builder.append(MiscUtils.getEightCharacterHexValue(this.color));
-		}
+		builder.append(color.getMatchingColorHexValue());
 		
 		builder.append(',');
 		builder.append(this.startLineIndex);
@@ -92,7 +107,7 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 	 * @return the color
 	 */
 	public Color getColor() {
-		return new Color(color.getRGB());
+		return color;
 	}
 
 	/**
@@ -104,7 +119,7 @@ List<AppendableFeature> feature = new ArrayList<AppendableFeature>();
 	public void setColor(Color color) {
 		if (color == null)
 			throw new IllegalArgumentException("color can not be null");
-		this.color = new Color(color.getRGB());
+		this.color = color;
 	}
 
 	/**
