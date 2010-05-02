@@ -2,7 +2,6 @@ package de.toolforge.googlechartwrapper;
 
 
 import java.lang.reflect.Field;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

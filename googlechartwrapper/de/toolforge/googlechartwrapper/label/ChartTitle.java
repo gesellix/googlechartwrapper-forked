@@ -8,7 +8,6 @@ import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IExtendedFeatureAppender;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
-import de.toolforge.googlechartwrapper.util.MiscUtils;
 
 /**
  * Specifies a chart title and optionally title style (fontsize and color of title)

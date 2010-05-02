@@ -7,7 +7,6 @@ import java.util.List;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IExtendedFeatureAppender;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
-import de.toolforge.googlechartwrapper.util.MiscUtils;
 
 
 /**

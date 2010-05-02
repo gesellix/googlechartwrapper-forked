@@ -30,7 +30,9 @@ public enum ChartTypeFeature {
 	FormulaData("chl"),
 	//also used for tex - wtf
 	PieChartLabel("chl"),
-	LineAndBarChartLineStyle("chm=D");
+	LineAndBarChartLineStyle("chm=D"),
+	FreeStandingDynamicIcon("chst"),
+	EmbeddedDynamicIconMarker("chem");
 	
 	
 	

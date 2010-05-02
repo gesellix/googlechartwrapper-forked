@@ -10,7 +10,6 @@ import de.toolforge.googlechartwrapper.ChartTypeFeature;
 import de.toolforge.googlechartwrapper.Color;
 import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
-import de.toolforge.googlechartwrapper.util.MiscUtils;
 
 /**
  * 

@@ -4,6 +4,8 @@
 package de.toolforge.googlechartwrapper;
 
 import de.toolforge.googlechartwrapper.coder.IEncoder;
+import de.toolforge.googlechartwrapper.data.FreestandingDynamicIconData;
+import de.toolforge.googlechartwrapper.data.FreestandingDynamicIconDataAppender;
 
 /**
  * @author steffan
@@ -11,8 +13,13 @@ import de.toolforge.googlechartwrapper.coder.IEncoder;
  */
 public class FreestandingDynamicIcon extends AbstractChart {
 	
-	public FreestandingDynamicIcon() {
-		// TODO Auto-generated constructor stub
+	protected FreestandingDynamicIconDataAppender freestandingDynamicIconDataAppender = new FreestandingDynamicIconDataAppender();
+	
+	
+	
+	public FreestandingDynamicIcon(FreestandingDynamicIconData data) {
+		
+		freestandingDynamicIconDataAppender.add(data);
 	}
 
 	@Override
@@ -31,12 +38,6 @@ public class FreestandingDynamicIcon extends AbstractChart {
 	public IEncoder getEncoder() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
-	@Override
-	public String getUrl() {
-		// TODO Auto-generated method stub
-		return super.getUrl();
 	}
 
 }

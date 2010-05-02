@@ -3,7 +3,7 @@ package de.toolforge.googlechartwrapper;
 
 import java.util.Collections;
 import java.util.List;
-
+import java.util.Queue;
 
 import de.toolforge.googlechartwrapper.color.ChartColor;
 
@@ -191,17 +191,13 @@ public class WorldMap extends AbstractMap{
 		return Collections.unmodifiableList(this.countryList);
 	}
 	
+	
+	
 	@Override
-	/**
-	 * overriden. Uses {@link AbstractChart#collectUrlElements()}
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 */
-	protected void collectUrlElements() {
-		super.collectUrlElements();
+	protected void collectUrlElements(Queue<FeatureAppender> urlElements) {
+		super.collectUrlElements(urlElements);
 
-		urlElements.offer("chtm=" + area.getAreaCode()); // area code
+		urlElements.add(new BasicStringAppender("chtm", area.getAreaCode()));// area code
 
 		// the world case
 		if (this.countryList != null) {
@@ -219,8 +215,8 @@ public class WorldMap extends AbstractMap{
 				colorLevel.deleteCharAt(colorLevel.length() - 1);
 			}
 
-			urlElements.offer("chld=" + countries.toString());
-			urlElements.offer("chd=t:" + colorLevel);
+			urlElements.add(new BasicStringAppender("chld", countries.toString()));
+			urlElements.add(new BasicStringAppender("chd", "t:"+colorLevel.toString()));
 		}
 	}
 	

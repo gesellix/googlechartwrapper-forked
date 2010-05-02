@@ -3,6 +3,7 @@ package de.toolforge.googlechartwrapper;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Queue;
 
 import de.toolforge.googlechartwrapper.WorldMap.Country;
 import de.toolforge.googlechartwrapper.WorldMap.CountryCode;
@@ -141,11 +142,13 @@ public class UsaMap extends AbstractMap{
 		return Collections.unmodifiableList(this.stateList);
 	}
 	
+	
 	@Override
-	protected void collectUrlElements() {
-		super.collectUrlElements();
+	protected void collectUrlElements(Queue<FeatureAppender> urlElements) {
+		super.collectUrlElements(urlElements);
 
-		urlElements.offer("chtm=" + area.getAreaCode()); // area code
+		urlElements.add(new BasicStringAppender("chtm", area.getAreaCode()));// area code
+		
 
 		// the usa case
 		if (this.stateList != null) {
@@ -163,8 +166,9 @@ public class UsaMap extends AbstractMap{
 				colorLevel.deleteCharAt(colorLevel.length() - 1);
 			}
 
-			urlElements.offer("chld=" + states.toString());
-			urlElements.offer("chd=t:" + colorLevel);
+			urlElements.add(new BasicStringAppender("chld", states.toString()));
+			urlElements.add(new BasicStringAppender("chd", "t:"+colorLevel.toString()));
+			
 		}		
 	}
 	
