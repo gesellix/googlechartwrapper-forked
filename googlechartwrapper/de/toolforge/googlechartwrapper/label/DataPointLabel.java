@@ -827,7 +827,7 @@ public class DataPointLabel implements IFeatureAppender {
 		 * nobody should ever construct an object of this class
 		 */
 		private DataPoint() {
-		};
+		}
 
 		/**
 		 * The {@link DataPointLabel} will be set on every datapoint.
@@ -854,7 +854,7 @@ public class DataPointLabel implements IFeatureAppender {
 
 			};
 
-		};
+		}
 
 		/**
 		 * The {@link DataPointLabel} will be drawn every nth datapoint
