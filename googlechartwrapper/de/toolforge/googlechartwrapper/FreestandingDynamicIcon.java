@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package de.toolforge.googlechartwrapper;
 
@@ -9,35 +9,33 @@ import de.toolforge.googlechartwrapper.data.FreestandingDynamicIconDataAppender;
 
 /**
  * @author steffan
- *
  */
 public class FreestandingDynamicIcon extends AbstractChart {
-	
-	protected FreestandingDynamicIconDataAppender freestandingDynamicIconDataAppender = new FreestandingDynamicIconDataAppender();
-	
-	
-	
-	public FreestandingDynamicIcon(FreestandingDynamicIconData data) {
-		
-		freestandingDynamicIconDataAppender.add(data);
-	}
 
-	@Override
-	protected ChartType getChartType() {
-		
-		return ChartType.FreestandingDynamicIcon;
-	}
+    protected FreestandingDynamicIconDataAppender freestandingDynamicIconDataAppender = new FreestandingDynamicIconDataAppender();
 
-	@Override
-	protected String getUrlChartType() {
-		
-		return ChartType.FreestandingDynamicIcon.getPrefix();
-	}
 
-	@Override
-	public IEncoder getEncoder() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public FreestandingDynamicIcon(FreestandingDynamicIconData data) {
+
+        freestandingDynamicIconDataAppender.add(data);
+    }
+
+    @Override
+    protected ChartType getChartType() {
+
+        return ChartType.FreestandingDynamicIcon;
+    }
+
+    @Override
+    protected String getUrlChartType() {
+
+        return null;
+    }
+
+
+    public IEncoder getEncoder() {
+        return null;
+        //return freestandingDynamicIconDataAppender.get
+    }
 
 }

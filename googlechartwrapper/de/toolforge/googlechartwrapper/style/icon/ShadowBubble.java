@@ -31,12 +31,8 @@ package de.toolforge.googlechartwrapper.style.icon;
  * Created by IntelliJ IDEA.
  * User: steffan
  * Date: Aug 5, 2010
- * Time: 11:25:40 PM
+ * Time: 11:22:15 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface Bubble extends DynamicIcon {
-
-    public ShadowBubble toShadow();
-
-    //TODO toMarker
+public interface ShadowBubble extends DynamicIcon {
 }
