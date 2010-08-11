@@ -134,6 +134,27 @@ public abstract class AbstractChart implements IChart {
         return generatePostRequestString("http://chart.apis.google.com/chart",
                 collectUrlElements(getAllAppenders()));
     }
+    
+    /**
+     * Returns a map with element prefixes (e.g. chdt) and its 
+     * content. The prefix is used as the key. This method might
+     * be helpful if a post request should be manually created. 
+     * An automatic method to create a simple post request is 
+     * available by using {@link #getPostRequest()}.
+     * 
+     * Note: Experimental.
+     * @return map of prefixes and content
+     */
+    public Map<String, String> getPostRequestParameters(){
+    	Map<String, String> params = new HashMap<String, String>();
+    	
+    	Queue<FeatureAppender> elements = collectUrlElements(getAllAppenders());
+    	for (FeatureAppender f : elements){
+    		params.put(f.getPrefix(), f.getContent());
+    	}
+    	
+    	return params;    
+    }
 
     /**
      * Returns the chart url with the specified
