@@ -1,781 +1,729 @@
 package de.toolforge.googlechartwrapper;
 
 
-
-import java.text.MessageFormat;
-import java.util.List;
-
 import de.toolforge.googlechartwrapper.coder.DataScalingTextEncoder;
 import de.toolforge.googlechartwrapper.coder.IEncoder;
-import de.toolforge.googlechartwrapper.color.ChartColor;
-import de.toolforge.googlechartwrapper.color.FillArea;
-import de.toolforge.googlechartwrapper.color.ISolidFillable;
-import de.toolforge.googlechartwrapper.color.LinearGradient;
-import de.toolforge.googlechartwrapper.color.LinearStripe;
-import de.toolforge.googlechartwrapper.color.SolidFill;
+import de.toolforge.googlechartwrapper.color.*;
 import de.toolforge.googlechartwrapper.data.BarChartDataSerie;
 import de.toolforge.googlechartwrapper.data.BarChartDataSeriesAppender;
 import de.toolforge.googlechartwrapper.data.DataScalingSet;
 import de.toolforge.googlechartwrapper.data.IMultiDataScaleable;
-import de.toolforge.googlechartwrapper.interfaces.IColorable;
-import de.toolforge.googlechartwrapper.interfaces.IEncodeable;
-import de.toolforge.googlechartwrapper.interfaces.ILinearable;
-import de.toolforge.googlechartwrapper.interfaces.IMarkable;
-import de.toolforge.googlechartwrapper.interfaces.IStyleable;
-import de.toolforge.googlechartwrapper.label.AxisLabelAppender;
-import de.toolforge.googlechartwrapper.label.AxisLabelContainer;
-import de.toolforge.googlechartwrapper.label.ChartLegend;
-import de.toolforge.googlechartwrapper.label.ChartLegendPositionContainer;
-import de.toolforge.googlechartwrapper.label.ChartTitle;
-import de.toolforge.googlechartwrapper.label.DataPointLabel;
-import de.toolforge.googlechartwrapper.label.IDataPointLabelable;
-import de.toolforge.googlechartwrapper.style.BarChartZeroLine;
-import de.toolforge.googlechartwrapper.style.BarWidthAndSpacing;
-import de.toolforge.googlechartwrapper.style.ChartMargin;
-import de.toolforge.googlechartwrapper.style.FinancialMarker;
-import de.toolforge.googlechartwrapper.style.GridLine;
-import de.toolforge.googlechartwrapper.style.IBarChartZeroLineable;
-import de.toolforge.googlechartwrapper.style.IBarWidthAndSpacingable;
-import de.toolforge.googlechartwrapper.style.IFinancialMarkable;
-import de.toolforge.googlechartwrapper.style.IGridLineable;
-import de.toolforge.googlechartwrapper.style.ILineAndBarChartLineStyleable;
-import de.toolforge.googlechartwrapper.style.LineAndBarChartLineStyle;
-import de.toolforge.googlechartwrapper.style.LineStyle;
-import de.toolforge.googlechartwrapper.style.RangeMarker;
-import de.toolforge.googlechartwrapper.style.ShapeMarker;
+import de.toolforge.googlechartwrapper.interfaces.*;
+import de.toolforge.googlechartwrapper.label.*;
+import de.toolforge.googlechartwrapper.style.*;
 import de.toolforge.googlechartwrapper.util.GenericAppender;
 import de.toolforge.googlechartwrapper.util.UpperLimitGenericAppender;
 import de.toolforge.googlechartwrapper.util.UpperLimitGenericAppender.UpperLimitReactions;
+
+import java.text.MessageFormat;
+import java.util.List;
 
 /**
  * Specifies a bar chart <a
  * href="http://code.google.com/apis/chart/types.html#bar_charts">
  * http://code.google.com/apis/chart/types.html#bar_charts</a>
- * 
- * <p>
+ * <p/>
+ * <p/>
  * Here are some examples of how bar chart can be used:
- * <p>
+ * <p/>
  * <blockquote>
- * 
+ * <p/>
  * <pre>
  * BarChart bc = new BarChart(new Dimension(300, 300),
  * 		BarChartOrientation.Horizontal, BarChartStyle.Grouped);
- * 
+ * <p/>
  * bc.addBarChartDataSerie(new BarChartDataSerie.BarChartDataSerieBuilder(Arrays
  * 		.asList(34, 23, 56, 34, 12)).legend(new ChartLegend(&quot;legend&quot;)).build());
- * 
+ * <p/>
  * bc.setBarWidthAndSpacing(BarWidthAndSpacing.newRelativeResize(0.5f, 0.1f));
- * 
+ * <p/>
  * bc.addShapeMarker(new ShapeMarker(MarkerTyp.Diamond, Color.RED, 0,
  * 		ShapeMarker.DataPoint.newDrawEachPoint(), 10));
- * 
+ * <p/>
  * </pre>
- * 
+ * <p/>
  * </blockquote>
- * <p>
- * 
+ * <p/>
+ *
  * @author steffan
  * @version 03/31/09
  * @see BarChartDataSerie
- * 
  */
 public class BarChart extends AbstractChart implements IMarkable, ILinearable,
-		IStyleable, IGridLineable, ISolidFillable, IMultiDataScaleable,
-		IColorable, IFinancialMarkable, IBarChartZeroLineable,
-		IBarWidthAndSpacingable, IDataPointLabelable,
-		ILineAndBarChartLineStyleable, IEncodeable {
+        IStyleable, IGridLineable, ISolidFillable, IMultiDataScaleable,
+        IColorable, IFinancialMarkable, IBarChartZeroLineable,
+        IBarWidthAndSpacingable, IDataPointLabelable,
+        ILineAndBarChartLineStyleable, IEncodeable {
 
-	private BarChartOrientation orientation;
-	private BarChartStyle style;
-	private boolean isAutoResizing = false;
+    private BarChartOrientation orientation;
+    private BarChartStyle style;
+    private boolean isAutoResizing = false;
 
-	protected GenericAppender<RangeMarker> rangeMarkerAppender = new GenericAppender<RangeMarker>(
-			ChartTypeFeature.Marker);
-	protected GenericAppender<ShapeMarker> shapeMarkerAppender = new GenericAppender<ShapeMarker>(
-			ChartTypeFeature.Marker);
-	protected UpperLimitGenericAppender<GridLine> gridLineAppender = new UpperLimitGenericAppender<GridLine>(
-			ChartTypeFeature.GridLine, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
-			ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
-	protected GenericAppender<FillArea> fillAreaAppender = new GenericAppender<FillArea>(
-			ChartTypeFeature.FillArea);
-	protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
-			ChartTypeFeature.SolidFill);
-	protected UpperLimitGenericAppender<ChartTitle> chartTitleAppender = new UpperLimitGenericAppender<ChartTitle>(
-			ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
-			ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<LinearStripe> linearStripesAppender = new UpperLimitGenericAppender<LinearStripe>(
-			ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
-	protected GenericAppender<FinancialMarker> financialMarker = new GenericAppender<FinancialMarker>(
-			ChartTypeFeature.Marker);
-	protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
-			ChartTypeFeature.ChartColor, ",");
+    protected GenericAppender<RangeMarker> rangeMarkerAppender = new GenericAppender<RangeMarker>(
+            ChartTypeFeature.Marker);
+    protected GenericAppender<ShapeMarker> shapeMarkerAppender = new GenericAppender<ShapeMarker>(
+            ChartTypeFeature.Marker);
+    protected UpperLimitGenericAppender<GridLine> gridLineAppender = new UpperLimitGenericAppender<GridLine>(
+            ChartTypeFeature.GridLine, 1, UpperLimitReactions.RemoveFirst);
+    protected UpperLimitGenericAppender<LinearGradient> linearGradientAppender = new UpperLimitGenericAppender<LinearGradient>(
+            ChartTypeFeature.LinearGradient, 1, UpperLimitReactions.RemoveFirst);
+    protected GenericAppender<FillArea> fillAreaAppender = new GenericAppender<FillArea>(
+            ChartTypeFeature.FillArea);
+    protected GenericAppender<SolidFill> solidFillAppender = new GenericAppender<SolidFill>(
+            ChartTypeFeature.SolidFill);
+    protected UpperLimitGenericAppender<ChartTitle> chartTitleAppender = new UpperLimitGenericAppender<ChartTitle>(
+            ChartTypeFeature.ChartTitle, 1, UpperLimitReactions.RemoveFirst);
+    protected UpperLimitGenericAppender<ChartMargin> chartMarginAppender = new UpperLimitGenericAppender<ChartMargin>(
+            ChartTypeFeature.ChartMargin, 1, UpperLimitReactions.RemoveFirst);
+    protected UpperLimitGenericAppender<LinearStripe> linearStripesAppender = new UpperLimitGenericAppender<LinearStripe>(
+            ChartTypeFeature.LinearStripes, 1, UpperLimitReactions.RemoveFirst);
+    protected GenericAppender<FinancialMarker> financialMarker = new GenericAppender<FinancialMarker>(
+            ChartTypeFeature.Marker);
+    protected GenericAppender<ChartColor> chartColorAppender = new GenericAppender<ChartColor>(
+            ChartTypeFeature.ChartColor, ",");
+    /*
 	protected UpperLimitGenericAppender<DataScalingSet> dataScalingAppender = new UpperLimitGenericAppender<DataScalingSet>(
 			ChartTypeFeature.DataScaling, 1, UpperLimitReactions.RemoveFirst);
-	protected GenericAppender<LineStyle> lineStyleAppender = new GenericAppender<LineStyle>(
-			ChartTypeFeature.LineStyle, ",");
-	protected AxisLabelAppender axisLabelAppender = new AxisLabelAppender();
-	protected BarChartDataSeriesAppender barChartDataSeriesAppender = new BarChartDataSeriesAppender();
-	protected UpperLimitGenericAppender<BarChartZeroLine> barChartZeroLineAppender = new UpperLimitGenericAppender<BarChartZeroLine>(
-			ChartTypeFeature.BarChartZeroLine, 1,
-			UpperLimitReactions.RemoveFirst);
-	protected UpperLimitGenericAppender<BarWidthAndSpacing> barWidthAndSpacingAppender = new UpperLimitGenericAppender<BarWidthAndSpacing>(
-			ChartTypeFeature.BarWidthAndSpacing, 1,
-			UpperLimitReactions.RemoveFirst);
-	protected GenericAppender<DataPointLabel> dataPointLabelAppender = new GenericAppender<DataPointLabel>(
-			ChartTypeFeature.Marker);
-	protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
-			ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
-	protected GenericAppender<LineAndBarChartLineStyle> lineAndBarChartLineStyleAppender = new GenericAppender<LineAndBarChartLineStyle>(
-			ChartTypeFeature.Marker);
-	protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
-			ChartTypeFeature.ChartLegendPosition, 1,
-			UpperLimitReactions.RemoveFirst);
-
-	/**
-	 * Constructs a bar chart
-	 * 
-	 * @param chartDimension
-	 *            the size of the diagram
-	 * @param orientation
-	 *            the orientation
-	 * @param style
-	 *            the style
-	 * 
-	 * @throws IllegalArgumentException
-	 *             if orientation is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if style is {@code null}
-	 *             
-	 * @deprecated use {@link #BarCharthart(Dimension, BarChartOrientation, BarChartStyle)}
-	 */
-	@Deprecated
-	public BarChart(java.awt.Dimension awtChartDimension, BarChartOrientation orientation,
-			BarChartStyle style) {
-		super(awtChartDimension);
-
-		if (orientation == null)
-			throw new IllegalArgumentException("orientation can not be null");
-		if (style == null)
-			throw new IllegalArgumentException("style can not be null");
-
-		this.orientation = orientation;
-		this.style = style;
-	}
-	
-	/**
-	 * Constructs a bar chart
-	 * 
-	 * @param chartDimension
-	 *            the size of the diagram
-	 * @param orientation
-	 *            the orientation
-	 * @param style
-	 *            the style
-	 * 
-	 * @throws IllegalArgumentException
-	 *             if orientation is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if style is {@code null}
-	 */
-	public BarChart(Dimension chartDimension, BarChartOrientation orientation,
-			BarChartStyle style) {
-		super(chartDimension);
-
-		if (orientation == null)
-			throw new IllegalArgumentException("orientation can not be null");
-		if (style == null)
-			throw new IllegalArgumentException("style can not be null");
-
-		this.orientation = orientation;
-		this.style = style;
-	}
-
-	@Override
-	protected ChartType getChartType() {
-
-		// lets find the right chart type
-		for (ChartType current : ChartType.values()) {
-			if (current.getPrefix().equals(getUrlChartType())) {
-				return current;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	protected String getUrlChartType() {
-
-		char orientationChar = this.orientation == BarChartOrientation.Horizontal ? 'v'
-				: 'h';
-		char styleChar = this.style == BarChartStyle.Stacked ? 's' : 'g';
-
-		return MessageFormat.format("b{0}{1}", orientationChar, styleChar);
-	}
-
-	/**
-	 * 
-	 * 
-	 * @author steffan
-	 * 
-	 */
-	public enum BarChartOrientation {
-
-		Vertical,
-
-		Horizontal
-	}
-
-	/**
-	 * 
-	 * @author steffan
-	 * 
-	 */
-	public enum BarChartStyle {
-
-		Stacked,
-
-		Grouped
-	}
-
-	public void setAutoResizing(boolean b) {
-		this.isAutoResizing = b;
-	}
-
-	/**
-	 * Returns {@code true} if autoResizing is enabled
-	 * 
-	 * @return {@code true} if enabled
-	 * 
-	 */
-	public boolean isAutoResizing() {
-		return this.isAutoResizing;
-	}
-
-	/**
-	 * Adds a new {@link BarChartDataSerie} to the chart.
-	 * 
-	 * @param barCharDataSerie
-	 * 
-	 * @throws IllegalArgumentException
-	 *             if barChartSerie is {@code null}
-	 */
-	public void addBarChartDataSerie(BarChartDataSerie barCharDataSerie) {
-		this.barChartDataSeriesAppender.add(barCharDataSerie);
-	}
-
-	/**
-	 * Adds a list of {@link BarChartDataSerie} to the chart.
-	 * 
-	 * @param barCharDataSeries
-	 * 
-	 * @throws IllegalArgumentException
-	 *             if barChartDataSeries or member is {@code null}
-	 */
-	public void addBarChartDataSeries(
-			List<? extends BarChartDataSerie> barCharDataSeries) {
-		this.barChartDataSeriesAppender.add(barCharDataSeries);
-	}
-
-	/**
-	 * Removes all {@link BarChartDataSerie}.
-	 */
-	public void removeAllBarChartDataSeries() {
-		this.barChartDataSeriesAppender.removeAll();
-	}
-
-	/**
-	 * Returns a unmodifiable list of all {@link BarChartDataSerie}
-	 * 
-	 * @return unmodifiable list, empty if nothing was set
-	 */
-	public List<? extends BarChartDataSerie> getAllBarChartDataSeries() {
-		return this.barChartDataSeriesAppender.getAllBarChartDataSeries();
-	}
-
-	/**
-	 * Removes a given {@link BarChartDataSerie} and returns the status.
-	 * 
-	 * @param barCharDataSerie
-	 * @return {@code true} if success
-	 */
-	public boolean removeBarChartDataSerie(BarChartDataSerie barCharDataSerie) {
-		return this.barChartDataSeriesAppender.remove(barCharDataSerie);
-	}
+			*/
+    protected GenericAppender<DataScalingSet> dataScalingAppender = new GenericAppender<DataScalingSet>(
+            ChartTypeFeature.DataScaling);
+    protected GenericAppender<LineStyle> lineStyleAppender = new GenericAppender<LineStyle>(
+            ChartTypeFeature.LineStyle, ",");
+    protected AxisLabelAppender axisLabelAppender = new AxisLabelAppender();
+    protected BarChartDataSeriesAppender barChartDataSeriesAppender = new BarChartDataSeriesAppender();
+    protected UpperLimitGenericAppender<BarChartZeroLine> barChartZeroLineAppender = new UpperLimitGenericAppender<BarChartZeroLine>(
+            ChartTypeFeature.BarChartZeroLine, 1,
+            UpperLimitReactions.RemoveFirst);
+    protected UpperLimitGenericAppender<BarWidthAndSpacing> barWidthAndSpacingAppender = new UpperLimitGenericAppender<BarWidthAndSpacing>(
+            ChartTypeFeature.BarWidthAndSpacing, 1,
+            UpperLimitReactions.RemoveFirst);
+    protected GenericAppender<DataPointLabel> dataPointLabelAppender = new GenericAppender<DataPointLabel>(
+            ChartTypeFeature.Marker);
+    protected UpperLimitGenericAppender<ChartLegend> chartLegendAppender = new UpperLimitGenericAppender<ChartLegend>(
+            ChartTypeFeature.ChartLegend, 1, UpperLimitReactions.RemoveFirst);
+    protected GenericAppender<LineAndBarChartLineStyle> lineAndBarChartLineStyleAppender = new GenericAppender<LineAndBarChartLineStyle>(
+            ChartTypeFeature.Marker);
+    protected UpperLimitGenericAppender<ChartLegendPositionContainer> chartLegendPositionAppender = new UpperLimitGenericAppender<ChartLegendPositionContainer>(
+            ChartTypeFeature.ChartLegendPosition, 1,
+            UpperLimitReactions.RemoveFirst);
+
+    /**
+     * Constructs a bar chart
+     *
+     * @param chartDimension the size of the diagram
+     * @param orientation    the orientation
+     * @param style          the style
+     * @throws IllegalArgumentException if orientation is {@code null}
+     * @throws IllegalArgumentException if style is {@code null}
+     * @deprecated use {@link #BarCharthart(Dimension, BarChartOrientation, BarChartStyle)}
+     */
+    @Deprecated
+    public BarChart(java.awt.Dimension awtChartDimension, BarChartOrientation orientation,
+                    BarChartStyle style) {
+        super(awtChartDimension);
+
+        if (orientation == null)
+            throw new IllegalArgumentException("orientation can not be null");
+        if (style == null)
+            throw new IllegalArgumentException("style can not be null");
+
+        this.orientation = orientation;
+        this.style = style;
+    }
+
+    /**
+     * Constructs a bar chart
+     *
+     * @param chartDimension the size of the diagram
+     * @param orientation    the orientation
+     * @param style          the style
+     * @throws IllegalArgumentException if orientation is {@code null}
+     * @throws IllegalArgumentException if style is {@code null}
+     */
+    public BarChart(Dimension chartDimension, BarChartOrientation orientation,
+                    BarChartStyle style) {
+        super(chartDimension);
+
+        if (orientation == null)
+            throw new IllegalArgumentException("orientation can not be null");
+        if (style == null)
+            throw new IllegalArgumentException("style can not be null");
+
+        this.orientation = orientation;
+        this.style = style;
+    }
+
+    @Override
+    protected ChartType getChartType() {
+
+        // lets find the right chart type
+        for (ChartType current : ChartType.values()) {
+            if (current.getPrefix().equals(getUrlChartType())) {
+                return current;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    protected String getUrlChartType() {
+
+        char orientationChar = this.orientation == BarChartOrientation.Horizontal ? 'v'
+                : 'h';
+        char styleChar = this.style == BarChartStyle.Stacked ? 's' : 'g';
+
+        return MessageFormat.format("b{0}{1}", orientationChar, styleChar);
+    }
+
+    /**
+     * @author steffan
+     */
+    public enum BarChartOrientation {
+
+        Vertical,
+
+        Horizontal
+    }
+
+    /**
+     * @author steffan
+     */
+    public enum BarChartStyle {
+
+        Stacked,
+
+        Grouped
+    }
+
+    public void setAutoResizing(boolean b) {
+        this.isAutoResizing = b;
+    }
+
+    /**
+     * Returns {@code true} if autoResizing is enabled
+     *
+     * @return {@code true} if enabled
+     */
+    public boolean isAutoResizing() {
+        return this.isAutoResizing;
+    }
+
+    /**
+     * Adds a new {@link BarChartDataSerie} to the chart.
+     *
+     * @param barCharDataSerie
+     * @throws IllegalArgumentException if barChartSerie is {@code null}
+     */
+    public void addBarChartDataSerie(BarChartDataSerie barCharDataSerie) {
+        this.barChartDataSeriesAppender.add(barCharDataSerie);
+    }
+
+    /**
+     * Adds a list of {@link BarChartDataSerie} to the chart.
+     *
+     * @param barCharDataSeries
+     * @throws IllegalArgumentException if barChartDataSeries or member is {@code null}
+     */
+    public void addBarChartDataSeries(
+            List<? extends BarChartDataSerie> barCharDataSeries) {
+        this.barChartDataSeriesAppender.add(barCharDataSeries);
+    }
+
+    /**
+     * Removes all {@link BarChartDataSerie}.
+     */
+    public void removeAllBarChartDataSeries() {
+        this.barChartDataSeriesAppender.removeAll();
+    }
 
-	/**
-	 * Removes a {@link BarChartDataSerie} at the given index.
-	 * 
-	 * @param index
-	 *            the list index
-	 * @return the removed {@link BarChartDataSerie}
-	 * 
-	 * @throws IndexOutOfBoundsException
-	 *             if index is out of bound
-	 */
-	public BarChartDataSerie removeBarChartDataSerie(int index) {
-		return this.barChartDataSeriesAppender.remove(index);
-	}
+    /**
+     * Returns a unmodifiable list of all {@link BarChartDataSerie}
+     *
+     * @return unmodifiable list, empty if nothing was set
+     */
+    public List<? extends BarChartDataSerie> getAllBarChartDataSeries() {
+        return this.barChartDataSeriesAppender.getAllBarChartDataSeries();
+    }
 
-	public void addRangeMarker(RangeMarker rm) {
-		this.rangeMarkerAppender.add(rm);
+    /**
+     * Removes a given {@link BarChartDataSerie} and returns the status.
+     *
+     * @param barCharDataSerie
+     * @return {@code true} if success
+     */
+    public boolean removeBarChartDataSerie(BarChartDataSerie barCharDataSerie) {
+        return this.barChartDataSeriesAppender.remove(barCharDataSerie);
+    }
 
-	}
+    /**
+     * Removes a {@link BarChartDataSerie} at the given index.
+     *
+     * @param index the list index
+     * @return the removed {@link BarChartDataSerie}
+     * @throws IndexOutOfBoundsException if index is out of bound
+     */
+    public BarChartDataSerie removeBarChartDataSerie(int index) {
+        return this.barChartDataSeriesAppender.remove(index);
+    }
 
-	public List<RangeMarker> getRangeMarkers() {
-		return rangeMarkerAppender.getList();
-	}
+    public void addRangeMarker(RangeMarker rm) {
+        this.rangeMarkerAppender.add(rm);
 
-	public void addShapeMarker(ShapeMarker shapeMarker) {
-		this.shapeMarkerAppender.add(shapeMarker);
+    }
 
-	}
+    public List<RangeMarker> getRangeMarkers() {
+        return rangeMarkerAppender.getList();
+    }
 
-	public List<ShapeMarker> getShapeMarkers() {
-		return shapeMarkerAppender.getList();
-	}
+    public void addShapeMarker(ShapeMarker shapeMarker) {
+        this.shapeMarkerAppender.add(shapeMarker);
 
-	public void removeAllRangeMarkers() {
-		this.rangeMarkerAppender.removeAll();
+    }
 
-	}
+    public List<ShapeMarker> getShapeMarkers() {
+        return shapeMarkerAppender.getList();
+    }
 
-	public RangeMarker removeRangeMarker(int index) {
+    public void removeAllRangeMarkers() {
+        this.rangeMarkerAppender.removeAll();
 
-		return this.rangeMarkerAppender.remove(index);
-	}
+    }
 
-	public boolean removeRangeMarker(RangeMarker rm) {
+    public RangeMarker removeRangeMarker(int index) {
 
-		return this.rangeMarkerAppender.remove(rm);
-	}
+        return this.rangeMarkerAppender.remove(index);
+    }
 
-	public void removeAllShapeMarkers() {
-		this.shapeMarkerAppender.removeAll();
+    public boolean removeRangeMarker(RangeMarker rm) {
 
-	}
+        return this.rangeMarkerAppender.remove(rm);
+    }
 
-	public ShapeMarker removeShapeMarker(int index) {
+    public void removeAllShapeMarkers() {
+        this.shapeMarkerAppender.removeAll();
 
-		return this.shapeMarkerAppender.remove(index);
-	}
+    }
 
-	public boolean removeShapeMarker(ShapeMarker sm) {
+    public ShapeMarker removeShapeMarker(int index) {
 
-		return this.shapeMarkerAppender.remove(sm);
-	}
+        return this.shapeMarkerAppender.remove(index);
+    }
 
-	public void removeGridLine() {
-		this.gridLineAppender.removeAll();
+    public boolean removeShapeMarker(ShapeMarker sm) {
 
-	}
+        return this.shapeMarkerAppender.remove(sm);
+    }
 
-	public void setGridLine(GridLine gl) {
-		this.gridLineAppender.add(gl);
+    public void removeGridLine() {
+        this.gridLineAppender.removeAll();
 
-	}
+    }
 
-	public void removeLinearGradient() {
-		this.linearGradientAppender.removeAll();
+    public void setGridLine(GridLine gl) {
+        this.gridLineAppender.add(gl);
 
-	}
+    }
 
-	public void addFillArea(FillArea fa) {
-		this.fillAreaAppender.add(fa);
+    public void removeLinearGradient() {
+        this.linearGradientAppender.removeAll();
 
-	}
+    }
 
-	public List<FillArea> getFillAreas() {
+    public void addFillArea(FillArea fa) {
+        this.fillAreaAppender.add(fa);
 
-		return this.fillAreaAppender.getList();
-	}
+    }
 
-	public void removeAllFillAreas() {
-		this.fillAreaAppender.removeAll();
+    public List<FillArea> getFillAreas() {
 
-	}
+        return this.fillAreaAppender.getList();
+    }
 
-	public FillArea removeFillArea(int index) {
+    public void removeAllFillAreas() {
+        this.fillAreaAppender.removeAll();
 
-		return this.fillAreaAppender.remove(index);
-	}
+    }
 
-	public boolean removeFillArea(FillArea fa) {
+    public FillArea removeFillArea(int index) {
 
-		return this.fillAreaAppender.remove(fa);
-	}
+        return this.fillAreaAppender.remove(index);
+    }
 
-	public void addSolidFill(SolidFill sf) {
-		this.solidFillAppender.add(sf);
+    public boolean removeFillArea(FillArea fa) {
 
-	}
+        return this.fillAreaAppender.remove(fa);
+    }
 
-	public List<SolidFill> getSolidFills() {
+    public void addSolidFill(SolidFill sf) {
+        this.solidFillAppender.add(sf);
 
-		return this.solidFillAppender.getList();
-	}
+    }
 
-	public void removeAllSolidFills() {
-		this.solidFillAppender.removeAll();
+    public List<SolidFill> getSolidFills() {
 
-	}
+        return this.solidFillAppender.getList();
+    }
 
-	public SolidFill removeSolidFill(int index) {
+    public void removeAllSolidFills() {
+        this.solidFillAppender.removeAll();
 
-		return this.solidFillAppender.remove(index);
-	}
+    }
 
-	public boolean removeSolidFill(SolidFill sf) {
+    public SolidFill removeSolidFill(int index) {
 
-		return this.solidFillAppender.remove(sf);
-	}
+        return this.solidFillAppender.remove(index);
+    }
 
-	public void addAxisLabelContainer(AxisLabelContainer labelSummary) {
+    public boolean removeSolidFill(SolidFill sf) {
 
-		this.axisLabelAppender.addAxis(labelSummary);
-	}
+        return this.solidFillAppender.remove(sf);
+    }
 
-	public List<AxisLabelContainer> getAxisLabelContainer() {
+    public void addAxisLabelContainer(AxisLabelContainer labelSummary) {
 
-		return this.axisLabelAppender.getList();
-	}
+        this.axisLabelAppender.addAxis(labelSummary);
+    }
 
-	public void removeAllAxisLabelContainer() {
-		this.axisLabelAppender.removeAll();
+    public List<AxisLabelContainer> getAxisLabelContainer() {
 
-	}
+        return this.axisLabelAppender.getList();
+    }
 
-	public AxisLabelContainer removeAxisLabelContainer(int index) {
+    public void removeAllAxisLabelContainer() {
+        this.axisLabelAppender.removeAll();
 
-		return this.axisLabelAppender.removeAxis(index);
-	}
+    }
 
-	public boolean removeAxisLabelContainer(AxisLabelContainer labelSummary) {
+    public AxisLabelContainer removeAxisLabelContainer(int index) {
 
-		return this.axisLabelAppender.removeAxis(labelSummary);
-	}
+        return this.axisLabelAppender.removeAxis(index);
+    }
 
-	public void removeChartTitle() {
-		this.chartTitleAppender.removeAll();
+    public boolean removeAxisLabelContainer(AxisLabelContainer labelSummary) {
 
-	}
+        return this.axisLabelAppender.removeAxis(labelSummary);
+    }
 
-	public void setChartTitle(ChartTitle title) {
-		this.chartTitleAppender.add(title);
+    public void removeChartTitle() {
+        this.chartTitleAppender.removeAll();
 
-	}
+    }
 
-	public void setLinearGradient(LinearGradient lg) {
-		if (lg == null) {
-			linearGradientAppender.removeAll();
-			return;
-		} else {
-			this.linearGradientAppender.add(lg);
-		}
-	}
+    public void setChartTitle(ChartTitle title) {
+        this.chartTitleAppender.add(title);
 
-	public LinearStripe getLinearStripes() {
+    }
 
-		return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
-				.getList().get(0)
-				: null;
-	}
+    public void setLinearGradient(LinearGradient lg) {
+        if (lg == null) {
+            linearGradientAppender.removeAll();
+            return;
+        } else {
+            this.linearGradientAppender.add(lg);
+        }
+    }
 
-	public void removeLinearStripes() {
-		linearStripesAppender.removeAll();
-	}
+    public LinearStripe getLinearStripes() {
 
-	public IEncoder getEncoder() {
+        return this.linearStripesAppender.getList().size() > 0 ? this.linearStripesAppender
+                .getList().get(0)
+                : null;
+    }
 
-		return this.barChartDataSeriesAppender.getEncoder();
-	}
+    public void removeLinearStripes() {
+        linearStripesAppender.removeAll();
+    }
 
-	public GridLine getGridLine() {
+    public IEncoder getEncoder() {
 
-		return this.gridLineAppender.getList().size() > 0 ? this.gridLineAppender
-				.getList().get(0)
-				: null;
-	}
+        return this.barChartDataSeriesAppender.getEncoder();
+    }
 
-	public LinearGradient getLinearGradient() {
+    public GridLine getGridLine() {
 
-		return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender
-				.getList().get(0)
-				: null;
-	}
+        return this.gridLineAppender.getList().size() > 0 ? this.gridLineAppender
+                .getList().get(0)
+                : null;
+    }
 
-	public ChartTitle getChartTitle() {
+    public LinearGradient getLinearGradient() {
 
-		return this.chartTitleAppender.getList().size() > 0 ? this.chartTitleAppender
-				.getList().get(0)
-				: null;
-	}
+        return this.linearGradientAppender.getList().size() > 0 ? this.linearGradientAppender
+                .getList().get(0)
+                : null;
+    }
 
-	public void addLineStyle(LineStyle lineStyle) {
-		this.lineStyleAppender.add(lineStyle);
+    public ChartTitle getChartTitle() {
 
-	}
+        return this.chartTitleAppender.getList().size() > 0 ? this.chartTitleAppender
+                .getList().get(0)
+                : null;
+    }
 
-	public List<LineStyle> getLineStyles() {
-		return this.lineStyleAppender.getList();
-	}
+    public void addLineStyle(LineStyle lineStyle) {
+        this.lineStyleAppender.add(lineStyle);
 
-	public void removeAllLineStyles() {
-		this.lineStyleAppender.removeAll();
+    }
 
-	}
+    public List<LineStyle> getLineStyles() {
+        return this.lineStyleAppender.getList();
+    }
 
-	public LineStyle removeLineStyle(int index) {
+    public void removeAllLineStyles() {
+        this.lineStyleAppender.removeAll();
 
-		return this.lineStyleAppender.remove(index);
-	}
+    }
 
-	public boolean removeLineStyle(LineStyle lineStyle) {
+    public LineStyle removeLineStyle(int index) {
 
-		return this.lineStyleAppender.remove(lineStyle);
-	}
+        return this.lineStyleAppender.remove(index);
+    }
 
-	public void addDataScalingSet(DataScalingSet ds) {
-		this.dataScalingAppender.add(ds);
-		this.barChartDataSeriesAppender
-				.setEncoder(new DataScalingTextEncoder());
-	}
+    public boolean removeLineStyle(LineStyle lineStyle) {
 
-	public List<DataScalingSet> getDataScalings() {
+        return this.lineStyleAppender.remove(lineStyle);
+    }
 
-		return this.dataScalingAppender.getList().size() > 0 ? this.dataScalingAppender
-				.getList()
-				: null;
-	}
+    public void addDataScalingSet(DataScalingSet ds) {
+        this.dataScalingAppender.add(ds);
+        this.barChartDataSeriesAppender
+                .setEncoder(new DataScalingTextEncoder());
+    }
 
-	/**
-	 * Removes all datascalings and sets the default encoder.
-	 * 
-	 * @see ScatterPlot#getEncoder()
-	 */
-	public void removeAllDataScalings() {
+    public List<DataScalingSet> getDataScalings() {
 
-		this.dataScalingAppender.removeAll();
+        return this.dataScalingAppender.getList().size() > 0 ? this.dataScalingAppender
+                .getList()
+                : null;
+    }
 
-		this.barChartDataSeriesAppender.removeEncoder();
+    /**
+     * Removes all datascalings and sets the default encoder.
+     *
+     * @see ScatterPlot#getEncoder()
+     */
+    public void removeAllDataScalings() {
 
-	}
+        this.dataScalingAppender.removeAll();
 
-	public DataScalingSet removeDataScalingSet(int index) {
-		return this.dataScalingAppender.remove(index);
-	}
+        this.barChartDataSeriesAppender.removeEncoder();
 
-	public boolean removeDataScalingSet(DataScalingSet set) {
-		return this.dataScalingAppender.remove(set);
-	}
+    }
 
-	public void addChartColor(ChartColor cc) {
+    public DataScalingSet removeDataScalingSet(int index) {
+        return this.dataScalingAppender.remove(index);
+    }
 
-		this.chartColorAppender.add(cc);
-	}
+    public boolean removeDataScalingSet(DataScalingSet set) {
+        return this.dataScalingAppender.remove(set);
+    }
 
-	public List<ChartColor> getChartColors() {
+    public void addChartColor(ChartColor cc) {
 
-		return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
-				.getList()
-				: null;
-	}
+        this.chartColorAppender.add(cc);
+    }
 
-	public void removeAllChartColors() {
-		this.chartColorAppender.removeAll();
+    public List<ChartColor> getChartColors() {
 
-	}
+        return this.chartColorAppender.getList().size() > 0 ? this.chartColorAppender
+                .getList()
+                : null;
+    }
 
-	public ChartColor removeChartColor(int index) {
+    public void removeAllChartColors() {
+        this.chartColorAppender.removeAll();
 
-		return this.chartColorAppender.remove(index);
-	}
+    }
 
-	public boolean removeChartColor(ChartColor cc) {
+    public ChartColor removeChartColor(int index) {
 
-		return this.chartColorAppender.remove(cc);
-	}
+        return this.chartColorAppender.remove(index);
+    }
 
-	public ChartMargin getChartMargin() {
-		return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
-				.getList().get(0)
-				: null;
-	}
+    public boolean removeChartColor(ChartColor cc) {
 
-	public void removeChartMargin() {
-		this.chartMarginAppender.removeAll();
+        return this.chartColorAppender.remove(cc);
+    }
 
-	}
+    public ChartMargin getChartMargin() {
+        return this.chartMarginAppender.getList().size() > 0 ? this.chartMarginAppender
+                .getList().get(0)
+                : null;
+    }
 
-	public void setChartMargin(ChartMargin cm) {
-		if (cm == null) {
-			this.chartMarginAppender.removeAll();
-		} else {
-			this.chartMarginAppender.add(cm);
-		}
-	}
+    public void removeChartMargin() {
+        this.chartMarginAppender.removeAll();
 
-	public void setLinearStripes(LinearStripe ls) {
-		if (ls == null) {
-			linearStripesAppender.removeAll();
-			return;
-		} else {
-			this.linearStripesAppender.add(ls);
-		}
-	}
+    }
 
-	public void addFinancialMarker(FinancialMarker fm) {
+    public void setChartMargin(ChartMargin cm) {
+        if (cm == null) {
+            this.chartMarginAppender.removeAll();
+        } else {
+            this.chartMarginAppender.add(cm);
+        }
+    }
 
-		this.financialMarker.add(fm);
+    public void setLinearStripes(LinearStripe ls) {
+        if (ls == null) {
+            linearStripesAppender.removeAll();
+            return;
+        } else {
+            this.linearStripesAppender.add(ls);
+        }
+    }
 
-	}
+    public void addFinancialMarker(FinancialMarker fm) {
 
-	public List<FinancialMarker> getFinancialMarkers() {
+        this.financialMarker.add(fm);
 
-		return this.financialMarker.getList();
-	}
+    }
 
-	public void removeAllFinancialMarkers() {
+    public List<FinancialMarker> getFinancialMarkers() {
 
-		this.financialMarker.removeAll();
-	}
+        return this.financialMarker.getList();
+    }
 
-	public boolean removeFinancialMarker(FinancialMarker fm) {
+    public void removeAllFinancialMarkers() {
 
-		return this.financialMarker.remove(fm);
-	}
+        this.financialMarker.removeAll();
+    }
 
-	public FinancialMarker removeFinancialMarker(int index) {
+    public boolean removeFinancialMarker(FinancialMarker fm) {
 
-		return this.financialMarker.remove(index);
-	}
+        return this.financialMarker.remove(fm);
+    }
 
-	public BarChartZeroLine getBarChartZeroLine() {
-		return this.barChartZeroLineAppender.getList().size() > 0 ? this.barChartZeroLineAppender
-				.getList().get(0)
-				: null;
+    public FinancialMarker removeFinancialMarker(int index) {
 
-	}
+        return this.financialMarker.remove(index);
+    }
 
-	public void removeBarChartZeroLine() {
+    public BarChartZeroLine getBarChartZeroLine() {
+        return this.barChartZeroLineAppender.getList().size() > 0 ? this.barChartZeroLineAppender
+                .getList().get(0)
+                : null;
 
-		this.barChartZeroLineAppender.removeAll();
+    }
 
-	}
+    public void removeBarChartZeroLine() {
 
-	public void setBarChartZeroLine(BarChartZeroLine bzl) {
+        this.barChartZeroLineAppender.removeAll();
 
-		this.barChartZeroLineAppender.add(bzl);
+    }
 
-	}
+    public void setBarChartZeroLine(BarChartZeroLine bzl) {
 
-	public BarWidthAndSpacing getBarWidthAndSpacing() {
-		return this.barWidthAndSpacingAppender.getList().size() > 0 ? this.barWidthAndSpacingAppender
-				.getList().get(0)
-				: null;
-	}
+        this.barChartZeroLineAppender.add(bzl);
 
-	public void removeBarWidthAndSpacing() {
+    }
 
-		this.barWidthAndSpacingAppender.removeAll();
+    public BarWidthAndSpacing getBarWidthAndSpacing() {
+        return this.barWidthAndSpacingAppender.getList().size() > 0 ? this.barWidthAndSpacingAppender
+                .getList().get(0)
+                : null;
+    }
 
-	}
+    public void removeBarWidthAndSpacing() {
 
-	public void setBarWidthAndSpacing(BarWidthAndSpacing ws) {
-		this.barWidthAndSpacingAppender.add(ws);
+        this.barWidthAndSpacingAppender.removeAll();
 
-	}
+    }
 
-	public void addDataPointLabel(DataPointLabel dpl) {
-		this.dataPointLabelAppender.add(dpl);
+    public void setBarWidthAndSpacing(BarWidthAndSpacing ws) {
+        this.barWidthAndSpacingAppender.add(ws);
 
-	}
+    }
 
-	public List<DataPointLabel> getDataPointLabels() {
+    public void addDataPointLabel(DataPointLabel dpl) {
+        this.dataPointLabelAppender.add(dpl);
 
-		return this.dataPointLabelAppender.getList();
-	}
+    }
 
-	public DataPointLabel removeDataPointLabel(int index) {
-		return this.dataPointLabelAppender.remove(index);
-	}
+    public List<DataPointLabel> getDataPointLabels() {
 
-	public boolean removeDataPointLabel(DataPointLabel dpl) {
-		return this.dataPointLabelAppender.remove(dpl);
-	}
+        return this.dataPointLabelAppender.getList();
+    }
 
-	public void removeDataPointLabels() {
-		this.dataPointLabelAppender.removeAll();
+    public DataPointLabel removeDataPointLabel(int index) {
+        return this.dataPointLabelAppender.remove(index);
+    }
 
-	}
+    public boolean removeDataPointLabel(DataPointLabel dpl) {
+        return this.dataPointLabelAppender.remove(dpl);
+    }
 
-	public ChartLegend getChartLegend() {
+    public void removeDataPointLabels() {
+        this.dataPointLabelAppender.removeAll();
 
-		if (this.chartLegendAppender.getList().size() > 0) {
-			return this.chartLegendAppender.getList().get(0);
-		} else {
-			return null;
-		}
-	}
+    }
 
-	public void removeChartLegend() {
-		this.chartLegendAppender.removeAll();
-		this.chartLegendPositionAppender.removeAll();
+    public ChartLegend getChartLegend() {
 
-	}
+        if (this.chartLegendAppender.getList().size() > 0) {
+            return this.chartLegendAppender.getList().get(0);
+        } else {
+            return null;
+        }
+    }
 
-	public void setChartLegend(ChartLegend legend) {
+    public void removeChartLegend() {
+        this.chartLegendAppender.removeAll();
+        this.chartLegendPositionAppender.removeAll();
 
-		if (legend == null) {
-			this.removeChartLegend();
-		} else {
-			this.chartLegendAppender.add(legend);
-			if (new ChartLegendPositionContainer(legend
-					.getChartLegendPosition()) != null) {
-				this.chartLegendPositionAppender
-						.add(new ChartLegendPositionContainer(legend
-								.getChartLegendPosition()));
-			}
-		}
-	}
+    }
 
-	public void addLineAndBarChartLineStyle(LineAndBarChartLineStyle lineStyle) {
+    public void setChartLegend(ChartLegend legend) {
 
-		this.lineAndBarChartLineStyleAppender.add(lineStyle);
+        if (legend == null) {
+            this.removeChartLegend();
+        } else {
+            this.chartLegendAppender.add(legend);
+            if (new ChartLegendPositionContainer(legend
+                    .getChartLegendPosition()) != null) {
+                this.chartLegendPositionAppender
+                        .add(new ChartLegendPositionContainer(legend
+                                .getChartLegendPosition()));
+            }
+        }
+    }
 
-	}
+    public void addLineAndBarChartLineStyle(LineAndBarChartLineStyle lineStyle) {
 
-	public List<LineAndBarChartLineStyle> getAllLineAndBarChartLineStyles() {
+        this.lineAndBarChartLineStyleAppender.add(lineStyle);
 
-		return this.lineAndBarChartLineStyleAppender.getList();
-	}
+    }
 
-	public void removeAllLineAndBarChartLineStyles() {
+    public List<LineAndBarChartLineStyle> getAllLineAndBarChartLineStyles() {
 
-		this.lineAndBarChartLineStyleAppender.removeAll();
+        return this.lineAndBarChartLineStyleAppender.getList();
+    }
 
-	}
+    public void removeAllLineAndBarChartLineStyles() {
 
-	public LineAndBarChartLineStyle removeLineAndBarChartLineStyle(int index) {
+        this.lineAndBarChartLineStyleAppender.removeAll();
 
-		return this.lineAndBarChartLineStyleAppender.remove(index);
-	}
+    }
 
-	public boolean removeLineAndBarChartLineStyle(
-			LineAndBarChartLineStyle lineStyle) {
+    public LineAndBarChartLineStyle removeLineAndBarChartLineStyle(int index) {
 
-		return this.lineAndBarChartLineStyleAppender.remove(lineStyle);
-	}
+        return this.lineAndBarChartLineStyleAppender.remove(index);
+    }
 
-	public void removeEncoder() {
-		this.barChartDataSeriesAppender.removeEncoder();
+    public boolean removeLineAndBarChartLineStyle(
+            LineAndBarChartLineStyle lineStyle) {
 
-	}
+        return this.lineAndBarChartLineStyleAppender.remove(lineStyle);
+    }
 
-	public void setEncoder(IEncoder encoder) {
-		this.barChartDataSeriesAppender.setEncoder(encoder);
+    public void removeEncoder() {
+        this.barChartDataSeriesAppender.removeEncoder();
 
-	}
+    }
+
+    public void setEncoder(IEncoder encoder) {
+        this.barChartDataSeriesAppender.setEncoder(encoder);
+
+    }
 
 }

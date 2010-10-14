@@ -1,11 +1,6 @@
 package de.toolforge.googlechartwrapper.data;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import de.toolforge.googlechartwrapper.ChartTypeFeature;
 import de.toolforge.googlechartwrapper.LineChart;
 import de.toolforge.googlechartwrapper.coder.AutoEncoder;
@@ -16,221 +11,217 @@ import de.toolforge.googlechartwrapper.util.AppendableFeature;
 import de.toolforge.googlechartwrapper.util.IExtendedFeatureAppender;
 import de.toolforge.googlechartwrapper.util.IFeatureAppender;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
- * 
  * @author steffan
- * 
  * @see LineChart
  * @see LineChartData
- * 
  */
 public class LineChartDataAppender implements IExtendedFeatureAppender,
-		IEncodeable {
+        IEncodeable {
 
-	private IEncoder encoder = new AutoEncoder();
-	private List<LineChartData> data = new ArrayList<LineChartData>();
+    private IEncoder encoder = new AutoEncoder();
+    private List<LineChartData> data = new ArrayList<LineChartData>();
 
-	
-	public String getFeaturePrefix() {
 
-		return ChartTypeFeature.ChartData.getPrefix();
-	}
+    public String getFeaturePrefix() {
 
-	/**
-	 * The {@link LineChartData} will be added to the list.
-	 * 
-	 * @param data
-	 *            {@link LineChartData}
-	 * 
-	 * @throws IllegalArgumentException
-	 *             if data is {@code null}
-	 */
-	public void addLineChartData(LineChartData data) {
-		if (data == null)
-			throw new IllegalArgumentException("data can not be nulll");
-		this.data.add(data);
-	}
+        return ChartTypeFeature.ChartData.getPrefix();
+    }
 
-	/**
-	 * The list will be merged.
-	 * 
-	 * @param data
-	 *            {@link LineChartData}
-	 * 
-	 * @throws IllegalArgumentException
-	 *             if collection is {@code null} or value is {@code null}
-	 */
-	public void addLineChartData(List<? extends LineChartData> data) {
+    /**
+     * The {@link LineChartData} will be added to the list.
+     *
+     * @param data {@link LineChartData}
+     * @throws IllegalArgumentException if data is {@code null}
+     */
+    public void addLineChartData(LineChartData data) {
+        if (data == null)
+            throw new IllegalArgumentException("data can not be null");
+        this.data.add(data);
+    }
 
-		if (data == null) {
-			throw new IllegalArgumentException("data can not be null");
-		} else {
-			for (LineChartData temp : Collections.unmodifiableCollection(data)) {
-				if (temp == null)
-					throw new IllegalArgumentException("value can not be null");
-			}
-			this.data.addAll(Collections.unmodifiableList(data));
-		}
-	}
-	/**
-	 * Returns a unmodifiable list, empty if nothing was set.
-	 * @return a unmodifiable view of the {@link LineChartData}
-	 */
-	public List<? extends LineChartData> getList(){
-		return Collections.unmodifiableList(this.data);
-	}
-	
-	/**
-	 * 
-	 * @param index
-	 * @return the removed {@link LineChartData}
-	 * 
-	 * @throws IndexOutOfBoundsException if index is out of bound
-	 */
-	public LineChartData removeLineChartData(int index) {
-		return this.data.remove(index);
-	}
-	
-	/**
-	 * Removes a given {@link LineChartData} and returns the status.
-	 * 
-	 * @param lineChartData
-	 * @return {@code true} if success
-	 */
-	public boolean removeLineChartData(LineChartData lineChartData) {
+    /**
+     * The lists will be merged.
+     *
+     * @param data {@link LineChartData}
+     * @throws IllegalArgumentException if collection is {@code null} or value is {@code null}
+     */
+    public void addLineChartData(List<? extends LineChartData> data) {
 
-		return this.data.remove(lineChartData);
-	}
-	
-	/**
-	 * Removes all {@link LineChartData}
-	 */
-	public void removeAllLineChartData() {
-		this.data.clear();
-	}
-	
-	public List<AppendableFeature> getAppendableFeatures(
-			List<? extends IFeatureAppender> otherAppenders) {
+        if (data == null) {
+            throw new IllegalArgumentException("data can not be null");
+        } else {
+            for (LineChartData temp : Collections.unmodifiableCollection(data)) {
+                if (temp == null)
+                    throw new IllegalArgumentException("value can not be null");
+            }
+            this.data.addAll(Collections.unmodifiableList(data));
+        }
+    }
 
-		// the raw data
-		List<float[]> data = new LinkedList<float[]>();
+    /**
+     * Returns a unmodifiable list, empty if nothing was set.
+     *
+     * @return a unmodifiable view of the {@link LineChartData}
+     */
+    public List<? extends LineChartData> getList() {
+        return Collections.unmodifiableList(this.data);
+    }
 
-		for (int z = 0; z < this.data.size(); z++) {
+    /**
+     * @param index
+     * @return the removed {@link LineChartData}
+     * @throws IndexOutOfBoundsException if index is out of bound
+     */
+    public LineChartData removeLineChartData(int index) {
+        return this.data.remove(index);
+    }
 
-			float values[] = new float[this.data.get(z).getDataSet().size()];
-			// copy elements
-			for (int u = 0; u < this.data.get(z).getDataSet().size(); u++) {
-				values[u] = this.data.get(z).getDataSet().get(u);
-			}
-			data.add(values);
-		}
-		boolean isColorUsed = false;
+    /**
+     * Removes a given {@link LineChartData} and returns the status.
+     *
+     * @param lineChartData
+     * @return {@code true} if success
+     */
+    public boolean removeLineChartData(LineChartData lineChartData) {
 
-		// the color string
-		StringBuilder color = new StringBuilder();
-		for (int i = 0; i < this.data.size(); i++) {
+        return this.data.remove(lineChartData);
+    }
 
-			// the user set a color
-			if (this.data.get(i).getColor() != null) {
-				isColorUsed = true;
-				color.append((this.data.get(i)
-						.getColor().getMatchingColorHexValue()));
-			}
-			// no color was set, we add the default color
-			if (this.data.get(i).getColor() == null) {
-				color.append(DefaultValues.DataColor.getMatchingColorHexValue());
-			}
+    /**
+     * Removes all {@link LineChartData}
+     */
+    public void removeAllLineChartData() {
+        this.data.clear();
+    }
 
-			// otherwise we have a "," at the end
-			if (i < this.data.size() - 1) {
-				color.append(",");
-			}
-		}
+    public List<AppendableFeature> getAppendableFeatures(
+            List<? extends IFeatureAppender> otherAppenders) {
 
-		boolean isStyleUsed = false;
-		// the lineStyle
-		StringBuilder style = new StringBuilder();
-		for (int u = 0; u < this.data.size(); u++) {
+        // the raw data
+        List<float[]> data = new LinkedList<float[]>();
 
-			// the user set a style
-			if (this.data.get(u).getStyle() != null) {
-				isStyleUsed = true;
-				style.append(this.data.get(u).getStyle().getAppendableFeatures(null).get(0).getData());
-			}
-			// no style was set, we add the default style
-			if (this.data.get(u).getStyle() == null) {
-				style.append(DefaultValues.LineStyle.getAppendableFeatures(null).get(0).getData());
-			}
+        for (int z = 0; z < this.data.size(); z++) {
 
-			// otherwise we have a "," at the end
-			if (u < this.data.size() - 1) {
-				style.append("|");
-			}
-		}
-		boolean isLegendUsed = false;
-		
-		// the chartLegend
-		StringBuilder legend = new StringBuilder();
-		for (int u = 0; u < this.data.size(); u++) {
+            float values[] = new float[this.data.get(z).getDataSet().size()];
+            // copy elements
+            for (int u = 0; u < this.data.get(z).getDataSet().size(); u++) {
+                values[u] = this.data.get(z).getDataSet().get(u);
+            }
+            data.add(values);
+        }
+        boolean isColorUsed = false;
 
-			// the user set a legend
-			if (this.data.get(u).getLegend() != null) {
-				isLegendUsed = true;
-				legend.append(this.data.get(u).getLegend().getAppendableFeatures(null).get(0).getData());
-			}
-			// no style was set, we add the default legend
-			if (this.data.get(u).getLegend() == null) {
-				legend.append("");
-			}
+        // the color string
+        StringBuilder color = new StringBuilder();
+        for (int i = 0; i < this.data.size(); i++) {
 
-			// otherwise we have a "," at the end
-			if (u < this.data.size() - 1) {
-				legend.append("|");
-			}
-		}
+            // the user set a color
+            if (this.data.get(i).getColor() != null) {
+                isColorUsed = true;
+                color.append((this.data.get(i)
+                        .getColor().getMatchingColorHexValue()));
+            }
+            // no color was set, we add the default color
+            if (this.data.get(i).getColor() == null) {
+                color.append(DefaultValues.DataColor.getMatchingColorHexValue());
+            }
 
-		List<AppendableFeature> features = new ArrayList<AppendableFeature>();
+            // otherwise we have a "," at the end
+            if (i < this.data.size() - 1) {
+                color.append(",");
+            }
+        }
 
-		features.add(new AppendableFeature(this.encoder.encodeFloatCollection(
-				data, ","), ChartTypeFeature.ChartData));
+        boolean isStyleUsed = false;
+        // the lineStyle
+        StringBuilder style = new StringBuilder();
+        for (int u = 0; u < this.data.size(); u++) {
 
-		// if the user set the color we have to add the string
-		if (isColorUsed) {
-			features.add(new AppendableFeature(color.toString(),
-					ChartTypeFeature.ChartColor));
-		}
-		// if the user set the style we have to add the string
-		if (isStyleUsed) {
-			features.add(new AppendableFeature(style.toString(),
-					ChartTypeFeature.LineStyle));
-		}
-		// if the user set the style we have to add the string
-		if (isLegendUsed) {
-			features.add(new AppendableFeature(legend.toString(),
-					ChartTypeFeature.ChartLegend));
-		}
+            // the user set a style
+            if (this.data.get(u).getStyle() != null) {
+                isStyleUsed = true;
+                style.append(this.data.get(u).getStyle().getAppendableFeatures(null).get(0).getData());
+            }
+            // no style was set, we add the default style
+            if (this.data.get(u).getStyle() == null) {
+                style.append(DefaultValues.LineStyle.getAppendableFeatures(null).get(0).getData());
+            }
 
-		return features;
-	}
+            // otherwise we have a "," at the end
+            if (u < this.data.size() - 1) {
+                style.append("|");
+            }
+        }
+        boolean isLegendUsed = false;
 
-	public IEncoder getEncoder() {
+        // the chartLegend
+        StringBuilder legend = new StringBuilder();
+        for (int u = 0; u < this.data.size(); u++) {
 
-		return this.encoder;
-	}
+            // the user set a legend
+            if (this.data.get(u).getLegend() != null) {
+                isLegendUsed = true;
+                legend.append(this.data.get(u).getLegend().getAppendableFeatures(null).get(0).getData());
+            }
+            // no style was set, we add the default legend
+            if (this.data.get(u).getLegend() == null) {
+                legend.append("");
+            }
 
-	public void removeEncoder() {
-		this.encoder = new AutoEncoder();
+            // otherwise we have a "," at the end
+            if (u < this.data.size() - 1) {
+                legend.append("|");
+            }
+        }
 
-	}
+        List<AppendableFeature> features = new ArrayList<AppendableFeature>();
 
-	public void setEncoder(IEncoder encoder) {
+        features.add(new AppendableFeature(this.encoder.encodeFloatCollection(
+                data, ","), ChartTypeFeature.ChartData));
 
-		this.encoder = encoder;
+        // if the user set the color we have to add the string
+        if (isColorUsed) {
+            features.add(new AppendableFeature(color.toString(),
+                    ChartTypeFeature.ChartColor));
+        }
+        // if the user set the style we have to add the string
+        if (isStyleUsed) {
+            features.add(new AppendableFeature(style.toString(),
+                    ChartTypeFeature.LineStyle));
+        }
+        // if the user set the style we have to add the string
+        if (isLegendUsed) {
+            features.add(new AppendableFeature(legend.toString(),
+                    ChartTypeFeature.ChartLegend));
+        }
 
-		if (encoder == null) {
-			this.encoder = new AutoEncoder();
-		}
+        return features;
+    }
 
-	}
+    public IEncoder getEncoder() {
+
+        return this.encoder;
+    }
+
+    public void removeEncoder() {
+        this.encoder = new AutoEncoder();
+
+    }
+
+    public void setEncoder(IEncoder encoder) {
+
+        this.encoder = encoder;
+
+        if (encoder == null) {
+            this.encoder = new AutoEncoder();
+        }
+
+    }
 
 }
